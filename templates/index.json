@@ -165,7 +165,7 @@
       "settings": {
         "full_width": true,
         "text": "আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  +8801819502705",
-        "text_size": "medium",
+        "text_size": "small",
         "text_style": "outline",
         "scrolling_mode": "auto",
         "scrolling_speed": 5,
