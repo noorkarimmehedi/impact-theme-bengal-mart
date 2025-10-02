@@ -123,7 +123,7 @@
             "container_width": 100,
             "gap_between_buttons": 15,
             "mobile_layout": "column",
-            "mobile_container_width": 100,
+            "mobile_container_width": 90,
             "button_background_color": "#ffffff",
             "button_hover_background_color": "#f5f5f5",
             "button_text_color": "#000000",
