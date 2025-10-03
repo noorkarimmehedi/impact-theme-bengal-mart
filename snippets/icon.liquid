@@ -102,8 +102,9 @@
           </svg>
 
         {%- when 'tote_bag' -%}
-  <svg xmlns="http://www.w3.org/2000/svg" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 20 20" fill="none">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--icon-stroke-width)" d="M3.392 6.875h13.216v8.016c0 .567-.224 1.112-.624 1.513-.4.402-.941.627-1.506.627H5.522a2.13 2.13 0 0 1-1.506-.627 2.15 2.15 0 0 1-.624-1.513zM8.818 2.969h2.333c.618 0 1.211.247 1.649.686a2.35 2.35 0 0 1 .683 1.658v1.562H6.486V5.313c0-.622.246-1.218.683-1.658a2.33 2.33 0 0 1 1.65-.686"></path>
+  <svg class="icon icon--bag {{ class | strip }}" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="icon--bag__inside" d="M4 7H20V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V7Z" stroke="currentColor" stroke-width="1.5"></path>
+    <path d="M8 6C8 3.79086 9.79086 2 12 2V2C14.2091 2 16 3.79086 16 6V7H8V6Z" stroke="currentColor" stroke-width="1.5"></path>
   </svg>
 
         {%- when 'shopping_cart' -%}
@@ -121,8 +122,9 @@
           </svg>
 
         {%- when 'tote_bag' -%}
-  <svg xmlns="http://www.w3.org/2000/svg" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 20 20" fill="none">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--icon-stroke-width)" d="M3.392 6.875h13.216v8.016c0 .567-.224 1.112-.624 1.513-.4.402-.941.627-1.506.627H5.522a2.13 2.13 0 0 1-1.506-.627 2.15 2.15 0 0 1-.624-1.513zM8.818 2.969h2.333c.618 0 1.211.247 1.649.686a2.35 2.35 0 0 1 .683 1.658v1.562H6.486V5.313c0-.622.246-1.218.683-1.658a2.33 2.33 0 0 1 1.65-.686"></path>
+  <svg class="icon icon--bag {{ class | strip }}" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="icon--bag__inside" d="M4 7H20V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V7Z" stroke="currentColor" stroke-width="1.5"></path>
+    <path d="M8 6C8 3.79086 9.79086 2 12 2V2C14.2091 2 16 3.79086 16 6V7H8V6Z" stroke="currentColor" stroke-width="1.5"></path>
   </svg>
 
         {%- when 'shopping_cart' -%}
