@@ -176,8 +176,35 @@
         "text_gradient": ""
       }
     },
+    "featured_collection_MLcfXh": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 5,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "BESTSELLERS",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
     "featured-collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "all-product",
         "products": [],
@@ -892,6 +919,7 @@
     "slideshow",
     "image-link-blocks",
     "scrolling-text",
+    "featured_collection_MLcfXh",
     "featured-collection",
     "collection-list",
     "impact-text",
