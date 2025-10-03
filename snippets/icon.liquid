@@ -102,9 +102,15 @@
           </svg>
 
         {%- when 'tote_bag' -%}
-          <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-            <path d="M14.666 7.333a3.666 3.666 0 1 1-7.333 0M3.33 6.785l-.642 7.7c-.137 1.654-.206 2.48.073 3.119a2.75 2.75 0 0 0 1.21 1.314c.612.332 1.442.332 3.102.332h7.853c1.66 0 2.49 0 3.103-.332a2.75 2.75 0 0 0 1.21-1.314c.279-.638.21-1.465.072-3.12l-.642-7.7c-.118-1.423-.178-2.134-.493-2.673A2.75 2.75 0 0 0 16.99 3.02c-.563-.269-1.277-.269-2.705-.269h-6.57c-1.428 0-2.142 0-2.705.27A2.75 2.75 0 0 0 3.823 4.11c-.315.539-.374 1.25-.493 2.674Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
+  <svg role="img" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22" fill="none" aria-label="cart" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0_tote" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="22" height="22">
+      <rect width="22" height="22" fill="#C4C4C4"></rect>
+    </mask>
+    <g mask="url(#mask0_tote)">
+      <path d="M3.3002 7.70001H18.7002L19.6197 18.7339C19.7169 19.9 18.7967 20.9 17.6266 20.9H4.3738C3.20372 20.9 2.28353 19.9 2.3807 18.7339L3.3002 7.70001Z" fill="currentColor"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.6 6.60001C5.99249 6.60001 5.48853 6.10256 5.6086 5.50703C6.11548 2.99307 8.33667 1.10001 11 1.10001C13.6633 1.10001 15.8845 2.99307 16.3914 5.50703C16.5115 6.10256 16.0075 6.60001 15.4 6.60001C14.7925 6.60001 14.3179 6.094 14.1192 5.51992C13.6718 4.22782 12.4443 3.30001 11 3.30001C9.55573 3.30001 8.32816 4.22782 7.88081 5.51992C7.68205 6.094 7.20751 6.60001 6.6 6.60001Z" fill="currentColor"></path>
+    </g>
+  </svg>
 
         {%- when 'shopping_cart' -%}
           <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
@@ -121,9 +127,15 @@
           </svg>
 
         {%- when 'tote_bag' -%}
-          <svg role="presentation" fill="none" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 15 }}" height="{{ height | default: 14 }}" class="{{ class | strip }}" viewBox="0 0 15 14">
-            <path d="M9.752 4.36a2.61 2.61 0 1 1-5.218 0m-2.85-.39-.456 5.48c-.098 1.177-.147 1.765.052 2.22.175.398.478.727.86.935.437.236 1.027.236 2.209.236h5.588c1.181 0 1.772 0 2.208-.236.383-.208.686-.537.86-.936.2-.454.15-1.042.052-2.22l-.456-5.48c-.085-1.012-.127-1.518-.351-1.902a1.957 1.957 0 0 0-.845-.777c-.4-.191-.908-.191-1.925-.191H4.805c-1.016 0-1.524 0-1.925.191-.353.17-.647.44-.844.777-.224.384-.267.89-.351 1.903Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+  <svg role="img" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22" fill="none" aria-label="cart" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0_tote" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="22" height="22">
+      <rect width="22" height="22" fill="#C4C4C4"></rect>
+    </mask>
+    <g mask="url(#mask0_tote)">
+      <path d="M3.3002 7.70001H18.7002L19.6197 18.7339C19.7169 19.9 18.7967 20.9 17.6266 20.9H4.3738C3.20372 20.9 2.28353 19.9 2.3807 18.7339L3.3002 7.70001Z" fill="currentColor"></path>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.6 6.60001C5.99249 6.60001 5.48853 6.10256 5.6086 5.50703C6.11548 2.99307 8.33667 1.10001 11 1.10001C13.6633 1.10001 15.8845 2.99307 16.3914 5.50703C16.5115 6.10256 16.0075 6.60001 15.4 6.60001C14.7925 6.60001 14.3179 6.094 14.1192 5.51992C13.6718 4.22782 12.4443 3.30001 11 3.30001C9.55573 3.30001 8.32816 4.22782 7.88081 5.51992C7.68205 6.094 7.20751 6.60001 6.6 6.60001Z" fill="currentColor"></path>
+    </g>
+  </svg>
 
         {%- when 'shopping_cart' -%}
           <svg role="presentation" fill="none" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 16 }}" height="{{ height | default: 15 }}" class="{{ class | strip }}" viewBox="0 0 16 15">
