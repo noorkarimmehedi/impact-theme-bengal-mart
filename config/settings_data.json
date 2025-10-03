@@ -46,11 +46,11 @@
     "blocks": {
       "1656560654682496077": {
         "type": "shopify://apps/instant-section-page-builder/blocks/instant_core/927e19d9-4e68-41db-99c7-d8debdc1f80d",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       },
-      "10508887350528622030": {
-        "type": "shopify://apps/appstle-bundles/blocks/appstle-bundle/8909921b-2d24-4d68-9b12-9d045d3dcb0a",
+      "6544682535036668446": {
+        "type": "shopify://apps/pumper-bundles/blocks/app-embed/0856870d-2aca-4b1e-a662-cf1797f61270",
         "disabled": false,
         "settings": {}
       }
