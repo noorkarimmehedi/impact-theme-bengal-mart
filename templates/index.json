@@ -16,7 +16,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/hero-desktop.png",
-            "mobile_image": "shopify://shop_images/hero-mobile.png",
+            "mobile_image": "shopify://shop_images/Hero_mobile_02.png",
             "content_max_width": 860,
             "mobile_text_position": "place-self-center text-center",
             "desktop_text_position": "sm:place-self-center sm:text-center",
