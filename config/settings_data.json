@@ -44,13 +44,13 @@
     "checkout_button_color": "#1a1a1a",
     "content_for_index": [],
     "blocks": {
-      "1656560654682496077": {
-        "type": "shopify://apps/instant-section-page-builder/blocks/instant_core/927e19d9-4e68-41db-99c7-d8debdc1f80d",
-        "disabled": true,
-        "settings": {}
-      },
       "6544682535036668446": {
         "type": "shopify://apps/pumper-bundles/blocks/app-embed/0856870d-2aca-4b1e-a662-cf1797f61270",
+        "disabled": false,
+        "settings": {}
+      },
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
         "disabled": false,
         "settings": {}
       }
