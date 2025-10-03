@@ -234,10 +234,11 @@
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": "best-sellers",
+            "collection": "bestsellers",
+            "image": "shopify://shop_images/Banner.png",
             "subheading": "",
             "title": "",
-            "url": "",
+            "url": "shopify://collections/bestsellers",
             "heading_tag": "h2",
             "text_position": "place-self-center text-center",
             "text_color": "#ffffff",
@@ -248,7 +249,8 @@
         "collection-2": {
           "type": "collection",
           "settings": {
-            "collection": "all-product",
+            "collection": "home",
+            "image": "shopify://shop_images/Banner.png",
             "subheading": "",
             "title": "",
             "url": "",
@@ -262,7 +264,8 @@
         "collection-3": {
           "type": "collection",
           "settings": {
-            "collection": "pre-booking",
+            "collection": "kitchen",
+            "image": "shopify://shop_images/Banner.png",
             "subheading": "",
             "title": "",
             "url": "",
