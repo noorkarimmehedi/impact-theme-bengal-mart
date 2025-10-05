@@ -384,6 +384,7 @@
         "item-1": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_cgo14ocgo14ocgo1.png",
             "title": "",
             "heading_tag": "h4",
             "link_url": "shopify://products/glass-cups-with-bamboo-lid-and-straw",
