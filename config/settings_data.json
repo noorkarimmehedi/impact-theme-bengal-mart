@@ -73,7 +73,7 @@
       },
       "12218243060015646318": {
         "type": "shopify://apps/whatflow-whatsapp-automation/blocks/stock-notification-2/ea957967-ac26-4ed9-a3f0-e749fab355ab",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "button_text": "Notify Me When Back In Stock",
           "button_bg_color": "#007bff",
