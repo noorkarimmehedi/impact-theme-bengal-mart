@@ -55,10 +55,44 @@
         "disabled": false,
         "settings": {}
       },
-      "442549160356511856": {
-        "type": "shopify://apps/ck-whatsapp/blocks/app-embed-block/ce4c5d89-06d5-4502-b18d-35d424a3f693",
+      "5685434155906765400": {
+        "type": "shopify://apps/whatflow-whatsapp-automation/blocks/whatsapp_chat_button/ea957967-ac26-4ed9-a3f0-e749fab355ab",
         "disabled": false,
-        "settings": {}
+        "settings": {
+          "show_singleagent_popup": true,
+          "popup_store_name": "default",
+          "popup_header_color": "#242833",
+          "popup_background_color": "#f3f3f3",
+          "popup_text_box_color": "#ffffff",
+          "popup_text": "We are here to assist you",
+          "whatsapp_button_text": "WhatsApp Us Now!",
+          "whatsapp_button_bg_color": "#242833",
+          "enable_live_chat": false,
+          "live_chat_preset_message": "Hello! How can I help you today?"
+        }
+      },
+      "12218243060015646318": {
+        "type": "shopify://apps/whatflow-whatsapp-automation/blocks/stock-notification-2/ea957967-ac26-4ed9-a3f0-e749fab355ab",
+        "disabled": false,
+        "settings": {
+          "button_text": "Notify Me When Back In Stock",
+          "button_bg_color": "#007bff",
+          "button_text_color": "#ffffff",
+          "button_border_color": "#007bff",
+          "button_border_radius": "4px",
+          "button_font_size": "14px",
+          "subscribed_text": "You're Subscribed!",
+          "widget_bg_color": "#f8f9fa",
+          "widget_border_color": "#e1e8ed",
+          "widget_border_radius": "6px",
+          "out_of_stock_title": "Out of Stock",
+          "out_of_stock_message": "This item is currently unavailable. Get notified when it's back!",
+          "form_label_color": "#333333",
+          "form_input_border_color": "#ced4da",
+          "form_input_border_radius": "4px",
+          "submit_btn_color": "#28a745",
+          "cancel_btn_color": "#6c757d"
+        }
       }
     }
   },
