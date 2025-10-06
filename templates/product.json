@@ -266,6 +266,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "recommendations_count": 10,
         "products": [],
@@ -334,7 +335,9 @@
       "name": "Featured collection",
       "settings": {
         "collection": "",
-        "products": [],
+        "products": [
+          "sunset-lamp-projector-with-remote-control"
+        ],
         "full_width": true,
         "stack_products": true,
         "show_progress_bar": false,
