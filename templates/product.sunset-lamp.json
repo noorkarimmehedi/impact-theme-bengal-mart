@@ -47,8 +47,15 @@
           "type": "separator",
           "settings": {}
         },
+        "text_UFieye": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bring the colors of sunset into your room with this RGB lamp. 360° rotation, remote control color change — perfect for photos, parties, or cozy vibes.</p>"
+          }
+        },
         "description": {
           "type": "description",
+          "disabled": true,
           "settings": {
             "collapse_content": false
           }
@@ -93,12 +100,14 @@
         "rating",
         "payment_terms",
         "separator",
+        "text_UFieye",
         "description",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
         "liquid_kYApyA"
       ],
+      "custom_css": [],
       "settings": {
         "full_width": true,
         "show_fixed_add_to_cart": true,
