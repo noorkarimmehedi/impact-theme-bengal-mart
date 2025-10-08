@@ -334,10 +334,8 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "collection": "",
-        "products": [
-          "sunset-lamp-projector-with-remote-control"
-        ],
+        "collection": "bestsellers",
+        "products": [],
         "full_width": true,
         "stack_products": true,
         "show_progress_bar": false,
