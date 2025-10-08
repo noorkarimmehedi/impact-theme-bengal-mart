@@ -100,13 +100,6 @@
             "content": ""
           }
         },
-        "links": {
-          "type": "links",
-          "settings": {
-            "menu": "footer",
-            "show_menu_title": true
-          }
-        },
         "text": {
           "type": "text",
           "settings": {
@@ -114,12 +107,19 @@
             "content": "<p>Bangladesh’s First Homegrown Home & Kitchen Brand.<br/>প্রতিদিনের আস্থায়, আপনার বাজার-(<strong>Bengal Mart-বেঙ্গল মার্ট)</strong>।</p>",
             "enable_follow_on_shop": true
           }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true
+          }
         }
       },
       "block_order": [
         "newsletter",
-        "links",
-        "text"
+        "text",
+        "links"
       ],
       "settings": {
         "show_social_media": true,
