@@ -1,0 +1,371 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "liquid_kYApyA": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% assign random_quantity = 'now' | date: \"%s\" | modulo: 20 | plus: 50 %}\n<div style=\"\n    display: inline-flex;\n    background: rgba(227, 255, 222, 1);\n    height: 35px;\n    border-radius: 9.04px;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    font-weight: 400;\n    font-size: 14.15px;\n    line-height: 19.2px;\n    letter-spacing: 0;\n    color: #000;\n    gap: 11px;\n\">\n  <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"8.5\" cy=\"8.5\" r=\"7.9\" fill=\"#084D3A\"></circle>\n    <path d=\"M9.5 3.5L5.5 9.5H8.5L7.5 13.5L11.5 7.5H8.5L9.5 3.5Z\" fill=\"#E3FFDE\"/>\n  </svg>\n  <span>\n    <strong style=\"text-decoration: underline;\">{{ random_quantity }}</strong> people are viewing right now — 9 left in stock!\n  </span>\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "price",
+        "rating",
+        "payment_terms",
+        "separator",
+        "description",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "liquid_kYApyA"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "thumbnails",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": false,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "text_with_icons_DrDHht": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_dhGKkW": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-truck",
+            "mobile_icon_width": 24,
+            "icon_width": 32,
+            "icon_background_type": "circle",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "Delivery within 48hours",
+            "content": "<p>Free worldwide shipping and returns - customs and duties taxes included</p>"
+          }
+        },
+        "item_tFgdp3": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "icon": "picto-coupon",
+            "mobile_icon_width": 24,
+            "icon_width": 32,
+            "icon_background_type": "circle",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "Customer service",
+            "content": "<p>We are available from monday to friday to answer your questions.</p>"
+          }
+        },
+        "item_bdNEqf": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "icon": "picto-coupon",
+            "mobile_icon_width": 24,
+            "icon_width": 32,
+            "icon_background_type": "circle",
+            "icon_background": "",
+            "icon_color": "",
+            "title": "Secure payment",
+            "content": "<p>Your payment information is processed securely.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_dhGKkW",
+        "item_tFgdp3",
+        "item_bdNEqf"
+      ],
+      "disabled": true,
+      "name": "Text with icons",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "title": "",
+        "heading_tag": "h5",
+        "text_alignment": "center",
+        "icon_spacing": "medium",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1758906325660f2750": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_kbGTyf": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 10,
+            "spacing_bottom": 15
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_606562f_78CEbK": {
+          "type": "ai_gen_block_606562f",
+          "settings": {
+            "whatsapp_number": "+8801819502705",
+            "phone_number": "+8801819502705",
+            "whatsapp_text": "WhatsApp করে অর্ডার করুন।",
+            "call_text": "Call করে অর্ডার করুন।",
+            "container_width": 100,
+            "gap_between_buttons": 15,
+            "mobile_layout": "column",
+            "mobile_container_width": 90,
+            "button_background_color": "#f0f0f0",
+            "button_hover_background_color": "#f5f5f5",
+            "button_text_color": "#000000",
+            "button_hover_text_color": "#000000",
+            "button_padding": 20,
+            "mobile_button_padding": 16,
+            "border_width": 1,
+            "border_color": "#e0e0e0",
+            "border_hover_color": "#cccccc",
+            "border_radius": 0,
+            "shadow_horizontal": -5,
+            "shadow_vertical": 4,
+            "shadow_blur": 8,
+            "shadow_opacity": 0,
+            "font_size": 16,
+            "mobile_font_size": 14,
+            "font_weight": "500",
+            "icon_size": 24,
+            "mobile_icon_size": 20,
+            "icon_text_gap": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_kbGTyf",
+        "ai_gen_block_606562f_78CEbK"
+      ],
+      "settings": {}
+    },
+    "1759498066f3f04a7f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_qqEUDx": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 15,
+            "spacing_bottom": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_qqEUDx"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "recommendations_count": 10,
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "1759497772a737a649": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_e476ec5_4NNfKc": {
+          "type": "ai_gen_block_e476ec5",
+          "disabled": true,
+          "settings": {
+            "max_width": 1200,
+            "section_padding": 60,
+            "mobile_section_padding": 40,
+            "column_gap": 40,
+            "mobile_gap": 20,
+            "background_color": "#f0f0f0",
+            "icon_color": "#000000",
+            "heading_color": "#000000",
+            "subheading_color": "#666666",
+            "icon_size": 48,
+            "mobile_icon_size": 32,
+            "icon_stroke_width": 1.5,
+            "icon_text_gap": 16,
+            "mobile_icon_text_gap": 10,
+            "heading_font": "sans_serif_n4",
+            "heading_size": 18,
+            "mobile_heading_size": 14,
+            "subheading_font": "sans_serif_n4",
+            "subheading_size": 14,
+            "mobile_subheading_size": 12,
+            "text_gap": 4,
+            "benefit_1_heading": "Ships in 1-2",
+            "benefit_1_subheading": "business days",
+            "benefit_2_heading": "Free US Shipping",
+            "benefit_2_subheading": "over $50",
+            "benefit_3_heading": "30 Day Returns",
+            "benefit_3_subheading": "& Exchanges"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_e476ec5_4NNfKc"
+      ],
+      "settings": {}
+    },
+    "featured_collection_gEQgRW": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "products": [
+          "sunset-lamp-projector-with-remote-control"
+        ],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_count": 5,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "YOU MAY ALSO LIKE",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "text_with_icons_DrDHht",
+    "1758906325660f2750",
+    "1759498066f3f04a7f",
+    "related-products",
+    "1759497772a737a649",
+    "featured_collection_gEQgRW"
+  ]
+}
