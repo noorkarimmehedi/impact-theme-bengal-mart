@@ -625,10 +625,12 @@
       ],
       "settings": {
         "full_width": true,
+        "image": "shopify://shop_images/Untitled_2500_x_1200_px.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_3.png",
         "title": "",
         "content": "",
         "button_text": "",
-        "button_url": "",
+        "button_url": "shopify://products/glass-oil-dispenser-jar",
         "desktop_text_position": "place-self-start text-start",
         "image_background": "",
         "image_background_gradient": "",
