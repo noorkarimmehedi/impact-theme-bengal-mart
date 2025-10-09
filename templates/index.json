@@ -473,6 +473,7 @@
         "item-3",
         "29246d34-c6e0-4373-84f6-b15e57736a00"
       ],
+      "disabled": true,
       "settings": {
         "full_width": true,
         "reduce_width": false,
@@ -964,11 +965,11 @@
     "collection-list",
     "impact-text",
     "image-with-text-overlay",
+    "hot-spots",
     "media-grid",
     "before-after-image",
     "video_qAbeXj",
     "press",
-    "hot-spots",
     "multiple-images-with-text",
     "featured-product",
     "feature-chart",
