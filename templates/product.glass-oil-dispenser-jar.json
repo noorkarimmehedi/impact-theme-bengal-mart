@@ -306,6 +306,7 @@
         "play_WJTnyc",
         "heading_ABAb7D"
       ],
+      "disabled": true,
       "name": "Video",
       "settings": {
         "full_width": true,
