@@ -250,7 +250,7 @@
           "type": "collection",
           "settings": {
             "collection": "home",
-            "image": "shopify://shop_images/Banner.png",
+            "image": "shopify://shop_images/home.png",
             "subheading": "",
             "title": "",
             "url": "",
