@@ -235,7 +235,7 @@
           "type": "collection",
           "settings": {
             "collection": "bestsellers",
-            "image": "shopify://shop_images/Banner.png",
+            "image": "shopify://shop_images/4fa86523b286a0d24e94c359afd80b07.png",
             "subheading": "",
             "title": "",
             "url": "shopify://collections/bestsellers",
@@ -265,7 +265,7 @@
           "type": "collection",
           "settings": {
             "collection": "kitchen",
-            "image": "shopify://shop_images/Banner.png",
+            "image": "shopify://shop_images/kitchen.png",
             "subheading": "",
             "title": "",
             "url": "",
