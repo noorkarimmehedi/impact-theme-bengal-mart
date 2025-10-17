@@ -39,6 +39,7 @@
     "heading_apparition": "split_fade",
     "show_quick_buy": false,
     "product_color_display": "swatch",
+    "product_image_aspect_ratio": "square",
     "product_info_alignment": "start",
     "cart_icon": "tote_bag",
     "social_facebook": "https://www.facebook.com/bengalmartofficial/",
@@ -55,11 +56,6 @@
       "17676059084223943535": {
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
-        "settings": {}
-      },
-      "1653648241919619285": {
-        "type": "shopify://apps/kwik-cod-lite/blocks/app-embed/d190ec3c-2cdb-4033-b871-b04532749c31",
-        "disabled": true,
         "settings": {}
       },
       "13669795325273674392": {
