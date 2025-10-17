@@ -52,14 +52,19 @@
         "disabled": false,
         "settings": {}
       },
-      "13669795325273674392": {
-        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
-        "disabled": false,
-        "settings": {}
-      },
       "17676059084223943535": {
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
+        "settings": {}
+      },
+      "1653648241919619285": {
+        "type": "shopify://apps/kwik-cod-lite/blocks/app-embed/d190ec3c-2cdb-4033-b871-b04532749c31",
+        "disabled": false,
+        "settings": {}
+      },
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
+        "disabled": true,
         "settings": {}
       }
     }
