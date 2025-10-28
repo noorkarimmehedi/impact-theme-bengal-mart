@@ -62,6 +62,11 @@
         "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
         "disabled": false,
         "settings": {}
+      },
+      "7953047552468621288": {
+        "type": "shopify://apps/navigo/blocks/app-embed/857321f0-0d5b-44fd-b2d8-80b529b52cb1",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
