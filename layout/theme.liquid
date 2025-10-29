@@ -186,43 +186,96 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
 {% endif %}
 
 <script>
-  // Update mobile cart badge when cart changes
-  function updateMobileCartBadge() {
-    fetch('/cart.js')
-      .then(response => response.json())
-      .then(cart => {
-        const badge = document.getElementById('mobile-cart-badge');
-        if (badge) {
-          badge.textContent = cart.item_count;
-          if (cart.item_count > 0) {
-            badge.classList.remove('hidden');
-          } else {
-            badge.classList.add('hidden');
+  (function() {
+    // Update mobile cart badge when cart changes
+    function updateMobileCartBadge() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          const badge = document.getElementById('mobile-cart-badge');
+          if (badge) {
+            badge.textContent = cart.item_count;
+            if (cart.item_count > 0) {
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
           }
-        }
-      })
-      .catch(error => console.error('Error updating cart badge:', error));
-  }
+        })
+        .catch(error => console.error('Error updating cart badge:', error));
+    }
 
-  // Listen for cart updates
-  document.addEventListener('DOMContentLoaded', function() {
-    // Update on page load
-    updateMobileCartBadge();
-    
-    // Listen for Shopify cart update events
-    document.addEventListener('cart:updated', updateMobileCartBadge);
-    
-    // Also listen for add to cart button clicks
-    document.querySelectorAll('form[action="/cart/add"]').forEach(form => {
-      form.addEventListener('submit', function() {
-        setTimeout(updateMobileCartBadge, 500);
+    // Intercept fetch requests to detect cart changes
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+      const url = args[0];
+      
+      return originalFetch.apply(this, args).then(response => {
+        // Check if it's a cart-related API call
+        if (typeof url === 'string' && 
+            (url.includes('/cart/add') || 
+             url.includes('/cart/change') || 
+             url.includes('/cart/update') ||
+             url.includes('/cart/clear'))) {
+          // Update badge after cart operation
+          setTimeout(updateMobileCartBadge, 300);
+        }
+        return response;
       });
+    };
+
+    // Listen for cart updates on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateMobileCartBadge);
+    } else {
+      updateMobileCartBadge();
+    }
+    
+    // Listen for various cart-related events
+    const cartEvents = [
+      'cart:updated',
+      'cart:refresh',
+      'cart.requestComplete',
+      'ajaxCart:added',
+      'ajaxCart:updated',
+      'product:added',
+      'variant:add'
+    ];
+    
+    cartEvents.forEach(event => {
+      document.addEventListener(event, updateMobileCartBadge);
     });
     
-    // Listen for Ajax cart events (if using Ajax cart)
-    document.addEventListener('ajaxCart:added', updateMobileCartBadge);
-    document.addEventListener('ajaxCart:updated', updateMobileCartBadge);
-  });
+    // Listen for add to cart form submissions
+    document.addEventListener('submit', function(e) {
+      if (e.target.matches('form[action*="/cart/add"]')) {
+        setTimeout(updateMobileCartBadge, 500);
+      }
+    });
+    
+    // Listen for click events on add to cart buttons
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('[name="add"], .add-to-cart, .product-form__submit');
+      if (target) {
+        setTimeout(updateMobileCartBadge, 500);
+      }
+    });
+
+    // Periodic check as fallback (every 2 seconds when page is visible)
+    let lastKnownCount = {{ cart.item_count }};
+    setInterval(function() {
+      if (!document.hidden) {
+        fetch('/cart.js')
+          .then(response => response.json())
+          .then(cart => {
+            if (cart.item_count !== lastKnownCount) {
+              lastKnownCount = cart.item_count;
+              updateMobileCartBadge();
+            }
+          });
+      }
+    }, 2000);
+  })();
 </script>
 
   </body>
