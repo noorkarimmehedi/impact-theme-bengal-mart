@@ -262,7 +262,7 @@
             "card_width": 350,
             "card_gap": 20,
             "card_padding": 24,
-            "card_background": "#cccccc",
+            "card_background": "#ffb74a",
             "border_width": 1,
             "border_color": "#E0E0E0",
             "hover_border_color": "#CCCCCC",
