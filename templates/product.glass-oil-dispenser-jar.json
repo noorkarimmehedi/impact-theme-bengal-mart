@@ -116,15 +116,16 @@
         "input_text_color": ""
       }
     },
-    "blocks_ziFqT6": {
+    "blocks_fKUCjE": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_8624388_knkENq": {
-          "type": "ai_gen_block_8624388",
+        "ai_gen_block_34a678d_W7hLcn": {
+          "type": "ai_gen_block_34a678d",
           "settings": {
             "title": "Available offers",
             "title_size": 28,
             "title_color": "#000000",
+            "title_alignment": "center",
             "section_background": "#ffffff",
             "section_border_width": 0,
             "section_border_color": "#E0E0E0",
@@ -133,7 +134,7 @@
             "card_width": 350,
             "card_gap": 20,
             "card_padding": 24,
-            "card_background": "#ffffff",
+            "card_background": "#ffb74a",
             "border_width": 1,
             "border_color": "#E0E0E0",
             "hover_border_color": "#CCCCCC",
@@ -183,7 +184,7 @@
         }
       },
       "block_order": [
-        "ai_gen_block_8624388_knkENq"
+        "ai_gen_block_34a678d_W7hLcn"
       ],
       "name": "Offers slider",
       "settings": {}
@@ -462,7 +463,7 @@
   },
   "order": [
     "main",
-    "blocks_ziFqT6",
+    "blocks_fKUCjE",
     "text_with_icons_DrDHht",
     "1758906325660f2750",
     "1759498066f3f04a7f",
