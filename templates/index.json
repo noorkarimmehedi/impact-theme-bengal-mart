@@ -160,6 +160,49 @@
         "heading_gradient": ""
       }
     },
+    "1761717881f75057a2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4ce305b_z8Nnpb": {
+          "type": "ai_gen_block_4ce305b",
+          "settings": {
+            "heading": "Shop by Category",
+            "heading_alignment": "center",
+            "heading_size": 36,
+            "heading_spacing": 30,
+            "heading_color": "#000000",
+            "collection_1": "bestsellers",
+            "collection_2": "frontpage",
+            "collection_3": "kitchen",
+            "collection_4": "",
+            "collection_5": "",
+            "collection_6": "",
+            "collection_7": "",
+            "collection_8": "",
+            "card_width": 260,
+            "card_height": 340,
+            "card_border_radius": 0,
+            "gap": 20,
+            "overlay_opacity": 60,
+            "show_product_count": true,
+            "category_title_size": 20,
+            "category_count_size": 14,
+            "category_text_color": "#ffffff",
+            "show_navigation": true,
+            "nav_button_color": "#000000",
+            "nav_button_hover_color": "#333333",
+            "nav_button_icon_color": "#ffffff",
+            "section_padding": 50,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4ce305b_z8Nnpb"
+      ],
+      "settings": {}
+    },
     "scrolling-text": {
       "type": "scrolling-text",
       "disabled": true,
@@ -960,6 +1003,7 @@
   "order": [
     "slideshow",
     "image-link-blocks",
+    "1761717881f75057a2",
     "scrolling-text",
     "featured_collection_MLcfXh",
     "featured-collection",
