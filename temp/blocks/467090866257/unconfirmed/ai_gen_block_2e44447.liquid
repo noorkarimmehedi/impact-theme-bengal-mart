@@ -1,6 +1,513 @@
+{% doc %}
+  @prompt
+    build a offers slider for me , i want something like: Available offers
+    
+    Enjoy ৳ 100 off on orders ৳ 1500+
+    
+    INSTANT100
+    
+    Copy
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-offers-banner-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-offers-banner__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-offers-banner__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .ai-offers-banner__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .ai-offers-banner__offers-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ai-offers-banner__offer-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: 2px dashed {{ block.settings.border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-offers-banner__offer-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .ai-offers-banner__code-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ai-offers-banner__code-{{ ai_gen_id }} {
+    flex: 1;
+    background-color: {{ block.settings.code_background }};
+    color: {{ block.settings.code_text_color }};
+    padding: 12px 16px;
+    border-radius: {{ block.settings.code_border_radius }}px;
+    font-size: {{ block.settings.code_size }}px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    border: 1px solid {{ block.settings.code_border_color }};
+  }
+
+  .ai-offers-banner__copy-btn-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    padding: 12px 20px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ai-offers-banner__copy-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-offers-banner__copy-btn-{{ ai_gen_id }}.copied {
+    background-color: {{ block.settings.success_color }};
+  }
+
+  .ai-offers-banner__icon-{{ ai_gen_id }} {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-offers-banner__offer-{{ ai_gen_id }} {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ai-offers-banner__code-wrapper-{{ ai_gen_id }} {
+      flex: 0 0 auto;
+      min-width: 250px;
+    }
+
+    .ai-offers-banner__offer-text-{{ ai_gen_id }} {
+      flex: 1;
+    }
+  }
+{% endstyle %}
+
+<available-offers-{{ ai_gen_id }} class="ai-offers-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-offers-banner__container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank %}
+      <div class="ai-offers-banner__header-{{ ai_gen_id }}">
+        <h2 class="ai-offers-banner__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="ai-offers-banner__offers-{{ ai_gen_id }}">
+      {% for i in (1..5) %}
+        {% liquid
+          assign offer_text_key = 'offer_' | append: i | append: '_text'
+          assign offer_code_key = 'offer_' | append: i | append: '_code'
+          assign offer_enabled_key = 'offer_' | append: i | append: '_enabled'
+
+          assign offer_text = block.settings[offer_text_key]
+          assign offer_code = block.settings[offer_code_key]
+          assign offer_enabled = block.settings[offer_enabled_key]
+        %}
+
+        {% if offer_enabled and offer_text != blank and offer_code != blank %}
+          <div class="ai-offers-banner__offer-{{ ai_gen_id }}">
+            <p class="ai-offers-banner__offer-text-{{ ai_gen_id }}">{{ offer_text }}</p>
+            
+            <div class="ai-offers-banner__code-wrapper-{{ ai_gen_id }}">
+              <div class="ai-offers-banner__code-{{ ai_gen_id }}" data-code="{{ offer_code }}">
+                {{ offer_code }}
+              </div>
+              <button 
+                class="ai-offers-banner__copy-btn-{{ ai_gen_id }}"
+                data-copy-code="{{ offer_code }}"
+                aria-label="Copy code {{ offer_code }}"
+              >
+                <svg class="ai-offers-banner__icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</available-offers-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AvailableOffers{{ ai_gen_id }} extends HTMLElement {
+      connectedCallback() {
+        this.copyButtons = this.querySelectorAll('.ai-offers-banner__copy-btn-{{ ai_gen_id }}');
+        this.setupCopyButtons();
+      }
+
+      setupCopyButtons() {
+        this.copyButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            const code = e.currentTarget.getAttribute('data-copy-code');
+            this.copyToClipboard(code, e.currentTarget);
+          });
+        });
+      }
+
+      copyToClipboard(text, button) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            this.showCopiedState(button);
+          }).catch(() => {
+            this.fallbackCopy(text, button);
+          });
+        } else {
+          this.fallbackCopy(text, button);
+        }
+      }
+
+      fallbackCopy(text, button) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          this.showCopiedState(button);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+
+      showCopiedState(button) {
+        const originalText = button.innerHTML;
+        button.classList.add('copied');
+        button.innerHTML = '<svg class="ai-offers-banner__icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>Copied!';
+        
+        setTimeout(() => {
+          button.classList.remove('copied');
+          button.innerHTML = originalText;
+        }, 2000);
+      }
+    }
+
+    customElements.define('available-offers-{{ ai_gen_id }}', AvailableOffers{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Available offers",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Available Offers"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Card border",
+      "default": "#00badb"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Offer text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "code_background",
+      "label": "Code background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "code_text_color",
+      "label": "Code text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "code_border_color",
+      "label": "Code border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "success_color",
+      "label": "Success (copied state)",
+      "default": "#00a341"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Offer text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Code size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Code border radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Offer 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_1_enabled",
+      "label": "Enable offer 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_1_text",
+      "label": "Offer text",
+      "default": "Enjoy ৳ 100 off on orders ৳ 1500+"
+    },
+    {
+      "type": "text",
+      "id": "offer_1_code",
+      "label": "Coupon code",
+      "default": "INSTANT100"
+    },
+    {
+      "type": "header",
+      "content": "Offer 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_2_enabled",
+      "label": "Enable offer 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_2_text",
+      "label": "Offer text",
+      "default": "Get ৳ 200 off on orders ৳ 3000+"
+    },
+    {
+      "type": "text",
+      "id": "offer_2_code",
+      "label": "Coupon code",
+      "default": "SAVE200"
+    },
+    {
+      "type": "header",
+      "content": "Offer 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_3_enabled",
+      "label": "Enable offer 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_3_text",
+      "label": "Offer text",
+      "default": "Free shipping on orders ৳ 2000+"
+    },
+    {
+      "type": "text",
+      "id": "offer_3_code",
+      "label": "Coupon code",
+      "default": "FREESHIP"
+    },
+    {
+      "type": "header",
+      "content": "Offer 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_4_enabled",
+      "label": "Enable offer 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "offer_4_text",
+      "label": "Offer text"
+    },
+    {
+      "type": "text",
+      "id": "offer_4_code",
+      "label": "Coupon code"
+    },
+    {
+      "type": "header",
+      "content": "Offer 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_5_enabled",
+      "label": "Enable offer 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "offer_5_text",
+      "label": "Offer text"
+    },
+    {
+      "type": "text",
+      "id": "offer_5_code",
+      "label": "Coupon code"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Available offers"
+    }
+  ]
+}
 {% endschema %}
