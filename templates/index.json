@@ -177,7 +177,7 @@
             "section_padding_top": 60,
             "section_padding_bottom": 60,
             "section_bg_color": "#ffffff",
-            "image_aspect_ratio": 1.1,
+            "image_aspect_ratio": 1.2,
             "title_overlay": true,
             "text_alignment": "left",
             "title_font_size": 16,
