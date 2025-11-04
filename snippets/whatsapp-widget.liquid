@@ -17,7 +17,7 @@
   .whatsapp-float-button {
     width: 56px;
     height: 56px;
-    background: #ffe603; /* Yellow background */
+    background: #ffe603;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -26,9 +26,9 @@
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     animation: pulse 2s infinite;
-    border: 2px solid #000; /* Black circle border */
+    border: none;
     position: relative;
-}
+  }
 
   .whatsapp-float-button:hover {
     transform: scale(1.1);
@@ -334,9 +334,10 @@
 <script>
   // Configuration
   const whatsappConfig = {
-    phoneNumber: '+8801609547606', // Change to your WhatsApp number with country code
-    message: 'Hello there! Is someone available to chat?', // Pre-filled message (optional)
+    phoneNumber: '+1234567890', // Change to your WhatsApp number with country code
+    message: 'Hi! I need help with...', // Pre-filled message (optional)
     messengerUrl: 'https://m.me/bengalmartofficial', // Change to your Facebook Messenger URL
+    messengerMessage: 'Hello there! Is someone available to chat?', // Pre-filled message for Messenger
   };
 
   // Elements
@@ -382,7 +383,9 @@
   // Start Messenger chat
   messengerBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    window.open(whatsappConfig.messengerUrl, '_blank', 'noopener,noreferrer');
+    const message = encodeURIComponent(whatsappConfig.messengerMessage);
+    const url = `${whatsappConfig.messengerUrl}?text=${message}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   });
 
   // Close on outside click
@@ -396,7 +399,7 @@
   // Adjust position on window resize for mobile
   function adjustPosition() {
     if (window.innerWidth <= 768) {
-      widget.style.bottom = '72px'; // Offset for mobile bottom nav
+      widget.style.bottom = '85px'; // Offset for mobile bottom nav
     } else {
       widget.style.bottom = '15px';
     }
