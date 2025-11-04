@@ -175,7 +175,7 @@
             "header_spacing": 20,
             "desktop_columns": 4,
             "container_width": 1400,
-            "grid_gap": 18,
+            "grid_gap": 12,
             "section_padding_top": 60,
             "section_padding_bottom": 60,
             "background_color": "#fefbf6",
