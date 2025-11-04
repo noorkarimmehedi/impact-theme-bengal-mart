@@ -179,7 +179,7 @@
             "section_padding_top": 60,
             "section_padding_bottom": 60,
             "background_color": "#ffffff",
-            "border_radius": 8,
+            "border_radius": 0,
             "image_aspect_ratio": 120,
             "arrow_bg_color": "#ffffff",
             "arrow_hover_bg_color": "#000000",
