@@ -423,6 +423,32 @@
         "text_color": ""
       }
     },
+    "blocks_UaKAYE": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_9BwJCV": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 15,
+            "spacing_bottom": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_9BwJCV"
+      ],
+      "disabled": true,
+      "name": "Horizontal divider",
+      "settings": {}
+    },
     "1762369195f8b47413": {
       "type": "_blocks",
       "blocks": {
@@ -648,6 +674,7 @@
     "17617215747115fc1c",
     "1762368399ef5b1dae",
     "text_with_icons_DrDHht",
+    "blocks_UaKAYE",
     "1762369195f8b47413",
     "1758906325660f2750",
     "1759498066f3f04a7f",
