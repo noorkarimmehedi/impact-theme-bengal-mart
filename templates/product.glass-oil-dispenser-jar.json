@@ -266,7 +266,7 @@
             "divider_border_radius": 0,
             "divider_width": 100,
             "divider_width_mobile": 90,
-            "spacing_top": 5,
+            "spacing_top": 15,
             "spacing_bottom": 5
           },
           "blocks": {}
