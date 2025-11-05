@@ -438,7 +438,7 @@
             "header_background": "#f8f8f8",
             "border_width": 1,
             "border_color": "#e0e0e0",
-            "tab_padding": 16,
+            "tab_padding": 20,
             "tab_horizontal_padding": 24,
             "tab_font_size": 14,
             "tab_text_color": "#666666",
