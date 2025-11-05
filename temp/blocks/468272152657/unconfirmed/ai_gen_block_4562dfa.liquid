@@ -1,6 +1,464 @@
+{% doc %}
+  @prompt
+    generate me a accordion style for description there should be visible three tabs when every customer click that tab it should show the that particular information. i want card border detais like this: Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    0
+    Shadow
+    Horizontal offset
+    
+    -5
+    Vertical offset
+    
+    4
+    Blur radius
+    
+    8
+    Shadow opacity
+    
+    0. , i didn't want like this. the tabs should be in the header of the section
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-tab-accordion-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.card_background }};
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+    transition: border-color 0.3s ease;
+    overflow: hidden;
+  }
+
+  .ai-tab-accordion-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-tab-header-{{ ai_gen_id }} {
+    display: flex;
+    border-bottom: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    background-color: {{ block.settings.header_background }};
+  }
+
+  .ai-tab-button-{{ ai_gen_id }} {
+    flex: 1;
+    padding: {{ block.settings.tab_padding }}px;
+    background: none;
+    border: none;
+    border-right: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    cursor: pointer;
+    font-size: {{ block.settings.tab_font_size }}px;
+    font-weight: {{ block.settings.tab_font_weight }};
+    color: {{ block.settings.tab_color }};
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-tab-button-{{ ai_gen_id }}:last-child {
+    border-right: none;
+  }
+
+  .ai-tab-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.tab_hover_background }};
+  }
+
+  .ai-tab-button-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.tab_active_background }};
+    color: {{ block.settings.tab_active_color }};
+    font-weight: {{ block.settings.tab_active_font_weight }};
+  }
+
+  .ai-tab-content-wrapper-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-tab-content-{{ ai_gen_id }} {
+    display: none;
+    padding: {{ block.settings.content_padding }}px;
+    color: {{ block.settings.content_color }};
+    font-size: {{ block.settings.content_font_size }}px;
+    line-height: 1.6;
+    animation: ai-tab-fade-{{ ai_gen_id }} 0.3s ease;
+  }
+
+  .ai-tab-content-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @keyframes ai-tab-fade-{{ ai_gen_id }} {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-tab-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.tab_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.tab_padding | times: 0.8 }}px;
+    }
+
+    .ai-tab-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<tab-accordion-{{ ai_gen_id }} class="ai-tab-accordion-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-tab-header-{{ ai_gen_id }}">
+    <button class="ai-tab-button-{{ ai_gen_id }} active" data-tab="1" aria-selected="true">
+      {{ block.settings.tab_1_title }}
+    </button>
+    <button class="ai-tab-button-{{ ai_gen_id }}" data-tab="2" aria-selected="false">
+      {{ block.settings.tab_2_title }}
+    </button>
+    <button class="ai-tab-button-{{ ai_gen_id }}" data-tab="3" aria-selected="false">
+      {{ block.settings.tab_3_title }}
+    </button>
+  </div>
+
+  <div class="ai-tab-content-wrapper-{{ ai_gen_id }}">
+    <div class="ai-tab-content-{{ ai_gen_id }} active" data-content="1">
+      {{ block.settings.tab_1_content }}
+    </div>
+    <div class="ai-tab-content-{{ ai_gen_id }}" data-content="2">
+      {{ block.settings.tab_2_content }}
+    </div>
+    <div class="ai-tab-content-{{ ai_gen_id }}" data-content="3">
+      {{ block.settings.tab_3_content }}
+    </div>
+  </div>
+</tab-accordion-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TabAccordion{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.tabs = this.querySelectorAll('.ai-tab-button-{{ ai_gen_id }}');
+        this.contents = this.querySelectorAll('.ai-tab-content-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const tabNumber = tab.getAttribute('data-tab');
+            
+            this.tabs.forEach((t) => {
+              t.classList.remove('active');
+              t.setAttribute('aria-selected', 'false');
+            });
+            
+            this.contents.forEach((c) => {
+              c.classList.remove('active');
+            });
+            
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            
+            const activeContent = this.querySelector(`[data-content="${tabNumber}"]`);
+            if (activeContent) {
+              activeContent.classList.add('active');
+            }
+          });
+        });
+      }
+    }
+
+    customElements.define('tab-accordion-{{ ai_gen_id }}', TabAccordion{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product tabs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Title",
+      "default": "Details"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_content",
+      "label": "Content",
+      "default": "<p>Add your product details here. Include information about materials, dimensions, care instructions, and other relevant specifications.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Title",
+      "default": "Shipping"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_content",
+      "label": "Content",
+      "default": "<p>Add your shipping and returns information here. Include delivery times, shipping costs, and return policy details.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Title",
+      "default": "Care"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_content",
+      "label": "Content",
+      "default": "<p>Add care instructions here. Include washing, drying, and maintenance guidelines to help customers keep the product in great condition.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": -5
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "header_background",
+      "label": "Header background",
+      "default": "#F9F9F9"
+    },
+    {
+      "type": "header",
+      "content": "Tab style"
+    },
+    {
+      "type": "range",
+      "id": "tab_padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Tab padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tab font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "tab_font_weight",
+      "label": "Tab font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "tab_color",
+      "label": "Tab color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_background",
+      "label": "Tab hover background",
+      "default": "#F0F0F0"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_background",
+      "label": "Active tab background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active tab color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "tab_active_font_weight",
+      "label": "Active tab font weight",
+      "options": [
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "header",
+      "content": "Content style"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Content font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs"
+    }
+  ]
+}
 {% endschema %}
