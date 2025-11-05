@@ -1,6 +1,878 @@
+{% doc %}
+  @prompt
+    build a offers slider for me , i want something like: Available offers
+    
+    Enjoy ৳ 100 off on orders ৳ 1500+
+    
+    INSTANT100
+    
+    Copy, it's good. but don't like the UI UX, section border color and opacity should be customizable , i want card border detais like this: Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    0
+    Shadow
+    Horizontal offset
+    
+    -5
+    Vertical offset
+    
+    4
+    Blur radius
+    
+    8
+    Shadow opacity
+    
+    0. make sure it's a slider, need the option for title alligment like left center or right
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-offers-slider-{{ ai_gen_id }} {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+  }
+
+  .ai-offers-slider__header-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+    text-align: {{ block.settings.title_alignment }};
+  }
+
+  .ai-offers-slider__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+  }
+
+  .ai-offers-slider__container-{{ ai_gen_id }} {
+    position: relative;
+    padding: 0 20px;
+  }
+
+  .ai-offers-slider__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.card_gap }}px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 10px;
+  }
+
+  .ai-offers-slider__track-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-offers-slider__card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.card_width }}px;
+    padding: {{ block.settings.card_padding }}px;
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-offers-slider__card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-offers-slider__card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.card_title_color }};
+    margin: 0 0 12px 0;
+  }
+
+  .ai-offers-slider__card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_description_size }}px;
+    color: {{ block.settings.card_description_color }};
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+  }
+
+  .ai-offers-slider__code-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: {{ block.settings.code_background }};
+    border-radius: {{ block.settings.code_border_radius }}px;
+    border: 1px dashed {{ block.settings.code_border_color }};
+  }
+
+  .ai-offers-slider__code-{{ ai_gen_id }} {
+    flex: 1;
+    font-family: monospace;
+    font-size: {{ block.settings.code_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.code_color }};
+    letter-spacing: 1px;
+  }
+
+  .ai-offers-slider__copy-btn-{{ ai_gen_id }} {
+    padding: 6px 12px;
+    background-color: {{ block.settings.copy_button_background }};
+    color: {{ block.settings.copy_button_color }};
+    border: none;
+    border-radius: {{ block.settings.copy_button_radius }}px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ai-offers-slider__copy-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.copy_button_hover }};
+  }
+
+  .ai-offers-slider__copy-btn-{{ ai_gen_id }}.copied {
+    background-color: {{ block.settings.copy_button_success }};
+  }
+
+  .ai-offers-slider__nav-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .ai-offers-slider__nav-btn-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: {{ block.settings.nav_button_background }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-offers-slider__nav-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.nav_button_hover }};
+  }
+
+  .ai-offers-slider__nav-btn-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-offers-slider__card-{{ ai_gen_id }} {
+      width: {{ block.settings.card_width_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<offers-slider-{{ ai_gen_id }} class="ai-offers-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.title != blank %}
+    <div class="ai-offers-slider__header-{{ ai_gen_id }}">
+      <h2 class="ai-offers-slider__title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="ai-offers-slider__container-{{ ai_gen_id }}">
+    <div class="ai-offers-slider__track-{{ ai_gen_id }}" data-slider-track>
+      {% if block.settings.offer_1_enabled %}
+        <div class="ai-offers-slider__card-{{ ai_gen_id }}">
+          {% if block.settings.offer_1_title != blank %}
+            <h3 class="ai-offers-slider__card-title-{{ ai_gen_id }}">{{ block.settings.offer_1_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.offer_1_description != blank %}
+            <div class="ai-offers-slider__card-description-{{ ai_gen_id }}">
+              {{ block.settings.offer_1_description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.offer_1_code != blank %}
+            <div class="ai-offers-slider__code-wrapper-{{ ai_gen_id }}">
+              <span class="ai-offers-slider__code-{{ ai_gen_id }}">{{ block.settings.offer_1_code }}</span>
+              <button 
+                class="ai-offers-slider__copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ block.settings.offer_1_code }}"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.offer_2_enabled %}
+        <div class="ai-offers-slider__card-{{ ai_gen_id }}">
+          {% if block.settings.offer_2_title != blank %}
+            <h3 class="ai-offers-slider__card-title-{{ ai_gen_id }}">{{ block.settings.offer_2_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.offer_2_description != blank %}
+            <div class="ai-offers-slider__card-description-{{ ai_gen_id }}">
+              {{ block.settings.offer_2_description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.offer_2_code != blank %}
+            <div class="ai-offers-slider__code-wrapper-{{ ai_gen_id }}">
+              <span class="ai-offers-slider__code-{{ ai_gen_id }}">{{ block.settings.offer_2_code }}</span>
+              <button 
+                class="ai-offers-slider__copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ block.settings.offer_2_code }}"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.offer_3_enabled %}
+        <div class="ai-offers-slider__card-{{ ai_gen_id }}">
+          {% if block.settings.offer_3_title != blank %}
+            <h3 class="ai-offers-slider__card-title-{{ ai_gen_id }}">{{ block.settings.offer_3_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.offer_3_description != blank %}
+            <div class="ai-offers-slider__card-description-{{ ai_gen_id }}">
+              {{ block.settings.offer_3_description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.offer_3_code != blank %}
+            <div class="ai-offers-slider__code-wrapper-{{ ai_gen_id }}">
+              <span class="ai-offers-slider__code-{{ ai_gen_id }}">{{ block.settings.offer_3_code }}</span>
+              <button 
+                class="ai-offers-slider__copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ block.settings.offer_3_code }}"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.offer_4_enabled %}
+        <div class="ai-offers-slider__card-{{ ai_gen_id }}">
+          {% if block.settings.offer_4_title != blank %}
+            <h3 class="ai-offers-slider__card-title-{{ ai_gen_id }}">{{ block.settings.offer_4_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.offer_4_description != blank %}
+            <div class="ai-offers-slider__card-description-{{ ai_gen_id }}">
+              {{ block.settings.offer_4_description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.offer_4_code != blank %}
+            <div class="ai-offers-slider__code-wrapper-{{ ai_gen_id }}">
+              <span class="ai-offers-slider__code-{{ ai_gen_id }}">{{ block.settings.offer_4_code }}</span>
+              <button 
+                class="ai-offers-slider__copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ block.settings.offer_4_code }}"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.offer_5_enabled %}
+        <div class="ai-offers-slider__card-{{ ai_gen_id }}">
+          {% if block.settings.offer_5_title != blank %}
+            <h3 class="ai-offers-slider__card-title-{{ ai_gen_id }}">{{ block.settings.offer_5_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.offer_5_description != blank %}
+            <div class="ai-offers-slider__card-description-{{ ai_gen_id }}">
+              {{ block.settings.offer_5_description }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.offer_5_code != blank %}
+            <div class="ai-offers-slider__code-wrapper-{{ ai_gen_id }}">
+              <span class="ai-offers-slider__code-{{ ai_gen_id }}">{{ block.settings.offer_5_code }}</span>
+              <button 
+                class="ai-offers-slider__copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ block.settings.offer_5_code }}"
+                aria-label="Copy code"
+              >
+                Copy
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.show_navigation %}
+      <div class="ai-offers-slider__nav-{{ ai_gen_id }}">
+        <button class="ai-offers-slider__nav-btn-{{ ai_gen_id }}" data-nav-prev aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="ai-offers-slider__nav-btn-{{ ai_gen_id }}" data-nav-next aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</offers-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class OffersSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('[data-slider-track]');
+        this.prevBtn = this.querySelector('[data-nav-prev]');
+        this.nextBtn = this.querySelector('[data-nav-next]');
+        this.copyButtons = this.querySelectorAll('.ai-offers-slider__copy-btn-{{ ai_gen_id }}');
+
+        this.setupCopyButtons();
+        this.setupNavigation();
+        this.updateNavigationState();
+      }
+
+      setupCopyButtons() {
+        this.copyButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const code = button.getAttribute('data-code');
+            navigator.clipboard.writeText(code).then(() => {
+              const originalText = button.textContent;
+              button.textContent = 'Copied!';
+              button.classList.add('copied');
+              
+              setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+              }, 2000);
+            });
+          });
+        });
+      }
+
+      setupNavigation() {
+        if (!this.prevBtn || !this.nextBtn) return;
+
+        this.prevBtn.addEventListener('click', () => {
+          const scrollAmount = this.track.offsetWidth * 0.8;
+          this.track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          setTimeout(() => this.updateNavigationState(), 300);
+        });
+
+        this.nextBtn.addEventListener('click', () => {
+          const scrollAmount = this.track.offsetWidth * 0.8;
+          this.track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          setTimeout(() => this.updateNavigationState(), 300);
+        });
+
+        this.track.addEventListener('scroll', () => {
+          this.updateNavigationState();
+        });
+      }
+
+      updateNavigationState() {
+        if (!this.prevBtn || !this.nextBtn) return;
+
+        const isAtStart = this.track.scrollLeft <= 0;
+        const isAtEnd = this.track.scrollLeft + this.track.offsetWidth >= this.track.scrollWidth - 1;
+
+        this.prevBtn.disabled = isAtStart;
+        this.nextBtn.disabled = isAtEnd;
+      }
+    }
+
+    customElements.define('offers-slider-{{ ai_gen_id }}', OffersSlider{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Offers slider",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Available offers"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Card width (desktop)",
+      "default": 350
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Card width (mobile)",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": -5
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Code style"
+    },
+    {
+      "type": "color",
+      "id": "code_background",
+      "label": "Code background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "code_border_color",
+      "label": "Code border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "code_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Code border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Code size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "code_color",
+      "label": "Code color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Copy button"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_hover",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_success",
+      "label": "Success background",
+      "default": "#00A341"
+    },
+    {
+      "type": "range",
+      "id": "copy_button_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "nav_button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Button color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_hover",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Offer 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_1_enabled",
+      "label": "Enable offer 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_1_title",
+      "label": "Title",
+      "default": "Special Discount"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_1_description",
+      "label": "Description",
+      "default": "Enjoy ৳ 100 off on orders ৳ 1500+"
+    },
+    {
+      "type": "text",
+      "id": "offer_1_code",
+      "label": "Coupon code",
+      "default": "INSTANT100"
+    },
+    {
+      "type": "header",
+      "content": "Offer 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_2_enabled",
+      "label": "Enable offer 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_2_title",
+      "label": "Title",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_2_description",
+      "label": "Description",
+      "default": "Free delivery on orders above ৳ 2000"
+    },
+    {
+      "type": "text",
+      "id": "offer_2_code",
+      "label": "Coupon code",
+      "default": "FREESHIP"
+    },
+    {
+      "type": "header",
+      "content": "Offer 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_3_enabled",
+      "label": "Enable offer 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_3_title",
+      "label": "Title",
+      "default": "Weekend Sale"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_3_description",
+      "label": "Description",
+      "default": "Get 15% off on all products this weekend"
+    },
+    {
+      "type": "text",
+      "id": "offer_3_code",
+      "label": "Coupon code",
+      "default": "WEEKEND15"
+    },
+    {
+      "type": "header",
+      "content": "Offer 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_4_enabled",
+      "label": "Enable offer 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "offer_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "offer_4_code",
+      "label": "Coupon code"
+    },
+    {
+      "type": "header",
+      "content": "Offer 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_5_enabled",
+      "label": "Enable offer 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "offer_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "offer_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "offer_5_code",
+      "label": "Coupon code"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offers slider"
+    }
+  ]
+}
 {% endschema %}
