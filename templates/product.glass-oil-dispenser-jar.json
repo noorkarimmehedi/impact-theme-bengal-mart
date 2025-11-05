@@ -253,6 +253,73 @@
         "text_color": ""
       }
     },
+    "blocks_nbkzVW": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_yNGk8n": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 5,
+            "spacing_bottom": 5
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_yNGk8n"
+      ],
+      "name": "Horizontal divider",
+      "settings": {}
+    },
+    "blocks_C7tVEY": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_18fab4c_knNgPJ": {
+          "type": "ai_gen_block_18fab4c",
+          "settings": {
+            "tab_1_title": "Description",
+            "tab_1_content": "<p>Add your product description here. Include key features, materials, and benefits.</p>",
+            "tab_2_title": "Specifications",
+            "tab_2_content": "<p>Add product specifications, dimensions, weight, and technical details here.</p>",
+            "tab_3_title": "Shipping & Returns",
+            "tab_3_content": "<p>Add shipping information, delivery times, and return policy details here.</p>",
+            "header_background": "#f8f8f8",
+            "border_width": 1,
+            "border_color": "#e0e0e0",
+            "tab_padding": 16,
+            "tab_horizontal_padding": 24,
+            "tab_font_size": 14,
+            "tab_text_color": "#666666",
+            "tab_hover_background": "#eeeeee",
+            "tab_hover_text_color": "#333333",
+            "active_tab_background": "#ffffff",
+            "active_tab_text_color": "#000000",
+            "active_border_color": "#000000",
+            "active_border_width": 3,
+            "content_padding": 24,
+            "content_background": "#ffffff",
+            "content_text_color": "#333333",
+            "line_height": 1.6,
+            "paragraph_spacing": 16,
+            "heading_spacing": 20,
+            "list_spacing": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_18fab4c_knNgPJ"
+      ],
+      "name": "Product accordion tabs",
+      "settings": {}
+    },
     "1758906325660f2750": {
       "type": "_blocks",
       "blocks": {
@@ -310,6 +377,7 @@
         "ai_gen_block_d3a950a_kbGTyf",
         "ai_gen_block_606562f_78CEbK"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1759498066f3f04a7f": {
@@ -465,6 +533,8 @@
     "main",
     "blocks_fKUCjE",
     "text_with_icons_DrDHht",
+    "blocks_nbkzVW",
+    "blocks_C7tVEY",
     "1758906325660f2750",
     "1759498066f3f04a7f",
     "related-products",
