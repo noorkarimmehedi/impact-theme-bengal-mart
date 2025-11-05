@@ -48,9 +48,8 @@
   }
 
   .whatsapp-float-button .whatsapp-icon {
-    stroke: #141B34;
-    fill: none;
-    stroke-width: 1.5;
+    fill: #000000;
+    stroke: none;
     transform: rotate(0deg) scale(1);
     opacity: 1;
   }
@@ -304,8 +303,15 @@
   <!-- Floating Button -->
   <button class="whatsapp-float-button" id="whatsapp-toggle" aria-label="Toggle WhatsApp Chat">
     <svg class="icon whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-      <path d="M14.1706 20.8905C18.3536 20.6125 21.6856 17.2332 21.9598 12.9909C22.0134 12.1607 22.0134 11.3009 21.9598 10.4707C21.6856 6.22838 18.3536 2.84913 14.1706 2.57107C12.7435 2.47621 11.2536 2.47641 9.8294 2.57107C5.64639 2.84913 2.31441 6.22838 2.04024 10.4707C1.98659 11.3009 1.98659 12.1607 2.04024 12.9909C2.1401 14.536 2.82343 15.9666 3.62791 17.1746C4.09501 18.0203 3.78674 19.0758 3.30021 19.9978C2.94941 20.6626 2.77401 20.995 2.91484 21.2351C3.05568 21.4752 3.37026 21.4829 3.99943 21.4982C5.24367 21.5285 6.08268 21.1757 6.74868 20.6846C7.1264 20.4061 7.31527 20.2668 7.44544 20.2508C7.5756 20.2348 7.83177 20.3403 8.34401 20.5513C8.8044 20.7409 9.33896 20.8579 9.8294 20.8905C11.2536 20.9852 12.7435 20.9854 14.1706 20.8905Z" stroke="currentColor" stroke-linejoin="round" />
-      <path d="M11.9953 12H12.0043M15.9908 12H15.9998M7.99982 12H8.00879" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+      <g clip-path="url(#clip0_chat_icon)">
+        <path d="M15.59 12.4V16.47C15.59 16.83 15.55 17.17 15.46 17.48C15.09 18.95 13.87 19.87 12.19 19.87H9.47L6.45 21.88C6 22.19 5.4 21.86 5.4 21.32V19.87C4.38 19.87 3.53 19.53 2.94 18.94C2.34 18.34 2 17.49 2 16.47V12.4C2 10.5 3.18 9.19 5 9.02C5.13 9.01 5.26 9 5.4 9H12.19C14.23 9 15.59 10.36 15.59 12.4Z" fill="currentColor"/>
+        <path d="M17.75 15.6C19.02 15.6 20.09 15.18 20.83 14.43C21.58 13.69 22 12.62 22 11.35V6.25C22 3.9 20.1 2 17.75 2H9.25C6.9 2 5 3.9 5 6.25V7C5 7.28 5.22 7.5 5.5 7.5H12.19C14.9 7.5 17.09 9.69 17.09 12.4V15.1C17.09 15.38 17.31 15.6 17.59 15.6H17.75Z" fill="currentColor"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_chat_icon">
+          <rect width="24" height="24" fill="white"/>
+        </clipPath>
+      </defs>
     </svg>
     <svg class="icon close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
       <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
@@ -370,7 +376,7 @@
   const whatsappConfig = {
     phoneNumber: '+8801609547606', // Change to your WhatsApp number with country code
     message: 'Hello there! Is someone available to chat?', // Pre-filled message
-    messengerUrl: 'https://m.me/bengalmartofficial', // Change to your Facebook Messenger URL
+    messengerUrl: 'https://m.me/your-page-username', // Change to your Facebook Messenger URL
     messengerMessage: 'Hello there! Is someone available to chat?', // Pre-filled message for Messenger
     callNumber: '+8801609547606', // Change to your phone number for direct calls
   };
