@@ -9,6 +9,66 @@
  */
 {
   "sections": {
+    "blocks_TBLrmp": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1a13f16_FE9rJq": {
+          "type": "ai_gen_block_1a13f16",
+          "settings": {
+            "section_title": "",
+            "image_aspect_ratio": "square",
+            "gap_mobile": 16,
+            "gap_desktop": 24,
+            "padding_top": 5,
+            "padding_bottom": 20,
+            "show_overlay_text": true,
+            "overlay_text_color": "#ffffff",
+            "overlay_background_opacity": 70,
+            "border_width": 1,
+            "border_color": "#e0e0e0",
+            "hover_border_color": "#cccccc",
+            "border_radius": 0,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 4,
+            "shadow_blur": 8,
+            "shadow_opacity": 0,
+            "arrow_background": "#ffffff",
+            "arrow_hover_background": "#f4f4f4",
+            "arrow_color": "#000000",
+            "collection_1": "bestsellers",
+            "hide_collection_1": false,
+            "collection_2": "kitchen",
+            "hide_collection_2": false,
+            "collection_3": "under-500",
+            "hide_collection_3": false,
+            "collection_4": "under-800",
+            "hide_collection_4": false,
+            "collection_5": "under-1200",
+            "hide_collection_5": false,
+            "collection_6": "under-1500",
+            "hide_collection_6": false,
+            "collection_7": "",
+            "hide_collection_7": false,
+            "collection_8": "",
+            "hide_collection_8": false,
+            "collection_9": "",
+            "hide_collection_9": false,
+            "collection_10": "",
+            "hide_collection_10": false,
+            "collection_11": "",
+            "hide_collection_11": false,
+            "collection_12": "",
+            "hide_collection_12": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1a13f16_FE9rJq"
+      ],
+      "name": "Fashion category grid",
+      "settings": {}
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -640,66 +700,6 @@
       ],
       "settings": {}
     },
-    "blocks_TBLrmp": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_1a13f16_FE9rJq": {
-          "type": "ai_gen_block_1a13f16",
-          "settings": {
-            "section_title": "Shop by Category",
-            "image_aspect_ratio": "square",
-            "gap_mobile": 16,
-            "gap_desktop": 24,
-            "padding_top": 5,
-            "padding_bottom": 40,
-            "show_overlay_text": true,
-            "overlay_text_color": "#ffffff",
-            "overlay_background_opacity": 70,
-            "border_width": 1,
-            "border_color": "#E0E0E0",
-            "hover_border_color": "#CCCCCC",
-            "border_radius": 0,
-            "shadow_horizontal": 0,
-            "shadow_vertical": 4,
-            "shadow_blur": 8,
-            "shadow_opacity": 0,
-            "arrow_background": "#ffffff",
-            "arrow_hover_background": "#f4f4f4",
-            "arrow_color": "#000000",
-            "collection_1": "bestsellers",
-            "hide_collection_1": false,
-            "collection_2": "kitchen",
-            "hide_collection_2": false,
-            "collection_3": "under-500",
-            "hide_collection_3": false,
-            "collection_4": "under-800",
-            "hide_collection_4": false,
-            "collection_5": "under-1200",
-            "hide_collection_5": false,
-            "collection_6": "under-1500",
-            "hide_collection_6": false,
-            "collection_7": "",
-            "hide_collection_7": false,
-            "collection_8": "",
-            "hide_collection_8": false,
-            "collection_9": "",
-            "hide_collection_9": false,
-            "collection_10": "",
-            "hide_collection_10": false,
-            "collection_11": "",
-            "hide_collection_11": false,
-            "collection_12": "",
-            "hide_collection_12": false
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_1a13f16_FE9rJq"
-      ],
-      "name": "Fashion category grid",
-      "settings": {}
-    },
     "featured_collection_gEQgRW": {
       "type": "featured-collection",
       "name": "Featured collection",
@@ -728,6 +728,7 @@
     }
   },
   "order": [
+    "blocks_TBLrmp",
     "main",
     "1761718859f70325d4",
     "1761719636e059b308",
@@ -740,7 +741,6 @@
     "1759498066f3f04a7f",
     "related-products",
     "1759497772a737a649",
-    "blocks_TBLrmp",
     "featured_collection_gEQgRW"
   ]
 }
