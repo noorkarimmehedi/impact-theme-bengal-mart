@@ -454,10 +454,10 @@
         "ai_gen_block_18fab4c_z7c9Ny": {
           "type": "ai_gen_block_18fab4c",
           "settings": {
-            "tab_1_title": "Fast Shipping",
-            "tab_1_content": "<p>We process all orders as quickly as possible after confirmation.</p><p><strong>   1.  Dhaka City deliveries</strong> usually arrive within <strong>1–2 business days</strong>.</p><p><strong>    2. Outside Dhaka City deliveries</strong> take about <strong>2–3 business days</strong>, depending on the location and courier service.</p><p>You’ll receive a confirmation message once your order is shipped.</p>",
-            "tab_2_title": "Order Tracking",
-            "tab_2_content": "<p>Once your order is shipped, we’ll send you a tracking number or link via SMS.</p><p>You can use this to see your order’s current status and expected delivery date.</p><p>If you don’t receive a tracking update within <strong>24 hours</strong> of ordering, feel free to message us directly.</p>",
+            "tab_1_title": "Description",
+            "tab_1_content": "<p>ফলমূল ও সবজি ধোয়া, পানি ঝরানো আর সংরক্ষণের ঝামেলা এখন এক ঝুড়িতেই! টেকসই ঢাকনাযুক্ত ডিজাইন রাখবে আপনার খাবার সবসময় টাটকা ও রান্নাঘর থাকবে ঝামেলামুক্ত।<br/></p>",
+            "tab_2_title": "Fast Shipping",
+            "tab_2_content": "<p>We process all orders as quickly as possible after confirmation.</p><p><strong>   1.  Dhaka City deliveries</strong> usually arrive within <strong>1–2 business days</strong>.</p><p><strong>    2. Outside Dhaka City deliveries</strong> take about <strong>2–3 business days</strong>, depending on the location and courier service.</p><p>You’ll receive a confirmation message once your order is shipped.</p>",
             "tab_3_title": "Get in touch",
             "tab_3_content": "<p>You can call us at +8801609547606. We will be happy to assist you.</p>",
             "header_background": "#f8f8f8",
