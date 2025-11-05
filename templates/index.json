@@ -237,7 +237,7 @@
             "border_width": 1,
             "border_color": "#E0E0E0",
             "hover_border_color": "#CCCCCC",
-            "border_radius": 8,
+            "border_radius": 2,
             "shadow_horizontal": 0,
             "shadow_vertical": 4,
             "shadow_blur": 8,
