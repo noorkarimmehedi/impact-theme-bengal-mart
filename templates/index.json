@@ -218,6 +218,65 @@
       ],
       "settings": {}
     },
+    "1762331971972f85e7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1a13f16_wC6QQM": {
+          "type": "ai_gen_block_1a13f16",
+          "settings": {
+            "section_title": "Shop by Category",
+            "image_aspect_ratio": "square",
+            "gap_mobile": 10,
+            "gap_desktop": 24,
+            "padding_top": 10,
+            "padding_bottom": 25,
+            "show_overlay_text": true,
+            "overlay_text_color": "#ffffff",
+            "overlay_background_opacity": 70,
+            "border_width": 1,
+            "border_color": "#E0E0E0",
+            "hover_border_color": "#CCCCCC",
+            "border_radius": 8,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 4,
+            "shadow_blur": 8,
+            "shadow_opacity": 0,
+            "arrow_background": "#ffffff",
+            "arrow_hover_background": "#f4f4f4",
+            "arrow_color": "#000000",
+            "collection_1": "bestsellers",
+            "hide_collection_1": false,
+            "collection_2": "home",
+            "hide_collection_2": false,
+            "collection_3": "kitchen",
+            "hide_collection_3": false,
+            "collection_4": "under-500",
+            "hide_collection_4": false,
+            "collection_5": "under-1200",
+            "hide_collection_5": false,
+            "collection_6": "under-1500",
+            "hide_collection_6": false,
+            "collection_7": "",
+            "hide_collection_7": false,
+            "collection_8": "",
+            "hide_collection_8": false,
+            "collection_9": "",
+            "hide_collection_9": false,
+            "collection_10": "",
+            "hide_collection_10": false,
+            "collection_11": "",
+            "hide_collection_11": false,
+            "collection_12": "",
+            "hide_collection_12": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1a13f16_wC6QQM"
+      ],
+      "settings": {}
+    },
     "scrolling-text": {
       "type": "scrolling-text",
       "disabled": true,
@@ -1019,6 +1078,7 @@
     "slideshow",
     "image-link-blocks",
     "1761717881f75057a2",
+    "1762331971972f85e7",
     "scrolling-text",
     "featured_collection_MLcfXh",
     "featured-collection",
