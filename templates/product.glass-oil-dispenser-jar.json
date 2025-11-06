@@ -215,7 +215,7 @@
             "description_color": "#666666",
             "copy_button_text": "Copy",
             "copied_text": "Copied!",
-            "copy_button_bg": "#ff8c00",
+            "copy_button_bg": "#e67e00",
             "copy_button_color": "#ffffff",
             "copy_button_hover_bg": "#e67e00",
             "success_color": "#00a341",
