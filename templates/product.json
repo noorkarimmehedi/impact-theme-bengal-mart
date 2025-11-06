@@ -365,10 +365,10 @@
             "offer_4_title": "New Order",
             "offer_4_description": "Save ৳ 150 on your first order",
             "offer_4_code": "NEW25",
-            "offer_5_enabled": false,
-            "offer_5_title": "",
-            "offer_5_description": "",
-            "offer_5_code": ""
+            "offer_5_enabled": true,
+            "offer_5_title": "Special Offer",
+            "offer_5_description": "Enjoy ৳ 100 off on orders ৳ 1500+",
+            "offer_5_code": "SPECIAL25"
           },
           "blocks": {}
         }
