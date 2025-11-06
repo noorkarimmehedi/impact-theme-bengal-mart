@@ -760,6 +760,7 @@
       "blocks": {
         "ai_gen_block_67ab875_rdDnKn": {
           "type": "ai_gen_block_67ab875",
+          "name": "Product-Collection",
           "settings": {
             "section_title": "You May Also Like",
             "title_size": 32,
