@@ -505,7 +505,7 @@
             "tab_3_content": "<p>If you don't like the product you can return it with just paying delivery charge and if there will be a mismatched product we won't change delivery charge for you.</p>",
             "header_background": "#f5f5f5",
             "header_padding": 20,
-            "header_border_radius": 8,
+            "header_border_radius": 0,
             "header_border_width": 1,
             "header_border_color": "#E0E0E0",
             "tab_spacing": 12,
