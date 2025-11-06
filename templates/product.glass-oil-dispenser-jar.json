@@ -279,6 +279,53 @@
       "name": "Horizontal divider",
       "settings": {}
     },
+    "1762463763bd40063c": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4d014ef_aLKXRL": {
+          "type": "ai_gen_block_4d014ef",
+          "settings": {
+            "row_1_label": "DESCRIPTION",
+            "row_1_content": "<p>High-quality product crafted with attention to detail and premium materials for lasting durability.</p>",
+            "row_2_label": "DETAILS",
+            "row_2_content": "<p>Material: Premium cotton blend<br/>Weight: 250g<br/>Dimensions: 30cm x 40cm</p>",
+            "row_3_label": "",
+            "row_3_content": "",
+            "row_4_label": "SHIPPING",
+            "row_4_content": "<p>Free shipping on orders over $50. Standard delivery 3-5 business days. Express shipping available at checkout.</p>",
+            "row_5_label": "",
+            "row_5_content": "",
+            "row_6_label": "",
+            "row_6_content": "",
+            "label_width": 30,
+            "column_gap": 30,
+            "row_padding": 20,
+            "padding": 24,
+            "padding_mobile": 16,
+            "label_width_mobile": 35,
+            "column_gap_mobile": 16,
+            "label_font_size": 14,
+            "label_font_size_mobile": 12,
+            "label_font_weight": "600",
+            "label_text_transform": "uppercase",
+            "label_letter_spacing": 1,
+            "label_color": "#000000",
+            "content_font_size": 14,
+            "content_font_size_mobile": 13,
+            "content_color": "#666666",
+            "background_color": "#ffffff",
+            "border_color": "#000000",
+            "border_width": 1,
+            "border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4d014ef_aLKXRL"
+      ],
+      "settings": {}
+    },
     "blocks_4kNXXL": {
       "type": "_blocks",
       "blocks": {
@@ -660,6 +707,7 @@
     "blocks_fKUCjE",
     "text_with_icons_DrDHht",
     "blocks_nbkzVW",
+    "1762463763bd40063c",
     "blocks_4kNXXL",
     "blocks_C7tVEY",
     "1758906325660f2750",
