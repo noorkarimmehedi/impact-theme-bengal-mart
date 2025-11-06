@@ -187,7 +187,6 @@
       "block_order": [
         "ai_gen_block_34a678d_W7hLcn"
       ],
-      "disabled": true,
       "name": "Offers slider",
       "settings": {}
     },
@@ -232,10 +231,10 @@
             "discount_3": "Buy 2 Get 1 Free",
             "code_3": "BUY2GET1",
             "description_3": "Applicable on selected items. Check product page.",
-            "card_4_enabled": false,
-            "discount_4": "",
-            "code_4": "",
-            "description_4": "",
+            "card_4_enabled": true,
+            "discount_4": "New Customer Offer",
+            "code_4": "WELCOME200",
+            "description_4": "First time? Get ৳ 200 off on orders ৳ 2500+",
             "card_5_enabled": false,
             "discount_5": "",
             "code_5": "",
