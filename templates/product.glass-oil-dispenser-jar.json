@@ -503,8 +503,78 @@
       ],
       "settings": {}
     },
+    "blocks_LyP6mf": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_67ab875_6hF9ta": {
+          "type": "ai_gen_block_67ab875",
+          "settings": {
+            "section_title": "You May Also Like",
+            "title_size": 32,
+            "title_alignment": "center",
+            "title_alignment_mobile": "left",
+            "title_color": "#000000",
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_link": "shopify://collections/bestsellers",
+            "button_width": 150,
+            "button_width_mobile": "custom",
+            "button_width_mobile_custom": 150,
+            "button_alignment_mobile": "left",
+            "button_font_size": 16,
+            "button_padding_vertical": 12,
+            "button_padding_horizontal": 27,
+            "button_border_radius": 12,
+            "button_bg_color": "#FF1744",
+            "button_text_color": "#ffffff",
+            "button_edge_dark": "#8B0029",
+            "button_edge_light": "#D50052",
+            "button_shadow_color": "rgba(0, 0, 0, 0.25)",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_horizontal": 20,
+            "collection": "bestsellers",
+            "products_limit_desktop": 4,
+            "products_limit_mobile": 4,
+            "columns_desktop": 4,
+            "columns_tablet": 3,
+            "columns_mobile": "2",
+            "grid_gap": 20,
+            "card_background": "#ffffff",
+            "card_padding": 16,
+            "border_width": 1,
+            "border_color": "#E0E0E0",
+            "hover_border_color": "#CCCCCC",
+            "border_radius": 8,
+            "shadow_horizontal": -7,
+            "shadow_vertical": 1,
+            "shadow_blur": 4,
+            "shadow_opacity": 0,
+            "show_vendor": false,
+            "vendor_color": "#666666",
+            "product_title_size": 13,
+            "product_title_color": "#000000",
+            "price_size": 18,
+            "price_color": "#000000",
+            "compare_price_size": 14,
+            "compare_price_color": "#666666",
+            "show_sale_badge": true,
+            "sale_badge_label": "Sale",
+            "sale_badge_bg": "#ff0000",
+            "sale_badge_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_67ab875_6hF9ta"
+      ],
+      "name": "You may like",
+      "settings": {}
+    },
     "featured_collection_gEQgRW": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "bestsellers",
@@ -541,6 +611,7 @@
     "related-products",
     "video_MDpVdL",
     "1759497772a737a649",
+    "blocks_LyP6mf",
     "featured_collection_gEQgRW"
   ]
 }
