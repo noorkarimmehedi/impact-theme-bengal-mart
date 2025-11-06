@@ -17,7 +17,7 @@
       "settings": {
         "announcement": true,
         "speed": 5000,
-        "design": "design1",
+        "design": "design4",
         "design1_message": "<strong>New Year Special</strong> Up to 20% off",
         "countdown_day": 31,
         "countdown_month": 1,
