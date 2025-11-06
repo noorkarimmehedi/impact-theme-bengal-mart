@@ -21,7 +21,7 @@
         "ai_gen_block_1a13f16_fntGrx": {
           "type": "ai_gen_block_1a13f16",
           "settings": {
-            "section_title": "Shop by Category",
+            "section_title": "",
             "image_aspect_ratio": "square",
             "gap_mobile": 16,
             "gap_desktop": 24,
