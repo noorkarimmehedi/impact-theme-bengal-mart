@@ -490,6 +490,59 @@
       ],
       "settings": {}
     },
+    "17624114639a44d3bc": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f32c00f_fUbPc8": {
+          "type": "ai_gen_block_f32c00f",
+          "settings": {
+            "tab_1_title": "Description",
+            "tab_1_content": "<p>ফলমূল ও সবজি ধোয়া, পানি ঝরানো আর সংরক্ষণের ঝামেলা এখন এক ঝুড়িতেই! টেকসই ঢাকনাযুক্ত ডিজাইন রাখবে আপনার খাবার সবসময় টাটকা ও রান্নাঘর থাকবে ঝামেলামুক্ত।<br/></p>",
+            "tab_2_title": "Shipping",
+            "tab_2_content": "<p>We process all orders as quickly as possible after confirmation.</p><p><strong>   1.  Dhaka City deliveries</strong> usually arrive within <strong>1–2 business days</strong>.</p><p><strong>    2. Outside Dhaka City deliveries</strong> take about <strong>2–3 business days</strong>, depending on the location and courier service.</p><p>You’ll receive a confirmation message once your order is shipped.</p>",
+            "tab_3_title": "Returns",
+            "tab_3_content": "<p>If you don't like the product you can return it with just paying delivery charge and if there will be a mismatched product we won't change delivery charge for you.</p>",
+            "header_background": "#f5f5f5",
+            "header_padding": 20,
+            "header_border_radius": 8,
+            "header_border_width": 1,
+            "header_border_color": "#E0E0E0",
+            "tab_spacing": 12,
+            "tab_font_size": 16,
+            "tab_font_weight": "600",
+            "tab_padding_vertical": 12,
+            "tab_padding_horizontal": 20,
+            "tab_border_radius": 0,
+            "tab_background": "#ffe603",
+            "tab_text_color": "#000000",
+            "tab_active_background": "#D50000",
+            "tab_active_text_color": "#ffffff",
+            "tab_edge_color": "#8B0000",
+            "tab_shadow_color": "#ffffff",
+            "content_padding": 24,
+            "content_background": "#ffffff",
+            "content_text_color": "#000000",
+            "line_height": 1.6,
+            "paragraph_spacing": 16,
+            "heading_spacing": 20,
+            "list_item_spacing": 8,
+            "border_width": 1,
+            "border_color": "#E0E0E0",
+            "hover_border_color": "#CCCCCC",
+            "border_radius": 0,
+            "shadow_horizontal": -5,
+            "shadow_vertical": 4,
+            "shadow_blur": 8,
+            "shadow_opacity": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f32c00f_fUbPc8"
+      ],
+      "settings": {}
+    },
     "1758906325660f2750": {
       "type": "_blocks",
       "blocks": {
@@ -676,6 +729,7 @@
     "text_with_icons_DrDHht",
     "blocks_UaKAYE",
     "1762369195f8b47413",
+    "17624114639a44d3bc",
     "1758906325660f2750",
     "1759498066f3f04a7f",
     "related-products",
