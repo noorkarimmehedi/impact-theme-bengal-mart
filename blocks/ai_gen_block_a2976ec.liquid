@@ -262,12 +262,8 @@
       }
 
       setupScrollListener() {
-        let scrollTimeout;
         this.track.addEventListener('scroll', () => {
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            this.updateActiveIndicator();
-          }, 100);
+          this.updateActiveIndicator();
         });
       }
 
