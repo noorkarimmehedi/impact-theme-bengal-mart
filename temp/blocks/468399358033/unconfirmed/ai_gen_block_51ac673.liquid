@@ -1,6 +1,689 @@
+{% doc %}
+  @prompt
+    want a section like this: Delivery
+    Enter Delivery Pincode
+    Check Enter pincode
+    Delivery by13 Nov, Thursday?
+    if ordered before 4:33 PM
+    instead of Enter pincode. I want Enter your city. and it should be for just Bangladesh. the UI should be like this : Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    8
+    Shadow
+    Horizontal offset
+    
+    -7
+    Vertical offset
+    
+    1
+    Blur radius
+    
+    4
+    Shadow opacity
+    
+    0. everything should be update in real time 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-checker-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.container_border_radius }}px;
+  }
+
+  .ai-delivery-checker__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.spacing }}px 0;
+  }
+
+  .ai-delivery-checker__input-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    margin-bottom: {{ block.settings.spacing }}px;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.input_padding }}px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    font-size: {{ block.settings.input_font_size }}px;
+    color: {{ block.settings.input_text_color }};
+    background-color: {{ block.settings.input_background }};
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.focus_border_color }};
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.placeholder_color }};
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.button_padding }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }}:active {
+    transform: scale(0.98);
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.spacing }}px;
+    padding: {{ block.settings.result_padding }}px;
+    background-color: {{ block.settings.result_background }};
+    border-radius: {{ block.settings.result_border_radius }}px;
+    border-left: 4px solid {{ block.settings.result_accent_color }};
+    display: none;
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-delivery-checker__delivery-date-{{ ai_gen_id }} {
+    font-size: {{ block.settings.delivery_date_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.delivery_date_color }};
+    margin: 0 0 8px 0;
+  }
+
+  .ai-delivery-checker__delivery-time-{{ ai_gen_id }} {
+    font-size: {{ block.settings.delivery_time_size }}px;
+    color: {{ block.settings.delivery_time_color }};
+    margin: 0;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }} {
+    margin-top: {{ block.settings.spacing }}px;
+    padding: {{ block.settings.result_padding }}px;
+    background-color: {{ block.settings.error_background }};
+    border-radius: {{ block.settings.result_border_radius }}px;
+    border-left: 4px solid {{ block.settings.error_accent_color }};
+    color: {{ block.settings.error_text_color }};
+    font-size: {{ block.settings.input_font_size }}px;
+    display: none;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }}.active {
+    display: block;
+  }
+{% endstyle %}
+
+<delivery-checker-{{ ai_gen_id }} class="ai-delivery-checker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h3 class="ai-delivery-checker__title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+  
+  <div class="ai-delivery-checker__input-wrapper-{{ ai_gen_id }}">
+    <input
+      type="text"
+      class="ai-delivery-checker__input-{{ ai_gen_id }}"
+      placeholder="{{ block.settings.placeholder }}"
+      aria-label="Enter your city"
+      data-input
+    >
+  </div>
+
+  <button
+    type="button"
+    class="ai-delivery-checker__button-{{ ai_gen_id }}"
+    data-check-button
+  >
+    {{ block.settings.button_text }}
+  </button>
+
+  <div class="ai-delivery-checker__result-{{ ai_gen_id }}" data-result>
+    <p class="ai-delivery-checker__delivery-date-{{ ai_gen_id }}" data-delivery-date></p>
+    <p class="ai-delivery-checker__delivery-time-{{ ai_gen_id }}" data-delivery-time></p>
+  </div>
+
+  <div class="ai-delivery-checker__error-{{ ai_gen_id }}" data-error></div>
+</delivery-checker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DeliveryChecker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.bangladeshCities = [
+          'dhaka', 'chittagong', 'chattogram', 'khulna', 'rajshahi', 'sylhet', 
+          'barisal', 'rangpur', 'mymensingh', 'comilla', 'narayanganj', 
+          'gazipur', 'tongi', 'narsingdi', 'jessore', 'bogra', 'dinajpur',
+          'saidpur', 'pabna', 'sirajganj', 'tangail', 'jamalpur', 'netrokona',
+          'kishoreganj', 'brahmanbaria', 'habiganj', 'moulvibazar', 'sunamganj',
+          'feni', 'noakhali', 'lakshmipur', 'chandpur', 'cox\'s bazar', 'coxs bazar',
+          'bandarban', 'rangamati', 'khagrachari', 'patuakhali', 'barguna',
+          'bhola', 'pirojpur', 'jhalokati', 'satkhira', 'bagerhat', 'chuadanga',
+          'meherpur', 'narail', 'magura', 'jhenaidah', 'kushtia', 'faridpur',
+          'gopalganj', 'madaripur', 'shariatpur', 'rajbari', 'manikganj',
+          'munshiganj', 'thakurgaon', 'panchagarh', 'nilphamari', 'lalmonirhat',
+          'kurigram', 'gaibandha', 'joypurhat', 'chapainawabganj', 'naogaon',
+          'natore', 'nawabganj', 'sherpur', 'netrakona'
+        ];
+      }
+
+      connectedCallback() {
+        this.input = this.querySelector('[data-input]');
+        this.checkButton = this.querySelector('[data-check-button]');
+        this.result = this.querySelector('[data-result]');
+        this.error = this.querySelector('[data-error]');
+        this.deliveryDate = this.querySelector('[data-delivery-date]');
+        this.deliveryTime = this.querySelector('[data-delivery-time]');
+
+        this.checkButton.addEventListener('click', () => this.checkDelivery());
+        this.input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.checkDelivery();
+          }
+        });
+      }
+
+      checkDelivery() {
+        const city = this.input.value.trim().toLowerCase();
+        
+        this.result.classList.remove('active');
+        this.error.classList.remove('active');
+
+        if (!city) {
+          this.showError('{{ block.settings.error_empty }}');
+          return;
+        }
+
+        const isValidCity = this.bangladeshCities.some(validCity => 
+          city.includes(validCity) || validCity.includes(city)
+        );
+
+        if (!isValidCity) {
+          this.showError('{{ block.settings.error_invalid }}');
+          return;
+        }
+
+        this.showDeliveryInfo();
+      }
+
+      showDeliveryInfo() {
+        const now = new Date();
+        const cutoffHour = {{ block.settings.cutoff_hour }};
+        const cutoffMinute = {{ block.settings.cutoff_minute }};
+        const deliveryDays = {{ block.settings.delivery_days }};
+
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        
+        let daysToAdd = deliveryDays;
+        if (currentHour > cutoffHour || (currentHour === cutoffHour && currentMinute >= cutoffMinute)) {
+          daysToAdd += 1;
+        }
+
+        const deliveryDate = new Date(now);
+        deliveryDate.setDate(deliveryDate.getDate() + daysToAdd);
+
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const dayName = days[deliveryDate.getDay()];
+        const date = deliveryDate.getDate();
+        const month = months[deliveryDate.getMonth()];
+
+        const cutoffTime = this.formatTime(cutoffHour, cutoffMinute);
+
+        this.deliveryDate.textContent = `Delivery by ${date} ${month}, ${dayName}`;
+        this.deliveryTime.textContent = `if ordered before ${cutoffTime}`;
+        
+        this.result.classList.add('active');
+      }
+
+      showError(message) {
+        this.error.textContent = message;
+        this.error.classList.add('active');
+      }
+
+      formatTime(hour, minute) {
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
+        const displayMinute = minute.toString().padStart(2, '0');
+        return `${displayHour}:${displayMinute} ${period}`;
+      }
+    }
+
+    customElements.define('delivery-checker-{{ ai_gen_id }}', DeliveryChecker{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Delivery checker",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Delivery"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your city"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Check"
+    },
+    {
+      "type": "text",
+      "id": "error_empty",
+      "label": "Empty error message",
+      "default": "Please enter your city"
+    },
+    {
+      "type": "text",
+      "id": "error_invalid",
+      "label": "Invalid city message",
+      "default": "Sorry, we don't deliver to this city yet"
+    },
+    {
+      "type": "header",
+      "content": "Delivery settings"
+    },
+    {
+      "type": "range",
+      "id": "delivery_days",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Delivery days",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "cutoff_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Cutoff hour (24h format)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cutoff_minute",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "label": "Cutoff minute",
+      "default": 33
+    },
+    {
+      "type": "header",
+      "content": "Container style"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "container_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing between elements",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "color",
+      "id": "focus_border_color",
+      "label": "Focus border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": -7
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.1
+    },
+    {
+      "type": "header",
+      "content": "Input field"
+    },
+    {
+      "type": "range",
+      "id": "input_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Delivery result"
+    },
+    {
+      "type": "range",
+      "id": "result_padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "result_background",
+      "label": "Background color",
+      "default": "#f0f9ff"
+    },
+    {
+      "type": "color",
+      "id": "result_accent_color",
+      "label": "Accent color",
+      "default": "#0ea5e9"
+    },
+    {
+      "type": "range",
+      "id": "result_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "delivery_date_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Delivery date font size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "delivery_date_color",
+      "label": "Delivery date color",
+      "default": "#0c4a6e"
+    },
+    {
+      "type": "range",
+      "id": "delivery_time_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Delivery time font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "delivery_time_color",
+      "label": "Delivery time color",
+      "default": "#475569"
+    },
+    {
+      "type": "header",
+      "content": "Error message"
+    },
+    {
+      "type": "color",
+      "id": "error_background",
+      "label": "Background color",
+      "default": "#fef2f2"
+    },
+    {
+      "type": "color",
+      "id": "error_accent_color",
+      "label": "Accent color",
+      "default": "#ef4444"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Text color",
+      "default": "#991b1b"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery checker"
+    }
+  ]
+}
 {% endschema %}
