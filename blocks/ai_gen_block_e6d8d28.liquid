@@ -156,7 +156,15 @@
     transition: border-color 0.3s ease;
     box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
     text-align: center;
+}
+
+/* Mobile version - width 90% */
+@media (max-width: 767px) {
+  .ai-delivery-checker__input-{{ ai_gen_id }} {
+      width: 90%;
   }
+}
+
 
   .ai-delivery-checker__input-{{ ai_gen_id }}::placeholder {
     text-align: center;
