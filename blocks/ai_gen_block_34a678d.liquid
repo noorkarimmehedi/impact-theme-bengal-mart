@@ -90,6 +90,13 @@
     box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
+  @media (min-width: 1024px) {
+  .ai-offers-slider {
+    display: flex;
+    justify-content: center; /* Centers all cards horizontally */
+    gap: 20px; /* Optional: spacing between cards */
+  }
+}
 
   .ai-offers-slider__card-{{ ai_gen_id }}:hover {
     border-color: {{ block.settings.hover_border_color }};
