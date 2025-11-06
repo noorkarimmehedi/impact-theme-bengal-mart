@@ -1,6 +1,689 @@
+{% doc %}
+  @prompt
+    magazine style home page banner with this button style: /* From Uiverse.io by cssbuttons-io */ 
+    button {
+     position: relative;
+     border: none;
+     background: transparent;
+     padding: 0;
+     cursor: pointer;
+     outline-offset: 4px;
+     transition: filter 250ms;
+     user-select: none;
+     touch-action: manipulation;
+    }
+    
+    .shadow {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     border-radius: 12px;
+     background: hsl(0deg 0% 0% / 0.25);
+     will-change: transform;
+     transform: translateY(2px);
+     transition: transform
+        600ms
+        cubic-bezier(.3, .7, .4, 1);
+    }
+    
+    .edge {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     border-radius: 12px;
+     background: linear-gradient(
+        to left,
+        hsl(340deg 100% 16%) 0%,
+        hsl(340deg 100% 32%) 8%,
+        hsl(340deg 100% 32%) 92%,
+        hsl(340deg 100% 16%) 100%
+      );
+    }
+    
+    .front {
+     display: block;
+     position: relative;
+     padding: 12px 27px;
+     border-radius: 12px;
+     font-size: 1.1rem;
+     color: white;
+     background: hsl(345deg 100% 47%);
+     will-change: transform;
+     transform: translateY(-4px);
+     transition: transform
+        600ms
+        cubic-bezier(.3, .7, .4, 1);
+    }
+    
+    button:hover {
+     filter: brightness(110%);
+    }
+    
+    button:hover .front {
+     transform: translateY(-6px);
+     transition: transform
+        250ms
+        cubic-bezier(.3, .7, .4, 1.5);
+    }
+    
+    button:active .front {
+     transform: translateY(-2px);
+     transition: transform 34ms;
+    }
+    
+    button:hover .shadow {
+     transform: translateY(4px);
+     transition: transform
+        250ms
+        cubic-bezier(.3, .7, .4, 1.5);
+    }
+    
+    button:active .shadow {
+     transform: translateY(1px);
+     transition: transform 34ms;
+    }
+    
+    button:focus:not(:focus-visible) {
+     outline: none;
+    }
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-magazine-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    min-height: {{ block.settings.banner_height_mobile }}px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: {{ block.settings.overlay_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-{{ ai_gen_id }} {
+      min-height: {{ block.settings.banner_height_desktop }}px;
+    }
+  }
+
+  .ai-magazine-banner-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: {{ block.settings.image_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-magazine-banner-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-magazine-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .ai-magazine-banner-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      {{ block.settings.gradient_direction }},
+      {{ block.settings.overlay_color }} 0%,
+      transparent 100%
+    );
+    opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .ai-magazine-banner-content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: {{ block.settings.content_max_width }}px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-content-{{ ai_gen_id }} {
+      padding: 60px 40px;
+    }
+  }
+
+  .ai-magazine-banner-eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_size_mobile }}px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ block.settings.eyebrow_color }};
+    margin: 0 0 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-eyebrow-{{ ai_gen_id }} {
+      font-size: {{ block.settings.eyebrow_size_desktop }}px;
+    }
+  }
+
+  .ai-magazine-banner-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 20px;
+    letter-spacing: -1px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+      letter-spacing: -2px;
+    }
+  }
+
+  .ai-magazine-banner-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ block.settings.subheading_color }};
+    margin: 0 0 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size_desktop }}px;
+    }
+  }
+
+  .ai-magazine-banner-button-wrapper-{{ ai_gen_id }} {
+    display: inline-block;
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }} {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:hover {
+    filter: brightness(110%);
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .ai-magazine-banner-button-shadow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    background: {{ block.settings.button_shadow_color }};
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:hover .ai-magazine-banner-button-shadow-{{ ai_gen_id }} {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:active .ai-magazine-banner-button-shadow-{{ ai_gen_id }} {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .ai-magazine-banner-button-edge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    background: linear-gradient(
+      to left,
+      {{ block.settings.button_edge_dark }} 0%,
+      {{ block.settings.button_edge_light }} 8%,
+      {{ block.settings.button_edge_light }} 92%,
+      {{ block.settings.button_edge_dark }} 100%
+    );
+  }
+
+  .ai-magazine-banner-button-front-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    padding: 12px 27px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.button_text_color }};
+    background: {{ block.settings.button_background }};
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-magazine-banner-button-front-{{ ai_gen_id }} {
+      padding: 14px 32px;
+      font-size: {{ block.settings.button_font_size | plus: 2 }}px;
+    }
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:hover .ai-magazine-banner-button-front-{{ ai_gen_id }} {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+  }
+
+  .ai-magazine-banner-button-{{ ai_gen_id }}:active .ai-magazine-banner-button-front-{{ ai_gen_id }} {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .ai-magazine-banner-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+{% endstyle %}
+
+<div class="ai-magazine-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.banner_image %}
+    <img
+      src="{{ block.settings.banner_image | image_url: width: 2000 }}"
+      alt="{{ block.settings.banner_image.alt | escape }}"
+      loading="lazy"
+      width="{{ block.settings.banner_image.width }}"
+      height="{{ block.settings.banner_image.height }}"
+      class="ai-magazine-banner-image-{{ ai_gen_id }}"
+    >
+  {% else %}
+    <div class="ai-magazine-banner-placeholder-{{ ai_gen_id }}">
+      {{ 'hero-apparel-1' | placeholder_svg_tag }}
+    </div>
+    <div class="ai-magazine-banner-empty-state-{{ ai_gen_id }}">
+      Add a banner image to get started
+    </div>
+  {% endif %}
+
+  <div class="ai-magazine-banner-overlay-{{ ai_gen_id }}"></div>
+
+  <div class="ai-magazine-banner-content-{{ ai_gen_id }}">
+    {% if block.settings.eyebrow_text != blank %}
+      <div class="ai-magazine-banner-eyebrow-{{ ai_gen_id }}">
+        {{ block.settings.eyebrow_text }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.heading != blank %}
+      <h1 class="ai-magazine-banner-heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h1>
+    {% endif %}
+
+    {% if block.settings.subheading != blank %}
+      <div class="ai-magazine-banner-subheading-{{ ai_gen_id }}">
+        {{ block.settings.subheading }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.button_text != blank %}
+      <div class="ai-magazine-banner-button-wrapper-{{ ai_gen_id }}">
+        <a
+          href="{{ block.settings.button_link }}"
+          class="ai-magazine-banner-button-{{ ai_gen_id }}"
+        >
+          <span class="ai-magazine-banner-button-shadow-{{ ai_gen_id }}"></span>
+          <span class="ai-magazine-banner-button-edge-{{ ai_gen_id }}"></span>
+          <span class="ai-magazine-banner-button-front-{{ ai_gen_id }}">
+            {{ block.settings.button_text }}
+          </span>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Magazine banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Height (mobile)",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "label": "Height (desktop)",
+      "default": 650
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image opacity",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Gradient direction",
+      "options": [
+        {
+          "value": "to top",
+          "label": "Bottom to top"
+        },
+        {
+          "value": "to bottom",
+          "label": "Top to bottom"
+        },
+        {
+          "value": "to left",
+          "label": "Right to left"
+        },
+        {
+          "value": "to right",
+          "label": "Left to right"
+        }
+      ],
+      "default": "to top"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 100,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1000
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "New Collection"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (desktop)",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Discover Your Style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Size (mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Size (desktop)",
+      "default": 72
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore our latest arrivals and find the perfect pieces to elevate your wardrobe this season."
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Size (desktop)",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#ff2e63"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_edge_light",
+      "label": "Edge light",
+      "default": "#d91a4d"
+    },
+    {
+      "type": "color",
+      "id": "button_edge_dark",
+      "label": "Edge dark",
+      "default": "#6d0d26"
+    },
+    {
+      "type": "color",
+      "id": "button_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.25)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Magazine banner"
+    }
+  ]
+}
 {% endschema %}
