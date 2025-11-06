@@ -90,22 +90,6 @@
     box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  @media (min-width: 1024px) {
-  /* outer wrapper */
-  .ai-offers-slider {
-    display: flex !important;
-    justify-content: center !important; /* center cards horizontally */
-    align-items: center;                 /* center vertically if needed */
-    gap: 16px;                           /* spacing between cards */
-    flex-wrap: nowrap;                   /* or wrap if you want multiple rows */
-  }
-
-  /* ensure cards keep their width and spacing */
-  .ai-offers-slider__card-{{ ai_gen_id }} {
-    margin: 0 !important;
-    flex: 0 0 auto;
-  }
-}
 
   .ai-offers-slider__card-{{ ai_gen_id }}:hover {
     border-color: {{ block.settings.hover_border_color }};
