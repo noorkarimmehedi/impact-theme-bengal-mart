@@ -15,6 +15,31 @@
         "content_width": "80ch"
       }
     },
+    "blocks_yQrUNX": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_APTeK9": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 15,
+            "spacing_bottom": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_APTeK9"
+      ],
+      "name": "Horizontal divider",
+      "settings": {}
+    },
     "blocks_ziHAFA": {
       "type": "_blocks",
       "blocks": {
@@ -103,6 +128,7 @@
   },
   "order": [
     "main",
+    "blocks_yQrUNX",
     "blocks_ziHAFA",
     "blocks_C8YybW"
   ]
