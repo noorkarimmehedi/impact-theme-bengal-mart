@@ -1,6 +1,567 @@
+{% doc %}
+  @prompt
+    want a section like this: Delivery
+    Enter Delivery Pincode
+    Check Enter pincode
+    Delivery by13 Nov, Thursday?
+    if ordered before 4:33 PM
+    instead of Enter pincode. I want Enter your city. and it should be for just Bangladesh. the UI should be like this : Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    8
+    Shadow
+    Horizontal offset
+    
+    -7
+    Vertical offset
+    
+    1
+    Blur radius
+    
+    4
+    Shadow opacity
+    
+    0
+    , delivery and check text should be in center. and it should be workable , when i click check button it doesn't work, Delivery by text
+    
+    Delivery by
+    Condition text. should be update in real time also for result i want real time delivery result , top and bottom padding should be customizable also inside Dhaka and outside Dhaka Delivery days can be customizable , yop padding should be more customizable.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-checker-{{ ai_gen_id }} {
+    padding: {{ block.settings.top_padding }}px 20px {{ block.settings.bottom_padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-delivery-checker__container-{{ ai_gen_id }} {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ai-delivery-checker__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .ai-delivery-checker__input-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-delivery-checker__input-wrapper-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-delivery-checker__input-wrapper-{{ ai_gen_id }}:focus-within {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-delivery-checker__input-group-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }} {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    background: transparent;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}::placeholder {
+    color: #999999;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }} {
+    padding: 8px 20px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }} {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: {{ block.settings.result_bg_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: center;
+    display: none;
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-delivery-checker__delivery-date-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .ai-delivery-checker__delivery-date-{{ ai_gen_id }} span {
+    color: {{ block.settings.highlight_color }};
+  }
+
+  .ai-delivery-checker__condition-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.condition_text_color }};
+    margin: 0;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }} {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #fff3f3;
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: center;
+    color: #d32f2f;
+    font-size: 14px;
+    display: none;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-delivery-checker__input-group-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ai-delivery-checker__input-{{ ai_gen_id }} {
+      width: 100%;
+      text-align: center;
+    }
+
+    .ai-delivery-checker__button-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<delivery-checker-{{ ai_gen_id }}
+  class="ai-delivery-checker-{{ ai_gen_id }}"
+  data-inside-dhaka-days="{{ block.settings.inside_dhaka_days }}"
+  data-outside-dhaka-days="{{ block.settings.outside_dhaka_days }}"
+  data-cutoff-time="{{ block.settings.cutoff_time }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-delivery-checker__container-{{ ai_gen_id }}">
+    <h3 class="ai-delivery-checker__title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+
+    <div class="ai-delivery-checker__input-wrapper-{{ ai_gen_id }}">
+      <div class="ai-delivery-checker__input-group-{{ ai_gen_id }}">
+        <input
+          type="text"
+          class="ai-delivery-checker__input-{{ ai_gen_id }}"
+          placeholder="{{ block.settings.placeholder }}"
+          aria-label="Enter your city"
+        >
+        <button
+          type="button"
+          class="ai-delivery-checker__button-{{ ai_gen_id }}"
+        >
+          {{ block.settings.button_text }}
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-delivery-checker__result-{{ ai_gen_id }}">
+      <p class="ai-delivery-checker__delivery-date-{{ ai_gen_id }}">
+        {{ block.settings.delivery_by_text }} <span class="delivery-date-value"></span>
+      </p>
+      <p class="ai-delivery-checker__condition-{{ ai_gen_id }}">
+        {{ block.settings.condition_text }} <span class="cutoff-time-value"></span>
+      </p>
+    </div>
+
+    <div class="ai-delivery-checker__error-{{ ai_gen_id }}">
+      {{ block.settings.error_message }}
+    </div>
+  </div>
+</delivery-checker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DeliveryChecker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.input = this.querySelector('.ai-delivery-checker__input-{{ ai_gen_id }}');
+        this.button = this.querySelector('.ai-delivery-checker__button-{{ ai_gen_id }}');
+        this.result = this.querySelector('.ai-delivery-checker__result-{{ ai_gen_id }}');
+        this.error = this.querySelector('.ai-delivery-checker__error-{{ ai_gen_id }}');
+        this.deliveryDateValue = this.querySelector('.delivery-date-value');
+        this.cutoffTimeValue = this.querySelector('.cutoff-time-value');
+        
+        this.insideDhakaDays = parseInt(this.dataset.insideDhakaDays) || 1;
+        this.outsideDhakaDays = parseInt(this.dataset.outsideDhakaDays) || 3;
+        this.cutoffTime = this.dataset.cutoffTime || '16:33';
+        
+        this.dhakaKeywords = ['dhaka', 'ঢাকা'];
+      }
+
+      connectedCallback() {
+        this.button.addEventListener('click', () => this.checkDelivery());
+        this.input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.checkDelivery();
+          }
+        });
+        
+        this.input.addEventListener('input', () => {
+          this.result.classList.remove('active');
+          this.error.classList.remove('active');
+        });
+      }
+
+      checkDelivery() {
+        const city = this.input.value.trim().toLowerCase();
+        
+        if (!city) {
+          this.showError();
+          return;
+        }
+        
+        const isDhaka = this.dhakaKeywords.some(keyword => city.includes(keyword));
+        const deliveryDays = isDhaka ? this.insideDhakaDays : this.outsideDhakaDays;
+        
+        const deliveryDate = this.calculateDeliveryDate(deliveryDays);
+        
+        this.deliveryDateValue.textContent = deliveryDate;
+        this.cutoffTimeValue.textContent = this.cutoffTime;
+        
+        this.error.classList.remove('active');
+        this.result.classList.add('active');
+      }
+
+      calculateDeliveryDate(daysToAdd) {
+        const now = new Date();
+        const cutoffParts = this.cutoffTime.split(':');
+        const cutoffHour = parseInt(cutoffParts[0]);
+        const cutoffMinute = parseInt(cutoffParts[1]);
+        
+        const cutoffToday = new Date();
+        cutoffToday.setHours(cutoffHour, cutoffMinute, 0, 0);
+        
+        let deliveryDate = new Date();
+        
+        if (now > cutoffToday) {
+          daysToAdd += 1;
+        }
+        
+        deliveryDate.setDate(deliveryDate.getDate() + daysToAdd);
+        
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        const dayName = days[deliveryDate.getDay()];
+        const date = deliveryDate.getDate();
+        const month = months[deliveryDate.getMonth()];
+        
+        return date + ' ' + month + ', ' + dayName;
+      }
+
+      showError() {
+        this.result.classList.remove('active');
+        this.error.classList.add('active');
+      }
+    }
+
+    customElements.define('delivery-checker-{{ ai_gen_id }}', DeliveryChecker{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Delivery checker",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Delivery"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your city"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Check"
+    },
+    {
+      "type": "text",
+      "id": "delivery_by_text",
+      "label": "Delivery by text",
+      "default": "Delivery by"
+    },
+    {
+      "type": "text",
+      "id": "condition_text",
+      "label": "Condition text",
+      "default": "if ordered before"
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Please enter a valid city name"
+    },
+    {
+      "type": "header",
+      "content": "Delivery settings"
+    },
+    {
+      "type": "range",
+      "id": "inside_dhaka_days",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Inside Dhaka delivery days",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "outside_dhaka_days",
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "label": "Outside Dhaka delivery days",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "cutoff_time",
+      "label": "Cutoff time (24-hour format)",
+      "default": "16:33",
+      "info": "Format: HH:MM (e.g., 16:33 for 4:33 PM)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.1
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "result_bg_color",
+      "label": "Result background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Delivery date highlight",
+      "default": "#00a341"
+    },
+    {
+      "type": "color",
+      "id": "condition_text_color",
+      "label": "Condition text",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery checker"
+    }
+  ]
+}
 {% endschema %}
