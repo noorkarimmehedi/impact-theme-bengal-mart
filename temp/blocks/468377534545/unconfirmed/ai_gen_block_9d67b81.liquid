@@ -1,6 +1,608 @@
+{% doc %}
+  @prompt
+    i want a section like this: Delivery
+    Enter Delivery Pincode
+    Check Enter pincode
+    Delivery by13 Nov, Thursday?
+    if ordered before 4:33 PM
+    instead of Enter pincode. I want Enter your city. and it should be for just Bangladesh. the UI should be like this : Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    8
+    Shadow
+    Horizontal offset
+    
+    -7
+    Vertical offset
+    
+    1
+    Blur radius
+    
+    4
+    Shadow opacity
+    
+    0
+    , delivery and check text should be in center. and it should be workable 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-checker-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.container_border_radius }}px;
+  }
+
+  .ai-delivery-checker__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 16px 0;
+    text-align: center;
+  }
+
+  .ai-delivery-checker__input-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    transition: border-color 0.3s ease;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+    text-align: center;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}::placeholder {
+    text-align: center;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.focus_border_color }};
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }} {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: {{ block.settings.result_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    border: 1px solid {{ block.settings.result_border_color }};
+    display: none;
+    text-align: center;
+  }
+
+  .ai-delivery-checker__result-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-delivery-checker__result-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.result_title_color }};
+    margin: 0 0 8px 0;
+  }
+
+  .ai-delivery-checker__result-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.result_text_color }};
+    margin: 0;
+  }
+
+  .ai-delivery-checker__result-date-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.result_date_color }};
+    margin: 8px 0;
+  }
+
+  .ai-delivery-checker__result-condition-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.result_condition_color }};
+    margin: 4px 0 0 0;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }} {
+    margin-top: 8px;
+    padding: 12px;
+    background-color: {{ block.settings.error_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    border: 1px solid {{ block.settings.error_border_color }};
+    color: {{ block.settings.error_text_color }};
+    font-size: 14px;
+    display: none;
+    text-align: center;
+  }
+
+  .ai-delivery-checker__error-{{ ai_gen_id }}.active {
+    display: block;
+  }
+{% endstyle %}
+
+<delivery-checker-{{ ai_gen_id }}
+  class="ai-delivery-checker-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <h3 class="ai-delivery-checker__title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+
+  <div class="ai-delivery-checker__input-wrapper-{{ ai_gen_id }}">
+    <input
+      type="text"
+      class="ai-delivery-checker__input-{{ ai_gen_id }}"
+      placeholder="{{ block.settings.placeholder }}"
+      aria-label="Enter your city"
+      data-city-input
+    >
+  </div>
+
+  <button
+    type="button"
+    class="ai-delivery-checker__button-{{ ai_gen_id }}"
+    data-check-button
+  >
+    {{ block.settings.button_text }}
+  </button>
+
+  <div class="ai-delivery-checker__error-{{ ai_gen_id }}" data-error-message></div>
+
+  <div class="ai-delivery-checker__result-{{ ai_gen_id }}" data-result>
+    <p class="ai-delivery-checker__result-title-{{ ai_gen_id }}">{{ block.settings.result_title }}</p>
+    <p class="ai-delivery-checker__result-date-{{ ai_gen_id }}" data-delivery-date></p>
+    <p class="ai-delivery-checker__result-condition-{{ ai_gen_id }}" data-delivery-condition></p>
+  </div>
+</delivery-checker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DeliveryChecker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.bangladeshCities = [
+          'Dhaka', 'Chittagong', 'Khulna', 'Rajshahi', 'Sylhet', 'Barisal', 'Rangpur', 'Mymensingh',
+          'Comilla', 'Narayanganj', 'Gazipur', 'Tongi', 'Narsingdi', 'Savar', 'Jessore', 'Bogra',
+          'Dinajpur', 'Cox\'s Bazar', 'Pabna', 'Kushtia', 'Tangail', 'Jamalpur', 'Faridpur', 'Brahmanbaria',
+          'Sirajganj', 'Madaripur', 'Munshiganj', 'Manikganj', 'Gopalganj', 'Shariatpur', 'Kishoreganj',
+          'Netrokona', 'Sherpur', 'Habiganj', 'Moulvibazar', 'Sunamganj', 'Feni', 'Lakshmipur', 'Noakhali',
+          'Chandpur', 'Chuadanga', 'Jhenaidah', 'Magura', 'Meherpur', 'Narail', 'Satkhira', 'Bagerhat',
+          'Jhalokati', 'Patuakhali', 'Pirojpur', 'Bandarban', 'Khagrachhari', 'Rangamati', 'Joypurhat',
+          'Naogaon', 'Natore', 'Chapainawabganj', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari',
+          'Panchagarh', 'Thakurgaon'
+        ];
+      }
+
+      connectedCallback() {
+        this.input = this.querySelector('[data-city-input]');
+        this.button = this.querySelector('[data-check-button]');
+        this.result = this.querySelector('[data-result]');
+        this.error = this.querySelector('[data-error-message]');
+        this.deliveryDate = this.querySelector('[data-delivery-date]');
+        this.deliveryCondition = this.querySelector('[data-delivery-condition]');
+
+        this.button.addEventListener('click', () => this.checkDelivery());
+        this.input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.checkDelivery();
+          }
+        });
+      }
+
+      checkDelivery() {
+        const city = this.input.value.trim();
+
+        this.result.classList.remove('active');
+        this.error.classList.remove('active');
+
+        if (!city) {
+          this.showError('{{ block.settings.error_empty }}');
+          return;
+        }
+
+        const cityLower = city.toLowerCase();
+        const isValidCity = this.bangladeshCities.some(
+          bdCity => bdCity.toLowerCase() === cityLower
+        );
+
+        if (!isValidCity) {
+          this.showError('{{ block.settings.error_invalid }}');
+          return;
+        }
+
+        this.showDeliveryInfo();
+      }
+
+      showError(message) {
+        this.error.textContent = message;
+        this.error.classList.add('active');
+      }
+
+      showDeliveryInfo() {
+        const now = new Date();
+        now.setHours(now.getHours() + 6);
+        
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const cutoffHour = {{ block.settings.cutoff_hour }};
+        const cutoffMinute = {{ block.settings.cutoff_minute }};
+
+        let deliveryDate = new Date(now);
+        const currentTime = currentHour * 60 + currentMinute;
+        const cutoffTime = cutoffHour * 60 + cutoffMinute;
+
+        if (currentTime >= cutoffTime) {
+          deliveryDate.setDate(deliveryDate.getDate() + {{ block.settings.delivery_days }} + 1);
+        } else {
+          deliveryDate.setDate(deliveryDate.getDate() + {{ block.settings.delivery_days }});
+        }
+
+        const options = { day: 'numeric', month: 'short', weekday: 'long' };
+        const formattedDate = deliveryDate.toLocaleDateString('en-US', options);
+
+        const cutoffHour12 = cutoffHour > 12 ? cutoffHour - 12 : (cutoffHour === 0 ? 12 : cutoffHour);
+        const ampm = cutoffHour >= 12 ? 'PM' : 'AM';
+        const cutoffTimeStr = cutoffHour12 + ':' + String(cutoffMinute).padStart(2, '0') + ' ' + ampm;
+
+        this.deliveryDate.textContent = '{{ block.settings.delivery_by_text }} ' + formattedDate;
+        this.deliveryCondition.textContent = '{{ block.settings.condition_text }} ' + cutoffTimeStr;
+        this.result.classList.add('active');
+      }
+    }
+
+    customElements.define('delivery-checker-{{ ai_gen_id }}', DeliveryChecker{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Delivery checker",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Delivery"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your city"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Check"
+    },
+    {
+      "type": "text",
+      "id": "result_title",
+      "label": "Result title",
+      "default": "Delivery available"
+    },
+    {
+      "type": "text",
+      "id": "delivery_by_text",
+      "label": "Delivery by text",
+      "default": "Delivery by"
+    },
+    {
+      "type": "text",
+      "id": "condition_text",
+      "label": "Condition text",
+      "default": "if ordered before"
+    },
+    {
+      "type": "header",
+      "content": "Delivery settings"
+    },
+    {
+      "type": "range",
+      "id": "delivery_days",
+      "min": 1,
+      "max": 14,
+      "step": 1,
+      "unit": "d",
+      "label": "Delivery days",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "cutoff_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "unit": "h",
+      "label": "Cutoff hour (24h format)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cutoff_minute",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "unit": "m",
+      "label": "Cutoff minute",
+      "default": 33
+    },
+    {
+      "type": "header",
+      "content": "Error messages"
+    },
+    {
+      "type": "text",
+      "id": "error_empty",
+      "label": "Empty field error",
+      "default": "Please enter your city name"
+    },
+    {
+      "type": "text",
+      "id": "error_invalid",
+      "label": "Invalid city error",
+      "default": "Sorry, we don't deliver to this city yet. Please enter a valid Bangladesh city."
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "color",
+      "id": "focus_border_color",
+      "label": "Focus border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": -7
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "result_background",
+      "label": "Result background",
+      "default": "#F0F9FF"
+    },
+    {
+      "type": "color",
+      "id": "result_border_color",
+      "label": "Result border",
+      "default": "#BAE6FD"
+    },
+    {
+      "type": "color",
+      "id": "result_title_color",
+      "label": "Result title",
+      "default": "#0C4A6E"
+    },
+    {
+      "type": "color",
+      "id": "result_text_color",
+      "label": "Result text",
+      "default": "#075985"
+    },
+    {
+      "type": "color",
+      "id": "result_date_color",
+      "label": "Result date",
+      "default": "#0C4A6E"
+    },
+    {
+      "type": "color",
+      "id": "result_condition_color",
+      "label": "Result condition",
+      "default": "#0369A1"
+    },
+    {
+      "type": "color",
+      "id": "error_background",
+      "label": "Error background",
+      "default": "#FEF2F2"
+    },
+    {
+      "type": "color",
+      "id": "error_border_color",
+      "label": "Error border",
+      "default": "#FECACA"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Error text",
+      "default": "#991B1B"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "container_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Container border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery checker"
+    }
+  ]
+}
 {% endschema %}
