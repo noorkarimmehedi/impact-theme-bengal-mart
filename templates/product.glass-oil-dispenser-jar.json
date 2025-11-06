@@ -71,7 +71,7 @@
         "liquid_kYApyA": {
           "type": "liquid",
           "settings": {
-            "liquid": "{% assign random_quantity = 'now' | date: \"%s\" | modulo: 20 | plus: 50 %}\n<div style=\"\n    display: inline-flex;\n    background: rgba(227, 255, 222, 1);\n    height: 35px;\n    border: 1px solid #E0E0E0;\n    border-radius: 4px;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 19.2px;\n    letter-spacing: 0;\n    color: #000;\n    gap: 11px;\n    box-shadow: -10px 0 0 rgba(0, 0, 0, 0);\n    transition: border-color 0.3s ease;\n\">\n  <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"8.5\" cy=\"8.5\" r=\"7.9\" fill=\"#084D3A\"></circle>\n    <path d=\"M9.5 3.5L5.5 9.5H8.5L7.5 13.5L11.5 7.5H8.5L9.5 3.5Z\" fill=\"#E3FFDE\"/>\n  </svg>\n  <span>\n    <strong style=\"text-decoration: underline;\">{{ random_quantity }}</strong> people are viewing right now — 23 left in stock!\n  </span>\n</div>\n\n<script>\n  const div = document.querySelector('div[style*=\"inline-flex\"]');\n  div.addEventListener('mouseenter', () => {\n    div.style.borderColor = '#CCCCCC';\n  });\n  div.addEventListener('mouseleave', () => {\n    div.style.borderColor = '#E0E0E0';\n  });\n</script>"
+            "liquid": "{% assign random_quantity = 'now' | date: \"%s\" | modulo: 20 | plus: 50 %}\n<div style=\"\n    display: inline-flex;\n    background: rgba(227, 255, 222, 1);\n    height: 35px;\n    border-radius: 9.04px;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    font-weight: 400;\n    font-size: 14.15px;\n    line-height: 19.2px;\n    letter-spacing: 0;\n    color: #000;\n    gap: 11px;\n\">\n  <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"8.5\" cy=\"8.5\" r=\"7.9\" fill=\"#084D3A\"></circle>\n    <path d=\"M9.5 3.5L5.5 9.5H8.5L7.5 13.5L11.5 7.5H8.5L9.5 3.5Z\" fill=\"#E3FFDE\"/>\n  </svg>\n  <span>\n    <strong style=\"text-decoration: underline;\">{{ random_quantity }}</strong> people are viewing right now — 23 left in stock!\n  </span>\n</div>"
           }
         },
         "buy_buttons": {
@@ -279,18 +279,18 @@
       "name": "Horizontal divider",
       "settings": {}
     },
-    "blocks_NXa3LG": {
+    "blocks_4kNXXL": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_f32c00f_xk333r": {
+        "ai_gen_block_f32c00f_tqWHUm": {
           "type": "ai_gen_block_f32c00f",
           "settings": {
-            "tab_1_title": "পণ্যের বিবরণ",
-            "tab_1_content": "<p>উচ্চমানের বোরোসিলিকেট গ্লাসে তৈরি এই 1000ml অয়েল বোতল টেকসই ও তাপ-সহনীয়। ইউরোপীয় ডিজাইনে ঝরঝরে লুক, সহজ ঢালা ও ছিটামুক্ত সংরক্ষণে আপনার কিচেনকে করবে আরও আকর্ষণীয় ও গোছানো।</p>",
-            "tab_2_title": "শিপিং",
-            "tab_2_content": "<p>অর্ডার কনফার্ম হওয়ার পর আমরা যত দ্রুত সম্ভব পণ্য প্রেরণের ব্যবস্থা করি।</p><p><strong>১.</strong> ঢাকা সিটিতে ডেলিভারি সাধারণত <strong>১–২ কার্যদিবসের</strong> মধ্যে সম্পন্ন হয়।<br/><br/><strong>২.</strong> ঢাকার বাইরে ডেলিভারি সাধারণত <strong>২–৩ কার্যদিবসের</strong> মধ্যে হয়, লোকেশন ও কুরিয়ার সার্ভিসের উপর নির্ভর করে।</p><p>অর্ডার শিপ হলে আপনাকে একটি কনফার্মেশন মেসেজ পাঠানো হবে।</p>",
-            "tab_3_title": "রিটার্নস",
-            "tab_3_content": "<p><strong>১.</strong> আপনি যদি আপনার কেনা পণ্য নিয়ে সন্তুষ্ট না হন, তবে কেবলমাত্র <strong>ডেলিভারি চার্জ প্রদান করে</strong> <strong>পণ্যটি ফেরত দিতে পারবেন।</strong><br/><br/><strong>২.</strong> যদি ভুল বা অমিল পণ্য প্রাপ্ত হয়, তবে রিটার্ন বা এক্সচেঞ্জের জন্য কোনো <strong>ডেলিভারি চার্জ প্রযোজ্য হবে না।</strong></p>",
+            "tab_1_title": "Description",
+            "tab_1_content": "<p>Add your product description here. Include key features, benefits, and specifications.</p>",
+            "tab_2_title": "Shipping",
+            "tab_2_content": "<p>Add your shipping information here. Include delivery times, costs, and policies.</p>",
+            "tab_3_title": "Returns",
+            "tab_3_content": "<p>Add your return policy here. Include timeframes, conditions, and process details.</p>",
             "header_background": "#f5f5f5",
             "header_padding": 20,
             "header_border_radius": 8,
@@ -301,9 +301,9 @@
             "tab_font_weight": "600",
             "tab_padding_vertical": 12,
             "tab_padding_horizontal": 20,
-            "tab_border_radius": 4,
-            "tab_background": "#ffe603",
-            "tab_text_color": "#000000",
+            "tab_border_radius": 12,
+            "tab_background": "#FF1744",
+            "tab_text_color": "#ffffff",
             "tab_active_background": "#D50000",
             "tab_active_text_color": "#ffffff",
             "tab_edge_color": "#8B0000",
@@ -328,7 +328,7 @@
         }
       },
       "block_order": [
-        "ai_gen_block_f32c00f_xk333r"
+        "ai_gen_block_f32c00f_tqWHUm"
       ],
       "name": "Tab accordion",
       "settings": {}
@@ -338,7 +338,6 @@
       "blocks": {
         "ai_gen_block_18fab4c_knNgPJ": {
           "type": "ai_gen_block_18fab4c",
-          "disabled": true,
           "settings": {
             "tab_1_title": "Description",
             "tab_1_content": "<p>উচ্চমানের বোরোসিলিকেট গ্লাসে তৈরি এই 1000ml অয়েল বোতল টেকসই ও তাপ-সহনীয়। ইউরোপীয় ডিজাইনে ঝরঝরে লুক, সহজ ঢালা ও ছিটামুক্ত সংরক্ষণে আপনার কিচেনকে করবে আরও আকর্ষণীয় ও গোছানো।</p>",
@@ -373,6 +372,7 @@
       "block_order": [
         "ai_gen_block_18fab4c_knNgPJ"
       ],
+      "disabled": true,
       "name": "Product accordion tabs",
       "settings": {}
     },
@@ -660,7 +660,7 @@
     "blocks_fKUCjE",
     "text_with_icons_DrDHht",
     "blocks_nbkzVW",
-    "blocks_NXa3LG",
+    "blocks_4kNXXL",
     "blocks_C7tVEY",
     "1758906325660f2750",
     "1759498066f3f04a7f",
