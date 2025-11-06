@@ -1,6 +1,589 @@
+{% doc %}
+  @prompt
+    1. Header Text and Countdown Timer
+    
+    A small clock icon at the beginning.
+    
+    Text:
+    “Order today within [countdown timer] for dispatch today. You’ll receive your package between [Start Date] to [End Date].”
+    
+    Countdown timer dynamically shows the remaining time before the same-day dispatch cut-off.
+    
+    The delivery date range (e.g., Dec 21 to Dec 28) should be dynamic based on current date + shipping rules.
+    
+    2. Timeline Box Design
+    
+    A rectangular box with light grey background and rounded corners.
+    
+    Inside the box, display a 3-step progress timeline horizontally:
+    
+    Icon	Title	Date
+    🛍️ (shopping bag icon)	Order purchased	Example: Dec 11
+    🚚 (delivery truck icon)	Order processing	Example: Dec 12 – 14
+    📍 (location pin icon)	Order delivered	Example: Dec 21 – 28
+    
+    Dots and connecting lines between each stage, like a progress tracker.
+    
+    Dates should be editable from the theme editor.
+    
+    3. Functionality Requirements
+    
+    All text and date fields must be customizable in Shopify theme editor.
+    
+    Countdown timer should automatically reset every day at the dispatch cut-off time.
+    
+    Fully responsive on desktop and mobile.
+    
+    Icons should be lightweight SVGs or Shopify icons.
+    
+    4. Style Notes
+    
+    Font similar to Shopify default (clean, modern, minimal).
+    
+    Text color: dark grey or black.
+    
+    Background of timeline box: light grey (#f5f5f5 or similar).
+    
+    Rounded corners and subtle shadow like the example.
+    
+    Spacing and alignment must match the attached design., Text before countdown and 
+    Text after countdown. should be in same line with bold timer. also Order dates should be adjustable like 2 days not i need to put dates , Text before countdown and 
+    Text after countdown. should be in same line with bold timer. in mobile version, Text before countdown and 
+    Text after countdown. should be in same line with bold timer. should be option for alligment , timer icon also should be also allinged with text alligment , still timer icon isn't alligned with the  Text before countdown and Text after countdown. it should be alligned with thetexts for Header alignment 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-shipping-timeline-{{ ai_gen_id }} {
+    margin: 20px 0;
+  }
+
+  .ai-shipping-timeline__header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    {% if block.settings.header_alignment == 'left' %}
+      justify-content: flex-start;
+    {% elsif block.settings.header_alignment == 'center' %}
+      justify-content: center;
+    {% elsif block.settings.header_alignment == 'right' %}
+      justify-content: flex-end;
+    {% endif %}
+  }
+
+  .ai-shipping-timeline__clock-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: {{ block.settings.icon_color }};
+    margin-top: 2px;
+    {% if block.settings.header_alignment == 'right' %}
+      order: 2;
+    {% endif %}
+  }
+
+  .ai-shipping-timeline__header-text-{{ ai_gen_id }} {
+    {% if block.settings.header_alignment == 'left' %}
+      text-align: left;
+    {% elsif block.settings.header_alignment == 'center' %}
+      text-align: center;
+    {% elsif block.settings.header_alignment == 'right' %}
+      text-align: right;
+    {% endif %}
+    {% if block.settings.header_alignment == 'right' %}
+      order: 1;
+    {% endif %}
+  }
+
+  .ai-shipping-timeline__countdown-{{ ai_gen_id }} {
+    font-weight: 700;
+    color: {{ block.settings.countdown_color }};
+    white-space: nowrap;
+  }
+
+  .ai-shipping-timeline__box-{{ ai_gen_id }} {
+    background-color: {{ block.settings.box_background }};
+    border-radius: {{ block.settings.box_border_radius }}px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .ai-shipping-timeline__progress-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    gap: 16px;
+  }
+
+  .ai-shipping-timeline__step-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-shipping-timeline__icon-wrapper-{{ ai_gen_id }} {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: {{ block.settings.icon_background }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai-shipping-timeline__icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-shipping-timeline__step-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin-bottom: 4px;
+  }
+
+  .ai-shipping-timeline__step-date-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.date_color }};
+  }
+
+  .ai-shipping-timeline__connector-{{ ai_gen_id }} {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: {{ block.settings.connector_color }};
+    z-index: 1;
+  }
+
+  .ai-shipping-timeline__dot-{{ ai_gen_id }} {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: {{ block.settings.connector_color }};
+    border-radius: 50%;
+    top: 20px;
+    z-index: 1;
+  }
+
+  .ai-shipping-timeline__dot-{{ ai_gen_id }}:nth-child(2) {
+    left: 33.33%;
+    transform: translateX(-50%);
+  }
+
+  .ai-shipping-timeline__dot-{{ ai_gen_id }}:nth-child(3) {
+    left: 66.66%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-shipping-timeline__header-{{ ai_gen_id }} {
+      font-size: 12px;
+      gap: 6px;
+    }
+
+    .ai-shipping-timeline__clock-icon-{{ ai_gen_id }} {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ai-shipping-timeline__box-{{ ai_gen_id }} {
+      padding: 16px;
+    }
+
+    .ai-shipping-timeline__progress-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-shipping-timeline__icon-wrapper-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-shipping-timeline__icon-{{ ai_gen_id }} {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ai-shipping-timeline__step-title-{{ ai_gen_id }} {
+      font-size: 11px;
+    }
+
+    .ai-shipping-timeline__step-date-{{ ai_gen_id }} {
+      font-size: 10px;
+    }
+
+    .ai-shipping-timeline__connector-{{ ai_gen_id }} {
+      top: 20px;
+    }
+
+    .ai-shipping-timeline__dot-{{ ai_gen_id }} {
+      top: 16px;
+      width: 6px;
+      height: 6px;
+    }
+  }
+{% endstyle %}
+
+<shipping-timeline-{{ ai_gen_id }} 
+  class="ai-shipping-timeline-{{ ai_gen_id }}" 
+  data-step1-days="{{ block.settings.step1_days_offset }}"
+  data-step2-start="{{ block.settings.step2_start_days }}"
+  data-step2-end="{{ block.settings.step2_end_days }}"
+  data-step3-start="{{ block.settings.step3_start_days }}"
+  data-step3-end="{{ block.settings.step3_end_days }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-shipping-timeline__header-{{ ai_gen_id }}">
+    <svg class="ai-shipping-timeline__clock-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    <div class="ai-shipping-timeline__header-text-{{ ai_gen_id }}">
+      {{ block.settings.header_text_before }} <span class="ai-shipping-timeline__countdown-{{ ai_gen_id }}" data-countdown></span> {{ block.settings.header_text_after }}
+    </div>
+  </div>
+
+  <div class="ai-shipping-timeline__box-{{ ai_gen_id }}">
+    <div class="ai-shipping-timeline__progress-{{ ai_gen_id }}">
+      <div class="ai-shipping-timeline__connector-{{ ai_gen_id }}"></div>
+      <div class="ai-shipping-timeline__dot-{{ ai_gen_id }}"></div>
+      <div class="ai-shipping-timeline__dot-{{ ai_gen_id }}"></div>
+
+      <div class="ai-shipping-timeline__step-{{ ai_gen_id }}">
+        <div class="ai-shipping-timeline__icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-shipping-timeline__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div class="ai-shipping-timeline__step-title-{{ ai_gen_id }}">{{ block.settings.step1_title }}</div>
+        <div class="ai-shipping-timeline__step-date-{{ ai_gen_id }}" data-step1-date></div>
+      </div>
+
+      <div class="ai-shipping-timeline__step-{{ ai_gen_id }}">
+        <div class="ai-shipping-timeline__icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-shipping-timeline__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </div>
+        <div class="ai-shipping-timeline__step-title-{{ ai_gen_id }}">{{ block.settings.step2_title }}</div>
+        <div class="ai-shipping-timeline__step-date-{{ ai_gen_id }}" data-step2-date></div>
+      </div>
+
+      <div class="ai-shipping-timeline__step-{{ ai_gen_id }}">
+        <div class="ai-shipping-timeline__icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-shipping-timeline__icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="ai-shipping-timeline__step-title-{{ ai_gen_id }}">{{ block.settings.step3_title }}</div>
+        <div class="ai-shipping-timeline__step-date-{{ ai_gen_id }}" data-step3-date></div>
+      </div>
+    </div>
+  </div>
+</shipping-timeline-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ShippingTimeline{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.countdownElement = this.querySelector('[data-countdown]');
+        this.step1DateElement = this.querySelector('[data-step1-date]');
+        this.step2DateElement = this.querySelector('[data-step2-date]');
+        this.step3DateElement = this.querySelector('[data-step3-date]');
+        this.cutoffHour = {{ block.settings.cutoff_hour }};
+        this.cutoffMinute = {{ block.settings.cutoff_minute }};
+        this.step1DaysOffset = parseInt(this.dataset.step1Days);
+        this.step2StartDays = parseInt(this.dataset.step2Start);
+        this.step2EndDays = parseInt(this.dataset.step2End);
+        this.step3StartDays = parseInt(this.dataset.step3Start);
+        this.step3EndDays = parseInt(this.dataset.step3End);
+        this.monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      }
+
+      connectedCallback() {
+        this.updateDates();
+        this.updateCountdown();
+        this.interval = setInterval(() => this.updateCountdown(), 1000);
+      }
+
+      disconnectedCallback() {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+      }
+
+      formatDate(date) {
+        return this.monthNames[date.getMonth()] + ' ' + date.getDate();
+      }
+
+      updateDates() {
+        const today = new Date();
+        
+        const step1Date = new Date(today);
+        step1Date.setDate(step1Date.getDate() + this.step1DaysOffset);
+        this.step1DateElement.textContent = this.formatDate(step1Date);
+
+        const step2StartDate = new Date(today);
+        step2StartDate.setDate(step2StartDate.getDate() + this.step2StartDays);
+        const step2EndDate = new Date(today);
+        step2EndDate.setDate(step2EndDate.getDate() + this.step2EndDays);
+        this.step2DateElement.textContent = this.formatDate(step2StartDate) + ' – ' + this.formatDate(step2EndDate);
+
+        const step3StartDate = new Date(today);
+        step3StartDate.setDate(step3StartDate.getDate() + this.step3StartDays);
+        const step3EndDate = new Date(today);
+        step3EndDate.setDate(step3EndDate.getDate() + this.step3EndDays);
+        this.step3DateElement.textContent = this.formatDate(step3StartDate) + ' – ' + this.formatDate(step3EndDate);
+      }
+
+      updateCountdown() {
+        const now = new Date();
+        const cutoff = new Date();
+        cutoff.setHours(this.cutoffHour, this.cutoffMinute, 0, 0);
+
+        if (now > cutoff) {
+          cutoff.setDate(cutoff.getDate() + 1);
+        }
+
+        const diff = cutoff - now;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const hoursStr = String(hours).padStart(2, '0');
+        const minutesStr = String(minutes).padStart(2, '0');
+        const secondsStr = String(seconds).padStart(2, '0');
+
+        this.countdownElement.textContent = hoursStr + ':' + minutesStr + ':' + secondsStr;
+      }
+    }
+
+    customElements.define('shipping-timeline-{{ ai_gen_id }}', ShippingTimeline{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Shipping timeline",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Countdown timer"
+    },
+    {
+      "type": "text",
+      "id": "header_text_before",
+      "label": "Text before countdown",
+      "default": "Order today within"
+    },
+    {
+      "type": "text",
+      "id": "header_text_after",
+      "label": "Text after countdown",
+      "default": "for dispatch today. You'll receive your package between the dates shown below."
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "cutoff_hour",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "label": "Cut-off hour (24h format)",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "cutoff_minute",
+      "min": 0,
+      "max": 59,
+      "step": 1,
+      "label": "Cut-off minute",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Step 1 - Order purchased"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Title",
+      "default": "Order purchased"
+    },
+    {
+      "type": "range",
+      "id": "step1_days_offset",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "label": "Days from today",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Step 2 - Order processing"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Title",
+      "default": "Order processing"
+    },
+    {
+      "type": "range",
+      "id": "step2_start_days",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "label": "Start days from today",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "step2_end_days",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "label": "End days from today",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Step 3 - Order delivered"
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Title",
+      "default": "Order delivered"
+    },
+    {
+      "type": "range",
+      "id": "step3_start_days",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "label": "Start days from today",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "step3_end_days",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "label": "End days from today",
+      "default": 17
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "date_color",
+      "label": "Date",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "countdown_color",
+      "label": "Countdown",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "box_background",
+      "label": "Box background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "connector_color",
+      "label": "Connector line",
+      "default": "#d1d1d1"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "box_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Box corner radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shipping timeline"
+    }
+  ]
+}
 {% endschema %}
