@@ -91,10 +91,19 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   @media (min-width: 1024px) {
+  /* outer wrapper */
   .ai-offers-slider {
-    display: flex;
-    justify-content: center; /* Centers all cards horizontally */
-    gap: 20px; /* Optional: spacing between cards */
+    display: flex !important;
+    justify-content: center !important; /* center cards horizontally */
+    align-items: center;                 /* center vertically if needed */
+    gap: 16px;                           /* spacing between cards */
+    flex-wrap: nowrap;                   /* or wrap if you want multiple rows */
+  }
+
+  /* ensure cards keep their width and spacing */
+  .ai-offers-slider__card-{{ ai_gen_id }} {
+    margin: 0 !important;
+    flex: 0 0 auto;
   }
 }
 
