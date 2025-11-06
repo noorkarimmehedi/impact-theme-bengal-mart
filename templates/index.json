@@ -9,6 +9,79 @@
  */
 {
   "sections": {
+    "1762431366d8997677": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1741a60_f3nrLC": {
+          "type": "ai_gen_block_1741a60",
+          "settings": {
+            "heading": "",
+            "heading_size": 32,
+            "heading_color": "#000000",
+            "heading_alignment": "center",
+            "heading_spacing": 10,
+            "shape": "circle",
+            "item_size": 110,
+            "item_spacing": 20,
+            "placeholder_bg_color": "#f5f5f5",
+            "enable_hover_effect": true,
+            "border_width": 1,
+            "border_color": "#000000",
+            "hover_border_color": "#cccccc",
+            "border_radius": 8,
+            "shadow_horizontal": -7,
+            "shadow_vertical": 1,
+            "shadow_blur": 4,
+            "shadow_opacity": 0,
+            "title_size": 14,
+            "title_color": "#000000",
+            "title_weight": "500",
+            "title_spacing": 10,
+            "show_navigation": true,
+            "nav_bg_color": "#ffffff",
+            "nav_hover_bg_color": "#f5f5f5",
+            "nav_icon_color": "#000000",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "collection_1": "bestsellers",
+            "custom_title_1": "",
+            "custom_url_1": "",
+            "collection_2": "home",
+            "custom_title_2": "",
+            "custom_url_2": "",
+            "collection_3": "kitchen",
+            "custom_title_3": "",
+            "custom_url_3": "",
+            "collection_4": "under-500",
+            "custom_title_4": "",
+            "custom_url_4": "",
+            "collection_5": "under-800",
+            "custom_title_5": "",
+            "custom_url_5": "",
+            "collection_6": "under-1200",
+            "custom_title_6": "",
+            "custom_url_6": "",
+            "collection_7": "under-1500",
+            "custom_title_7": "",
+            "custom_url_7": "",
+            "collection_8": "",
+            "custom_title_8": "",
+            "custom_url_8": "",
+            "collection_9": "",
+            "custom_title_9": "",
+            "custom_url_9": "",
+            "collection_10": "",
+            "custom_title_10": "",
+            "custom_url_10": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1741a60_f3nrLC"
+      ],
+      "settings": {}
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
@@ -1146,6 +1219,7 @@
     }
   },
   "order": [
+    "1762431366d8997677",
     "slideshow",
     "image-link-blocks",
     "1761717881f75057a2",
