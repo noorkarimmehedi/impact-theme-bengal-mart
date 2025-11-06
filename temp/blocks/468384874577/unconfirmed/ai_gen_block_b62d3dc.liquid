@@ -1,6 +1,1033 @@
+{% doc %}
+  @prompt
+    build a you may like it section with this UI: Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    8
+    Shadow
+    Horizontal offset
+    
+    -7
+    Vertical offset
+    
+    1
+    Blur radius
+    
+    4
+    Shadow opacity
+    
+    0
+    . the section title and pricing and compared pricing should be visible also the collection should be option for select from shopify , product image isn't showing , top and bottom padding can be customizable also in desktop version there is so much gap on the left and right side  fix it , in desktop version Product card size should be cuztomizable , Add a View all button below the section title. in mobile and desktop button add a option for Products to show, i want this style for view all button: /* From Uiverse.io by cssbuttons-io */ 
+    button {
+     position: relative;
+     border: none;
+     background: transparent;
+     padding: 0;
+     cursor: pointer;
+     outline-offset: 4px;
+     transition: filter 250ms;
+     user-select: none;
+     touch-action: manipulation;
+    }
+    
+    .shadow {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     border-radius: 12px;
+     background: hsl(0deg 0% 0% / 0.25);
+     will-change: transform;
+     transform: translateY(2px);
+     transition: transform
+        600ms
+        cubic-bezier(.3, .7, .4, 1);
+    }
+    
+    .edge {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     border-radius: 12px;
+     background: linear-gradient(
+        to left,
+        hsl(340deg 100% 16%) 0%,
+        hsl(340deg 100% 32%) 8%,
+        hsl(340deg 100% 32%) 92%,
+        hsl(340deg 100% 16%) 100%
+      );
+    }
+    
+    .front {
+     display: block;
+     position: relative;
+     padding: 12px 27px;
+     border-radius: 12px;
+     font-size: 1.1rem;
+     color: white;
+     background: hsl(345deg 100% 47%);
+     will-change: transform;
+     transform: translateY(-4px);
+     transition: transform
+        600ms
+        cubic-bezier(.3, .7, .4, 1);
+    }
+    
+    button:hover {
+     filter: brightness(110%);
+    }
+    
+    button:hover .front {
+     transform: translateY(-6px);
+     transition: transform
+        250ms
+        cubic-bezier(.3, .7, .4, 1.5);
+    }
+    
+    button:active .front {
+     transform: translateY(-2px);
+     transition: transform 34ms;
+    }
+    
+    button:hover .shadow {
+     transform: translateY(4px);
+     transition: transform
+        250ms
+        cubic-bezier(.3, .7, .4, 1.5);
+    }
+    
+    button:active .shadow {
+     transform: translateY(1px);
+     transition: transform 34ms;
+    }
+    
+    button:focus:not(:focus-visible) {
+     outline: none;
+    }. also button width should be customizable , the view all button width isn't working. also for desktop version . the section title alignment isn't working in mobile version , add customization for section title alligment in mobile version also add customization view all button width for mobile version 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-you-may-like-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding_top }}px {{ block.settings.padding_horizontal }}px {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-you-may-like__container-{{ ai_gen_id }} {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-you-may-like__header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ai-you-may-like__heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.title_alignment }};
+    margin: 0;
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+    width: {{ block.settings.button_width }}px;
+    flex-shrink: 0;
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:hover {
+    filter: brightness(110%);
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .ai-you-may-like__button-shadow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    background: {{ block.settings.button_shadow_color }};
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:hover .ai-you-may-like__button-shadow-{{ ai_gen_id }} {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:active .ai-you-may-like__button-shadow-{{ ai_gen_id }} {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .ai-you-may-like__button-edge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    background: linear-gradient(
+      to left,
+      {{ block.settings.button_edge_dark }} 0%,
+      {{ block.settings.button_edge_light }} 8%,
+      {{ block.settings.button_edge_light }} 92%,
+      {{ block.settings.button_edge_dark }} 100%
+    );
+  }
+
+  .ai-you-may-like__view-all-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    color: {{ block.settings.button_text_color }};
+    background: {{ block.settings.button_bg_color }};
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    text-decoration: none;
+    font-weight: 600;
+    width: 100%;
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:hover .ai-you-may-like__view-all-{{ ai_gen_id }} {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}:active .ai-you-may-like__view-all-{{ ai_gen_id }} {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .ai-you-may-like__view-all-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ai-you-may-like__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-you-may-like__product-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+  }
+
+  .ai-you-may-like__product-card-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.hover_border_color }};
+  }
+
+  .ai-you-may-like__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    display: block;
+  }
+
+  .ai-you-may-like__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-you-may-like__image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-you-may-like__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-you-may-like__info-{{ ai_gen_id }} {
+    padding: {{ block.settings.card_padding }}px;
+  }
+
+  .ai-you-may-like__vendor-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.vendor_color }};
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-you-may-like__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.product_title_size }}px;
+    color: {{ block.settings.product_title_color }};
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .ai-you-may-like__title-link-{{ ai_gen_id }} {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-you-may-like__title-link-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-you-may-like__price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ai-you-may-like__price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    color: {{ block.settings.price_color }};
+    font-weight: 700;
+  }
+
+  .ai-you-may-like__compare-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.compare_price_size }}px;
+    color: {{ block.settings.compare_price_color }};
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  .ai-you-may-like__badge-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: {{ block.settings.sale_badge_bg }};
+    color: {{ block.settings.sale_badge_color }};
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .ai-you-may-like__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+  }
+
+  .ai-you-may-like__empty-state-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-you-may-like__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-you-may-like__grid-{{ ai_gen_id }} {
+      {% if block.settings.columns_mobile == '1' %}
+        grid-template-columns: 1fr;
+      {% else %}
+        grid-template-columns: repeat(2, 1fr);
+      {% endif %}
+      gap: {{ block.settings.grid_gap | times: 0.7 }}px;
+    }
+
+    .ai-you-may-like__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+      text-align: {{ block.settings.title_alignment_mobile }};
+      width: 100%;
+    }
+
+    .ai-you-may-like__info-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.7 }}px;
+    }
+
+    .ai-you-may-like__header-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+    }
+
+    .ai-you-may-like__view-all-wrapper-{{ ai_gen_id }} {
+      {% if block.settings.button_width_mobile == 'full' %}
+        width: 100%;
+      {% else %}
+        width: {{ block.settings.button_width_mobile_custom }}px;
+        margin: 0 auto;
+      {% endif %}
+      max-width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-you-may-like-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-you-may-like__container-{{ ai_gen_id }}">
+    <div class="ai-you-may-like__header-{{ ai_gen_id }}">
+      {% if block.settings.section_title != blank %}
+        <h2 class="ai-you-may-like__heading-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+      {% endif %}
+
+      {% if block.settings.show_view_all and block.settings.view_all_link != blank %}
+        <button class="ai-you-may-like__view-all-wrapper-{{ ai_gen_id }}" onclick="window.location.href='{{ block.settings.view_all_link }}'">
+          <span class="ai-you-may-like__button-shadow-{{ ai_gen_id }}"></span>
+          <span class="ai-you-may-like__button-edge-{{ ai_gen_id }}"></span>
+          <span class="ai-you-may-like__view-all-{{ ai_gen_id }}">
+            {{ block.settings.view_all_text }}
+            <svg class="ai-you-may-like__view-all-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </button>
+      {% endif %}
+    </div>
+
+    {% if block.settings.collection != blank %}
+      <div class="ai-you-may-like__grid-{{ ai_gen_id }}">
+        {% assign products_to_show_desktop = block.settings.products_limit_desktop %}
+        {% assign products_to_show_mobile = block.settings.products_limit_mobile %}
+        
+        {% for product in block.settings.collection.products limit: products_to_show_desktop %}
+          <div class="ai-you-may-like__product-card-{{ ai_gen_id }}" data-product-index="{{ forloop.index }}">
+            <a href="{{ product.url }}" class="ai-you-may-like__image-wrapper-{{ ai_gen_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  class="ai-you-may-like__image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {% else %}
+                <div class="ai-you-may-like__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </a>
+
+            <div class="ai-you-may-like__info-{{ ai_gen_id }}">
+              {% if block.settings.show_vendor and product.vendor != blank %}
+                <div class="ai-you-may-like__vendor-{{ ai_gen_id }}">{{ product.vendor }}</div>
+              {% endif %}
+
+              <h3 class="ai-you-may-like__title-{{ ai_gen_id }}">
+                <a href="{{ product.url }}" class="ai-you-may-like__title-link-{{ ai_gen_id }}">
+                  {{ product.title }}
+                </a>
+              </h3>
+
+              <div class="ai-you-may-like__price-wrapper-{{ ai_gen_id }}">
+                <span class="ai-you-may-like__price-{{ ai_gen_id }}">
+                  {{ product.price | money }}
+                </span>
+
+                {% if product.compare_at_price > product.price %}
+                  <span class="ai-you-may-like__compare-price-{{ ai_gen_id }}">
+                    {{ product.compare_at_price | money }}
+                  </span>
+                  {% if block.settings.show_sale_badge %}
+                    <span class="ai-you-may-like__badge-{{ ai_gen_id }}">
+                      {{ block.settings.sale_badge_label }}
+                    </span>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="ai-you-may-like__empty-state-{{ ai_gen_id }}">
+        {{ 'collection-1' | placeholder_svg_tag }}
+        <p>Select a collection to display products</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    function handleProductVisibility{{ ai_gen_id }}() {
+      const isMobile = window.innerWidth <= 749;
+      const mobileLimit = {{ block.settings.products_limit_mobile }};
+      const cards = document.querySelectorAll('.ai-you-may-like__product-card-{{ ai_gen_id }}');
+      
+      cards.forEach((card, index) => {
+        if (isMobile && index >= mobileLimit) {
+          card.style.display = 'none';
+        } else {
+          card.style.display = 'block';
+        }
+      });
+    }
+
+    handleProductVisibility{{ ai_gen_id }}();
+    window.addEventListener('resize', handleProductVisibility{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "You may like",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment on desktop",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment_mobile",
+      "label": "Title alignment on mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "View all button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all button",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "view_all_text",
+      "label": "Button text",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_width",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Button width on desktop",
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "button_width_mobile",
+      "label": "Button width on mobile",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full width"
+        },
+        {
+          "value": "custom",
+          "label": "Custom width"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "button_width_mobile_custom",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Custom button width on mobile",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 15,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 27
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#FF1744"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_edge_dark",
+      "label": "Edge dark color",
+      "default": "#8B0029"
+    },
+    {
+      "type": "color",
+      "id": "button_edge_light",
+      "label": "Edge light color",
+      "default": "#D50052"
+    },
+    {
+      "type": "color",
+      "id": "button_shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.25)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Left and right padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit_desktop",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_limit_mobile",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show on mobile",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on tablet",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "hover_border_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": -7
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Product info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "vendor_color",
+      "label": "Vendor color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Pricing"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Price size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Compare price size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Sale badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show sale badge",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sale_badge_label",
+      "label": "Badge text",
+      "default": "Sale"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_bg",
+      "label": "Badge background",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "You may like"
+    }
+  ]
+}
 {% endschema %}
