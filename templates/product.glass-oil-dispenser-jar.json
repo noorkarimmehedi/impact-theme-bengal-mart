@@ -279,11 +279,63 @@
       "name": "Horizontal divider",
       "settings": {}
     },
+    "17624643819ada24cb": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d46bd5f_3E3U9j": {
+          "type": "ai_gen_block_d46bd5f",
+          "settings": {
+            "row_1_label": "DESCRIPTION",
+            "row_1_content": "<p>Premium quality product with exceptional craftsmanship and attention to detail.</p>",
+            "row_2_label": "DETAILS",
+            "row_2_content": "<p>Made from high-quality materials. Durable and long-lasting construction.</p>",
+            "row_3_label": "WASH CARE",
+            "row_3_content": "<p>Machine wash cold. Tumble dry low. Do not bleach.</p>",
+            "row_4_label": "SHIPPING",
+            "row_4_content": "<p>Free shipping on orders over $50. Delivery within 5-7 business days.</p>",
+            "row_5_label": "",
+            "row_5_content": "",
+            "row_6_label": "",
+            "row_6_content": "",
+            "border_color": "#000000",
+            "border_width": 1,
+            "border_radius": 0,
+            "outer_background_color": "#ffffff",
+            "background_color": "#f5f5f5",
+            "label_color": "#000000",
+            "content_color": "#000000",
+            "label_font_size": 14,
+            "label_font_weight": "600",
+            "label_text_transform": "uppercase",
+            "label_letter_spacing": 0.5,
+            "content_font_size": 14,
+            "content_line_height": 1.6,
+            "left_column_width": 30,
+            "section_padding": 30,
+            "row_padding": 20,
+            "column_gap": 30,
+            "mobile_horizontal_margin": 15,
+            "mobile_left_column_width": 35,
+            "mobile_section_padding": 20,
+            "mobile_row_padding": 15,
+            "mobile_column_gap": 15,
+            "mobile_label_font_size": 12,
+            "mobile_content_font_size": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d46bd5f_3E3U9j"
+      ],
+      "settings": {}
+    },
     "1762463763bd40063c": {
       "type": "_blocks",
       "blocks": {
         "ai_gen_block_4d014ef_aLKXRL": {
           "type": "ai_gen_block_4d014ef",
+          "disabled": true,
           "settings": {
             "row_1_label": "পণ্যের বিবরণ",
             "row_1_content": "<p>উচ্চমানের বোরোসিলিকেট গ্লাসে তৈরি এই 1000ml অয়েল বোতল টেকসই ও তাপ-সহনীয়। ইউরোপীয় ডিজাইনে ঝরঝরে লুক, সহজ ঢালা ও ছিটামুক্ত সংরক্ষণে আপনার কিচেনকে করবে আরও আকর্ষণীয় ও গোছানো।</p>",
@@ -377,6 +429,7 @@
       "block_order": [
         "ai_gen_block_f32c00f_tqWHUm"
       ],
+      "disabled": true,
       "name": "Tab accordion",
       "settings": {}
     },
@@ -707,6 +760,7 @@
     "blocks_fKUCjE",
     "text_with_icons_DrDHht",
     "blocks_nbkzVW",
+    "17624643819ada24cb",
     "1762463763bd40063c",
     "blocks_4kNXXL",
     "blocks_C7tVEY",
