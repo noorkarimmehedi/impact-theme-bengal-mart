@@ -17,7 +17,7 @@
       "settings": {
         "announcement": true,
         "speed": 5000,
-        "design": "design4",
+        "design": "design3",
         "design1_message": "<strong>New Year Special</strong> Up to 20% off",
         "countdown_day": 31,
         "countdown_month": 1,
@@ -26,7 +26,7 @@
         "countdown_minute": 59,
         "design2_message": "Join 15,000+ Happy Customers",
         "design3_message": "Join our New Year Challenge",
-        "design3_buttontext": "Join Now",
+        "design3_buttontext": "USE \"NEW25\" COUPON",
         "design4_message": "Our 2025 Collection Launched",
         "link": ""
       }
