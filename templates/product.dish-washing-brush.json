@@ -117,6 +117,65 @@
         "input_text_color": ""
       }
     },
+    "blocks_9nGCtN": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a2976ec_Yanmnd": {
+          "type": "ai_gen_block_a2976ec",
+          "settings": {
+            "title": "Exclusive Coupons",
+            "title_size": 28,
+            "title_color": "#000000",
+            "title_spacing": 4,
+            "card_background": "#ffe603",
+            "border_color": "#d88117",
+            "card_border_radius": 4,
+            "discount_color": "#d35400",
+            "shadow_opacity": 0,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 2,
+            "shadow_blur": 8,
+            "code_background": "#ffffff",
+            "code_border_color": "#e0e0e0",
+            "code_color": "#000000",
+            "description_color": "#666666",
+            "copy_button_text": "Copy",
+            "copied_text": "Copied!",
+            "copy_button_bg": "#e67e00",
+            "copy_button_color": "#ffffff",
+            "copy_button_hover_bg": "#e67e00",
+            "success_color": "#00a341",
+            "indicator_color": "#ff8c00",
+            "card_1_enabled": true,
+            "discount_1": "নতুন কাস্টমার অফার",
+            "code_1": "WELCOME200",
+            "description_1": "প্রথম অর্ডার? ৳২৫০০+ অর্ডারে ৳২০০ ছাড় ও ফ্রি ডেলিভারি।",
+            "card_2_enabled": true,
+            "discount_2": "Flat ৳100 OFF",
+            "code_2": "FLAT100",
+            "description_2": "On your first purchase. New customers only.",
+            "card_3_enabled": true,
+            "discount_3": "Buy 2 Get 1 Free",
+            "code_3": "BUY2GET1",
+            "description_3": "Applicable on selected items. Check product page.",
+            "card_4_enabled": false,
+            "discount_4": "",
+            "code_4": "",
+            "description_4": "",
+            "card_5_enabled": false,
+            "discount_5": "",
+            "code_5": "",
+            "description_5": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a2976ec_Yanmnd"
+      ],
+      "name": "Offer cards carousel",
+      "settings": {}
+    },
     "1761718859f70325d4": {
       "type": "_blocks",
       "blocks": {
@@ -306,78 +365,6 @@
       "disabled": true,
       "settings": {}
     },
-    "17617215747115fc1c": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_34a678d_JC6QhJ": {
-          "type": "ai_gen_block_34a678d",
-          "settings": {
-            "title": "Available offers",
-            "title_size": 28,
-            "title_color": "#000000",
-            "title_alignment": "center",
-            "section_background": "#ffffff",
-            "section_border_width": 0,
-            "section_border_color": "#e0e0e0",
-            "section_opacity": 1,
-            "section_padding": 40,
-            "card_width": 350,
-            "card_gap": 20,
-            "card_padding": 24,
-            "card_background": "#ffe603",
-            "border_width": 1,
-            "border_color": "#e0e0e0",
-            "hover_border_color": "#cccccc",
-            "border_radius": 0,
-            "shadow_horizontal": -5,
-            "shadow_vertical": 4,
-            "shadow_blur": 8,
-            "shadow_opacity": 0,
-            "offer_title_size": 18,
-            "offer_title_color": "#000000",
-            "offer_description_size": 14,
-            "offer_description_color": "#666666",
-            "code_background": "#f5f5f5",
-            "code_border_color": "#cccccc",
-            "code_text_color": "#000000",
-            "button_background": "#000000",
-            "button_text_color": "#ffffff",
-            "button_hover_background": "#333333",
-            "button_copied_background": "#7900fd",
-            "show_navigation": true,
-            "nav_button_background": "#ffffff",
-            "nav_button_color": "#000000",
-            "nav_button_border": "#e0e0e0",
-            "nav_button_hover_background": "#f5f5f5",
-            "offer_1_enabled": true,
-            "offer_1_title": "Special Discount",
-            "offer_1_description": "Enjoy ৳ 100 off on orders ৳ 1500+",
-            "offer_1_code": "INSTANT100",
-            "offer_2_enabled": true,
-            "offer_2_title": "Free Shipping",
-            "offer_2_description": "Get free shipping on orders above ৳ 2000",
-            "offer_2_code": "FREESHIP",
-            "offer_3_enabled": true,
-            "offer_3_title": "New Customer Offer",
-            "offer_3_description": "First time? Get ৳ 200 off on orders ৳ 2500+",
-            "offer_3_code": "WELCOME200",
-            "offer_4_enabled": true,
-            "offer_4_title": "New Order",
-            "offer_4_description": "Save ৳ 150 on your first order",
-            "offer_4_code": "NEW25",
-            "offer_5_enabled": true,
-            "offer_5_title": "Special Offer",
-            "offer_5_description": "Enjoy ৳ 100 off on orders ৳ 1500+",
-            "offer_5_code": "SPECIAL25"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_34a678d_JC6QhJ"
-      ],
-      "settings": {}
-    },
     "1762368399ef5b1dae": {
       "type": "_blocks",
       "blocks": {
@@ -484,31 +471,6 @@
         "background_gradient": "",
         "text_color": ""
       }
-    },
-    "blocks_UaKAYE": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_d3a950a_9BwJCV": {
-          "type": "ai_gen_block_d3a950a",
-          "settings": {
-            "divider_style": "solid",
-            "divider_color": "#e0e0e0",
-            "divider_thickness": 1,
-            "divider_opacity": 100,
-            "divider_border_radius": 0,
-            "divider_width": 100,
-            "divider_width_mobile": 90,
-            "spacing_top": 15,
-            "spacing_bottom": 15
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_d3a950a_9BwJCV"
-      ],
-      "name": "Horizontal divider",
-      "settings": {}
     },
     "1762369195f8b47413": {
       "type": "_blocks",
@@ -880,13 +842,12 @@
   },
   "order": [
     "main",
+    "blocks_9nGCtN",
     "1761718859f70325d4",
     "1761719636e059b308",
     "176241985955d541c0",
-    "17617215747115fc1c",
     "1762368399ef5b1dae",
     "text_with_icons_DrDHht",
-    "blocks_UaKAYE",
     "1762369195f8b47413",
     "17624114639a44d3bc",
     "1758906325660f2750",
