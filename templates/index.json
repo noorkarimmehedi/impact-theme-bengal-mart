@@ -94,7 +94,7 @@
             "show_overlay": true,
             "overlay_color": "#000000",
             "overlay_opacity": 30,
-            "heading": "<p>Welcome to বেঙ্গল মার্ট </p>",
+            "heading": "<p>Welcome to <strong>Bengal Mart-বেঙ্গল মার্ট </strong></p>",
             "heading_color": "#ffffff",
             "subheading": "<p>Bangladesh’s First Homegrown Home & Kitchen Brand.</p>",
             "subheading_color": "#ffffff",
@@ -126,7 +126,7 @@
             "text_alignment_desktop": "left",
             "height_mobile": 600,
             "image_fit_mobile": "cover",
-            "heading_size_mobile": 30,
+            "heading_size_mobile": 26,
             "subheading_size_mobile": 16,
             "padding_mobile": 30,
             "text_alignment_mobile": "left"
