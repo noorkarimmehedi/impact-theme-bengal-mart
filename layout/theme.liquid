@@ -113,6 +113,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       position: fixed;
       bottom: 0;
       left: 0;
+      right: 0;
       width: 100%;
       background: #ffffff;
       box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
@@ -120,7 +121,21 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       justify-content: space-around;
       padding: 8px 0;
       z-index: 1000;
+      /* Prevent layout shifts */
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      /* Force GPU acceleration */
+      will-change: transform;
+      /* Prevent iOS Safari from moving it */
+      touch-action: manipulation;
     }
+    
+    /* Add padding to body to prevent content from going under navbar */
+    body {
+      padding-bottom: 65px;
+    }
+    
     .mobile-bottom-nav a {
       display: flex;
       flex-direction: column;
@@ -132,6 +147,8 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       text-decoration: none;
       font-size: 12px;
       position: relative;
+      /* Prevent tap highlight */
+      -webkit-tap-highlight-color: transparent;
     }
     .mobile-bottom-nav a svg {
       flex-shrink: 0;
@@ -175,6 +192,10 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
   @media screen and (min-width: 769px) {
     .mobile-bottom-nav {
       display: none;
+    }
+    
+    body {
+      padding-bottom: 0;
     }
   }
 </style>
@@ -221,6 +242,40 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
 
 <script>
   (function() {
+    // Prevent navbar from shifting on mobile browsers
+    let ticking = false;
+    
+    function fixNavbarPosition() {
+      const navbar = document.querySelector('.mobile-bottom-nav');
+      if (!navbar) return;
+      
+      // Force navbar to stay at bottom
+      navbar.style.bottom = '0';
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          navbar.style.bottom = '0';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    
+    // Fix position on scroll (iOS Safari address bar issue)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(fixNavbarPosition, 50);
+    }, { passive: true });
+    
+    // Fix position on resize (device rotation, keyboard open/close)
+    window.addEventListener('resize', fixNavbarPosition, { passive: true });
+    
+    // Fix position on orientation change
+    window.addEventListener('orientationchange', () => {
+      setTimeout(fixNavbarPosition, 100);
+    });
+    
     // Update mobile cart badge when cart changes
     function updateMobileCartBadge() {
       fetch('/cart.js')
@@ -260,9 +315,13 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
 
     // Listen for cart updates on page load
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateMobileCartBadge);
+      document.addEventListener('DOMContentLoaded', () => {
+        updateMobileCartBadge();
+        fixNavbarPosition();
+      });
     } else {
       updateMobileCartBadge();
+      fixNavbarPosition();
     }
     
     // Listen for various cart-related events
