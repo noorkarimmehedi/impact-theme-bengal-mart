@@ -118,6 +118,65 @@
         "input_text_color": ""
       }
     },
+    "blocks_CpV4i9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a2976ec_XVe7dn": {
+          "type": "ai_gen_block_a2976ec",
+          "settings": {
+            "title": "Special Offers",
+            "title_size": 28,
+            "title_color": "#000000",
+            "title_spacing": 12,
+            "card_background": "#fff9f0",
+            "border_color": "#ff8c00",
+            "card_border_radius": 6,
+            "discount_color": "#d35400",
+            "shadow_opacity": 0,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 2,
+            "shadow_blur": 8,
+            "code_background": "#ffffff",
+            "code_border_color": "#e0e0e0",
+            "code_color": "#000000",
+            "description_color": "#666666",
+            "copy_button_text": "Copy",
+            "copied_text": "Copied!",
+            "copy_button_bg": "#ff8c00",
+            "copy_button_color": "#ffffff",
+            "copy_button_hover_bg": "#e67e00",
+            "success_color": "#00a341",
+            "indicator_color": "#ff8c00",
+            "card_1_enabled": true,
+            "discount_1": "Get 20% OFF",
+            "code_1": "SAVE20",
+            "description_1": "Valid on orders above ৳500. Limited time offer!",
+            "card_2_enabled": true,
+            "discount_2": "Flat ৳100 OFF",
+            "code_2": "FLAT100",
+            "description_2": "On your first purchase. New customers only.",
+            "card_3_enabled": true,
+            "discount_3": "Buy 2 Get 1 Free",
+            "code_3": "BUY2GET1",
+            "description_3": "Applicable on selected items. Check product page.",
+            "card_4_enabled": false,
+            "discount_4": "",
+            "code_4": "",
+            "description_4": "",
+            "card_5_enabled": false,
+            "discount_5": "",
+            "code_5": "",
+            "description_5": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a2976ec_XVe7dn"
+      ],
+      "name": "Offer cards carousel",
+      "settings": {}
+    },
     "1758906325660f2750": {
       "type": "_blocks",
       "blocks": {
@@ -159,6 +218,7 @@
       "block_order": [
         "ai_gen_block_606562f_78CEbK"
       ],
+      "disabled": true,
       "settings": {}
     },
     "related-products": {
@@ -186,6 +246,7 @@
   },
   "order": [
     "main",
+    "blocks_CpV4i9",
     "1758906325660f2750",
     "related-products"
   ]
