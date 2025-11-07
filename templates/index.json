@@ -124,7 +124,7 @@
             "subheading_size_desktop": 20,
             "padding_desktop": 60,
             "text_alignment_desktop": "left",
-            "height_mobile": 550,
+            "height_mobile": 600,
             "image_fit_mobile": "cover",
             "heading_size_mobile": 32,
             "subheading_size_mobile": 16,
