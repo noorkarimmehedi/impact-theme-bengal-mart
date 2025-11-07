@@ -266,6 +266,58 @@
       ],
       "settings": {}
     },
+    "blocks_XmAMr6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d46bd5f_3mxBGR": {
+          "type": "ai_gen_block_d46bd5f",
+          "settings": {
+            "row_1_label": "পণ্যের বিবরণ",
+            "row_1_content": "<p>উচ্চমানের 304 স্টেইনলেস স্টিলের তৈরি এই কিচেন ও বাথরুম সিঙ্ক অর্গানাইজারে আছে স্বয়ংক্রিয় ড্রেনেজ সিস্টেম ও তিন ভাগে ভাগ করা স্টোরেজ — যা আপনার রান্নাঘর ও বাথরুমকে রাখবে পরিষ্কার ও গোছানো।</p>",
+            "row_2_label": "শিপিং",
+            "row_2_content": "<p>অর্ডার কনফার্ম হওয়ার পর আমরা যত দ্রুত সম্ভব পণ্য প্রেরণের ব্যবস্থা করি।</p><p><strong>১.</strong> ঢাকা সিটিতে ডেলিভারি সাধারণত <strong>১–২ কার্যদিবসের</strong> মধ্যে সম্পন্ন হয়।<br/><br/><strong>২.</strong> ঢাকার বাইরে ডেলিভারি সাধারণত <strong>২–৩ কার্যদিবসের</strong> মধ্যে হয়, লোকেশন ও কুরিয়ার সার্ভিসের উপর নির্ভর করে।</p><p>অর্ডার শিপ হলে আপনাকে একটি কনফার্মেশন মেসেজ পাঠানো হবে।</p>",
+            "row_3_label": "রিটার্নস",
+            "row_3_content": "<p><strong>১.</strong> আপনি যদি আপনার কেনা পণ্য নিয়ে সন্তুষ্ট না হন, তবে কেবলমাত্র <strong>ডেলিভারি চার্জ প্রদান করে</strong> <strong>পণ্যটি ফেরত দিতে পারবেন।</strong><br/><br/><strong>২.</strong> যদি ভুল বা অমিল পণ্য প্রাপ্ত হয়, তবে রিটার্ন বা এক্সচেঞ্জের জন্য কোনো <strong>ডেলিভারি চার্জ প্রযোজ্য হবে না।</strong></p>",
+            "row_4_label": "",
+            "row_4_content": "",
+            "row_5_label": "",
+            "row_5_content": "",
+            "row_6_label": "",
+            "row_6_content": "",
+            "border_color": "#000000",
+            "border_width": 1,
+            "border_radius": 4,
+            "outer_background_color": "#ffffff",
+            "background_color": "#f5f5f5",
+            "label_color": "#000000",
+            "content_color": "#000000",
+            "label_font_size": 14,
+            "label_font_weight": "600",
+            "label_text_transform": "uppercase",
+            "label_letter_spacing": 0.5,
+            "content_font_size": 14,
+            "content_line_height": 1.6,
+            "left_column_width": 30,
+            "section_padding": 30,
+            "row_padding": 20,
+            "column_gap": 30,
+            "mobile_horizontal_margin": 15,
+            "mobile_left_column_width": 35,
+            "mobile_section_padding": 20,
+            "mobile_row_padding": 15,
+            "mobile_column_gap": 15,
+            "mobile_label_font_size": 12,
+            "mobile_content_font_size": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d46bd5f_3mxBGR"
+      ],
+      "name": "Product info table",
+      "settings": {}
+    },
     "1759498066f3f04a7f": {
       "type": "_blocks",
       "blocks": {
@@ -388,6 +440,7 @@
     "blocks_e67dMj",
     "text_with_icons_DrDHht",
     "1758906325660f2750",
+    "blocks_XmAMr6",
     "1759498066f3f04a7f",
     "related-products",
     "1759497772a737a649",
