@@ -276,11 +276,6 @@
                   </a>
                 </h3>
                 <div class="ai-you-may-like-price-{{ ai_gen_id }}">
-                  {% if product.compare_at_price > product.price %}
-                    <span style="text-decoration: line-through; opacity: 0.6; margin-right: 8px;">
-                      {{ product.compare_at_price | money }}
-                    </span>
-                  {% endif %}
                   {{ product.price | money }}
                 </div>
 
