@@ -152,7 +152,7 @@
             "copyright_font_size": 10,
             "arc_lab_url": "https://api.whatsapp.com/send/?phone=8801733670129",
             "credit_color": "#ffffff",
-            "credit_link_color": "#ffffff",
+            "credit_link_color": "#ffec3d",
             "credit_font_size": 10,
             "credit_spacing": 8,
             "bottom_bar_bg_color": "#ffffff",
