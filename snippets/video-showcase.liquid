@@ -7,16 +7,10 @@
 
 {% comment %} ========== EDIT YOUR VIDEO SETTINGS HERE ========== {% endcomment %}
 {% assign video_1_url = 'https://cdn.shopify.com/videos/c/o/v/4fc6d166ac0a448dbf4074b15ee57c90.mov' %}
-{% assign video_1_title = 'Style 1' %}
-{% assign video_1_description = 'First look' %}
 
 {% assign video_2_url = 'https://cdn.shopify.com/videos/c/o/v/video-2.mp4' %}
-{% assign video_2_title = 'Style 2' %}
-{% assign video_2_description = 'Second look' %}
 
 {% assign video_3_url = 'https://cdn.shopify.com/videos/c/o/v/video-3.mp4' %}
-{% assign video_3_title = 'Style 3' %}
-{% assign video_3_description = 'Third look' %}
 {% comment %} ==================================================== {% endcomment %}
 
 <style>
@@ -90,7 +84,7 @@
   
   .video-expand-btn {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     width: 40px;
     height: 40px;
@@ -218,7 +212,7 @@
     .video-expand-btn {
       width: 35px;
       height: 35px;
-      top: 15px;
+      bottom: 15px;
       right: 15px;
     }
     
@@ -289,17 +283,6 @@
           <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
-      
-      {% if video_1_title or video_1_description %}
-      <div class="video-showcase-overlay">
-        {% if video_1_title %}
-          <h3 class="video-showcase-title">{{ video_1_title }}</h3>
-        {% endif %}
-        {% if video_1_description %}
-          <p class="video-showcase-description">{{ video_1_description }}</p>
-        {% endif %}
-      </div>
-      {% endif %}
     </div>
 
     <!-- Video 2 -->
@@ -321,17 +304,6 @@
           <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
-      
-      {% if video_2_title or video_2_description %}
-      <div class="video-showcase-overlay">
-        {% if video_2_title %}
-          <h3 class="video-showcase-title">{{ video_2_title }}</h3>
-        {% endif %}
-        {% if video_2_description %}
-          <p class="video-showcase-description">{{ video_2_description }}</p>
-        {% endif %}
-      </div>
-      {% endif %}
     </div>
 
     <!-- Video 3 -->
@@ -353,17 +325,6 @@
           <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
-      
-      {% if video_3_title or video_3_description %}
-      <div class="video-showcase-overlay">
-        {% if video_3_title %}
-          <h3 class="video-showcase-title">{{ video_3_title }}</h3>
-        {% endif %}
-        {% if video_3_description %}
-          <p class="video-showcase-description">{{ video_3_description }}</p>
-        {% endif %}
-      </div>
-      {% endif %}
     </div>
 
   </div>
