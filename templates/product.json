@@ -657,6 +657,31 @@
         "product_card_text_color": ""
       }
     },
+    "blocks_wzFWbh": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d3a950a_RBWCqf": {
+          "type": "ai_gen_block_d3a950a",
+          "settings": {
+            "divider_style": "solid",
+            "divider_color": "#e0e0e0",
+            "divider_thickness": 1,
+            "divider_opacity": 100,
+            "divider_border_radius": 0,
+            "divider_width": 100,
+            "divider_width_mobile": 90,
+            "spacing_top": 15,
+            "spacing_bottom": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d3a950a_RBWCqf"
+      ],
+      "name": "Horizontal divider",
+      "settings": {}
+    },
     "1759497772a737a649": {
       "type": "_blocks",
       "blocks": {
@@ -707,7 +732,7 @@
         "section_title": "YOU MAY ALSO LIKE",
         "collection": "bestsellers",
         "products_to_show": 8,
-        "background_color": "#f5f5f5",
+        "background_color": "#000000",
         "section_padding_mobile": 40,
         "section_padding_desktop": 60,
         "desktop_side_padding": 30,
@@ -730,8 +755,8 @@
         "card_background": "#ffffff",
         "card_padding": 16,
         "card_border_width": 1,
-        "card_border_color": "#E0E0E0",
-        "card_hover_border_color": "#CCCCCC",
+        "card_border_color": "#e0e0e0",
+        "card_hover_border_color": "#cccccc",
         "card_border_radius": 8,
         "card_shadow_x": 0,
         "card_shadow_y": 4,
@@ -766,31 +791,6 @@
         "bottom_button_hover_border_color": "#000000",
         "bottom_button_border_radius": 0
       }
-    },
-    "blocks_wzFWbh": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_d3a950a_RBWCqf": {
-          "type": "ai_gen_block_d3a950a",
-          "settings": {
-            "divider_style": "solid",
-            "divider_color": "#e0e0e0",
-            "divider_thickness": 1,
-            "divider_opacity": 100,
-            "divider_border_radius": 0,
-            "divider_width": 100,
-            "divider_width_mobile": 90,
-            "spacing_top": 15,
-            "spacing_bottom": 15
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_d3a950a_RBWCqf"
-      ],
-      "name": "Horizontal divider",
-      "settings": {}
     },
     "featured_collection_gEQgRW": {
       "type": "featured-collection",
