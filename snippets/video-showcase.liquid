@@ -23,7 +23,7 @@
   .video-showcase-section {
     width: 100%;
     padding: 40px 20px;
-    background: #ffffff;
+    background: #F5F5F5;
   }
   
   .video-showcase-container {
@@ -42,8 +42,14 @@
     aspect-ratio: 9 / 16;
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     background: #000;
+    transition: border-color 0.3s ease;
+  }
+  
+  .video-showcase-wrapper:hover {
+    border-color: #CCCCCC;
   }
   
   .video-showcase-player {
