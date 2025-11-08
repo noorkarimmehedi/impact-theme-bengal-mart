@@ -91,6 +91,7 @@
   .ai-premium-footer__box-{{ ai_gen_id }} {
     background-color: {{ block.settings.box_bg_color }};
     border: {{ block.settings.box_border_width }}px solid {{ block.settings.box_border_color }};
+    border-radius: 0;
     padding: {{ block.settings.box_padding }}px;
     text-align: center;
     display: flex;
@@ -99,7 +100,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
-    aspect-ratio: 1;
+    min-height: {{ block.settings.box_height }}px;
   }
 
   .ai-premium-footer__box-{{ ai_gen_id }}:hover {
@@ -639,12 +640,12 @@
     {
       "type": "range",
       "id": "box_font_size",
-      "min": 10,
-      "max": 18,
+      "min": 9,
+      "max": 16,
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 13
+      "default": 11
     },
     {
       "type": "range",
@@ -668,22 +669,32 @@
     {
       "type": "range",
       "id": "box_padding",
-      "min": 15,
-      "max": 50,
-      "step": 5,
+      "min": 10,
+      "max": 40,
+      "step": 2,
       "unit": "px",
       "label": "Padding",
-      "default": 30
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "box_height",
+      "min": 60,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Box height",
+      "default": 80
     },
     {
       "type": "range",
       "id": "box_gap",
-      "min": 10,
-      "max": 40,
-      "step": 5,
+      "min": 5,
+      "max": 30,
+      "step": 1,
       "unit": "px",
       "label": "Gap between boxes",
-      "default": 20
+      "default": 12
     },
     {
       "type": "header",
