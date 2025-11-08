@@ -89,7 +89,7 @@
         "liquid_hkXXkH": {
           "type": "liquid",
           "settings": {
-            "liquid": "{% render 'video-showcase' %}"
+            "liquid": "{% render 'video-showcase-dish-washing' %}"
           }
         }
       },
