@@ -163,20 +163,34 @@
   
   @media (max-width: 768px) {
     .video-showcase-section {
-      padding: 30px 15px;
+      padding: 30px 0;
+      overflow-x: auto;
     }
     
     .video-showcase-container {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      display: flex;
+      gap: 15px;
+      padding: 0 15px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      grid-template-columns: none;
+    }
+    
+    .video-showcase-container::-webkit-scrollbar {
+      display: none;
     }
     
     .video-showcase-wrapper {
-      max-width: 100%;
+      flex: 0 0 280px;
+      max-width: 280px;
+      scroll-snap-align: start;
     }
     
     .video-showcase-wrapper:last-child {
-      grid-column: 1;
+      grid-column: auto;
+      margin-right: 15px;
     }
     
     .video-showcase-title {
@@ -190,8 +204,8 @@
   
   @media (max-width: 480px) {
     .video-showcase-wrapper {
-      max-width: 340px;
-      margin: 0 auto;
+      flex: 0 0 260px;
+      max-width: 260px;
     }
   }
 </style>
