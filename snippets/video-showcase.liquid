@@ -1,0 +1,402 @@
+{% comment %}
+  Video Showcase Snippet - 3 Videos
+  Usage: {% render 'video-showcase' %}
+  
+  INSTRUCTIONS: Edit the settings below to customize your videos
+{% endcomment %}
+
+{% comment %} ========== EDIT YOUR VIDEO SETTINGS HERE ========== {% endcomment %}
+{% assign video_1_url = 'https://cdn.shopify.com/videos/c/o/v/4fc6d166ac0a448dbf4074b15ee57c90.mov' %}
+{% assign video_1_title = 'Style 1' %}
+{% assign video_1_description = 'First look' %}
+
+{% assign video_2_url = 'https://cdn.shopify.com/videos/c/o/v/video-2.mp4' %}
+{% assign video_2_title = 'Style 2' %}
+{% assign video_2_description = 'Second look' %}
+
+{% assign video_3_url = 'https://cdn.shopify.com/videos/c/o/v/video-3.mp4' %}
+{% assign video_3_title = 'Style 3' %}
+{% assign video_3_description = 'Third look' %}
+{% comment %} ==================================================== {% endcomment %}
+
+<style>
+  .video-showcase-section {
+    width: 100%;
+    padding: 40px 20px;
+    background: #ffffff;
+  }
+  
+  .video-showcase-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .video-showcase-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 9 / 16;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: #000;
+  }
+  
+  .video-showcase-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .video-showcase-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .video-showcase-wrapper:hover .video-showcase-overlay {
+    opacity: 1;
+  }
+  
+  .video-showcase-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  
+  .video-showcase-description {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+  }
+  
+  .video-controls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+  
+  .video-play-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+  }
+  
+  .video-showcase-wrapper:hover .video-play-btn {
+    opacity: 1;
+  }
+  
+  .video-play-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+  
+  .video-play-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 3px;
+  }
+  
+  .video-play-btn.playing {
+    opacity: 0;
+  }
+  
+  .video-mute-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+  .video-mute-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .video-mute-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+  
+  @media (max-width: 1024px) {
+    .video-showcase-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .video-showcase-wrapper:last-child {
+      grid-column: 1 / -1;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .video-showcase-section {
+      padding: 30px 15px;
+    }
+    
+    .video-showcase-container {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .video-showcase-wrapper {
+      max-width: 100%;
+    }
+    
+    .video-showcase-wrapper:last-child {
+      grid-column: 1;
+    }
+    
+    .video-showcase-title {
+      font-size: 16px;
+    }
+    
+    .video-showcase-description {
+      font-size: 13px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .video-showcase-wrapper {
+      max-width: 340px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<div class="video-showcase-section">
+  <div class="video-showcase-container">
+    
+    <!-- Video 1 -->
+    <div class="video-showcase-wrapper">
+      <video 
+        class="video-showcase-player" 
+        id="videoShowcase1"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        src="{{ video_1_url }}"
+      >
+        Your browser does not support the video tag.
+      </video>
+      
+      <div class="video-controls">
+        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase1', 'playBtn1', 'playIcon1', 'pauseIcon1')">
+          <svg id="playIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg id="pauseIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <button class="video-mute-btn" onclick="toggleMute('videoShowcase1', 'mutedIcon1', 'unmutedIcon1')">
+        <svg id="mutedIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg id="unmutedIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+      
+      {% if video_1_title or video_1_description %}
+      <div class="video-showcase-overlay">
+        {% if video_1_title %}
+          <h3 class="video-showcase-title">{{ video_1_title }}</h3>
+        {% endif %}
+        {% if video_1_description %}
+          <p class="video-showcase-description">{{ video_1_description }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Video 2 -->
+    <div class="video-showcase-wrapper">
+      <video 
+        class="video-showcase-player" 
+        id="videoShowcase2"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        src="{{ video_2_url }}"
+      >
+        Your browser does not support the video tag.
+      </video>
+      
+      <div class="video-controls">
+        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase2', 'playBtn2', 'playIcon2', 'pauseIcon2')">
+          <svg id="playIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg id="pauseIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <button class="video-mute-btn" onclick="toggleMute('videoShowcase2', 'mutedIcon2', 'unmutedIcon2')">
+        <svg id="mutedIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg id="unmutedIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+      
+      {% if video_2_title or video_2_description %}
+      <div class="video-showcase-overlay">
+        {% if video_2_title %}
+          <h3 class="video-showcase-title">{{ video_2_title }}</h3>
+        {% endif %}
+        {% if video_2_description %}
+          <p class="video-showcase-description">{{ video_2_description }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Video 3 -->
+    <div class="video-showcase-wrapper">
+      <video 
+        class="video-showcase-player" 
+        id="videoShowcase3"
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        src="{{ video_3_url }}"
+      >
+        Your browser does not support the video tag.
+      </video>
+      
+      <div class="video-controls">
+        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase3', 'playBtn3', 'playIcon3', 'pauseIcon3')">
+          <svg id="playIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg id="pauseIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <button class="video-mute-btn" onclick="toggleMute('videoShowcase3', 'mutedIcon3', 'unmutedIcon3')">
+        <svg id="mutedIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg id="unmutedIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+      
+      {% if video_3_title or video_3_description %}
+      <div class="video-showcase-overlay">
+        {% if video_3_title %}
+          <h3 class="video-showcase-title">{{ video_3_title }}</h3>
+        {% endif %}
+        {% if video_3_description %}
+          <p class="video-showcase-description">{{ video_3_description }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function togglePlayPause(videoId, btnId, playIconId, pauseIconId) {
+    const video = document.getElementById(videoId);
+    const playIcon = document.getElementById(playIconId);
+    const pauseIcon = document.getElementById(pauseIconId);
+    const btn = event.currentTarget;
+    
+    if (video.paused) {
+      video.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+      btn.classList.add('playing');
+    } else {
+      video.pause();
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      btn.classList.remove('playing');
+    }
+  }
+  
+  function toggleMute(videoId, mutedIconId, unmutedIconId) {
+    const video = document.getElementById(videoId);
+    const mutedIcon = document.getElementById(mutedIconId);
+    const unmutedIcon = document.getElementById(unmutedIconId);
+    
+    if (video.muted) {
+      video.muted = false;
+      mutedIcon.style.display = 'none';
+      unmutedIcon.style.display = 'block';
+    } else {
+      video.muted = true;
+      mutedIcon.style.display = 'block';
+      unmutedIcon.style.display = 'none';
+    }
+  }
+  
+  // Add click handlers to all videos
+  document.querySelectorAll('.video-showcase-player').forEach((video, index) => {
+    const videoNum = index + 1;
+    video.addEventListener('click', function() {
+      togglePlayPause(
+        `videoShowcase${videoNum}`, 
+        `playBtn${videoNum}`, 
+        `playIcon${videoNum}`, 
+        `pauseIcon${videoNum}`
+      );
+    });
+    
+    // Update play button on play/pause events
+    video.addEventListener('play', function() {
+      const btn = video.parentElement.querySelector('.video-play-btn');
+      btn.classList.add('playing');
+    });
+    
+    video.addEventListener('pause', function() {
+      const btn = video.parentElement.querySelector('.video-play-btn');
+      btn.classList.remove('playing');
+    });
+  });
+</script>
