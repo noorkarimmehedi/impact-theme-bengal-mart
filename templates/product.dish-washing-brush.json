@@ -223,7 +223,7 @@
             "border_color": "#000000",
             "border_width": 1,
             "border_radius": 4,
-            "outer_background_color": "#ffffff",
+            "outer_background_color": "#f5f5f5",
             "background_color": "#f5f5f5",
             "label_color": "#000000",
             "content_color": "#000000",
