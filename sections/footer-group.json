@@ -164,12 +164,10 @@
             "social_link_spacing": 30,
             "social_link_1_text": "CONNECT",
             "social_link_1_url": "",
-            "social_link_2_text": "INSTAGRAM",
+            "social_link_2_text": "FACEBOOK",
             "social_link_2_url": "",
-            "social_link_3_text": "YOUTUBE",
+            "social_link_3_text": "INSTAGRAM",
             "social_link_3_url": "",
-            "social_link_4_text": "LINKEDIN",
-            "social_link_4_url": "",
             "body_font": "system_ui_n4"
           },
           "blocks": {}
