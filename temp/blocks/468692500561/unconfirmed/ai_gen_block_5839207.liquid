@@ -1,6 +1,818 @@
+{% doc %}
+  @prompt
+    Design a minimal, high-end e-commerce clothing section titled ‘YOU MAY ALSO LIKE’. Use a light grey background and place the section title in small, uppercase sans-serif text at the top-left. Add a clean rectangular button labeled ‘DISCOVER MORE’ at the top-right for navigation.
+    
+    Below, create a 2x2 grid layout displaying four product cards. Each card should feature a large, high-quality clothing image centered on a solid or gradient background (dark tones, black, olive, and warm hues). Under each image, display the product name in bold uppercase text and the price in smaller, grey-colored text beneath it. Maintain consistent spacing, alignment, and clean visual hierarchy across all cards.
+    
+    Use soft shadows, balanced padding, and neutral typography for a modern, editorial feel. The overall look should feel premium, minimal, and fashion-forward — focusing attention on the product visuals., in mobile version two products per row and in desktop version 4 products per row , there are so much gap on both left and right side on desktop version., instead of selecting individual products i want here to select a collection from the Shopify, every product should have a add to cart button 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-collection-section-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding_mobile }}px 16px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-collection-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+  }
+
+  .ai-collection-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: {{ block.settings.header_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-collection-header-{{ ai_gen_id }} {
+      margin-bottom: {{ block.settings.header_spacing_desktop }}px;
+    }
+  }
+
+  .ai-collection-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size_mobile }}px;
+    font-weight: 400;
+    letter-spacing: {{ block.settings.title_letter_spacing }}px;
+    text-transform: uppercase;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-collection-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size_desktop }}px;
+    }
+  }
+
+  .ai-collection-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 500;
+    letter-spacing: {{ block.settings.button_letter_spacing }}px;
+    text-transform: uppercase;
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .ai-collection-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-collection-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: {{ block.settings.grid_gap_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-collection-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(4, 1fr);
+      gap: {{ block.settings.grid_gap_desktop }}px;
+    }
+  }
+
+  .ai-product-card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-product-link-{{ ai_gen_id }} {
+    text-decoration: none;
+    display: block;
+  }
+
+  .ai-product-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    margin-bottom: {{ block.settings.image_spacing }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  }
+
+  .ai-product-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-product-link-{{ ai_gen_id }}:hover .ai-product-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+  }
+
+  .ai-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .ai-product-info-{{ ai_gen_id }} {
+    text-align: left;
+    margin-bottom: {{ block.settings.info_button_spacing }}px;
+  }
+
+  .ai-product-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.product_name_size_mobile }}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: {{ block.settings.product_name_color }};
+    margin: 0 0 {{ block.settings.name_price_spacing }}px 0;
+    letter-spacing: {{ block.settings.product_name_letter_spacing }}px;
+    line-height: 1.3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-product-name-{{ ai_gen_id }} {
+      font-size: {{ block.settings.product_name_size_desktop }}px;
+    }
+  }
+
+  .ai-product-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.product_price_size_mobile }}px;
+    color: {{ block.settings.product_price_color }};
+    margin: 0;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-product-price-{{ ai_gen_id }} {
+      font-size: {{ block.settings.product_price_size_desktop }}px;
+    }
+  }
+
+  .ai-add-to-cart-button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.cart_button_padding }}px;
+    background-color: {{ block.settings.cart_button_background }};
+    color: {{ block.settings.cart_button_text_color }};
+    border: {{ block.settings.cart_button_border_width }}px solid {{ block.settings.cart_button_border_color }};
+    border-radius: {{ block.settings.cart_button_border_radius }}px;
+    font-size: {{ block.settings.cart_button_font_size }}px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: {{ block.settings.cart_button_letter_spacing }}px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .ai-add-to-cart-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.cart_button_hover_background }};
+    color: {{ block.settings.cart_button_hover_text_color }};
+    border-color: {{ block.settings.cart_button_hover_border_color }};
+  }
+
+  .ai-add-to-cart-button-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ai-empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: {{ block.settings.product_price_color }};
+    font-size: 14px;
+  }
+{% endstyle %}
+
+<product-collection-{{ ai_gen_id }} class="ai-collection-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-collection-header-{{ ai_gen_id }}">
+    <h2 class="ai-collection-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+    {% if block.settings.button_link != blank %}
+      <a href="{{ block.settings.button_link }}" class="ai-collection-button-{{ ai_gen_id }}">
+        {{ block.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+
+  {% if block.settings.collection != blank %}
+    <div class="ai-collection-grid-{{ ai_gen_id }}">
+      {% for product in block.settings.collection.products limit: block.settings.products_to_show %}
+        <div class="ai-product-card-{{ ai_gen_id }}">
+          <a href="{{ product.url }}" class="ai-product-link-{{ ai_gen_id }}">
+            <div class="ai-product-image-wrapper-{{ ai_gen_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="ai-product-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="800"
+                  height="800"
+                >
+              {% else %}
+                <div class="ai-product-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="ai-product-info-{{ ai_gen_id }}">
+              <h3 class="ai-product-name-{{ ai_gen_id }}">{{ product.title }}</h3>
+              <p class="ai-product-price-{{ ai_gen_id }}">{{ product.price | money }}</p>
+            </div>
+          </a>
+          
+          {% if product.available %}
+            <button
+              type="button"
+              class="ai-add-to-cart-button-{{ ai_gen_id }}"
+              data-product-id="{{ product.id }}"
+              data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+            >
+              {{ block.settings.cart_button_text }}
+            </button>
+          {% else %}
+            <button
+              type="button"
+              class="ai-add-to-cart-button-{{ ai_gen_id }}"
+              disabled
+            >
+              {{ block.settings.sold_out_text }}
+            </button>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="ai-empty-state-{{ ai_gen_id }}">
+      Select a collection to display products
+    </div>
+  {% endif %}
+</product-collection-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductCollection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.buttons = this.querySelectorAll('.ai-add-to-cart-button-{{ ai_gen_id }}:not([disabled])');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', this.handleAddToCart.bind(this));
+        });
+      }
+
+      handleAddToCart(event) {
+        const button = event.target;
+        const variantId = button.getAttribute('data-variant-id');
+        const originalText = button.textContent;
+
+        button.disabled = true;
+        button.textContent = '{{ block.settings.adding_text }}';
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.textContent = '{{ block.settings.added_text }}';
+          
+          setTimeout(() => {
+            button.disabled = false;
+            button.textContent = originalText;
+          }, 2000);
+
+          if (window.theme && window.theme.cart) {
+            window.theme.cart.refresh();
+          }
+          
+          document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+            bubbles: true
+          }));
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+          button.textContent = originalText;
+          button.disabled = false;
+        });
+      }
+    }
+
+    customElements.define('product-collection-{{ ai_gen_id }}', ProductCollection{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "You may also like",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Title",
+      "default": "YOU MAY ALSO LIKE"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Title style"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (mobile)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (desktop)",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom spacing (mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom spacing (desktop)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Discover button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Text",
+      "default": "DISCOVER MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "button_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_desktop",
+      "min": 12,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap (desktop)",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Image bottom spacing",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "product_name_color",
+      "label": "Name color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "product_name_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Name size (mobile)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "product_name_size_desktop",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Name size (desktop)",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "product_name_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Name letter spacing",
+      "default": 0.5
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "label": "Price color",
+      "default": "#757575"
+    },
+    {
+      "type": "range",
+      "id": "product_price_size_mobile",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Price size (mobile)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "product_price_size_desktop",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Price size (desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "name_price_spacing",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Name to price spacing",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "info_button_spacing",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Info to button spacing",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Add to cart button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_button_text",
+      "label": "Button text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "adding_text",
+      "label": "Adding text",
+      "default": "ADDING..."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "added_text",
+      "label": "Added text",
+      "default": "ADDED ✓"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sold_out_text",
+      "label": "Sold out text",
+      "default": "SOLD OUT"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_background",
+      "label": "Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_border_color",
+      "label": "Border",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover_background",
+      "label": "Hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover_border_color",
+      "label": "Hover border",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "cart_button_font_size",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "cart_button_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "cart_button_padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "cart_button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "cart_button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "You may also like"
+    }
+  ]
+}
 {% endschema %}
