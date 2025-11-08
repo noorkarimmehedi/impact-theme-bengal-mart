@@ -628,6 +628,7 @@
       "blocks": {
         "ai_gen_block_57bdf25_nU9jtJ": {
           "type": "ai_gen_block_57bdf25",
+          "name": "You may also like final",
           "settings": {
             "section_title": "YOU MAY ALSO LIKE",
             "collection": "bestsellers",
@@ -697,7 +698,7 @@
       "block_order": [
         "ai_gen_block_57bdf25_nU9jtJ"
       ],
-      "name": "You may also like",
+      "name": "You may also like final",
       "settings": {}
     },
     "1762423629cbe8073e": {
