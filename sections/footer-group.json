@@ -94,7 +94,7 @@
           "type": "ai_gen_block_4add4c9",
           "settings": {
             "marquee_text": "SHIPPING ALL OVER BANGLADESH",
-            "marquee_font": "system_ui_n4",
+            "marquee_font": "serif",
             "marquee_bg_color": "#ffffff",
             "marquee_text_color": "#7900fd",
             "marquee_font_size": 12,
@@ -157,7 +157,7 @@
             "credit_spacing": 8,
             "bottom_bar_bg_color": "#ffffff",
             "social_link_color": "#7900fd",
-            "social_link_font": "system_ui_n4",
+            "social_link_font": "serif",
             "bottom_bar_padding": 20,
             "bottom_bar_margin_top": 0,
             "social_link_font_size": 11,
