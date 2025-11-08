@@ -377,102 +377,54 @@
               // Fetch updated cart data
               const cartResponse = await fetch('/cart.js');
               const cart = await cartResponse.json();
-              const cartCount = cart.item_count;
               
-              console.log('Cart updated - Item count:', cartCount);
+              // Trigger multiple cart update events
+              document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+                bubbles: true
+              }));
               
-              // Update all possible cart count elements
-              const cartSelectors = [
-                '.cart-count-bubble',
-                '.cart-count',
-                '.cart__count',
-                '.cart-link__bubble',
-                '[data-cart-count]',
-                '[data-cart-count-bubble]',
-                '.header__icon--cart .icon__fallback-text',
-                '#cart-icon-bubble',
-                '.cart-icon-bubble',
-                'cart-count',
-                'span.count',
-                '.item-count',
-                '.cart-item-count',
-                '[aria-label*="cart"] span',
-                '.header-cart-count',
-                '.minicart-quantity',
-                '.cart-quantity',
-                'cart-notification-bubble',
-                'cart-icon-bubble'
-              ];
+              document.body.dispatchEvent(new CustomEvent('cart:refresh', {
+                bubbles: true
+              }));
+
+              window.dispatchEvent(new CustomEvent('cart:updated', { 
+                detail: cart,
+                bubbles: true 
+              }));
               
-              cartSelectors.forEach(selector => {
-                const elements = document.querySelectorAll(selector);
-                elements.forEach(element => {
-                  if (element) {
-                    console.log('Updating element:', selector, element);
-                    element.textContent = cartCount;
-                    element.innerText = cartCount;
-                    if (cartCount > 0) {
-                      element.classList.remove('hidden', 'hide');
-                      element.removeAttribute('hidden');
-                      element.style.display = '';
-                    }
-                  }
-                });
-              });
-              
-              // Update data attributes
-              const dataElements = document.querySelectorAll('[data-cart-count], a[href*="cart"]');
-              dataElements.forEach(element => {
-                if (element.hasAttribute('data-cart-count')) {
-                  element.setAttribute('data-cart-count', cartCount);
-                }
-              });
-              
-              // Trigger all possible cart events
-              const events = [
-                'cart:refresh',
-                'cart:updated',
-                'cart:changed',
-                'cart:build',
-                'ajaxCart.afterCartLoad',
-                'drawer:refresh'
-              ];
-              
-              events.forEach(eventName => {
-                document.documentElement.dispatchEvent(new CustomEvent(eventName, {
-                  bubbles: true,
-                  detail: { cart: cart }
-                }));
-                
-                document.body.dispatchEvent(new CustomEvent(eventName, {
-                  bubbles: true,
-                  detail: { cart: cart }
-                }));
-                
-                window.dispatchEvent(new CustomEvent(eventName, {
-                  bubbles: true,
-                  detail: { cart: cart }
-                }));
-              });
+              document.dispatchEvent(new CustomEvent('cart:changed', {
+                detail: cart,
+                bubbles: true
+              }));
 
               // Try Shopify theme methods
-              if (typeof Shopify !== 'undefined') {
-                if (Shopify.theme && Shopify.theme.cart) {
+              if (typeof Shopify !== 'undefined' && Shopify.theme) {
+                if (Shopify.theme.cart) {
                   Shopify.theme.cart.refresh();
                 }
-                if (Shopify.onCartUpdate) {
-                  Shopify.onCartUpdate(cart);
+              }
+              
+              // Update cart count in header
+              const cartCount = cart.item_count;
+              const cartBubbles = document.querySelectorAll('.cart-count-bubble, .cart-count, [data-cart-count], .header__icon--cart .icon__fallback-text');
+              
+              cartBubbles.forEach(bubble => {
+                if (bubble) {
+                  bubble.textContent = cartCount;
+                  if (cartCount > 0) {
+                    bubble.classList.remove('hidden');
+                    bubble.style.display = '';
+                  }
                 }
-              }
+              });
               
-              // Try theme-specific methods
-              if (window.theme && window.theme.cart) {
-                window.theme.cart.getCart();
-              }
-              
-              if (window.ajaxCart) {
-                window.ajaxCart.load();
-              }
+              // Update cart icon badge
+              const cartIcons = document.querySelectorAll('[data-cart-indicator], .cart-link[data-cart-count]');
+              cartIcons.forEach(icon => {
+                if (icon.hasAttribute('data-cart-count')) {
+                  icon.setAttribute('data-cart-count', cartCount);
+                }
+              });
 
               setTimeout(() => {
                 button.textContent = originalText;
