@@ -485,7 +485,7 @@
             "divider_border_radius": 0,
             "divider_width": 100,
             "divider_width_mobile": 90,
-            "spacing_top": 15,
+            "spacing_top": 10,
             "spacing_bottom": 15
           },
           "blocks": {}
@@ -497,99 +497,56 @@
       "name": "Horizontal divider",
       "settings": {}
     },
-    "1762369195f8b47413": {
+    "blocks_r9NdT9": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_18fab4c_z7c9Ny": {
-          "type": "ai_gen_block_18fab4c",
+        "ai_gen_block_d46bd5f_3X9UHb": {
+          "type": "ai_gen_block_d46bd5f",
           "settings": {
-            "tab_1_title": "Description",
-            "tab_1_content": "<p>ফলমূল ও সবজি ধোয়া, পানি ঝরানো আর সংরক্ষণের ঝামেলা এখন এক ঝুড়িতেই! টেকসই ঢাকনাযুক্ত ডিজাইন রাখবে আপনার খাবার সবসময় টাটকা ও রান্নাঘর থাকবে ঝামেলামুক্ত।<br/></p>",
-            "tab_2_title": "Fast Shipping",
-            "tab_2_content": "<p>We process all orders as quickly as possible after confirmation.</p><p><strong>   1.  Dhaka City deliveries</strong> usually arrive within <strong>1–2 business days</strong>.</p><p><strong>    2. Outside Dhaka City deliveries</strong> take about <strong>2–3 business days</strong>, depending on the location and courier service.</p><p>You’ll receive a confirmation message once your order is shipped.</p>",
-            "tab_3_title": "Get in touch",
-            "tab_3_content": "<p>You can call us at +8801609547606. We will be happy to assist you.</p>",
-            "header_background": "#f8f8f8",
+            "row_1_label": "শিপিং",
+            "row_1_content": "<p>অর্ডার নিশ্চিতের পর আমরা দ্রুত পণ্য পাঠাই।<br/><br/>১. <strong>ঢাকায়: ১–২ কার্যদিবস।</strong><br/><br/>২. <strong>ঢাকার</strong> <strong>বাইরে: ২–৩ কার্যদিবস</strong>, লোকেশন ও কুরিয়ার অনুযায়ী।<br/><br/>শিপ হলে কনফার্মেশন মেসেজ দেওয়া হবে।</p>",
+            "row_2_label": "রিটার্নস",
+            "row_2_content": "<p>১. যদি আপনি পণ্যে সন্তুষ্ট না হন, তবে কেবল <strong>ডেলিভারি চার্জ দিয়ে </strong>রিটার্ন করতে পারবেন।<br/><br/>২. ভুল বা অমিল পণ্য প্রাপ্ত হলে রিটার্ন/এক্সচেঞ্জে <strong>কোনো চার্জ প্রযোজ্য হবে না।</strong></p>",
+            "row_3_label": "",
+            "row_3_content": "",
+            "row_4_label": "",
+            "row_4_content": "",
+            "row_5_label": "",
+            "row_5_content": "",
+            "row_6_label": "",
+            "row_6_content": "",
+            "border_color": "#000000",
             "border_width": 1,
-            "border_color": "#e0e0e0",
-            "tab_padding": 16,
-            "tab_horizontal_padding": 24,
-            "tab_font_size": 14,
-            "tab_text_color": "#666666",
-            "tab_hover_background": "#eeeeee",
-            "tab_hover_text_color": "#333333",
-            "active_tab_background": "#ffffff",
-            "active_tab_text_color": "#000000",
-            "active_border_color": "#000000",
-            "active_border_width": 3,
-            "content_padding": 24,
-            "content_background": "#ffffff",
-            "content_text_color": "#333333",
-            "line_height": 1.6,
-            "paragraph_spacing": 16,
-            "heading_spacing": 20,
-            "list_spacing": 8
+            "border_radius": 4,
+            "outer_background_color": "#f5f5f5",
+            "background_color": "#f5f5f5",
+            "label_color": "#000000",
+            "content_color": "#000000",
+            "label_font_size": 14,
+            "label_font_weight": "600",
+            "label_text_transform": "uppercase",
+            "label_letter_spacing": 0.5,
+            "content_font_size": 14,
+            "content_line_height": 1.6,
+            "left_column_width": 30,
+            "section_padding": 30,
+            "row_padding": 20,
+            "column_gap": 30,
+            "mobile_horizontal_margin": 15,
+            "mobile_left_column_width": 35,
+            "mobile_section_padding": 20,
+            "mobile_row_padding": 15,
+            "mobile_column_gap": 15,
+            "mobile_label_font_size": 12,
+            "mobile_content_font_size": 12
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_18fab4c_z7c9Ny"
+        "ai_gen_block_d46bd5f_3X9UHb"
       ],
-      "disabled": true,
-      "settings": {}
-    },
-    "17624114639a44d3bc": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_f32c00f_fUbPc8": {
-          "type": "ai_gen_block_f32c00f",
-          "settings": {
-            "tab_1_title": "পণ্যের বিবরণ",
-            "tab_1_content": "<p>ফলমূল ও সবজি ধোয়া, পানি ঝরানো আর সংরক্ষণের ঝামেলা এখন এক ঝুড়িতেই! টেকসই ঢাকনাযুক্ত ডিজাইন রাখবে আপনার খাবার সবসময় টাটকা ও রান্নাঘর থাকবে ঝামেলামুক্ত।<br/></p>",
-            "tab_2_title": "শিপিং",
-            "tab_2_content": "<p>অর্ডার কনফার্ম হওয়ার পর আমরা যত দ্রুত সম্ভব পণ্য প্রেরণের ব্যবস্থা করি।</p><p><strong>১.</strong> ঢাকা সিটিতে ডেলিভারি সাধারণত <strong>১–২ কার্যদিবসের</strong> মধ্যে সম্পন্ন হয়।<br/><br/><strong>২.</strong> ঢাকার বাইরে ডেলিভারি সাধারণত <strong>২–৩ কার্যদিবসের</strong> মধ্যে হয়, লোকেশন ও কুরিয়ার সার্ভিসের উপর নির্ভর করে।</p><p>অর্ডার শিপ হলে আপনাকে একটি কনফার্মেশন মেসেজ পাঠানো হবে।</p>",
-            "tab_3_title": "রিটার্নস",
-            "tab_3_content": "<p><strong>১.</strong> আপনি যদি আপনার কেনা পণ্য নিয়ে সন্তুষ্ট না হন, তবে কেবলমাত্র <strong>ডেলিভারি চার্জ প্রদান করে</strong> <strong>পণ্যটি ফেরত দিতে পারবেন।</strong><br/><br/><strong>২.</strong> যদি ভুল বা অমিল পণ্য প্রাপ্ত হয়, তবে রিটার্ন বা এক্সচেঞ্জের জন্য কোনো <strong>ডেলিভারি চার্জ প্রযোজ্য হবে না।</strong></p>",
-            "header_background": "#ffffff",
-            "header_padding": 16,
-            "header_border_radius": 0,
-            "header_border_width": 1,
-            "header_border_color": "#e0e0e0",
-            "tab_spacing": 12,
-            "tab_font_size": 16,
-            "tab_font_weight": "600",
-            "tab_padding_vertical": 12,
-            "tab_padding_horizontal": 20,
-            "tab_border_radius": 4,
-            "tab_background": "#ffe603",
-            "tab_text_color": "#000000",
-            "tab_active_background": "#d50000",
-            "tab_active_text_color": "#ffffff",
-            "tab_edge_color": "#8b0000",
-            "tab_shadow_color": "#00000040",
-            "content_padding": 24,
-            "content_background": "#ffffff",
-            "content_text_color": "#000000",
-            "line_height": 1.6,
-            "paragraph_spacing": 16,
-            "heading_spacing": 20,
-            "list_item_spacing": 8,
-            "border_width": 1,
-            "border_color": "#e0e0e0",
-            "hover_border_color": "#cccccc",
-            "border_radius": 0,
-            "shadow_horizontal": -5,
-            "shadow_vertical": 4,
-            "shadow_blur": 8,
-            "shadow_opacity": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_f32c00f_fUbPc8"
-      ],
+      "name": "Product info table",
       "settings": {}
     },
     "1758906325660f2750": {
@@ -874,8 +831,7 @@
     "1762368399ef5b1dae",
     "text_with_icons_DrDHht",
     "blocks_UaKAYE",
-    "1762369195f8b47413",
-    "17624114639a44d3bc",
+    "blocks_r9NdT9",
     "1758906325660f2750",
     "1759498066f3f04a7f",
     "related-products",
