@@ -232,6 +232,7 @@
 
     .ai-premium-footer__social-links-{{ ai_gen_id }} {
       gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
+      padding: 0 10px;
     }
 
     .ai-premium-footer__social-left-{{ ai_gen_id }} {
@@ -240,6 +241,7 @@
 
     .ai-premium-footer__social-right-{{ ai_gen_id }} {
       gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
+      margin-right: 10px;
     }
 
     .ai-premium-footer__social-link-{{ ai_gen_id }} {
@@ -434,19 +436,19 @@
     <div class="ai-premium-footer__social-links-{{ ai_gen_id }}">
       <div class="ai-premium-footer__social-left-{{ ai_gen_id }}">
         {% if block.settings.social_link_1_text != blank %}
-          <a href="{{ block.settings.social_link_1_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          <a href="{{ block.settings.social_link_1_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}" target="_blank" rel="noopener">
             {{ block.settings.social_link_1_text }}
           </a>
         {% endif %}
       </div>
       <div class="ai-premium-footer__social-right-{{ ai_gen_id }}">
         {% if block.settings.social_link_2_text != blank %}
-          <a href="{{ block.settings.social_link_2_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          <a href="{{ block.settings.social_link_2_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}" target="_blank" rel="noopener">
             {{ block.settings.social_link_2_text }}
           </a>
         {% endif %}
         {% if block.settings.social_link_3_text != blank %}
-          <a href="{{ block.settings.social_link_3_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          <a href="{{ block.settings.social_link_3_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}" target="_blank" rel="noopener">
             {{ block.settings.social_link_3_text }}
           </a>
         {% endif %}
