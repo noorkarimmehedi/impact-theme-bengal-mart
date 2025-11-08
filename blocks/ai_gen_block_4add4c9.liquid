@@ -1,18 +1,9 @@
-{% doc %}
-  @prompt
-    Design a clean, minimal e-commerce website footer for a premium clothing brand. At the very top, include a thin black bar with horizontally repeating text ‘SHIPPING WORLDWIDE’ in white uppercase letters, evenly spaced and scrolling infinitely.
-    
-    Below that, center the brand logo (‘Bluorng’) in elegant serif typography on a light grey background. Beneath the logo, create two columns:
-    
-    The left column titled ‘HELP’ with uppercase heading and smaller grey links such as Members Login, Exchange/Return Request, FAQ, Terms, and Shipping.
-    
-    The right column titled ‘COMPANY’ with uppercase heading and smaller grey links like Story, Our Stores, Careers, Contact Us, Collaborations, and Blogs.
-    
-    At the bottom, display copyright text in uppercase grey (‘© 2025 BLUORNG RETAIL PRIVATE LIMITED, ALL RIGHTS RESERVED.’).
-    Finally, include a black footer strip with white uppercase links labeled ‘CONNECT’, ‘INSTAGRAM’, ‘YOUTUBE’, and ‘LINKEDIN’, spaced evenly.
-    
-    Use a minimalist, luxury-inspired style with consistent alignment, generous padding, and clear hierarchy., help section should be on left side and company section should be on the right side in mobile version. also the font should be customizable. for brand name a logo option should be available , help section should be alighned more on the left and company section should be more on the right. also font isn't working , in Copyright text section add this:  Website designed and developed by Arc Lab Technology with option to add link for Arc Lab Technology and underline the Arc Lab Technology, for desktop logo and brand name and coopyright arc lab text should be on the left and the two colums help and comany should be on the right side, brand name text size should be customizable for both mobile and desktop, Logo size (desktop) not working 
-{% enddoc %}
+{% comment %}
+  Premium E-commerce Footer
+  Design: Clean, minimal footer for premium clothing brand
+  Features: Scrolling marquee, logo, two-column links, copyright, social bar
+{% endcomment %}
+
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -184,10 +175,22 @@
 
   .ai-premium-footer__social-links-{{ ai_gen_id }} {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: {{ block.settings.social_link_spacing }}px;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-premium-footer__social-left-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.social_link_spacing }}px;
+  }
+
+  .ai-premium-footer__social-right-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.social_link_spacing }}px;
   }
 
   .ai-premium-footer__social-link-{{ ai_gen_id }} {
@@ -228,6 +231,14 @@
     }
 
     .ai-premium-footer__social-links-{{ ai_gen_id }} {
+      gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
+    }
+
+    .ai-premium-footer__social-left-{{ ai_gen_id }} {
+      gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
+    }
+
+    .ai-premium-footer__social-right-{{ ai_gen_id }} {
       gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
     }
 
@@ -421,26 +432,30 @@
 
   <div class="ai-premium-footer__bottom-bar-{{ ai_gen_id }}">
     <div class="ai-premium-footer__social-links-{{ ai_gen_id }}">
-      {% if block.settings.social_link_1_text != blank %}
-        <a href="{{ block.settings.social_link_1_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
-          {{ block.settings.social_link_1_text }}
-        </a>
-      {% endif %}
-      {% if block.settings.social_link_2_text != blank %}
-        <a href="{{ block.settings.social_link_2_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
-          {{ block.settings.social_link_2_text }}
-        </a>
-      {% endif %}
-      {% if block.settings.social_link_3_text != blank %}
-        <a href="{{ block.settings.social_link_3_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
-          {{ block.settings.social_link_3_text }}
-        </a>
-      {% endif %}
-      {% if block.settings.social_link_4_text != blank %}
-        <a href="{{ block.settings.social_link_4_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
-          {{ block.settings.social_link_4_text }}
-        </a>
-      {% endif %}
+      <div class="ai-premium-footer__social-left-{{ ai_gen_id }}">
+        {% if block.settings.social_link_1_text != blank %}
+          <a href="{{ block.settings.social_link_1_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+            {{ block.settings.social_link_1_text }}
+          </a>
+        {% endif %}
+      </div>
+      <div class="ai-premium-footer__social-right-{{ ai_gen_id }}">
+        {% if block.settings.social_link_2_text != blank %}
+          <a href="{{ block.settings.social_link_2_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+            {{ block.settings.social_link_2_text }}
+          </a>
+        {% endif %}
+        {% if block.settings.social_link_3_text != blank %}
+          <a href="{{ block.settings.social_link_3_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+            {{ block.settings.social_link_3_text }}
+          </a>
+        {% endif %}
+        {% if block.settings.social_link_4_text != blank %}
+          <a href="{{ block.settings.social_link_4_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+            {{ block.settings.social_link_4_text }}
+          </a>
+        {% endif %}
+      </div>
     </div>
   </div>
 </footer>
