@@ -1,5 +1,5 @@
 {% comment %}
-  Video Showcase Snippet - 3 Videos
+  Video Showcase Snippet - 3 Videos with Expand Icon
   Usage: {% render 'video-showcase' %}
   
   INSTRUCTIONS: Edit the settings below to customize your videos
@@ -46,6 +46,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     background: #000;
     transition: border-color 0.3s ease;
+    cursor: pointer;
   }
   
   .video-showcase-wrapper:hover {
@@ -87,50 +88,9 @@
     opacity: 0.9;
   }
   
-  .video-controls {
+  .video-expand-btn {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-  }
-  
-  .video-play-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0;
-  }
-  
-  .video-showcase-wrapper:hover .video-play-btn {
-    opacity: 1;
-  }
-  
-  .video-play-btn:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1);
-  }
-  
-  .video-play-btn svg {
-    width: 24px;
-    height: 24px;
-    margin-left: 3px;
-  }
-  
-  .video-play-btn.playing {
-    opacity: 0;
-  }
-  
-  .video-mute-btn {
-    position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     width: 40px;
     height: 40px;
@@ -143,15 +103,77 @@
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
+    opacity: 0;
   }
   
-  .video-mute-btn:hover {
+  .video-showcase-wrapper:hover .video-expand-btn {
+    opacity: 1;
+  }
+  
+  .video-expand-btn:hover {
     background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
   }
   
-  .video-mute-btn svg {
+  .video-expand-btn svg {
     width: 20px;
     height: 20px;
+    fill: white;
+  }
+  
+  /* Modal Styles */
+  .video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .video-modal.active {
+    display: flex;
+  }
+  
+  .video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    aspect-ratio: 9 / 16;
+  }
+  
+  .video-modal-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .video-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .video-modal-close:hover {
+    transform: scale(1.1);
+  }
+  
+  .video-modal-close svg {
+    width: 30px;
+    height: 30px;
     fill: white;
   }
   
@@ -193,26 +215,31 @@
       font-size: 12px;
     }
     
-    .video-mute-btn {
+    .video-expand-btn {
       width: 35px;
       height: 35px;
-      bottom: 15px;
+      top: 15px;
       right: 15px;
     }
     
-    .video-mute-btn svg {
+    .video-expand-btn svg {
       width: 16px;
       height: 16px;
     }
     
-    .video-play-btn {
-      width: 50px;
-      height: 50px;
+    .video-modal-content {
+      width: 95%;
     }
     
-    .video-play-btn svg {
-      width: 20px;
-      height: 20px;
+    .video-modal-close {
+      top: -45px;
+      width: 35px;
+      height: 35px;
+    }
+    
+    .video-modal-close svg {
+      width: 25px;
+      height: 25px;
     }
   }
   
@@ -257,23 +284,9 @@
         Your browser does not support the video tag.
       </video>
       
-      <div class="video-controls">
-        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase1', 'playBtn1', 'playIcon1', 'pauseIcon1')">
-          <svg id="playIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <svg id="pauseIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-          </svg>
-        </button>
-      </div>
-      
-      <button class="video-mute-btn" onclick="toggleMute('videoShowcase1', 'mutedIcon1', 'unmutedIcon1')">
-        <svg id="mutedIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-        </svg>
-        <svg id="unmutedIcon1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
-          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      <button class="video-expand-btn" onclick="expandVideo('videoShowcase1')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
       
@@ -303,23 +316,9 @@
         Your browser does not support the video tag.
       </video>
       
-      <div class="video-controls">
-        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase2', 'playBtn2', 'playIcon2', 'pauseIcon2')">
-          <svg id="playIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <svg id="pauseIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-          </svg>
-        </button>
-      </div>
-      
-      <button class="video-mute-btn" onclick="toggleMute('videoShowcase2', 'mutedIcon2', 'unmutedIcon2')">
-        <svg id="mutedIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-        </svg>
-        <svg id="unmutedIcon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
-          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      <button class="video-expand-btn" onclick="expandVideo('videoShowcase2')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
       
@@ -349,23 +348,9 @@
         Your browser does not support the video tag.
       </video>
       
-      <div class="video-controls">
-        <button class="video-play-btn" onclick="togglePlayPause('videoShowcase3', 'playBtn3', 'playIcon3', 'pauseIcon3')">
-          <svg id="playIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <svg id="pauseIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-          </svg>
-        </button>
-      </div>
-      
-      <button class="video-mute-btn" onclick="toggleMute('videoShowcase3', 'mutedIcon3', 'unmutedIcon3')">
-        <svg id="mutedIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-        </svg>
-        <svg id="unmutedIcon3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
-          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      <button class="video-expand-btn" onclick="expandVideo('videoShowcase3')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
         </svg>
       </button>
       
@@ -384,63 +369,76 @@
   </div>
 </div>
 
+<!-- Modal for expanded video -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-content">
+    <button class="video-modal-close" onclick="closeModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+    <video 
+      class="video-modal-player" 
+      id="modalVideo"
+      controls
+      autoplay
+      loop
+      playsinline
+    >
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
 <script>
-  function togglePlayPause(videoId, btnId, playIconId, pauseIconId) {
-    const video = document.getElementById(videoId);
-    const playIcon = document.getElementById(playIconId);
-    const pauseIcon = document.getElementById(pauseIconId);
-    const btn = event.currentTarget;
+  function expandVideo(videoId) {
+    event.stopPropagation();
+    const sourceVideo = document.getElementById(videoId);
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
     
-    if (video.paused) {
+    // Copy the video source to modal
+    modalVideo.src = sourceVideo.src;
+    modalVideo.muted = false;
+    
+    // Show modal
+    modal.classList.add('active');
+    
+    // Pause original video
+    sourceVideo.pause();
+    
+    // Play modal video
+    modalVideo.play();
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    
+    // Pause and reset modal video
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    
+    // Hide modal
+    modal.classList.remove('active');
+    
+    // Resume all original videos
+    document.querySelectorAll('.video-showcase-player').forEach(video => {
       video.play();
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = 'block';
-      btn.classList.add('playing');
-    } else {
-      video.pause();
-      playIcon.style.display = 'block';
-      pauseIcon.style.display = 'none';
-      btn.classList.remove('playing');
-    }
+    });
   }
   
-  function toggleMute(videoId, mutedIconId, unmutedIconId) {
-    const video = document.getElementById(videoId);
-    const mutedIcon = document.getElementById(mutedIconId);
-    const unmutedIcon = document.getElementById(unmutedIconId);
-    
-    if (video.muted) {
-      video.muted = false;
-      mutedIcon.style.display = 'none';
-      unmutedIcon.style.display = 'block';
-    } else {
-      video.muted = true;
-      mutedIcon.style.display = 'block';
-      unmutedIcon.style.display = 'none';
+  // Close modal when clicking outside the video
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
     }
-  }
+  });
   
-  // Add click handlers to all videos
-  document.querySelectorAll('.video-showcase-player').forEach((video, index) => {
-    const videoNum = index + 1;
-    video.addEventListener('click', function() {
-      togglePlayPause(
-        `videoShowcase${videoNum}`, 
-        `playBtn${videoNum}`, 
-        `playIcon${videoNum}`, 
-        `pauseIcon${videoNum}`
-      );
-    });
-    
-    // Update play button on play/pause events
-    video.addEventListener('play', function() {
-      const btn = video.parentElement.querySelector('.video-play-btn');
-      btn.classList.add('playing');
-    });
-    
-    video.addEventListener('pause', function() {
-      const btn = video.parentElement.querySelector('.video-play-btn');
-      btn.classList.remove('playing');
-    });
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
   });
 </script>
