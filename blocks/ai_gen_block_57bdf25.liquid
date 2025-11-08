@@ -1,37 +1,7 @@
-{% doc %}
-  @prompt
-    Design a minimal, high-end e-commerce clothing section titled ‘YOU MAY ALSO LIKE’. Use a light grey background and place the section title in small, uppercase sans-serif text at the top-left. Add a clean rectangular button labeled ‘DISCOVER MORE’ at the top-right for navigation.
-    
-    Below, create a 2x2 grid layout displaying four product cards. Each card should feature a large, high-quality clothing image centered on a solid or gradient background (dark tones, black, olive, and warm hues). Under each image, display the product name in bold uppercase text and the price in smaller, grey-colored text beneath it. Maintain consistent spacing, alignment, and clean visual hierarchy across all cards.
-    
-    Use soft shadows, balanced padding, and neutral typography for a modern, editorial feel. The overall look should feel premium, minimal, and fashion-forward — focusing attention on the product visuals., in mobile version two products per row and in desktop version 4 products per row , there are so much gap on both left and right side on desktop version., instead of selecting individual products i want here to select a collection from the Shopify, every product should have a add to cart button, every card add to cart button should in same position in mobile version. so that it looks beautiful. also there are so much gap on both left and right side on desktop version, still there are so much gap on both left and right side on desktop version. reduce that, reduce the left and right side gap a little bit more on desktop version, reduce the left and right side gap a little bit more on desktop version. reduce just a little bit, for product card i want this: Border
-    Border width
-    
-    1
-    Border color
-    
-    #E0E0E0
-    Hover border color
-    
-    #CCCCCC
-    Border radius
-    
-    8
-    Shadow
-    Horizontal offset
-    
-    0
-    Vertical offset
-    
-    4
-    Blur radius
-    
-    8
-    Shadow opacity
-    
-    0
-    , i want a bottom button too with all customization including color and radiusa and button allingment 
-{% enddoc %}
+{% comment %}
+  Design a minimal, high-end e-commerce clothing section titled 'YOU MAY ALSO LIKE'
+{% endcomment %}
+
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -254,6 +224,11 @@
 
     .ai-you-may-like-price-{{ ai_gen_id }} {
       font-size: {{ block.settings.price_size_desktop }}px;
+    }
+
+    .ai-you-may-like-button-wrapper-{{ ai_gen_id }} {
+      display: flex;
+      justify-content: center;
     }
   }
 {% endstyle %}
