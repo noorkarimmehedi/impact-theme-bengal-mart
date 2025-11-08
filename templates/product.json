@@ -87,6 +87,7 @@
         },
         "liquid_HTqcEP": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% render 'video-showcase' %}"
           }
