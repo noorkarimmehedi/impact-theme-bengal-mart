@@ -450,11 +450,6 @@
             {{ block.settings.social_link_3_text }}
           </a>
         {% endif %}
-        {% if block.settings.social_link_4_text != blank %}
-          <a href="{{ block.settings.social_link_4_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
-            {{ block.settings.social_link_4_text }}
-          </a>
-        {% endif %}
       </div>
     </div>
   </div>
@@ -1005,7 +1000,7 @@
       "type": "text",
       "id": "social_link_2_text",
       "label": "Social link 2 text",
-      "default": "INSTAGRAM"
+      "default": "FACEBOOK"
     },
     {
       "type": "url",
@@ -1016,23 +1011,12 @@
       "type": "text",
       "id": "social_link_3_text",
       "label": "Social link 3 text",
-      "default": "YOUTUBE"
+      "default": "INSTAGRAM"
     },
     {
       "type": "url",
       "id": "social_link_3_url",
       "label": "Social link 3 URL"
-    },
-    {
-      "type": "text",
-      "id": "social_link_4_text",
-      "label": "Social link 4 text",
-      "default": "LINKEDIN"
-    },
-    {
-      "type": "url",
-      "id": "social_link_4_url",
-      "label": "Social link 4 URL"
     },
     {
       "type": "header",
