@@ -142,7 +142,7 @@
             "column_title_margin": 20,
             "link_font": "serif",
             "link_color": "#ffffff",
-            "link_hover_color": "#000000",
+            "link_hover_color": "#ffec3d",
             "link_font_size": 13,
             "link_spacing": 5,
             "columns_margin_bottom": 40,
