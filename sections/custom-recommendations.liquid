@@ -1,22 +1,24 @@
 {% comment %}
-  Design a minimal, high-end e-commerce clothing section titled 'YOU MAY ALSO LIKE FINAL'
+  You May Also Like Section - Shopify Compatible
 {% endcomment %}
 
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% liquid
+  assign section_id = section.id | replace: '_', '' | downcase
+%}
 
 {% style %}
-  .ai-you-may-like-{{ ai_gen_id }} {
-    background-color: {{ block.settings.background_color }};
-    padding: {{ block.settings.section_padding_mobile }}px 16px;
+  .ai-you-may-like-{{ section_id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.section_padding_mobile }}px 16px;
     width: 100%;
   }
 
-  .ai-you-may-like-container-{{ ai_gen_id }} {
+  .ai-you-may-like-container-{{ section_id }} {
     max-width: 100%;
     margin: 0 auto;
   }
 
-  .ai-you-may-like-header-{{ ai_gen_id }} {
+  .ai-you-may-like-header-{{ section_id }} {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,22 +26,22 @@
     gap: 16px;
   }
 
-  .ai-you-may-like-title-{{ ai_gen_id }} {
-    font-family: {{ block.settings.title_font.family }}, sans-serif;
-    font-size: {{ block.settings.title_size_mobile }}px;
+  .ai-you-may-like-title-{{ section_id }} {
+    font-family: {{ section.settings.title_font.family }}, sans-serif;
+    font-size: {{ section.settings.title_size_mobile }}px;
     font-weight: 400;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: {{ block.settings.title_color }};
+    color: {{ section.settings.title_color }};
     margin: 0;
   }
 
-  .ai-you-may-like-button-{{ ai_gen_id }} {
+  .ai-you-may-like-button-{{ section_id }} {
     padding: 10px 20px;
-    background-color: {{ block.settings.button_background }};
-    color: {{ block.settings.button_text_color }};
-    border: 1px solid {{ block.settings.button_border_color }};
-    border-radius: {{ block.settings.button_border_radius }}px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: 1px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 1.5px;
@@ -51,34 +53,34 @@
     display: inline-block;
   }
 
-  .ai-you-may-like-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_background }};
-    color: {{ block.settings.button_hover_text_color }};
-    border-color: {{ block.settings.button_hover_border_color }};
+  .ai-you-may-like-button-{{ section_id }}:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
   }
 
-  .ai-you-may-like-grid-{{ ai_gen_id }} {
+  .ai-you-may-like-grid-{{ section_id }} {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: {{ block.settings.grid_gap_mobile }}px;
+    gap: {{ section.settings.grid_gap_mobile }}px;
   }
 
-  .ai-you-may-like-card-{{ ai_gen_id }} {
-    background-color: {{ block.settings.card_background }};
+  .ai-you-may-like-card-{{ section_id }} {
+    background-color: {{ section.settings.card_background }};
     overflow: hidden;
-    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    box-shadow: {{ block.settings.card_shadow_x }}px {{ block.settings.card_shadow_y }}px {{ block.settings.card_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 }});
+    border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color }};
+    border-radius: {{ section.settings.card_border_radius }}px;
+    box-shadow: {{ section.settings.card_shadow_x }}px {{ section.settings.card_shadow_y }}px {{ section.settings.card_shadow_blur }}px rgba(0, 0, 0, {{ section.settings.card_shadow_opacity | divided_by: 100.0 }});
     display: flex;
     flex-direction: column;
     transition: border-color 0.3s ease;
   }
 
-  .ai-you-may-like-card-{{ ai_gen_id }}:hover {
-    border-color: {{ block.settings.card_hover_border_color }};
+  .ai-you-may-like-card-{{ section_id }}:hover {
+    border-color: {{ section.settings.card_hover_border_color }};
   }
 
-  .ai-you-may-like-image-wrapper-{{ ai_gen_id }} {
+  .ai-you-may-like-image-wrapper-{{ section_id }} {
     position: relative;
     width: 100%;
     padding-bottom: 100%;
@@ -86,7 +88,7 @@
     background-color: #f5f5f5;
   }
 
-  .ai-you-may-like-image-{{ ai_gen_id }} {
+  .ai-you-may-like-image-{{ section_id }} {
     position: absolute;
     top: 0;
     left: 0;
@@ -95,7 +97,7 @@
     object-fit: cover;
   }
 
-  .ai-you-may-like-placeholder-{{ ai_gen_id }} {
+  .ai-you-may-like-placeholder-{{ section_id }} {
     position: absolute;
     top: 0;
     left: 0;
@@ -107,25 +109,25 @@
     background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
   }
 
-  .ai-you-may-like-placeholder-{{ ai_gen_id }} svg {
+  .ai-you-may-like-placeholder-{{ section_id }} svg {
     width: 50%;
     height: 50%;
     opacity: 0.3;
   }
 
-  .ai-you-may-like-info-{{ ai_gen_id }} {
-    padding: {{ block.settings.card_padding }}px;
+  .ai-you-may-like-info-{{ section_id }} {
+    padding: {{ section.settings.card_padding }}px;
     text-align: left;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  .ai-you-may-like-product-title-{{ ai_gen_id }} {
-    font-size: {{ block.settings.product_title_size_mobile }}px;
+  .ai-you-may-like-product-title-{{ section_id }} {
+    font-size: {{ section.settings.product_title_size_mobile }}px;
     font-weight: 700;
     text-transform: uppercase;
-    color: {{ block.settings.product_title_color }};
+    color: {{ section.settings.product_title_color }};
     margin: 0 0 8px 0;
     letter-spacing: 0.5px;
     line-height: 1.3;
@@ -136,32 +138,32 @@
     overflow: hidden;
   }
 
-  .ai-you-may-like-price-{{ ai_gen_id }} {
-    font-size: {{ block.settings.price_size_mobile }}px;
-    color: {{ block.settings.price_color }};
+  .ai-you-may-like-price-{{ section_id }} {
+    font-size: {{ section.settings.price_size_mobile }}px;
+    color: {{ section.settings.price_color }};
     margin: 0 0 12px 0;
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .ai-you-may-like-compare-price-{{ ai_gen_id }} {
-    font-size: {{ block.settings.compare_price_size_mobile }}px;
-    color: {{ block.settings.compare_price_color }};
+  .ai-you-may-like-compare-price-{{ section_id }} {
+    font-size: {{ section.settings.compare_price_size_mobile }}px;
+    color: {{ section.settings.compare_price_color }};
     text-decoration: line-through;
     opacity: 0.7;
   }
 
-  .ai-you-may-like-button-wrapper-{{ ai_gen_id }} {
+  .ai-you-may-like-button-wrapper-{{ section_id }} {
     margin-top: auto;
   }
 
-  .ai-you-may-like-add-to-cart-{{ ai_gen_id }} {
+  .ai-you-may-like-add-to-cart-{{ section_id }} {
     width: 100%;
     padding: 10px 16px;
-    background-color: {{ block.settings.add_to_cart_background }};
-    color: {{ block.settings.add_to_cart_text_color }};
-    border: 1px solid {{ block.settings.add_to_cart_border_color }};
+    background-color: {{ section.settings.add_to_cart_background }};
+    color: {{ section.settings.add_to_cart_text_color }};
+    border: 1px solid {{ section.settings.add_to_cart_border_color }};
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -171,35 +173,35 @@
     text-align: center;
   }
 
-  .ai-you-may-like-add-to-cart-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.add_to_cart_hover_background }};
-    color: {{ block.settings.add_to_cart_hover_text_color }};
-    border-color: {{ block.settings.add_to_cart_hover_border_color }};
+  .ai-you-may-like-add-to-cart-{{ section_id }}:hover {
+    background-color: {{ section.settings.add_to_cart_hover_background }};
+    color: {{ section.settings.add_to_cart_hover_text_color }};
+    border-color: {{ section.settings.add_to_cart_hover_border_color }};
   }
 
-  .ai-you-may-like-add-to-cart-{{ ai_gen_id }}:disabled {
+  .ai-you-may-like-add-to-cart-{{ section_id }}:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .ai-you-may-like-empty-{{ ai_gen_id }} {
+  .ai-you-may-like-empty-{{ section_id }} {
     text-align: center;
     padding: 60px 20px;
     color: #999;
     font-size: 14px;
   }
 
-  .ai-you-may-like-bottom-button-wrapper-{{ ai_gen_id }} {
-    margin-top: {{ block.settings.bottom_button_spacing }}px;
-    text-align: {{ block.settings.bottom_button_alignment }};
+  .ai-you-may-like-bottom-button-wrapper-{{ section_id }} {
+    margin-top: {{ section.settings.bottom_button_spacing }}px;
+    text-align: {{ section.settings.bottom_button_alignment }};
   }
 
-  .ai-you-may-like-bottom-button-{{ ai_gen_id }} {
+  .ai-you-may-like-bottom-button-{{ section_id }} {
     padding: 12px 32px;
-    background-color: {{ block.settings.bottom_button_background }};
-    color: {{ block.settings.bottom_button_text_color }};
-    border: 1px solid {{ block.settings.bottom_button_border_color }};
-    border-radius: {{ block.settings.bottom_button_border_radius }}px;
+    background-color: {{ section.settings.bottom_button_background }};
+    color: {{ section.settings.bottom_button_text_color }};
+    border: 1px solid {{ section.settings.bottom_button_border_color }};
+    border-radius: {{ section.settings.bottom_button_border_radius }}px;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1.5px;
@@ -210,316 +212,228 @@
     display: inline-block;
   }
 
-  .ai-you-may-like-bottom-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.bottom_button_hover_background }};
-    color: {{ block.settings.bottom_button_hover_text_color }};
-    border-color: {{ block.settings.bottom_button_hover_border_color }};
+  .ai-you-may-like-bottom-button-{{ section_id }}:hover {
+    background-color: {{ section.settings.bottom_button_hover_background }};
+    color: {{ section.settings.bottom_button_hover_text_color }};
+    border-color: {{ section.settings.bottom_button_hover_border_color }};
   }
 
   @media screen and (min-width: 750px) {
-    .ai-you-may-like-{{ ai_gen_id }} {
-      padding: {{ block.settings.section_padding_desktop }}px {{ block.settings.desktop_side_padding }}px;
+    .ai-you-may-like-{{ section_id }} {
+      padding: {{ section.settings.section_padding_desktop }}px {{ section.settings.desktop_side_padding }}px;
     }
 
-    .ai-you-may-like-container-{{ ai_gen_id }} {
-      max-width: {{ block.settings.max_width }}px;
+    .ai-you-may-like-container-{{ section_id }} {
+      max-width: {{ section.settings.max_width }}px;
     }
 
-    .ai-you-may-like-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.title_size_desktop }}px;
+    .ai-you-may-like-title-{{ section_id }} {
+      font-size: {{ section.settings.title_size_desktop }}px;
     }
 
-    .ai-you-may-like-grid-{{ ai_gen_id }} {
+    .ai-you-may-like-grid-{{ section_id }} {
       grid-template-columns: repeat(4, 1fr);
-      gap: {{ block.settings.grid_gap_desktop }}px;
+      gap: {{ section.settings.grid_gap_desktop }}px;
     }
 
-    .ai-you-may-like-product-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.product_title_size_desktop }}px;
+    .ai-you-may-like-product-title-{{ section_id }} {
+      font-size: {{ section.settings.product_title_size_desktop }}px;
     }
 
-    .ai-you-may-like-price-{{ ai_gen_id }} {
-      font-size: {{ block.settings.price_size_desktop }}px;
+    .ai-you-may-like-price-{{ section_id }} {
+      font-size: {{ section.settings.price_size_desktop }}px;
     }
 
-    .ai-you-may-like-compare-price-{{ ai_gen_id }} {
-      font-size: {{ block.settings.compare_price_size_desktop }}px;
+    .ai-you-may-like-compare-price-{{ section_id }} {
+      font-size: {{ section.settings.compare_price_size_desktop }}px;
     }
 
-    .ai-you-may-like-button-wrapper-{{ ai_gen_id }} {
+    .ai-you-may-like-button-wrapper-{{ section_id }} {
       display: flex;
       justify-content: center;
     }
   }
 {% endstyle %}
 
-<you-may-also-like-{{ ai_gen_id }}>
-  <div class="ai-you-may-like-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-    <div class="ai-you-may-like-container-{{ ai_gen_id }}">
-      <div class="ai-you-may-like-header-{{ ai_gen_id }}">
-        <h2 class="ai-you-may-like-title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
-        {% if block.settings.button_link != blank %}
-          <a href="{{ block.settings.button_link }}" class="ai-you-may-like-button-{{ ai_gen_id }}">
-            {{ block.settings.button_text }}
-          </a>
-        {% endif %}
-      </div>
-
-      {% if block.settings.collection != blank and block.settings.collection.products.size > 0 %}
-        <div class="ai-you-may-like-grid-{{ ai_gen_id }}">
-          {% for product in block.settings.collection.products limit: block.settings.products_to_show %}
-            <div class="ai-you-may-like-card-{{ ai_gen_id }}">
-              <a href="{{ product.url }}">
-                <div class="ai-you-may-like-image-wrapper-{{ ai_gen_id }}">
-                  {% if product.featured_image %}
-                    <img
-                      src="{{ product.featured_image | image_url: width: 800 }}"
-                      alt="{{ product.featured_image.alt | escape }}"
-                      class="ai-you-may-like-image-{{ ai_gen_id }}"
-                      loading="lazy"
-                      width="800"
-                      height="800"
-                    >
-                  {% else %}
-                    <div class="ai-you-may-like-placeholder-{{ ai_gen_id }}">
-                      {{ 'product-1' | placeholder_svg_tag }}
-                    </div>
-                  {% endif %}
-                </div>
-              </a>
-
-              <div class="ai-you-may-like-info-{{ ai_gen_id }}">
-                <h3 class="ai-you-may-like-product-title-{{ ai_gen_id }}">
-                  <a href="{{ product.url }}" style="color: inherit; text-decoration: none;">
-                    {{ product.title }}
-                  </a>
-                </h3>
-                <div class="ai-you-may-like-price-{{ ai_gen_id }}">
-                  <span>{{ product.price | money }}</span>
-                  {% if product.compare_at_price > product.price %}
-                    <span class="ai-you-may-like-compare-price-{{ ai_gen_id }}">
-                      {{ product.compare_at_price | money }}
-                    </span>
-                  {% endif %}
-                </div>
-
-                <div class="ai-you-may-like-button-wrapper-{{ ai_gen_id }}">
-                  {% if product.available %}
-                    <button
-                      type="button"
-                      class="ai-you-may-like-add-to-cart-{{ ai_gen_id }}"
-                      data-product-id="{{ product.id }}"
-                      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                    >
-                      {{ block.settings.add_to_cart_text }}
-                    </button>
-                  {% else %}
-                    <button
-                      type="button"
-                      class="ai-you-may-like-add-to-cart-{{ ai_gen_id }}"
-                      disabled
-                    >
-                      Sold Out
-                    </button>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-
-        {% if block.settings.show_bottom_button and block.settings.bottom_button_link != blank %}
-          <div class="ai-you-may-like-bottom-button-wrapper-{{ ai_gen_id }}">
-            <a href="{{ block.settings.bottom_button_link }}" class="ai-you-may-like-bottom-button-{{ ai_gen_id }}">
-              {{ block.settings.bottom_button_text }}
-            </a>
-          </div>
-        {% endif %}
-      {% else %}
-        <div class="ai-you-may-like-empty-{{ ai_gen_id }}">
-          <p>Select a collection to display products</p>
-        </div>
+<div class="ai-you-may-like-{{ section_id }}" {{ section.shopify_attributes }}>
+  <div class="ai-you-may-like-container-{{ section_id }}">
+    <div class="ai-you-may-like-header-{{ section_id }}">
+      <h2 class="ai-you-may-like-title-{{ section_id }}">{{ section.settings.section_title }}</h2>
+      {% if section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="ai-you-may-like-button-{{ section_id }}">
+          {{ section.settings.button_text }}
+        </a>
       {% endif %}
     </div>
+
+    {% if section.settings.collection != blank and section.settings.collection.products.size > 0 %}
+      <div class="ai-you-may-like-grid-{{ section_id }}">
+        {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+          <div class="ai-you-may-like-card-{{ section_id }}">
+            <a href="{{ product.url }}">
+              <div class="ai-you-may-like-image-wrapper-{{ section_id }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="ai-you-may-like-image-{{ section_id }}"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                  >
+                {% else %}
+                  <div class="ai-you-may-like-placeholder-{{ section_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+            </a>
+
+            <div class="ai-you-may-like-info-{{ section_id }}">
+              <h3 class="ai-you-may-like-product-title-{{ section_id }}">
+                <a href="{{ product.url }}" style="color: inherit; text-decoration: none;">
+                  {{ product.title }}
+                </a>
+              </h3>
+              <div class="ai-you-may-like-price-{{ section_id }}">
+                <span>{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="ai-you-may-like-compare-price-{{ section_id }}">
+                    {{ product.compare_at_price | money }}
+                  </span>
+                {% endif %}
+              </div>
+
+              <div class="ai-you-may-like-button-wrapper-{{ section_id }}">
+                {% if product.available %}
+                  <button
+                    type="button"
+                    class="ai-you-may-like-add-to-cart-{{ section_id }}"
+                    data-product-id="{{ product.id }}"
+                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  >
+                    {{ section.settings.add_to_cart_text }}
+                  </button>
+                {% else %}
+                  <button
+                    type="button"
+                    class="ai-you-may-like-add-to-cart-{{ section_id }}"
+                    disabled
+                  >
+                    Sold Out
+                  </button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_bottom_button and section.settings.bottom_button_link != blank %}
+        <div class="ai-you-may-like-bottom-button-wrapper-{{ section_id }}">
+          <a href="{{ section.settings.bottom_button_link }}" class="ai-you-may-like-bottom-button-{{ section_id }}">
+            {{ section.settings.bottom_button_text }}
+          </a>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="ai-you-may-like-empty-{{ section_id }}">
+        <p>Select a collection to display products</p>
+      </div>
+    {% endif %}
   </div>
-</you-may-also-like-{{ ai_gen_id }}>
+</div>
 
 <script>
   (function() {
-    class YouMayAlsoLike extends HTMLElement {
-      constructor() {
-        super();
-      }
+    const sectionId = '{{ section_id }}';
+    const buttons = document.querySelectorAll('.ai-you-may-like-add-to-cart-' + sectionId);
 
-      connectedCallback() {
-        this.setupAddToCart();
-      }
+    buttons.forEach((button) => {
+      button.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const variantId = button.getAttribute('data-variant-id');
 
-      setupAddToCart() {
-        const buttons = this.querySelectorAll('.ai-you-may-like-add-to-cart-{{ ai_gen_id }}');
+        if (!variantId || button.disabled) return;
 
-        buttons.forEach((button) => {
-          button.addEventListener('click', async (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const variantId = button.getAttribute('data-variant-id');
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = 'Adding...';
 
-            if (!variantId || button.disabled) return;
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              items: [{
+                id: variantId,
+                quantity: 1
+              }]
+            })
+          });
 
-            button.disabled = true;
-            const originalText = button.textContent;
-            button.textContent = 'Adding...';
+          if (!response.ok) {
+            throw new Error('Failed to add to cart');
+          }
 
-            try {
-              const response = await fetch('/cart/add.js', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                  items: [{
-                    id: variantId,
-                    quantity: 1
-                  }]
-                })
-              });
-
-              if (!response.ok) {
-                throw new Error('Failed to add to cart');
-              }
-
-              const data = await response.json();
-              button.textContent = 'Added!';
-              
-              // Fetch updated cart data
-              const cartResponse = await fetch('/cart.js');
-              const cart = await cartResponse.json();
-              const cartCount = cart.item_count;
-              
-              // Update count-bubble in header only (not mobile navbar)
-              const header = document.querySelector('header, .header');
-              if (header) {
-                const countBubbles = header.querySelectorAll('.count-bubble, .header__cart-count');
-                countBubbles.forEach(bubble => {
-                  bubble.textContent = cartCount;
-                  
-                  // Ensure the bubble has proper styling classes
-                  if (!bubble.classList.contains('count-bubble')) {
-                    bubble.classList.add('count-bubble');
-                  }
-                  
-                  if (cartCount > 0) {
-                    bubble.classList.remove('hidden');
-                    bubble.removeAttribute('hidden');
-                    bubble.style.display = '';
-                    bubble.style.visibility = 'visible';
-                    bubble.style.opacity = '1';
-                  } else {
-                    bubble.style.display = 'none';
-                  }
-                });
-                
-                // Also check for cart links in header and ensure count bubble exists
-                const cartLinks = header.querySelectorAll('a[href="/cart"], a[href*="/cart"]');
-                cartLinks.forEach(link => {
-                  let bubble = link.querySelector('.count-bubble, .header__cart-count');
-                  
-                  // If bubble doesn't exist, create it
-                  if (!bubble && cartCount > 0) {
-                    bubble = document.createElement('div');
-                    bubble.className = 'count-bubble header__cart-count';
-                    bubble.textContent = cartCount;
-                    link.appendChild(bubble);
-                  } else if (bubble) {
-                    bubble.textContent = cartCount;
-                    if (cartCount > 0) {
-                      bubble.style.display = '';
-                      bubble.style.visibility = 'visible';
-                      bubble.style.opacity = '1';
-                    }
-                  }
-                });
-              }
-              
-              // Update other cart indicators (not in mobile nav)
-              const cartSelectors = [
-                'header .cart-count-bubble',
-                'header .cart-count',
-                'header [data-cart-count]',
-                '.header .cart-count-bubble',
-                '.header .cart-count',
-                '.header [data-cart-count]'
-              ];
-              
-              cartSelectors.forEach(selector => {
-                try {
-                  const elements = document.querySelectorAll(selector);
-                  elements.forEach(element => {
-                    element.textContent = cartCount;
-                    if (element.hasAttribute('data-cart-count')) {
-                      element.setAttribute('data-cart-count', cartCount);
-                    }
-                    if (cartCount > 0) {
-                      element.classList.remove('hidden');
-                      element.style.display = '';
-                      element.style.visibility = 'visible';
-                    }
-                  });
-                } catch (e) {
-                  // Ignore errors
-                }
-              });
-              
-              // Trigger cart events
-              const events = ['cart:refresh', 'cart:updated', 'cart:changed'];
-              events.forEach(eventName => {
-                document.documentElement.dispatchEvent(new CustomEvent(eventName, {
-                  bubbles: true,
-                  detail: { cart: cart }
-                }));
-              });
-
-              // Try theme methods
-              if (window.theme?.cart?.getCart) {
-                window.theme.cart.getCart();
-              }
-
-              setTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-              }, 2000);
-
-            } catch (error) {
-              console.error('Error adding to cart:', error);
-              button.textContent = 'Error';
-              setTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-              }, 2000);
+          const data = await response.json();
+          button.textContent = 'Added!';
+          
+          // Fetch updated cart
+          const cartResponse = await fetch('/cart.js');
+          const cart = await cartResponse.json();
+          
+          // Update cart count in header
+          const countBubbles = document.querySelectorAll('.cart-count-bubble, [data-cart-count]');
+          countBubbles.forEach(bubble => {
+            bubble.textContent = cart.item_count;
+            if (cart.item_count > 0) {
+              bubble.classList.remove('hidden');
+              bubble.style.display = '';
             }
           });
-        });
-      }
-    }
+          
+          // Trigger cart refresh event
+          document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+            bubbles: true,
+            detail: { cart: cart }
+          }));
 
-    if (!customElements.get('you-may-also-like-{{ ai_gen_id }}')) {
-      customElements.define('you-may-also-like-{{ ai_gen_id }}', YouMayAlsoLike);
-    }
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          button.textContent = 'Error';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+        }
+      });
+    });
   })();
 </script>
 
 {% schema %}
 {
-  "name": "You may also like",
+  "name": "You May Also Like",
+  "tag": "section",
+  "class": "section-you-may-like",
   "settings": [
     {
       "type": "header",
       "content": "Section"
     },
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "section_title",
       "label": "Title",
       "default": "YOU MAY ALSO LIKE"
@@ -625,7 +539,7 @@
       "content": "Top button"
     },
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "button_text",
       "label": "Text",
       "default": "DISCOVER MORE"
@@ -892,7 +806,7 @@
       "content": "Add to cart button"
     },
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "add_to_cart_text",
       "label": "Text",
       "default": "Add to Cart"
@@ -944,7 +858,7 @@
       "default": true
     },
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "bottom_button_text",
       "label": "Text",
       "default": "View All Products"
@@ -1033,7 +947,7 @@
   ],
   "presets": [
     {
-      "name": "You may also like"
+      "name": "You May Also Like"
     }
   ]
 }
