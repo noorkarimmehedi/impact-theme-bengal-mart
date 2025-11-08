@@ -379,53 +379,59 @@
               const cart = await cartResponse.json();
               const cartCount = cart.item_count;
               
-              // Update count-bubble (from your theme CSS)
-              const countBubbles = document.querySelectorAll('.count-bubble, .header__cart-count');
-              countBubbles.forEach(bubble => {
-                bubble.textContent = cartCount;
-                
-                // Ensure the bubble has proper styling classes
-                if (!bubble.classList.contains('count-bubble')) {
-                  bubble.classList.add('count-bubble');
-                }
-                
-                if (cartCount > 0) {
-                  bubble.classList.remove('hidden');
-                  bubble.removeAttribute('hidden');
-                  bubble.style.display = '';
-                  bubble.style.visibility = 'visible';
-                  bubble.style.opacity = '1';
-                } else {
-                  bubble.style.display = 'none';
-                }
-              });
-              
-              // Also check for cart links and ensure count bubble exists
-              const cartLinks = document.querySelectorAll('a[href="/cart"], a[href*="/cart"]');
-              cartLinks.forEach(link => {
-                let bubble = link.querySelector('.count-bubble, .header__cart-count');
-                
-                // If bubble doesn't exist, create it
-                if (!bubble && cartCount > 0) {
-                  bubble = document.createElement('div');
-                  bubble.className = 'count-bubble header__cart-count';
+              // Update count-bubble in header only (not mobile navbar)
+              const header = document.querySelector('header, .header');
+              if (header) {
+                const countBubbles = header.querySelectorAll('.count-bubble, .header__cart-count');
+                countBubbles.forEach(bubble => {
                   bubble.textContent = cartCount;
-                  link.appendChild(bubble);
-                } else if (bubble) {
-                  bubble.textContent = cartCount;
+                  
+                  // Ensure the bubble has proper styling classes
+                  if (!bubble.classList.contains('count-bubble')) {
+                    bubble.classList.add('count-bubble');
+                  }
+                  
                   if (cartCount > 0) {
+                    bubble.classList.remove('hidden');
+                    bubble.removeAttribute('hidden');
                     bubble.style.display = '';
                     bubble.style.visibility = 'visible';
                     bubble.style.opacity = '1';
+                  } else {
+                    bubble.style.display = 'none';
                   }
-                }
-              });
+                });
+                
+                // Also check for cart links in header and ensure count bubble exists
+                const cartLinks = header.querySelectorAll('a[href="/cart"], a[href*="/cart"]');
+                cartLinks.forEach(link => {
+                  let bubble = link.querySelector('.count-bubble, .header__cart-count');
+                  
+                  // If bubble doesn't exist, create it
+                  if (!bubble && cartCount > 0) {
+                    bubble = document.createElement('div');
+                    bubble.className = 'count-bubble header__cart-count';
+                    bubble.textContent = cartCount;
+                    link.appendChild(bubble);
+                  } else if (bubble) {
+                    bubble.textContent = cartCount;
+                    if (cartCount > 0) {
+                      bubble.style.display = '';
+                      bubble.style.visibility = 'visible';
+                      bubble.style.opacity = '1';
+                    }
+                  }
+                });
+              }
               
-              // Update all possible cart indicators
+              // Update other cart indicators (not in mobile nav)
               const cartSelectors = [
-                '.cart-count-bubble',
-                '.cart-count',
-                '[data-cart-count]'
+                'header .cart-count-bubble',
+                'header .cart-count',
+                'header [data-cart-count]',
+                '.header .cart-count-bubble',
+                '.header .cart-count',
+                '.header [data-cart-count]'
               ];
               
               cartSelectors.forEach(selector => {
