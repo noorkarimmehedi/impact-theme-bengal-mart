@@ -1,6 +1,1019 @@
+{% doc %}
+  @prompt
+    Design a clean, minimal e-commerce website footer for a premium clothing brand. At the very top, include a thin black bar with horizontally repeating text ‘SHIPPING WORLDWIDE’ in white uppercase letters, evenly spaced and scrolling infinitely.
+    
+    Below that, center the brand logo (‘Bluorng’) in elegant serif typography on a light grey background. Beneath the logo, create two columns:
+    
+    The left column titled ‘HELP’ with uppercase heading and smaller grey links such as Members Login, Exchange/Return Request, FAQ, Terms, and Shipping.
+    
+    The right column titled ‘COMPANY’ with uppercase heading and smaller grey links like Story, Our Stores, Careers, Contact Us, Collaborations, and Blogs.
+    
+    At the bottom, display copyright text in uppercase grey (‘© 2025 BLUORNG RETAIL PRIVATE LIMITED, ALL RIGHTS RESERVED.’).
+    Finally, include a black footer strip with white uppercase links labeled ‘CONNECT’, ‘INSTAGRAM’, ‘YOUTUBE’, and ‘LINKEDIN’, spaced evenly.
+    
+    Use a minimalist, luxury-inspired style with consistent alignment, generous padding, and clear hierarchy., help section should be on left side and company section should be on the right side in mobile version. also the font should be customizable. for brand name a logo option should be available , help section should be alighned more on the left and company section should be more on the right. also font isn't working , in Copyright text section add this:  Website designed and developed by Arc Lab Technology with option to add link for Arc Lab Technology and underline the Arc Lab Technology, for desktop logo and brand name and coopyright arc lab text should be on the left and the two colums help and comany should be on the right side
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-premium-footer-{{ ai_gen_id }} {
+    width: 100%;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+  }
+
+  .ai-premium-footer__marquee-{{ ai_gen_id }} {
+    background-color: {{ block.settings.marquee_bg_color }};
+    overflow: hidden;
+    padding: 12px 0;
+    position: relative;
+  }
+
+  .ai-premium-footer__marquee-content-{{ ai_gen_id }} {
+    display: flex;
+    white-space: nowrap;
+    animation: ai-premium-footer-scroll-{{ ai_gen_id }} {{ block.settings.scroll_speed }}s linear infinite;
+  }
+
+  .ai-premium-footer__marquee-text-{{ ai_gen_id }} {
+    color: {{ block.settings.marquee_text_color }};
+    font-size: {{ block.settings.marquee_font_size }}px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    padding: 0 40px;
+    font-family: {{ block.settings.marquee_font.family }}, {{ block.settings.marquee_font.fallback_families }};
+    font-weight: {{ block.settings.marquee_font.weight }};
+    font-style: {{ block.settings.marquee_font.style }};
+  }
+
+  @keyframes ai-premium-footer-scroll-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ai-premium-footer__main-{{ ai_gen_id }} {
+    background-color: {{ block.settings.main_bg_color }};
+    padding: {{ block.settings.main_padding_top }}px 20px {{ block.settings.main_padding_bottom }}px;
+  }
+
+  .ai-premium-footer__content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .ai-premium-footer__logo-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.logo_margin_bottom }}px;
+  }
+
+  .ai-premium-footer__logo-image-{{ ai_gen_id }} {
+    max-width: {{ block.settings.logo_width }}px;
+    height: auto;
+    display: inline-block;
+  }
+
+  .ai-premium-footer__logo-text-{{ ai_gen_id }} {
+    font-family: {{ block.settings.logo_font.family }}, {{ block.settings.logo_font.fallback_families }};
+    font-size: {{ block.settings.logo_font_size }}px;
+    font-weight: {{ block.settings.logo_font.weight }};
+    font-style: {{ block.settings.logo_font.style }};
+    color: {{ block.settings.logo_color }};
+    letter-spacing: {{ block.settings.logo_letter_spacing }}px;
+    margin: 0;
+  }
+
+  .ai-premium-footer__columns-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .ai-premium-footer__column-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-premium-footer__column--left-{{ ai_gen_id }} {
+    text-align: left;
+  }
+
+  .ai-premium-footer__column--right-{{ ai_gen_id }} {
+    text-align: right;
+  }
+
+  .ai-premium-footer__column-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.column_title_size }}px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: {{ block.settings.column_title_color }};
+    margin: 0 0 {{ block.settings.column_title_margin }}px;
+    font-family: {{ block.settings.column_title_font.family }}, {{ block.settings.column_title_font.fallback_families }};
+    font-weight: {{ block.settings.column_title_font.weight }};
+    font-style: {{ block.settings.column_title_font.style }};
+  }
+
+  .ai-premium-footer__link-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-premium-footer__link-item-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.link_spacing }}px;
+  }
+
+  .ai-premium-footer__link-{{ ai_gen_id }} {
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.link_font_size }}px;
+    transition: color 0.3s ease;
+    font-family: {{ block.settings.link_font.family }}, {{ block.settings.link_font.fallback_families }};
+    font-weight: {{ block.settings.link_font.weight }};
+    font-style: {{ block.settings.link_font.style }};
+  }
+
+  .ai-premium-footer__link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-premium-footer__copyright-wrapper-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-premium-footer__copyright-{{ ai_gen_id }} {
+    color: {{ block.settings.copyright_color }};
+    font-size: {{ block.settings.copyright_font_size }}px;
+    letter-spacing: 1px;
+    margin: 0 0 {{ block.settings.credit_spacing }}px;
+    font-family: {{ block.settings.copyright_font.family }}, {{ block.settings.copyright_font.fallback_families }};
+    font-weight: {{ block.settings.copyright_font.weight }};
+    font-style: {{ block.settings.copyright_font.style }};
+  }
+
+  .ai-premium-footer__credit-{{ ai_gen_id }} {
+    color: {{ block.settings.credit_color }};
+    font-size: {{ block.settings.credit_font_size }}px;
+    letter-spacing: 0.5px;
+    margin: 0;
+    font-family: {{ block.settings.copyright_font.family }}, {{ block.settings.copyright_font.fallback_families }};
+    font-weight: {{ block.settings.copyright_font.weight }};
+    font-style: {{ block.settings.copyright_font.style }};
+  }
+
+  .ai-premium-footer__credit-link-{{ ai_gen_id }} {
+    color: {{ block.settings.credit_link_color }};
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-premium-footer__credit-link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-premium-footer__bottom-bar-{{ ai_gen_id }} {
+    background-color: {{ block.settings.bottom_bar_bg_color }};
+    padding: {{ block.settings.bottom_bar_padding }}px 20px;
+    margin-top: {{ block.settings.bottom_bar_margin_top }}px;
+  }
+
+  .ai-premium-footer__social-links-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: {{ block.settings.social_link_spacing }}px;
+    flex-wrap: wrap;
+  }
+
+  .ai-premium-footer__social-link-{{ ai_gen_id }} {
+    color: {{ block.settings.social_link_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.social_link_font_size }}px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: opacity 0.3s ease;
+    font-family: {{ block.settings.social_link_font.family }}, {{ block.settings.social_link_font.fallback_families }};
+    font-weight: {{ block.settings.social_link_font.weight }};
+    font-style: {{ block.settings.social_link_font.style }};
+  }
+
+  .ai-premium-footer__social-link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-premium-footer__content-{{ ai_gen_id }} {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 60px;
+    }
+
+    .ai-premium-footer__left-section-{{ ai_gen_id }} {
+      flex: 0 0 auto;
+      max-width: 350px;
+    }
+
+    .ai-premium-footer__logo-{{ ai_gen_id }} {
+      text-align: left;
+      margin-bottom: {{ block.settings.logo_margin_bottom }}px;
+    }
+
+    .ai-premium-footer__copyright-wrapper-{{ ai_gen_id }} {
+      text-align: left;
+    }
+
+    .ai-premium-footer__columns-{{ ai_gen_id }} {
+      flex: 1;
+      gap: 60px;
+      max-width: none;
+    }
+
+    .ai-premium-footer__column-{{ ai_gen_id }} {
+      text-align: left;
+    }
+
+    .ai-premium-footer__column--left-{{ ai_gen_id }} {
+      text-align: left;
+    }
+
+    .ai-premium-footer__column--right-{{ ai_gen_id }} {
+      text-align: left;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-premium-footer__columns-{{ ai_gen_id }} {
+      gap: 30px;
+    }
+
+    .ai-premium-footer__column-{{ ai_gen_id }} {
+      text-align: left;
+    }
+
+    .ai-premium-footer__column--left-{{ ai_gen_id }} {
+      text-align: left;
+    }
+
+    .ai-premium-footer__column--right-{{ ai_gen_id }} {
+      text-align: right;
+    }
+
+    .ai-premium-footer__logo-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.logo_font_size | times: 0.8 }}px;
+    }
+
+    .ai-premium-footer__logo-image-{{ ai_gen_id }} {
+      max-width: {{ block.settings.logo_width | times: 0.8 }}px;
+    }
+
+    .ai-premium-footer__marquee-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.marquee_font_size | times: 0.8 }}px;
+    }
+
+    .ai-premium-footer__social-links-{{ ai_gen_id }} {
+      gap: {{ block.settings.social_link_spacing | times: 0.7 }}px;
+    }
+
+    .ai-premium-footer__social-link-{{ ai_gen_id }} {
+      font-size: {{ block.settings.social_link_font_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<footer class="ai-premium-footer-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-premium-footer__marquee-{{ ai_gen_id }}">
+    <div class="ai-premium-footer__marquee-content-{{ ai_gen_id }}">
+      {% for i in (1..20) %}
+        <span class="ai-premium-footer__marquee-text-{{ ai_gen_id }}">{{ block.settings.marquee_text }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="ai-premium-footer__main-{{ ai_gen_id }}">
+    <div class="ai-premium-footer__content-{{ ai_gen_id }}">
+      <div class="ai-premium-footer__left-section-{{ ai_gen_id }}">
+        <div class="ai-premium-footer__logo-{{ ai_gen_id }}">
+          {% if block.settings.logo_image != blank %}
+            <img
+              src="{{ block.settings.logo_image | image_url: width: block.settings.logo_width }}"
+              alt="{{ block.settings.brand_name | escape }}"
+              class="ai-premium-footer__logo-image-{{ ai_gen_id }}"
+              width="{{ block.settings.logo_width }}"
+              height="auto"
+              loading="lazy"
+            >
+          {% elsif block.settings.brand_name != blank %}
+            <h2 class="ai-premium-footer__logo-text-{{ ai_gen_id }}">{{ block.settings.brand_name }}</h2>
+          {% endif %}
+        </div>
+
+        <div class="ai-premium-footer__copyright-wrapper-{{ ai_gen_id }}">
+          <p class="ai-premium-footer__copyright-{{ ai_gen_id }}">{{ block.settings.copyright_text }}</p>
+          <p class="ai-premium-footer__credit-{{ ai_gen_id }}">
+            Website designed and developed by 
+            {% if block.settings.arc_lab_url != blank %}
+              <a href="{{ block.settings.arc_lab_url }}" class="ai-premium-footer__credit-link-{{ ai_gen_id }}" target="_blank" rel="noopener">Arc Lab Technology</a>
+            {% else %}
+              <span class="ai-premium-footer__credit-link-{{ ai_gen_id }}">Arc Lab Technology</span>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+
+      <div class="ai-premium-footer__columns-{{ ai_gen_id }}">
+        <div class="ai-premium-footer__column-{{ ai_gen_id }} ai-premium-footer__column--left-{{ ai_gen_id }}">
+          <h3 class="ai-premium-footer__column-title-{{ ai_gen_id }}">{{ block.settings.help_title }}</h3>
+          <ul class="ai-premium-footer__link-list-{{ ai_gen_id }}">
+            {% if block.settings.help_link_1_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.help_link_1_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.help_link_1_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.help_link_2_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.help_link_2_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.help_link_2_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.help_link_3_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.help_link_3_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.help_link_3_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.help_link_4_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.help_link_4_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.help_link_4_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.help_link_5_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.help_link_5_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.help_link_5_text }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div class="ai-premium-footer__column-{{ ai_gen_id }} ai-premium-footer__column--right-{{ ai_gen_id }}">
+          <h3 class="ai-premium-footer__column-title-{{ ai_gen_id }}">{{ block.settings.company_title }}</h3>
+          <ul class="ai-premium-footer__link-list-{{ ai_gen_id }}">
+            {% if block.settings.company_link_1_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_1_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_1_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.company_link_2_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_2_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_2_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.company_link_3_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_3_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_3_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.company_link_4_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_4_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_4_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.company_link_5_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_5_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_5_text }}
+                </a>
+              </li>
+            {% endif %}
+            {% if block.settings.company_link_6_text != blank %}
+              <li class="ai-premium-footer__link-item-{{ ai_gen_id }}">
+                <a href="{{ block.settings.company_link_6_url }}" class="ai-premium-footer__link-{{ ai_gen_id }}">
+                  {{ block.settings.company_link_6_text }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-premium-footer__bottom-bar-{{ ai_gen_id }}">
+    <div class="ai-premium-footer__social-links-{{ ai_gen_id }}">
+      {% if block.settings.social_link_1_text != blank %}
+        <a href="{{ block.settings.social_link_1_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          {{ block.settings.social_link_1_text }}
+        </a>
+      {% endif %}
+      {% if block.settings.social_link_2_text != blank %}
+        <a href="{{ block.settings.social_link_2_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          {{ block.settings.social_link_2_text }}
+        </a>
+      {% endif %}
+      {% if block.settings.social_link_3_text != blank %}
+        <a href="{{ block.settings.social_link_3_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          {{ block.settings.social_link_3_text }}
+        </a>
+      {% endif %}
+      {% if block.settings.social_link_4_text != blank %}
+        <a href="{{ block.settings.social_link_4_url }}" class="ai-premium-footer__social-link-{{ ai_gen_id }}">
+          {{ block.settings.social_link_4_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Premium footer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Scrolling marquee"
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee text",
+      "default": "SHIPPING WORLDWIDE"
+    },
+    {
+      "type": "font_picker",
+      "id": "marquee_font",
+      "label": "Font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "marquee_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "marquee_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "marquee_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Brand logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 150
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Bluorng"
+    },
+    {
+      "type": "font_picker",
+      "id": "logo_font",
+      "label": "Logo font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "logo_font_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "logo_letter_spacing",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "logo_color",
+      "label": "Logo color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "logo_margin_bottom",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Main section"
+    },
+    {
+      "type": "color",
+      "id": "main_bg_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "main_padding_top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "main_padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Help column"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Title",
+      "default": "HELP"
+    },
+    {
+      "type": "text",
+      "id": "help_link_1_text",
+      "label": "Link 1 text",
+      "default": "Members Login"
+    },
+    {
+      "type": "url",
+      "id": "help_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_2_text",
+      "label": "Link 2 text",
+      "default": "Exchange/Return Request"
+    },
+    {
+      "type": "url",
+      "id": "help_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_3_text",
+      "label": "Link 3 text",
+      "default": "FAQ"
+    },
+    {
+      "type": "url",
+      "id": "help_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_4_text",
+      "label": "Link 4 text",
+      "default": "Terms"
+    },
+    {
+      "type": "url",
+      "id": "help_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_5_text",
+      "label": "Link 5 text",
+      "default": "Shipping"
+    },
+    {
+      "type": "url",
+      "id": "help_link_5_url",
+      "label": "Link 5 URL"
+    },
+    {
+      "type": "header",
+      "content": "Company column"
+    },
+    {
+      "type": "text",
+      "id": "company_title",
+      "label": "Title",
+      "default": "COMPANY"
+    },
+    {
+      "type": "text",
+      "id": "company_link_1_text",
+      "label": "Link 1 text",
+      "default": "Story"
+    },
+    {
+      "type": "url",
+      "id": "company_link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "company_link_2_text",
+      "label": "Link 2 text",
+      "default": "Our Stores"
+    },
+    {
+      "type": "url",
+      "id": "company_link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "company_link_3_text",
+      "label": "Link 3 text",
+      "default": "Careers"
+    },
+    {
+      "type": "url",
+      "id": "company_link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "company_link_4_text",
+      "label": "Link 4 text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "company_link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "company_link_5_text",
+      "label": "Link 5 text",
+      "default": "Collaborations"
+    },
+    {
+      "type": "url",
+      "id": "company_link_5_url",
+      "label": "Link 5 URL"
+    },
+    {
+      "type": "text",
+      "id": "company_link_6_text",
+      "label": "Link 6 text",
+      "default": "Blogs"
+    },
+    {
+      "type": "url",
+      "id": "company_link_6_url",
+      "label": "Link 6 URL"
+    },
+    {
+      "type": "header",
+      "content": "Column style"
+    },
+    {
+      "type": "font_picker",
+      "id": "column_title_font",
+      "label": "Title font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "column_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "column_title_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Title size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "column_title_margin",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Title bottom spacing",
+      "default": 20
+    },
+    {
+      "type": "font_picker",
+      "id": "link_font",
+      "label": "Link font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Link size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "link_spacing",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Link spacing",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "columns_margin_bottom",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2025 BLUORNG RETAIL PRIVATE LIMITED, ALL RIGHTS RESERVED."
+    },
+    {
+      "type": "font_picker",
+      "id": "copyright_font",
+      "label": "Font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Text color",
+      "default": "#999999"
+    },
+    {
+      "type": "range",
+      "id": "copyright_font_size",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Website credit"
+    },
+    {
+      "type": "url",
+      "id": "arc_lab_url",
+      "label": "Arc Lab Technology URL"
+    },
+    {
+      "type": "color",
+      "id": "credit_color",
+      "label": "Credit text color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "credit_link_color",
+      "label": "Arc Lab link color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "credit_font_size",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "credit_spacing",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Spacing between copyright and credit",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Bottom social bar"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_bg_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "social_link_color",
+      "label": "Link color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "font_picker",
+      "id": "social_link_font",
+      "label": "Link font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "bottom_bar_padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_bar_margin_top",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Top spacing",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "social_link_font_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Link size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "social_link_spacing",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Link spacing",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "social_link_1_text",
+      "label": "Social link 1 text",
+      "default": "CONNECT"
+    },
+    {
+      "type": "url",
+      "id": "social_link_1_url",
+      "label": "Social link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "social_link_2_text",
+      "label": "Social link 2 text",
+      "default": "INSTAGRAM"
+    },
+    {
+      "type": "url",
+      "id": "social_link_2_url",
+      "label": "Social link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "social_link_3_text",
+      "label": "Social link 3 text",
+      "default": "YOUTUBE"
+    },
+    {
+      "type": "url",
+      "id": "social_link_3_url",
+      "label": "Social link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "social_link_4_text",
+      "label": "Social link 4 text",
+      "default": "LINKEDIN"
+    },
+    {
+      "type": "url",
+      "id": "social_link_4_url",
+      "label": "Social link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "sans-serif"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium footer"
+    }
+  ]
+}
 {% endschema %}
