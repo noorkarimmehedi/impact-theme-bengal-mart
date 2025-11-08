@@ -140,6 +140,16 @@
     font-size: {{ block.settings.price_size_mobile }}px;
     color: {{ block.settings.price_color }};
     margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-you-may-like-compare-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.compare_price_size_mobile }}px;
+    color: {{ block.settings.compare_price_color }};
+    text-decoration: line-through;
+    opacity: 0.7;
   }
 
   .ai-you-may-like-button-wrapper-{{ ai_gen_id }} {
@@ -232,6 +242,10 @@
       font-size: {{ block.settings.price_size_desktop }}px;
     }
 
+    .ai-you-may-like-compare-price-{{ ai_gen_id }} {
+      font-size: {{ block.settings.compare_price_size_desktop }}px;
+    }
+
     .ai-you-may-like-button-wrapper-{{ ai_gen_id }} {
       display: flex;
       justify-content: center;
@@ -281,7 +295,12 @@
                   </a>
                 </h3>
                 <div class="ai-you-may-like-price-{{ ai_gen_id }}">
-                  {{ product.price | money }}
+                  <span>{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span class="ai-you-may-like-compare-price-{{ ai_gen_id }}">
+                      {{ product.compare_at_price | money }}
+                    </span>
+                  {% endif %}
                 </div>
 
                 <div class="ai-you-may-like-button-wrapper-{{ ai_gen_id }}">
@@ -837,6 +856,36 @@
       "id": "price_color",
       "label": "Color",
       "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Compare at price"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size_mobile",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size_desktop",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Size (desktop)",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Color",
+      "default": "#999999"
     },
     {
       "type": "header",
