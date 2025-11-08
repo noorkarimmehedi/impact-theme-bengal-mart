@@ -87,6 +87,98 @@
         "text_color": ""
       }
     },
+    "176259713958968b09": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4add4c9_gHJJn7": {
+          "type": "ai_gen_block_4add4c9",
+          "settings": {
+            "marquee_text": "SHIPPING WORLDWIDE",
+            "marquee_font": "system_ui_n4",
+            "marquee_bg_color": "#7900fd",
+            "marquee_text_color": "#ffffff",
+            "marquee_font_size": 12,
+            "scroll_speed": 30,
+            "logo_width": 120,
+            "logo_width_desktop": 150,
+            "brand_name": "Bengal Mart-বেঙ্গল মার্ট ",
+            "logo_font": "serif",
+            "logo_font_size_mobile": 26,
+            "logo_font_size_desktop": 32,
+            "logo_letter_spacing": 2,
+            "logo_color": "#000000",
+            "logo_margin_bottom": 40,
+            "main_bg_color": "#f5f5f5",
+            "main_padding_top": 60,
+            "main_padding_bottom": 40,
+            "help_title": "HELP",
+            "help_link_1_text": "Members Login",
+            "help_link_1_url": "",
+            "help_link_2_text": "Exchange/Return Request",
+            "help_link_2_url": "",
+            "help_link_3_text": "FAQ",
+            "help_link_3_url": "",
+            "help_link_4_text": "Terms",
+            "help_link_4_url": "",
+            "help_link_5_text": "Shipping",
+            "help_link_5_url": "",
+            "company_title": "COMPANY",
+            "company_link_1_text": "Story",
+            "company_link_1_url": "",
+            "company_link_2_text": "Our Stores",
+            "company_link_2_url": "",
+            "company_link_3_text": "Careers",
+            "company_link_3_url": "",
+            "company_link_4_text": "Contact Us",
+            "company_link_4_url": "",
+            "company_link_5_text": "Collaborations",
+            "company_link_5_url": "",
+            "company_link_6_text": "",
+            "company_link_6_url": "",
+            "column_title_font": "serif",
+            "column_title_color": "#000000",
+            "column_title_size": 12,
+            "column_title_margin": 20,
+            "link_font": "serif",
+            "link_color": "#666666",
+            "link_hover_color": "#000000",
+            "link_font_size": 13,
+            "link_spacing": 8,
+            "columns_margin_bottom": 40,
+            "copyright_text": "© 2025 BENGAL MART PRIVATE LIMITED, ALL RIGHTS RESERVED.",
+            "copyright_font": "system_ui_n4",
+            "copyright_color": "#999999",
+            "copyright_font_size": 10,
+            "arc_lab_url": "",
+            "credit_color": "#999999",
+            "credit_link_color": "#7900fd",
+            "credit_font_size": 10,
+            "credit_spacing": 8,
+            "bottom_bar_bg_color": "#7900fd",
+            "social_link_color": "#ffffff",
+            "social_link_font": "system_ui_n4",
+            "bottom_bar_padding": 20,
+            "bottom_bar_margin_top": 0,
+            "social_link_font_size": 11,
+            "social_link_spacing": 30,
+            "social_link_1_text": "CONNECT",
+            "social_link_1_url": "",
+            "social_link_2_text": "INSTAGRAM",
+            "social_link_2_url": "",
+            "social_link_3_text": "YOUTUBE",
+            "social_link_3_url": "",
+            "social_link_4_text": "LINKEDIN",
+            "social_link_4_url": "",
+            "body_font": "system_ui_n4"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4add4c9_gHJJn7"
+      ],
+      "settings": {}
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -102,6 +194,7 @@
         },
         "text": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "title": "About",
             "content": "<p>Bangladesh’s First Homegrown Home & Kitchen Brand.<br/>প্রতিদিনের আস্থায়, আপনার বাজার-(<strong>Bengal Mart-বেঙ্গল মার্ট)</strong>।</p>",
@@ -110,6 +203,7 @@
         },
         "links": {
           "type": "links",
+          "disabled": true,
           "settings": {
             "menu": "footer",
             "show_menu_title": true
@@ -121,6 +215,7 @@
         "text",
         "links"
       ],
+      "disabled": true,
       "settings": {
         "show_social_media": true,
         "show_payment_icons": true,
@@ -133,6 +228,7 @@
   },
   "order": [
     "text-with-icons",
+    "176259713958968b09",
     "footer"
   ]
 }
