@@ -150,7 +150,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       transition: all 0.2s ease;
       /* Ensure clickability */
       cursor: pointer;
-      -webkit-tap-highlight-color: rgba(121, 0, 253, 0.1);
+      -webkit-tap-highlight-color: transparent;
     }
     
     .mobile-bottom-nav a::before {
@@ -163,24 +163,19 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       height: 48px;
       border-radius: 50%;
       background-color: transparent;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+      transition: background-color 0.15s ease, transform 0.1s ease;
       z-index: -1;
     }
     
-    .mobile-bottom-nav a:active::before,
-    .mobile-bottom-nav a:focus::before {
-      background-color: rgba(121, 0, 253, 0.1);
-      transform: translateX(-50%) scale(0.95);
+    .mobile-bottom-nav a:active::before {
+      background-color: rgba(121, 0, 253, 0.15);
+      transform: translateX(-50%) scale(0.9);
     }
     
-    .mobile-bottom-nav a:active,
-    .mobile-bottom-nav a:focus {
+    .mobile-bottom-nav a:active {
       color: #7900FD;
     }
     
-    .mobile-bottom-nav a:hover {
-      color: #7900FD;
-    }
     .mobile-bottom-nav a svg {
       flex-shrink: 0;
       width: 24px;
@@ -383,6 +378,20 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       if (target) {
         setTimeout(updateMobileCartBadge, 500);
       }
+    });
+    
+    // Add haptic feedback for navigation taps
+    document.querySelectorAll('.mobile-bottom-nav a').forEach(link => {
+      link.addEventListener('touchstart', function() {
+        // Trigger haptic feedback on supported devices
+        if (navigator.vibrate) {
+          navigator.vibrate(10); // Very short, subtle vibration
+        }
+        // Alternative API for iOS Safari
+        if (window.Taptic && window.Taptic.impact) {
+          window.Taptic.impact();
+        }
+      }, { passive: true });
     });
 
     // Periodic check as fallback (every 2 seconds when page is visible)
