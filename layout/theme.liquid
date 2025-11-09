@@ -195,6 +195,31 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       max-width: 100%;
     }
     
+    /* Gradient background for Shop Under ৳500 */
+    .mobile-bottom-nav a.featured-deal {
+      background: linear-gradient(135deg, #7900FD 0%, #FF006E 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 8px 12px;
+      margin: 0 4px;
+      box-shadow: 0 4px 12px rgba(121, 0, 253, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mobile-bottom-nav a.featured-deal::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3));
+    }
+    
+    .mobile-bottom-nav a.featured-deal:active {
+      color: white;
+      transform: translateY(-2px) scale(0.95);
+    }
+    
+    .mobile-bottom-nav a.featured-deal svg {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    }
+    
     /* Cart Badge */
     .cart-badge {
       position: absolute;
@@ -250,7 +275,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       <span>Categories</span>
     </a>
 
-    <a href="/collections" title="Shop Under ৳500">
+    <a href="/collections" title="Shop Under ৳500" class="featured-deal">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none">
         <path d="M7.72852 15.2861H12.7285M10.2271 12.7861H10.2364M10.2294 17.7861H10.2388" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M6.5 3.69682C9.53332 6.78172 14.5357 0.123719 17.4957 2.53998C19.1989 3.93028 18.6605 7 16.4494 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
