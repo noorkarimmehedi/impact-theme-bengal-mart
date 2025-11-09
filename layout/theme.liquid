@@ -147,7 +147,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       text-decoration: none;
       font-size: 12px;
       position: relative;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       /* Ensure clickability */
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -156,30 +156,30 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     .mobile-bottom-nav a::before {
       content: '';
       position: absolute;
-      top: 0;
+      top: -2px;
       left: 50%;
-      transform: translateX(-50%);
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(121, 0, 253, 0.08), rgba(121, 0, 253, 0.12));
+      transform: translateX(-50%) scale(0.8);
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(121, 0, 253, 0.15), rgba(121, 0, 253, 0.25));
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: -1;
     }
     
     .mobile-bottom-nav a:active::before {
       opacity: 1;
-      transform: translateX(-50%) scale(0.92);
+      transform: translateX(-50%) scale(1);
     }
     
     .mobile-bottom-nav a:active {
       color: #7900FD;
-      transform: translateY(-2px);
     }
     
     .mobile-bottom-nav a:active svg {
-      transform: scale(0.9);
+      transform: scale(0.85);
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .mobile-bottom-nav a svg {
