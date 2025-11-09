@@ -115,13 +115,12 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       left: 0;
       right: 0;
       width: 100%;
-      background: #F5F5F5;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+      background: #ffffff;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       justify-content: space-around;
-      padding: 16px 0;
+      padding: 8px 0;
       z-index: 1000;
-      border-top: 1px solid #E0E0E0;
       /* Prevent layout shifts */
       transform: translateZ(0);
       backface-visibility: hidden;
@@ -134,7 +133,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     
     /* Add padding to body to prevent content from going under navbar */
     body {
-      padding-bottom: 80px;
+      padding-bottom: 65px;
     }
     
     .mobile-bottom-nav a {
@@ -149,19 +148,9 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       font-size: 12px;
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: #FFFFFF;
-      padding: 16px 8px;
-      margin: 0 4px;
-      border: 1px solid #E0E0E0;
-      border-radius: 4px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
       /* Ensure clickability */
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-    }
-    
-    .mobile-bottom-nav a:hover {
-      border-color: #CCCCCC;
     }
     
     .mobile-bottom-nav a::before {
