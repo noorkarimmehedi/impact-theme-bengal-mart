@@ -120,7 +120,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       display: flex;
       justify-content: space-around;
       padding: 8px 0;
-      z-index: 1000;
+      z-index: 9999;
       /* Prevent layout shifts */
       transform: translateZ(0);
       backface-visibility: hidden;
@@ -129,11 +129,27 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       will-change: transform;
       /* Prevent iOS Safari from moving it */
       touch-action: manipulation;
+      /* Additional fixes for mobile browsers */
+      min-height: 65px;
+      box-sizing: border-box;
     }
     
     /* Add padding to body to prevent content from going under navbar */
     body {
-      padding-bottom: 65px;
+      padding-bottom: 75px !important;
+    }
+    
+    /* Ensure no content shows below navbar */
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: #7900FD;
+      z-index: 9998;
+      pointer-events: none;
     }
     
     .mobile-bottom-nav a {
@@ -151,6 +167,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       /* Ensure clickability */
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      padding: 8px 4px;
     }
     
     .mobile-bottom-nav a::before {
@@ -229,6 +246,10 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     body {
       padding-bottom: 0;
     }
+    
+    body::after {
+      display: none;
+    }
   }
 </style>
 
@@ -281,8 +302,11 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       const navbar = document.querySelector('.mobile-bottom-nav');
       if (!navbar) return;
       
-      // Force navbar to stay at bottom
+      // Force navbar to stay at bottom with important positioning
+      navbar.style.position = 'fixed';
       navbar.style.bottom = '0';
+      navbar.style.left = '0';
+      navbar.style.right = '0';
       
       if (!ticking) {
         window.requestAnimationFrame(() => {
