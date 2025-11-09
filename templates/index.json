@@ -465,7 +465,7 @@
             "card_shadow_y": 4,
             "card_shadow_blur": 8,
             "card_shadow_opacity": 0,
-            "product_title_size_mobile": 12,
+            "product_title_size_mobile": 11,
             "product_title_size_desktop": 14,
             "product_title_color": "#1a1a1a",
             "price_size_mobile": 14,
