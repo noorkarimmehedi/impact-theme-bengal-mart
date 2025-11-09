@@ -776,7 +776,7 @@
         "product_title_color": "#1a1a1a",
         "price_size_mobile": 13,
         "price_size_desktop": 13,
-        "price_color": "#666666",
+        "price_color": "#000000",
         "compare_price_size_mobile": 10,
         "compare_price_size_desktop": 12,
         "compare_price_color": "#999999",
