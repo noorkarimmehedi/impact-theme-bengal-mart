@@ -115,11 +115,11 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       left: 0;
       right: 0;
       width: 100%;
-      background: #ffffff;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      background: #7900FD;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: space-around;
-      padding: 8px 0;
+      padding: 12px 16px;
       z-index: 1000;
       /* Prevent layout shifts */
       transform: translateZ(0);
@@ -133,7 +133,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     
     /* Add padding to body to prevent content from going under navbar */
     body {
-      padding-bottom: 65px;
+      padding-bottom: 70px;
     }
     
     .mobile-bottom-nav a {
@@ -143,14 +143,18 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       justify-content: center;
       gap: 4px;
       flex: 1;
-      color: #333;
+      color: #FFFFFF;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 11px;
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       /* Ensure clickability */
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+    }
+    
+    .mobile-bottom-nav a:hover {
+      opacity: 0.8;
     }
     
     .mobile-bottom-nav a::before {
@@ -162,7 +166,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       width: 56px;
       height: 56px;
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(121, 0, 253, 0.08), rgba(121, 0, 253, 0.12));
+      background: rgba(255, 255, 255, 0.1);
       opacity: 0;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: -1;
@@ -174,7 +178,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     }
     
     .mobile-bottom-nav a:active {
-      color: #7900FD;
+      color: #FFFFFF;
       transform: translateY(-2px);
     }
     
@@ -186,6 +190,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       flex-shrink: 0;
       width: 24px;
       height: 24px;
+      color: #FFFFFF;
     }
     
     .mobile-bottom-nav a span {
@@ -197,7 +202,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     
     /* Purple color for Shop Under ৳500 */
     .mobile-bottom-nav a.featured-deal {
-      color: #7900FD;
+      color: #FFFFFF;
     }
     
     /* Cart Badge */
