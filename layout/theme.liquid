@@ -156,11 +156,11 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     .mobile-bottom-nav a::before {
       content: '';
       position: absolute;
-      top: 2px;
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       background-color: transparent;
       transition: background-color 0.15s ease, transform 0.1s ease;
@@ -382,14 +382,41 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     
     // Add haptic feedback for navigation taps
     document.querySelectorAll('.mobile-bottom-nav a').forEach(link => {
-      link.addEventListener('touchstart', function() {
+      link.addEventListener('touchstart', function(e) {
         // Trigger haptic feedback on supported devices
-        if (navigator.vibrate) {
-          navigator.vibrate(10); // Very short, subtle vibration
-        }
-        // Alternative API for iOS Safari
-        if (window.Taptic && window.Taptic.impact) {
-          window.Taptic.impact();
+        try {
+          // Try modern Vibration API (works on most devices)
+          if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+          }
+          
+          // Try Haptic Engine API for iOS (requires user gesture)
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.haptic) {
+            window.webkit.messageHandlers.haptic.postMessage('impact');
+          }
+          
+          // Try alternative iOS methods
+          if (window.TapticEngine) {
+            window.TapticEngine.impact({style: 'light'});
+          }
+          
+          // Audio fallback for iOS (creates a subtle "tap" feel)
+          const context = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          
+          oscillator.connect(gain);
+          gain.connect(context.destination);
+          
+          oscillator.frequency.value = 20;
+          gain.gain.setValueAtTime(0.01, context.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 0.01);
+          
+          oscillator.start(context.currentTime);
+          oscillator.stop(context.currentTime + 0.01);
+        } catch (error) {
+          // Silently fail if haptics not supported
+          console.log('Haptic feedback not available');
         }
       }, { passive: true });
     });
