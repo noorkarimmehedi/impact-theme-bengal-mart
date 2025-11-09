@@ -1,0 +1,376 @@
+{% comment %}
+  Discount Codes Snippet
+  Usage: {% render 'discount-codes' %}
+{% endcomment %}
+
+<style>
+  .discount-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 12px 8px 8px;
+    border: 1px solid #000000;
+    border-radius: 1px;
+    background: transparent;
+    transition: all 0.2s ease;
+    margin: 4px 0;
+  }
+  
+  .discount-trigger:hover {
+    background: #f5f5f5;
+    border-color: #000000;
+  }
+  
+  .discount-trigger svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .discount-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+  }
+  
+  .discount-modal.active {
+    display: flex;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .discount-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease;
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .discount-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .discount-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  .discount-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #6b7280;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .discount-close:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+  
+  .discount-body {
+    padding: 24px;
+  }
+  
+  .discount-code-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .discount-code-item:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .discount-code-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .discount-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .discount-code-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .discount-code-value {
+    font-size: 14px;
+    color: #059669;
+    font-weight: 500;
+  }
+
+  .discount-code-description {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 12px;
+  }
+
+  .discount-code-display {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .discount-code-box {
+    flex: 1;
+    background: white;
+    border: 2px dashed #d1d5db;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .discount-copy-btn {
+    background: #000000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .discount-copy-btn:hover {
+    background: #1f2937;
+  }
+
+  .discount-copy-btn.copied {
+    background: #059669;
+  }
+
+  .discount-copy-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .discount-note {
+    margin-top: 20px;
+    padding: 16px;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1e40af;
+  }
+  
+  @media (max-width: 768px) {
+    .discount-modal {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    
+    .discount-content {
+      margin: 0;
+      border-radius: 12px 12px 0 0;
+      max-height: 85vh;
+    }
+    
+    .discount-header h2 {
+      font-size: 20px;
+    }
+
+    .discount-code-label {
+      font-size: 14px;
+    }
+
+    .discount-code-box {
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+
+    .discount-copy-btn {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+</style>
+
+<button class="discount-trigger" onclick="openDiscountModal()">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none">
+    <path d="M9.5 14.5L14.5 9.5M9.99975 9.5H10.0087M13.9998 14.5H14.0087" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+  View Discount Codes
+</button>
+
+<div class="discount-modal" id="discountModal" onclick="closeDiscountOnOutside(event)">
+  <div class="discount-content">
+    <div class="discount-header">
+      <h2>Available Discounts</h2>
+      <button class="discount-close" onclick="closeDiscountModal()">&times;</button>
+    </div>
+    
+    <div class="discount-body">
+      <!-- Discount Code 1 -->
+      <div class="discount-code-item">
+        <div class="discount-code-header">
+          <span class="discount-code-label">🎉 First Order Special</span>
+          <span class="discount-code-value">20% OFF</span>
+        </div>
+        <p class="discount-code-description">Get 20% off your first purchase. Valid for new customers only.</p>
+        <div class="discount-code-display">
+          <div class="discount-code-box" id="code1">WELCOME20</div>
+          <button class="discount-copy-btn" onclick="copyDiscountCode('code1', this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+              <path d="M9 15C9 12.1716 9 10.7574 9.87868 9.87868C10.7574 9 12.1716 9 15 9L16 9C18.8284 9 20.2426 9 21.1213 9.87868C22 10.7574 22 12.1716 22 15V16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15C12.1716 22 10.7574 22 9.87868 21.1213C9 20.2426 9 18.8284 9 16L9 15Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.9999 9C16.9975 6.04291 16.9528 4.51121 16.092 3.46243C15.9258 3.25989 15.7401 3.07418 15.5376 2.90796C14.4312 2 12.7875 2 9.5 2C6.21252 2 4.56878 2 3.46243 2.90796C3.25989 3.07417 3.07418 3.25989 2.90796 3.46243C2 4.56878 2 6.21252 2 9.5C2 12.7875 2 14.4312 2.90796 15.5376C3.07417 15.7401 3.25989 15.9258 3.46243 16.092C4.51121 16.9528 6.04291 16.9975 9 16.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- Discount Code 2 -->
+      <div class="discount-code-item">
+        <div class="discount-code-header">
+          <span class="discount-code-label">🛍️ Big Savings</span>
+          <span class="discount-code-value">15% OFF</span>
+        </div>
+        <p class="discount-code-description">Save 15% on orders over $100. Limited time offer.</p>
+        <div class="discount-code-display">
+          <div class="discount-code-box" id="code2">SAVE15</div>
+          <button class="discount-copy-btn" onclick="copyDiscountCode('code2', this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+              <path d="M9 15C9 12.1716 9 10.7574 9.87868 9.87868C10.7574 9 12.1716 9 15 9L16 9C18.8284 9 20.2426 9 21.1213 9.87868C22 10.7574 22 12.1716 22 15V16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15C12.1716 22 10.7574 22 9.87868 21.1213C9 20.2426 9 18.8284 9 16L9 15Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.9999 9C16.9975 6.04291 16.9528 4.51121 16.092 3.46243C15.9258 3.25989 15.7401 3.07418 15.5376 2.90796C14.4312 2 12.7875 2 9.5 2C6.21252 2 4.56878 2 3.46243 2.90796C3.25989 3.07417 3.07418 3.25989 2.90796 3.46243C2 4.56878 2 6.21252 2 9.5C2 12.7875 2 14.4312 2.90796 15.5376C3.07417 15.7401 3.25989 15.9258 3.46243 16.092C4.51121 16.9528 6.04291 16.9975 9 16.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- Discount Code 3 -->
+      <div class="discount-code-item">
+        <div class="discount-code-header">
+          <span class="discount-code-label">💝 Free Shipping</span>
+          <span class="discount-code-value">FREE DELIVERY</span>
+        </div>
+        <p class="discount-code-description">Enjoy free shipping on all orders. No minimum purchase required.</p>
+        <div class="discount-code-display">
+          <div class="discount-code-box" id="code3">FREESHIP</div>
+          <button class="discount-copy-btn" onclick="copyDiscountCode('code3', this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+              <path d="M9 15C9 12.1716 9 10.7574 9.87868 9.87868C10.7574 9 12.1716 9 15 9L16 9C18.8284 9 20.2426 9 21.1213 9.87868C22 10.7574 22 12.1716 22 15V16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15C12.1716 22 10.7574 22 9.87868 21.1213C9 20.2426 9 18.8284 9 16L9 15Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.9999 9C16.9975 6.04291 16.9528 4.51121 16.092 3.46243C15.9258 3.25989 15.7401 3.07418 15.5376 2.90796C14.4312 2 12.7875 2 9.5 2C6.21252 2 4.56878 2 3.46243 2.90796C3.25989 3.07417 3.07418 3.25989 2.90796 3.46243C2 4.56878 2 6.21252 2 9.5C2 12.7875 2 14.4312 2.90796 15.5376C3.07417 15.7401 3.25989 15.9258 3.46243 16.092C4.51121 16.9528 6.04291 16.9975 9 16.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+      </div>
+      
+      <div class="discount-note">
+        <strong>💡 How to use:</strong> Click the "Copy" button next to any discount code, then paste it at checkout to apply your savings. Codes cannot be combined with other offers.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openDiscountModal() {
+    document.getElementById('discountModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeDiscountModal() {
+    document.getElementById('discountModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  function closeDiscountOnOutside(event) {
+    if (event.target.id === 'discountModal') {
+      closeDiscountModal();
+    }
+  }
+
+  function copyDiscountCode(codeId, button) {
+    const codeText = document.getElementById(codeId).textContent;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(codeText).then(function() {
+      // Change button text and style
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M5 14L8.5 17.5L19 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Copied!';
+      button.classList.add('copied');
+      
+      // Reset after 2 seconds
+      setTimeout(function() {
+        button.innerHTML = originalHTML;
+        button.classList.remove('copied');
+      }, 2000);
+    }).catch(function(err) {
+      console.error('Failed to copy: ', err);
+    });
+  }
+  
+  // Close on ESC key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeDiscountModal();
+    }
+  });
+</script>
