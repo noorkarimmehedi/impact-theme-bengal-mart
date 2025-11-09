@@ -64,12 +64,6 @@
             "size_chart_page": ""
           }
         },
-        "liquid_bCbgkt": {
-          "type": "liquid",
-          "settings": {
-            "liquid": "{% render 'discount-codes' %}"
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -109,7 +103,6 @@
         "separator",
         "description",
         "variant_picker",
-        "liquid_bCbgkt",
         "quantity_selector",
         "buy_buttons",
         "liquid_kYApyA",
