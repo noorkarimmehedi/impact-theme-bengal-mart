@@ -423,13 +423,28 @@
     window.open(luxuryConfig.messengerUrl, '_blank', 'noopener,noreferrer');
   });
 
-  // Close on outside click
+  // Close widget on outside click
   document.addEventListener('click', function(event) {
     if (!widget.contains(event.target) && chatContainer.classList.contains('active')) {
       chatContainer.classList.remove('active');
       toggleBtn.classList.remove('active');
     }
   });
+
+  // Adjust widget position on window resize (for mobile)
+  function adjustPosition() {
+    if (window.innerWidth <= 768) {
+      widget.style.bottom = '75px'; // Offset for mobile bottom nav
+    } else {
+      widget.style.bottom = '15px';
+    }
+  }
+
+  // Initialize position
+  adjustPosition();
+
+  // Listen for resize
+  window.addEventListener('resize', adjustPosition);
 </script>
 
 </body>
