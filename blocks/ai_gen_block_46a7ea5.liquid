@@ -66,7 +66,7 @@
     gap: {{ block.settings.content_spacing }}px;
   }
 
-    .ai-hero-text-wrapper-{{ ai_gen_id }} {
+  .ai-hero-text-wrapper-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.text_spacing }}px;
@@ -74,12 +74,12 @@
     text-align: center;
   }
 
-
   .ai-hero-heading-{{ ai_gen_id }} {
     margin: 0;
     font-size: {{ block.settings.heading_size_mobile }}px;
     color: {{ block.settings.heading_color }};
     line-height: 1.2;
+    text-align: center;
   }
 
   .ai-hero-subheading-{{ ai_gen_id }} {
@@ -87,6 +87,7 @@
     font-size: {{ block.settings.subheading_size_mobile }}px;
     color: {{ block.settings.subheading_color }};
     line-height: 1.4;
+    text-align: center;
   }
 
   .ai-hero-buttons-{{ ai_gen_id }} {
@@ -172,14 +173,17 @@
 
     .ai-hero-text-wrapper-{{ ai_gen_id }} {
       padding: 0;
+      text-align: left;
     }
 
     .ai-hero-heading-{{ ai_gen_id }} {
       font-size: {{ block.settings.heading_size_desktop }}px;
+      text-align: left;
     }
 
     .ai-hero-subheading-{{ ai_gen_id }} {
       font-size: {{ block.settings.subheading_size_desktop }}px;
+      text-align: left;
     }
 
     .ai-hero-buttons-{{ ai_gen_id }} {
