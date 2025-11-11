@@ -9907,15 +9907,15 @@ split-lines {
   color: #fff;
 }
 
-/* Compare At Price (Strikethrough) - Much Smaller & Compact */
+/* Compare At Price (Strikethrough) - Original Style */
 .price-list compare-at-price {
   display: inline-block;
   padding: 1px 4px;
   font-size: 10px;
   font-weight: bold;
   text-align: center;
-  color: #fff;
-  background-color: #D50000;
+  color: #666;
+  background-color: #f0f0f0;
   border: 1px solid #000;
   border-radius: 3px;
   box-shadow: 1px 1px 0px #000;
@@ -9948,5 +9948,5 @@ split-lines {
   font-size: 11px;
   padding: 1px 4px;
   transform: translateY(2px);
-  background-color: #D50000;
+  background-color: #f0f0f0;
 }
