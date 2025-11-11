@@ -9950,3 +9950,143 @@ split-lines {
   transform: translateY(2px);
   background-color: #f0f0f0;
 }
+/* ================================
+   MOBILE STICKY NAVIGATION STYLES
+   ================================ */
+
+/* Change top area color to match announcement bar on mobile */
+@media screen and (max-width: 1000px) {
+  body {
+    background-color: #7900FD;
+  }
+
+  /* Ensure header group has same background */
+  .shopify-section-group-header-group {
+    background-color: #7900FD;
+  }
+
+  /* Remove any top padding/margin that might show white */
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Sticky Bottom Navigation - Mobile Only */
+@media screen and (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #7900FD;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    z-index: 1000;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+    touch-action: manipulation;
+  }
+
+  body {
+    padding-bottom: 65px;
+  }
+
+  .mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-bottom-nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  .mobile-bottom-nav a:active::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(0.92);
+  }
+
+  .mobile-bottom-nav a:active {
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .mobile-bottom-nav a:active svg {
+    transform: scale(0.9);
+  }
+
+  .mobile-bottom-nav a svg {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobile-bottom-nav a span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  /* Cart Badge */
+  .cart-badge {
+    position: absolute;
+    top: -2px;
+    right: 50%;
+    transform: translateX(12px);
+    background: #ff4444;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .cart-badge.hidden {
+    display: none;
+  }
+}
+
+/* Hide bottom nav on larger screens */
+@media screen and (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+}
