@@ -9907,20 +9907,20 @@ split-lines {
   color: #fff;
 }
 
-/* Compare At Price (Strikethrough) - Comic Style */
+/* Compare At Price (Strikethrough) - Much Smaller & Compact */
 .price-list compare-at-price {
   display: inline-block;
-  padding: 2px 5px;
-  font-size: 12px;
+  padding: 1px 4px;
+  font-size: 10px;
   font-weight: bold;
   text-align: center;
   color: #666;
   background-color: #f0f0f0;
-  border: 2px solid #000;
-  border-radius: 4px;
-  box-shadow: 2px 2px 0px #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0px #000;
   text-decoration: line-through;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 /* Unit Price */
@@ -9943,6 +9943,6 @@ split-lines {
 }
 
 .price-list--lg compare-at-price {
-  font-size: 14px;
-  padding: 2px 6px;
+  font-size: 11px;
+  padding: 1px 4px;
 }
