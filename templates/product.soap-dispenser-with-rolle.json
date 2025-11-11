@@ -86,9 +86,8 @@
         },
         "liquid_HTqcEP": {
           "type": "liquid",
-          "disabled": true,
           "settings": {
-            "liquid": "{% render 'video-showcase' %}"
+            "liquid": "{% render 'video-showcase-dispenser-roller' %}"
           }
         }
       },
