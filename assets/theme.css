@@ -9885,7 +9885,6 @@ split-lines {
   gap: 4px;
   align-items: center;
 }
-
 /* Regular/Sale Price - Comic Style */
 .price-list sale-price {
   display: inline-block;
@@ -9900,13 +9899,11 @@ split-lines {
   box-shadow: 2px 2px 0px #000;
   line-height: 1.1;
 }
-
 /* On Sale Price */
 .price-list sale-price.text-on-sale {
   background-color: #ff5252;
   color: #fff;
 }
-
 /* Compare At Price (Strikethrough) - Much Smaller & Compact */
 .price-list compare-at-price {
   display: inline-block;
@@ -9921,8 +9918,8 @@ split-lines {
   box-shadow: 1px 1px 0px #000;
   text-decoration: line-through;
   line-height: 1;
+  transform: translateY(2px);
 }
-
 /* Unit Price */
 .price-list unit-price {
   display: inline-block;
@@ -9935,14 +9932,13 @@ split-lines {
   border-radius: 3px;
   box-shadow: 1px 1px 0px #000;
 }
-
 /* Large price variant */
 .price-list--lg sale-price {
   font-size: 16px;
   padding: 3px 8px;
 }
-
 .price-list--lg compare-at-price {
   font-size: 11px;
   padding: 1px 4px;
+  transform: translateY(2px);
 }
