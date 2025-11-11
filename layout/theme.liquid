@@ -107,6 +107,18 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
 }
   /* Sticky Bottom Navigation - Mobile Only */
   @media screen and (max-width: 768px) {
+    /* Force viewport to include bottom bar area */
+    html {
+      height: -webkit-fill-available;
+      height: 100%;
+    }
+    
+    body {
+      min-height: -webkit-fill-available;
+      min-height: 100vh;
+      position: relative;
+    }
+    
     .mobile-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -114,7 +126,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       right: 0;
       width: 100%;
       background: #7900FD;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2), 0 50px 0 50px #7900FD;
       display: flex;
       justify-content: space-around;
       padding: 8px 0;
@@ -128,7 +140,8 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       /* Prevent iOS Safari from moving it */
       touch-action: manipulation;
       
-      /* FIX FOR TRANSPARENT GAP */
+      /* FIX FOR TRANSPARENT GAP - Extended padding */
+      padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
       padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
       min-height: calc(65px + env(safe-area-inset-bottom, 0px));
       
@@ -137,16 +150,39 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       isolation: isolate;
     }
     
-    /* Ensure no gap below navbar */
+    /* Triple layer protection against gaps */
+    .mobile-bottom-nav::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: #7900FD;
+      z-index: -1;
+    }
+    
     body::after {
       content: '';
       position: fixed;
-      bottom: 0;
+      bottom: -50px;
       left: 0;
       right: 0;
-      height: env(safe-area-inset-bottom, 0px);
+      height: 150px;
       background: #7900FD;
-      z-index: 999;
+      z-index: 998;
+      pointer-events: none;
+    }
+    
+    html::after {
+      content: '';
+      position: fixed;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: #7900FD;
+      z-index: 997;
       pointer-events: none;
     }
     
