@@ -9878,7 +9878,7 @@ split-lines {
   display: -webkit-box;
   overflow: hidden;
 }
-/* Comic-style Product Price Design - More Compact */
+/* Comic-style Product Price Design - More Compact with Smaller Text */
 .price-list {
   display: inline-flex;
   flex-wrap: wrap;
@@ -9890,6 +9890,7 @@ split-lines {
 .price-list sale-price {
   display: inline-block;
   padding: 2px 6px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
   color: #fff;
@@ -9910,6 +9911,7 @@ split-lines {
 .price-list compare-at-price {
   display: inline-block;
   padding: 2px 5px;
+  font-size: 12px;
   font-weight: bold;
   text-align: center;
   color: #666;
@@ -9925,7 +9927,7 @@ split-lines {
 .price-list unit-price {
   display: inline-block;
   padding: 1px 4px;
-  font-size: 0.875em;
+  font-size: 10px;
   font-weight: bold;
   color: #333;
   background-color: #fcf414;
@@ -9936,9 +9938,11 @@ split-lines {
 
 /* Large price variant */
 .price-list--lg sale-price {
+  font-size: 16px;
   padding: 3px 8px;
 }
 
 .price-list--lg compare-at-price {
+  font-size: 14px;
   padding: 2px 6px;
 }
