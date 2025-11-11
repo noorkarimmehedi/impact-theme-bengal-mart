@@ -86,32 +86,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
     </main>
     {%- comment -%} WhatsApp Chat Widget {%- endcomment -%}
     {% render 'whatsapp-widget' %}
-  {% unless template == 'checkout' %}
-  <div class="mobile-bottom-nav">
-    <a href="/" class="mobile-bottom-nav__item">
-      <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9h-3v9H6v-9H3z"/></svg>
-      Home
-    </a>
-    <a href="/collections/all" class="mobile-bottom-nav__item">
-      <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg>
-      Shop
-    </a>
-    <a href="/cart" class="mobile-bottom-nav__item">
-      <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 
-      0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 14l-.94-2h12.45c.75 
-      0 1.41-.41 1.75-1.03l3.58-6.49L21.16 3H5.21L4.27 1H1v2h2l3.6 7.59-1.35 
-      2.44C4.52 14.37 5.48 16 7 16h12v-2H7.16z"/></svg>
-      Cart
-    </a>
-    <a href="/pages/contact" class="mobile-bottom-nav__item">
-      <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.88-2.18 4.88-4.88S14.7 
-      2.25 12 2.25 7.12 4.43 7.12 7.12 9.3 12 12 12zm0 
-      2.25c-3.03 0-9 1.52-9 4.5v2.25h18V18.75c0-2.98-5.97-4.5-9-4.5z"/></svg>
-      Account
-    </a>
-  </div>
-{% endunless %}
-
+  
   
   </body>
 </html>
