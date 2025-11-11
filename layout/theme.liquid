@@ -126,7 +126,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       right: 0;
       width: 100%;
       background: #7900FD;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2), 0 50px 0 50px #7900FD;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: space-around;
       padding: 8px 0;
@@ -150,39 +150,28 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       isolation: isolate;
     }
     
-    /* Triple layer protection against gaps */
+    /* Only cover the gap BELOW navbar, not above */
     .mobile-bottom-nav::after {
       content: '';
       position: absolute;
-      bottom: -100px;
+      bottom: -50px;
       left: 0;
       right: 0;
-      height: 100px;
+      height: 50px;
       background: #7900FD;
       z-index: -1;
     }
     
+    /* Minimal background fill for safe area only */
     body::after {
       content: '';
       position: fixed;
-      bottom: -50px;
+      bottom: -20px;
       left: 0;
       right: 0;
-      height: 150px;
+      height: 20px;
       background: #7900FD;
       z-index: 998;
-      pointer-events: none;
-    }
-    
-    html::after {
-      content: '';
-      position: fixed;
-      bottom: -50px;
-      left: 0;
-      right: 0;
-      height: 150px;
-      background: #7900FD;
-      z-index: 997;
       pointer-events: none;
     }
     
