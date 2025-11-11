@@ -127,11 +127,32 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       will-change: transform;
       /* Prevent iOS Safari from moving it */
       touch-action: manipulation;
+      
+      /* FIX FOR TRANSPARENT GAP */
+      padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+      min-height: calc(65px + env(safe-area-inset-bottom, 0px));
+      
+      /* Prevent any transparent areas */
+      -webkit-transform: translate3d(0, 0, 0);
+      isolation: isolate;
+    }
+    
+    /* Ensure no gap below navbar */
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: env(safe-area-inset-bottom, 0px);
+      background: #7900FD;
+      z-index: 999;
+      pointer-events: none;
     }
     
     /* Add padding to body to prevent content from going under navbar */
     body {
-      padding-bottom: 65px;
+      padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px)) !important;
     }
     
     .mobile-bottom-nav a {
@@ -444,6 +465,3 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
 
 </body>
 </html>
-  
-
-
