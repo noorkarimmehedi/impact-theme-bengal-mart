@@ -53,21 +53,21 @@
 {% assign heading_1 = heading_1 | default: "Get Best Offer and Deals" %}
 {% assign subheading_1 = subheading_1 | default: "" %}
 {% assign code_1 = code_1 | default: "NEW25" %}
-{% assign description_1 = description_1 | default: "" %}
+{% assign description_1 = description_1 | default: "প্রথম অর্ডার? ৳২৫০০+ অর্ডারে ৳২০০ ছাড় ও ফ্রি ডেলিভারি।" %}
 
 {% comment %} Offer 2 {% endcomment %}
 {% assign card_2_enabled = card_2_enabled | default: true %}
 {% assign heading_2 = heading_2 | default: "20% OFF Your First Order" %}
 {% assign subheading_2 = subheading_2 | default: "" %}
 {% assign code_2 = code_2 | default: "INSTANT100" %}
-{% assign description_2 = description_2 | default: "" %}
+{% assign description_2 = description_2 | default: "৳১৫০০ বা তার বেশি অর্ডারে ৳১০০ ছাড় উপভোগ করুন!" %}
 
 {% comment %} Offer 3 {% endcomment %}
 {% assign card_3_enabled = card_3_enabled | default: true %}
 {% assign heading_3 = heading_3 | default: "Free Shipping Available" %}
 {% assign subheading_3 = subheading_3 | default: "" %}
 {% assign code_3 = code_3 | default: "FREESHIP" %}
-{% assign description_3 = description_3 | default: "" %}
+{% assign description_3 = description_3 | default: "৳২৩০০+ অর্ডারে ফ্রি ডেলিভারি।" %}
 
 {% comment %} Offer 4 {% endcomment %}
 {% assign card_4_enabled = card_4_enabled | default: false %}
@@ -101,7 +101,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding: 0 16px;
+    padding: 0;
   }
 
   .offer-cards__track-{{ unique_id }} {
@@ -254,7 +254,7 @@
 
   @media screen and (min-width: 749px) {
     .offer-cards__carousel-{{ unique_id }} {
-      padding: 0 40px;
+      padding: 0;
     }
 
     .offer-cards__track-{{ unique_id }} {
