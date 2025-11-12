@@ -9878,54 +9878,75 @@ split-lines {
   display: -webkit-box;
   overflow: hidden;
 }
-interface ComicPriceProps {
-  salePrice?: string;
-  compareAtPrice?: string;
-  unitPrice?: string;
-  large?: boolean;
+/* Comic-style Product Price Design - More Compact with Smaller Text */
+.price-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
-export function ComicPrice({
-  salePrice,
-  compareAtPrice,
-  unitPrice,
-  large = false,
-}: ComicPriceProps) {
-  return (
-    <div
-      className={`inline-flex items-center flex-wrap gap-2 ${
-        large ? 'text-base' : 'text-sm'
-      }`}
-    >
-      {/* Sale Price */}
-      {salePrice && (
-        <div
-          className={`relative px-3 py-1 font-bold text-white border-2 border-neutral-800 rounded-md bg-red-600 shadow-[2px_2px_0_#000] transition-transform duration-150 group
-          hover:-translate-y-0.5 hover:shadow-[0_4px_0_#262626] active:translate-y-0 active:shadow-none`}
-        >
-          <span className="relative z-10">{salePrice}</span>
-          {/* Shine animation like CartoonButton */}
-          <div className="absolute top-1/2 left-[-100%] w-8 h-12 bg-white/50 -translate-y-1/2 rotate-12 transition-all duration-500 ease-in-out group-hover:left-[200%]" />
-        </div>
-      )}
+/* Regular/Sale Price - Comic Style */
+.price-list sale-price {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #D50000;
+  border: 2px solid #000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px #000;
+  line-height: 1.1;
+}
 
-      {/* Compare at Price */}
-      {compareAtPrice && (
-        <div
-          className={`inline-block px-2 py-[2px] font-bold text-gray-700 bg-gray-100 border border-black rounded shadow-[1px_1px_0_#000] text-xs line-through translate-y-[2px]`}
-        >
-          {compareAtPrice}
-        </div>
-      )}
+/* On Sale Price */
+.price-list sale-price.text-on-sale {
+  background-color: #D50000;
+  color: #fff;
+}
 
-      {/* Unit Price */}
-      {unitPrice && (
-        <div
-          className={`inline-block px-2 py-[2px] font-bold text-white bg-red-600 border border-black rounded shadow-[1px_1px_0_#000] text-xs`}
-        >
-          {unitPrice}
-        </div>
-      )}
-    </div>
-  );
+/* Compare At Price (Strikethrough) - Original Style */
+.price-list compare-at-price {
+  display: inline-block;
+  padding: 1px 4px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  color: #666;
+  background-color: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0px #000;
+  text-decoration: line-through;
+  line-height: 1;
+  transform: translateY(2px);
+}
+
+/* Unit Price */
+.price-list unit-price {
+  display: inline-block;
+  padding: 1px 4px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #D50000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0px #000;
+}
+
+/* Large price variant */
+.price-list--lg sale-price {
+  font-size: 16px;
+  padding: 3px 8px;
+  background-color: #D50000;
+}
+
+.price-list--lg compare-at-price {
+  font-size: 11px;
+  padding: 1px 4px;
+  transform: translateY(2px);
+  background-color: #f0f0f0;
 }
