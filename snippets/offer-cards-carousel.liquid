@@ -113,6 +113,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 8px 0 12px 0;
+    justify-content: flex-start;
   }
 
   .offer-cards__track-{{ unique_id }}::-webkit-scrollbar {
@@ -257,7 +258,7 @@
     }
 
     .offer-cards__track-{{ unique_id }} {
-      justify-content: center;
+      justify-content: flex-start;
       gap: 20px;
     }
 
@@ -269,6 +270,7 @@
   @media screen and (min-width: 990px) {
     .offer-cards__track-{{ unique_id }} {
       gap: 24px;
+      justify-content: flex-start;
     }
 
     .offer-card-{{ unique_id }} {
@@ -375,12 +377,19 @@
       }
 
       centerFirstCard() {
-        if (this.cards.length > 0 && window.innerWidth < 750) {
+        if (this.cards.length > 0) {
           const firstCard = this.cards[0];
           const trackWidth = this.track.offsetWidth;
           const cardWidth = firstCard.offsetWidth;
-          const scrollPosition = firstCard.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
-          this.track.scrollLeft = scrollPosition;
+          
+          if (window.innerWidth < 750) {
+            // Mobile: center the first card
+            const scrollPosition = firstCard.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
+            this.track.scrollLeft = scrollPosition;
+          } else {
+            // Desktop: scroll to start
+            this.track.scrollLeft = 0;
+          }
         }
       }
 
