@@ -1,6 +1,6 @@
 {% doc %}
   @prompt
-    The offer cards use a light background with orange dashed borders to draw attention without being overwhelming. Rounded corners add a friendly touch. Clear discount text, bold coupon codes, and a contrasting copy button make it instantly usable. Card spacing and carousel indicators ensure clean presentation and easy navigation., i want small card size not so big like now. also first card should be in the center. now it clishing on the left on mobile version, make the offer card more smaller. also i want customization between Title and card spacing, cards shadow should be customizable 
+    Redesigned offer cards with ticket/coupon style featuring notched circular cutouts on sides, cleaner layout with main heading and subheading, smaller card sizes, centered first card on mobile, customizable title spacing and shadow options.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -14,6 +14,7 @@
     text-align: center;
     font-size: {{ block.settings.title_size }}px;
     color: {{ block.settings.title_color }};
+    font-weight: 700;
     margin: 0 0 {{ block.settings.title_spacing }}px 0;
   }
 
@@ -32,7 +33,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 8px 0;
+    padding: 20px 0;
   }
 
   .ai-offer-cards__track-{{ ai_gen_id }}::-webkit-scrollbar {
@@ -40,23 +41,62 @@
   }
 
   .ai-offer-card-{{ ai_gen_id }} {
-    flex: 0 0 280px;
+    flex: 0 0 240px;
     scroll-snap-align: center;
     background: {{ block.settings.card_background }};
-    border: 2px dashed {{ block.settings.border_color }};
+    border: 2px solid {{ block.settings.border_color }};
     border-radius: {{ block.settings.card_border_radius }}px;
-    padding: 20px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    position: relative;
     box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
   }
 
-  .ai-offer-card__discount-{{ ai_gen_id }} {
-    font-size: 16px;
-    font-weight: 600;
-    color: {{ block.settings.discount_color }};
+  /* Ticket notches */
+  .ai-offer-card-{{ ai_gen_id }}::before,
+  .ai-offer-card-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: {{ block.settings.notch_background }};
+    border-radius: 50%;
+    border: 2px solid {{ block.settings.border_color }};
+  }
+
+  .ai-offer-card-{{ ai_gen_id }}::before {
+    left: -11px;
+    border-right: none;
+  }
+
+  .ai-offer-card-{{ ai_gen_id }}::after {
+    right: -11px;
+    border-left: none;
+  }
+
+  .ai-offer-card__heading-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
     margin: 0;
+    line-height: 1.3;
+  }
+
+  .ai-offer-card__subheading-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .ai-offer-card__subheading-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+    font-weight: 500;
   }
 
   .ai-offer-card__code-wrapper-{{ ai_gen_id }} {
@@ -64,18 +104,19 @@
     align-items: center;
     gap: 8px;
     background: {{ block.settings.code_background }};
-    padding: 10px 12px;
+    padding: 8px 10px;
     border-radius: 6px;
-    border: 1px solid {{ block.settings.code_border_color }};
+    border: 1px dashed {{ block.settings.code_border_color }};
+    margin-top: 8px;
   }
 
   .ai-offer-card__code-{{ ai_gen_id }} {
     flex: 1;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: {{ block.settings.code_color }};
     margin: 0;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
   .ai-offer-card__copy-btn-{{ ai_gen_id }} {
@@ -84,11 +125,12 @@
     border: none;
     padding: 6px 12px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    text-transform: uppercase;
   }
 
   .ai-offer-card__copy-btn-{{ ai_gen_id }}:hover {
@@ -100,10 +142,10 @@
   }
 
   .ai-offer-card__description-{{ ai_gen_id }} {
-    font-size: 13px;
+    font-size: 12px;
     color: {{ block.settings.description_color }};
-    margin: 0;
-    line-height: 1.5;
+    margin: 4px 0 0 0;
+    line-height: 1.4;
   }
 
   .ai-offer-cards__indicators-{{ ai_gen_id }} {
@@ -121,6 +163,8 @@
     opacity: 0.3;
     transition: opacity 0.3s ease;
     cursor: pointer;
+    border: none;
+    padding: 0;
   }
 
   .ai-offer-cards__indicator-{{ ai_gen_id }}.active {
@@ -138,7 +182,7 @@
     }
 
     .ai-offer-card-{{ ai_gen_id }} {
-      flex: 0 0 320px;
+      flex: 0 0 280px;
     }
   }
 
@@ -148,7 +192,7 @@
     }
 
     .ai-offer-card-{{ ai_gen_id }} {
-      flex: 0 0 340px;
+      flex: 0 0 300px;
     }
   }
 {% endstyle %}
@@ -162,12 +206,14 @@
     <div class="ai-offer-cards__track-{{ ai_gen_id }}" data-track>
       {% for i in (1..5) %}
         {% liquid
-          assign discount_key = 'discount_' | append: i
+          assign heading_key = 'heading_' | append: i
+          assign subheading_key = 'subheading_' | append: i
           assign code_key = 'code_' | append: i
           assign description_key = 'description_' | append: i
           assign enabled_key = 'card_' | append: i | append: '_enabled'
 
-          assign discount = block.settings[discount_key]
+          assign heading = block.settings[heading_key]
+          assign subheading = block.settings[subheading_key]
           assign code = block.settings[code_key]
           assign description = block.settings[description_key]
           assign enabled = block.settings[enabled_key]
@@ -175,8 +221,12 @@
 
         {% if enabled and code != blank %}
           <div class="ai-offer-card-{{ ai_gen_id }}" data-card>
-            {% if discount != blank %}
-              <p class="ai-offer-card__discount-{{ ai_gen_id }}">{{ discount }}</p>
+            {% if heading != blank %}
+              <h3 class="ai-offer-card__heading-{{ ai_gen_id }}">{{ heading }}</h3>
+            {% endif %}
+
+            {% if subheading != blank %}
+              <p class="ai-offer-card__subheading-{{ ai_gen_id }}">{{ subheading }}</p>
             {% endif %}
 
             <div class="ai-offer-card__code-wrapper-{{ ai_gen_id }}">
@@ -336,7 +386,7 @@
 
 {% schema %}
 {
-  "name": "Offer cards carousel",
+  "name": "Ticket Offer Cards",
   "tag": null,
   "settings": [
     {
@@ -347,7 +397,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Special Offers"
+      "default": "Available Offers"
     },
     {
       "type": "range",
@@ -382,8 +432,14 @@
     {
       "type": "color",
       "id": "card_background",
-      "label": "Background",
-      "default": "#fff9f0"
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "notch_background",
+      "label": "Notch background (should match page background)",
+      "default": "#f5f5f5"
     },
     {
       "type": "color",
@@ -403,9 +459,21 @@
     },
     {
       "type": "color",
-      "id": "discount_color",
-      "label": "Discount text color",
-      "default": "#d35400"
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#0066cc"
     },
     {
       "type": "header",
@@ -459,13 +527,13 @@
       "type": "color",
       "id": "code_background",
       "label": "Code background",
-      "default": "#ffffff"
+      "default": "#fffbf5"
     },
     {
       "type": "color",
       "id": "code_border_color",
       "label": "Code border color",
-      "default": "#e0e0e0"
+      "default": "#ff8c00"
     },
     {
       "type": "color",
@@ -541,21 +609,27 @@
     },
     {
       "type": "text",
-      "id": "discount_1",
-      "label": "Discount text",
-      "default": "Get 20% OFF"
+      "id": "heading_1",
+      "label": "Heading",
+      "default": "Get Best Offer and Deals"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_1",
+      "label": "Subheading (can include HTML links)",
+      "default": "Download our app now to claim yours."
     },
     {
       "type": "text",
       "id": "code_1",
       "label": "Coupon code",
-      "default": "SAVE20"
+      "default": "APP2024"
     },
     {
       "type": "textarea",
       "id": "description_1",
       "label": "Description",
-      "default": "Valid on orders above ৳500. Limited time offer!"
+      "default": "Valid for new app users only"
     },
     {
       "type": "header",
@@ -569,21 +643,27 @@
     },
     {
       "type": "text",
-      "id": "discount_2",
-      "label": "Discount text",
-      "default": "Flat ৳100 OFF"
+      "id": "heading_2",
+      "label": "Heading",
+      "default": "20% OFF Your First Order"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_2",
+      "label": "Subheading",
+      "default": "Sign up today and save big on your purchase."
     },
     {
       "type": "text",
       "id": "code_2",
       "label": "Coupon code",
-      "default": "FLAT100"
+      "default": "WELCOME20"
     },
     {
       "type": "textarea",
       "id": "description_2",
       "label": "Description",
-      "default": "On your first purchase. New customers only."
+      "default": "Minimum order ৳500 required"
     },
     {
       "type": "header",
@@ -597,21 +677,27 @@
     },
     {
       "type": "text",
-      "id": "discount_3",
-      "label": "Discount text",
-      "default": "Buy 2 Get 1 Free"
+      "id": "heading_3",
+      "label": "Heading",
+      "default": "Free Shipping Available"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_3",
+      "label": "Subheading",
+      "default": "Shop now and get free delivery on all orders."
     },
     {
       "type": "text",
       "id": "code_3",
       "label": "Coupon code",
-      "default": "BUY2GET1"
+      "default": "FREESHIP"
     },
     {
       "type": "textarea",
       "id": "description_3",
       "label": "Description",
-      "default": "Applicable on selected items. Check product page."
+      "default": "On orders above ৳1000"
     },
     {
       "type": "header",
@@ -625,8 +711,13 @@
     },
     {
       "type": "text",
-      "id": "discount_4",
-      "label": "Discount text"
+      "id": "heading_4",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_4",
+      "label": "Subheading"
     },
     {
       "type": "text",
@@ -650,8 +741,13 @@
     },
     {
       "type": "text",
-      "id": "discount_5",
-      "label": "Discount text"
+      "id": "heading_5",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_5",
+      "label": "Subheading"
     },
     {
       "type": "text",
@@ -666,7 +762,7 @@
   ],
   "presets": [
     {
-      "name": "Offer cards carousel"
+      "name": "Ticket Offer Cards"
     }
   ]
 }
