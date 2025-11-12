@@ -9878,7 +9878,7 @@ split-lines {
   display: -webkit-box;
   overflow: hidden;
 }
-/* Comic-style Product Price Design - More Compact with Smaller Text */
+/* Comic-Style Product Price Design — Cartoon Button Aesthetic */
 .price-list {
   display: inline-flex;
   flex-wrap: wrap;
@@ -9886,67 +9886,91 @@ split-lines {
   align-items: center;
 }
 
-/* Regular/Sale Price - Comic Style */
+/* --- SALE PRICE --- */
 .price-list sale-price {
+  position: relative;
   display: inline-block;
-  padding: 2px 6px;
   font-size: 14px;
   font-weight: bold;
-  text-align: center;
   color: #fff;
-  background-color: #D50000;
+  background-color: #d50000;
   border: 2px solid #000;
-  border-radius: 4px;
-  box-shadow: 2px 2px 0px #000;
+  border-radius: 6px;
+  padding: 4px 10px;
+  box-shadow: 2px 2px 0 #000;
   line-height: 1.1;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.15s ease-in-out;
 }
 
-/* On Sale Price */
-.price-list sale-price.text-on-sale {
-  background-color: #D50000;
-  color: #fff;
+/* Hover lift & shadow pop */
+.price-list sale-price:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #262626;
 }
 
-/* Compare At Price (Strikethrough) - Original Style */
+/* Active press */
+.price-list sale-price:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Shine animation layer */
+.price-list sale-price::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 40px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) rotate(12deg);
+  transition: left 0.5s ease-in-out;
+}
+
+/* Shine on hover */
+.price-list sale-price:hover::after {
+  left: 200%;
+}
+
+/* --- COMPARE AT PRICE --- */
 .price-list compare-at-price {
   display: inline-block;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-size: 10px;
   font-weight: bold;
-  text-align: center;
   color: #666;
   background-color: #f0f0f0;
   border: 1px solid #000;
-  border-radius: 3px;
-  box-shadow: 1px 1px 0px #000;
+  border-radius: 4px;
   text-decoration: line-through;
+  box-shadow: 1px 1px 0 #000;
   line-height: 1;
   transform: translateY(2px);
 }
 
-/* Unit Price */
+/* --- UNIT PRICE --- */
 .price-list unit-price {
   display: inline-block;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-size: 10px;
   font-weight: bold;
   color: #fff;
-  background-color: #D50000;
+  background-color: #d50000;
   border: 1px solid #000;
-  border-radius: 3px;
-  box-shadow: 1px 1px 0px #000;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 #000;
 }
 
-/* Large price variant */
+/* --- LARGE VARIANT --- */
 .price-list--lg sale-price {
   font-size: 16px;
-  padding: 3px 8px;
-  background-color: #D50000;
+  padding: 6px 12px;
 }
 
 .price-list--lg compare-at-price {
   font-size: 11px;
-  padding: 1px 4px;
+  padding: 2px 6px;
   transform: translateY(2px);
-  background-color: #f0f0f0;
 }
