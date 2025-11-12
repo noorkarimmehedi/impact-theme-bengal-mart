@@ -89,6 +89,12 @@
           "settings": {
             "liquid": "{% render 'video-showcase-dispenser-roller' %}"
           }
+        },
+        "liquid_6FwdGd": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'offer-cards-carousel' %}"
+          }
         }
       },
       "block_order": [
@@ -104,7 +110,8 @@
         "quantity_selector",
         "buy_buttons",
         "liquid_kYApyA",
-        "liquid_HTqcEP"
+        "liquid_HTqcEP",
+        "liquid_6FwdGd"
       ],
       "settings": {
         "full_width": true,
