@@ -357,158 +357,155 @@
 </div>
 
 <script>
-  (function() {
-    if (customElements.get('offer-cards-{{ unique_id }}')) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    const uniqueId = '{{ unique_id }}';
+    const container = document.querySelector('.offer-cards-' + uniqueId);
+    
+    if (!container) return;
+    
+    const track = container.querySelector('[data-track]');
+    const cards = container.querySelectorAll('[data-card]');
+    const indicatorsContainer = container.querySelector('[data-indicators]');
+    let currentIndex = 0;
 
-    class OfferCards extends HTMLElement {
-      constructor() {
-        super();
-        this.uniqueId = '{{ unique_id }}';
-        this.track = this.querySelector('[data-track]');
-        this.cards = this.querySelectorAll('[data-card]');
-        this.indicatorsContainer = this.querySelector('[data-indicators]');
-        this.currentIndex = 0;
-      }
-
-      connectedCallback() {
-        this.createIndicators();
-        this.setupCopyButtons();
-        this.setupScrollListener();
-        this.centerFirstCard();
-      }
-
-      centerFirstCard() {
-        if (this.cards.length > 0) {
-          const firstCard = this.cards[0];
-          const trackWidth = this.track.offsetWidth;
-          const cardWidth = firstCard.offsetWidth;
-          
-          if (window.innerWidth < 750) {
-            // Mobile: center the first card
-            const scrollPosition = firstCard.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
-            this.track.scrollLeft = scrollPosition;
-          } else {
-            // Desktop: scroll to start
-            this.track.scrollLeft = 0;
-          }
+    // Center first card
+    function centerFirstCard() {
+      if (cards.length > 0) {
+        const firstCard = cards[0];
+        const trackWidth = track.offsetWidth;
+        const cardWidth = firstCard.offsetWidth;
+        
+        if (window.innerWidth < 750) {
+          const scrollPosition = firstCard.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
+          track.scrollLeft = scrollPosition;
+        } else {
+          track.scrollLeft = 0;
         }
       }
+    }
 
-      createIndicators() {
-        if (this.cards.length <= 1) return;
+    // Create indicators
+    function createIndicators() {
+      if (cards.length <= 1) return;
 
-        this.cards.forEach((card, index) => {
-          const indicator = document.createElement('button');
-          indicator.className = 'offer-cards__indicator-' + this.uniqueId;
-          indicator.setAttribute('aria-label', 'Go to offer ' + (index + 1));
-          if (index === 0) indicator.classList.add('active');
+      cards.forEach((card, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'offer-cards__indicator-' + uniqueId;
+        indicator.setAttribute('aria-label', 'Go to offer ' + (index + 1));
+        if (index === 0) indicator.classList.add('active');
 
-          indicator.addEventListener('click', () => {
-            this.scrollToCard(index);
-          });
-
-          this.indicatorsContainer.appendChild(indicator);
+        indicator.addEventListener('click', () => {
+          scrollToCard(index);
         });
-      }
 
-      scrollToCard(index) {
-        const card = this.cards[index];
-        if (!card) return;
+        indicatorsContainer.appendChild(indicator);
+      });
+    }
 
-        const trackWidth = this.track.offsetWidth;
-        const cardWidth = card.offsetWidth;
-        const scrollPosition = card.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
+    // Scroll to card
+    function scrollToCard(index) {
+      const card = cards[index];
+      if (!card) return;
 
-        this.track.scrollTo({
-          left: scrollPosition,
-          behavior: 'smooth'
-        });
-      }
+      const trackWidth = track.offsetWidth;
+      const cardWidth = card.offsetWidth;
+      const scrollPosition = card.offsetLeft - (trackWidth / 2) + (cardWidth / 2);
 
-      setupScrollListener() {
-        this.track.addEventListener('scroll', () => {
-          this.updateActiveIndicator();
-        });
-      }
+      track.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
 
-      updateActiveIndicator() {
-        const trackCenter = this.track.scrollLeft + (this.track.offsetWidth / 2);
-        let closestIndex = 0;
-        let closestDistance = Infinity;
+    // Update active indicator
+    function updateActiveIndicator() {
+      const trackCenter = track.scrollLeft + (track.offsetWidth / 2);
+      let closestIndex = 0;
+      let closestDistance = Infinity;
 
-        this.cards.forEach((card, index) => {
-          const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-          const distance = Math.abs(trackCenter - cardCenter);
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(trackCenter - cardCenter);
 
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      const indicators = indicatorsContainer.querySelectorAll('.offer-cards__indicator-' + uniqueId);
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === closestIndex);
+      });
+
+      currentIndex = closestIndex;
+    }
+
+    // Setup copy buttons
+    function setupCopyButtons() {
+      const copyButtons = container.querySelectorAll('.offer-card__copy-btn-' + uniqueId);
+
+      copyButtons.forEach(button => {
+        button.addEventListener('click', async function(e) {
+          e.preventDefault();
+          const code = this.getAttribute('data-code');
+          const originalText = this.textContent;
+
+          try {
+            // Try modern clipboard API first
+            await navigator.clipboard.writeText(code);
+            this.textContent = '{{ copied_text }}';
+            this.classList.add('copied');
+
+            setTimeout(() => {
+              this.textContent = originalText;
+              this.classList.remove('copied');
+            }, 2000);
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = code;
+            textArea.style.position = 'fixed';
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            textArea.style.padding = '0';
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            textArea.style.background = 'transparent';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+              document.execCommand('copy');
+              this.textContent = '{{ copied_text }}';
+              this.classList.add('copied');
+
+              setTimeout(() => {
+                this.textContent = originalText;
+                this.classList.remove('copied');
+              }, 2000);
+            } catch (fallbackErr) {
+              console.error('Copy failed:', fallbackErr);
+              alert('Failed to copy: ' + code);
+            }
+            
+            document.body.removeChild(textArea);
           }
         });
-
-        const indicators = this.indicatorsContainer.querySelectorAll('.offer-cards__indicator-' + this.uniqueId);
-        indicators.forEach((indicator, index) => {
-          indicator.classList.toggle('active', index === closestIndex);
-        });
-
-        this.currentIndex = closestIndex;
-      }
-
-      setupCopyButtons() {
-        const copyButtons = this.querySelectorAll('.offer-card__copy-btn-' + this.uniqueId);
-
-        copyButtons.forEach(button => {
-          button.addEventListener('click', async () => {
-            const code = button.getAttribute('data-code');
-            const originalText = button.textContent;
-
-            try {
-              await navigator.clipboard.writeText(code);
-              button.textContent = '{{ copied_text }}';
-              button.classList.add('copied');
-
-              setTimeout(() => {
-                button.textContent = originalText;
-                button.classList.remove('copied');
-              }, 2000);
-            } catch (err) {
-              const textArea = document.createElement('textarea');
-              textArea.value = code;
-              textArea.style.position = 'fixed';
-              textArea.style.opacity = '0';
-              document.body.appendChild(textArea);
-              textArea.select();
-              document.execCommand('copy');
-              document.body.removeChild(textArea);
-
-              button.textContent = '{{ copied_text }}';
-              button.classList.add('copied');
-
-              setTimeout(() => {
-                button.textContent = originalText;
-                button.classList.remove('copied');
-              }, 2000);
-            }
-          });
-        });
-      }
+      });
     }
 
-    // Use unique class name to avoid conflicts
-    customElements.define('offer-cards-{{ unique_id }}', OfferCards);
+    // Setup scroll listener
+    track.addEventListener('scroll', updateActiveIndicator);
 
-    // Initialize if element exists
-    const element = document.querySelector('.offer-cards-{{ unique_id }}');
-    if (element && !element.hasAttribute('data-initialized')) {
-      element.setAttribute('data-initialized', 'true');
-      const instance = Object.create(OfferCards.prototype);
-      OfferCards.call(instance);
-      instance.track = element.querySelector('[data-track]');
-      instance.cards = element.querySelectorAll('[data-card]');
-      instance.indicatorsContainer = element.querySelector('[data-indicators]');
-      instance.currentIndex = 0;
-      instance.uniqueId = '{{ unique_id }}';
-      instance.connectedCallback();
-    }
-  })();
+    // Initialize
+    createIndicators();
+    setupCopyButtons();
+    centerFirstCard();
+  });
 </script>
