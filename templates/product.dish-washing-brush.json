@@ -262,7 +262,7 @@
             "row_padding": 20,
             "column_gap": 30,
             "mobile_horizontal_margin": 15,
-            "mobile_left_column_width": 35,
+            "mobile_left_column_width": 30,
             "mobile_section_padding": 20,
             "mobile_row_padding": 15,
             "mobile_column_gap": 15,
