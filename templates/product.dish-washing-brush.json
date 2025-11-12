@@ -196,6 +196,7 @@
       "block_order": [
         "ai_gen_block_a2976ec_Yanmnd"
       ],
+      "disabled": true,
       "name": "Offer cards carousel",
       "settings": {}
     },
