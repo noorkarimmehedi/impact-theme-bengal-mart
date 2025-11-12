@@ -83,6 +83,12 @@
           "settings": {
             "liquid": "{% assign random_quantity = 'now' | date: \"%s\" | modulo: 20 | plus: 50 %}\n<div style=\"\n    display: inline-flex;\n    background: rgba(227, 255, 222, 1);\n    height: 35px;\n    border: 1px solid #E0E0E0;\n    border-radius: 4px;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 19.2px;\n    letter-spacing: 0;\n    color: #000;\n    gap: 11px;\n    box-shadow: -10px 0 0 rgba(0, 0, 0, 0);\n    transition: border-color 0.3s ease;\n\">\n  <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"8.5\" cy=\"8.5\" r=\"7.9\" fill=\"#084D3A\"></circle>\n    <path d=\"M9.5 3.5L5.5 9.5H8.5L7.5 13.5L11.5 7.5H8.5L9.5 3.5Z\" fill=\"#E3FFDE\"/>\n  </svg>\n  <span>\n    <strong style=\"text-decoration: underline;\">{{ random_quantity }}</strong> people are viewing right now — 23 left in stock!\n  </span>\n</div>\n\n<script>\n  const div = document.querySelector('div[style*=\"inline-flex\"]');\n  div.addEventListener('mouseenter', () => {\n    div.style.borderColor = '#CCCCCC';\n  });\n  div.addEventListener('mouseleave', () => {\n    div.style.borderColor = '#E0E0E0';\n  });\n</script>"
           }
+        },
+        "liquid_dcezkf": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'offer-cards-carousel' %}"
+          }
         }
       },
       "block_order": [
@@ -97,7 +103,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "liquid_kYApyA"
+        "liquid_kYApyA",
+        "liquid_dcezkf"
       ],
       "settings": {
         "full_width": true,
