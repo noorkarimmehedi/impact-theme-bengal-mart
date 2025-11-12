@@ -41,10 +41,10 @@
 
 {% assign copy_button_text = copy_button_text | default: "Copy" %}
 {% assign copied_text = copied_text | default: "Copied!" %}
-{% assign copy_button_bg = copy_button_bg | default: "#D50000" %}
+{% assign copy_button_bg = copy_button_bg | default: "#E67E00" %}
 {% assign copy_button_color = copy_button_color | default: "#FFFFFF" %}
-{% assign copy_button_hover_bg = copy_button_hover_bg | default: "#D50000" %}
-{% assign success_color = success_color | default: "#D50000" %}
+{% assign copy_button_hover_bg = copy_button_hover_bg | default: "#E67E00" %}
+{% assign success_color = success_color | default: "#00A341" %}
 
 {% assign indicator_color = indicator_color | default: "#FF8C00" %}
 
@@ -200,90 +200,24 @@
   }
 
   .offer-card__copy-btn-{{ unique_id }} {
-    position: relative;
+    background: {{ copy_button_bg }};
+    color: {{ copy_button_color }};
     border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    outline-offset: 4px;
-    transition: filter 250ms;
-    user-select: none;
-    touch-action: manipulation;
-  }
-
-  .offer-card__copy-btn-{{ unique_id }}:hover {
-    filter: brightness(110%);
-  }
-
-  .offer-card__copy-btn-{{ unique_id }}:focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  .offer-card__copy-shadow-{{ unique_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    background: hsl(0deg 0% 0% / 0.25);
-    will-change: transform;
-    transform: translateY(2px);
-    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-  }
-
-  .offer-card__copy-edge-{{ unique_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(
-      to left,
-      hsl(28deg 100% 35%) 0%,
-      hsl(28deg 100% 45%) 8%,
-      hsl(28deg 100% 45%) 92%,
-      hsl(28deg 100% 35%) 100%
-    );
-  }
-
-  .offer-card__copy-front-{{ unique_id }} {
-    display: block;
-    position: relative;
     padding: 4px 10px;
-    border-radius: 4px;
+    border-radius: 3px;
     font-size: 10px;
     font-weight: 600;
-    color: {{ copy_button_color }};
-    background: {{ copy_button_bg }};
-    will-change: transform;
-    transform: translateY(-4px);
-    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
     text-transform: uppercase;
   }
 
-  .offer-card__copy-btn-{{ unique_id }}:hover .offer-card__copy-front-{{ unique_id }} {
-    transform: translateY(-6px);
-    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  .offer-card__copy-btn-{{ unique_id }}:hover {
+    background: {{ copy_button_hover_bg }};
   }
 
-  .offer-card__copy-btn-{{ unique_id }}:active .offer-card__copy-front-{{ unique_id }} {
-    transform: translateY(-2px);
-    transition: transform 34ms;
-  }
-
-  .offer-card__copy-btn-{{ unique_id }}:hover .offer-card__copy-shadow-{{ unique_id }} {
-    transform: translateY(4px);
-    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-  }
-
-  .offer-card__copy-btn-{{ unique_id }}:active .offer-card__copy-shadow-{{ unique_id }} {
-    transform: translateY(1px);
-    transition: transform 34ms;
-  }
-
-  .offer-card__copy-btn-{{ unique_id }}.copied .offer-card__copy-front-{{ unique_id }} {
+  .offer-card__copy-btn-{{ unique_id }}.copied {
     background: {{ success_color }};
   }
 
@@ -406,11 +340,7 @@
                 data-code="{{ code }}"
                 aria-label="Copy coupon code {{ code }}"
               >
-                <span class="offer-card__copy-shadow-{{ unique_id }}"></span>
-                <span class="offer-card__copy-edge-{{ unique_id }}"></span>
-                <span class="offer-card__copy-front-{{ unique_id }}" data-front>
-                  {{ copy_button_text }}
-                </span>
+                {{ copy_button_text }}
               </button>
             </div>
 
@@ -519,17 +449,16 @@
         button.addEventListener('click', async function(e) {
           e.preventDefault();
           const code = this.getAttribute('data-code');
-          const frontElement = this.querySelector('[data-front]');
-          const originalText = frontElement.textContent;
+          const originalText = this.textContent;
 
           try {
             // Try modern clipboard API first
             await navigator.clipboard.writeText(code);
-            frontElement.textContent = '{{ copied_text }}';
+            this.textContent = '{{ copied_text }}';
             this.classList.add('copied');
 
             setTimeout(() => {
-              frontElement.textContent = originalText;
+              this.textContent = originalText;
               this.classList.remove('copied');
             }, 2000);
           } catch (err) {
@@ -553,11 +482,11 @@
             
             try {
               document.execCommand('copy');
-              frontElement.textContent = '{{ copied_text }}';
+              this.textContent = '{{ copied_text }}';
               this.classList.add('copied');
 
               setTimeout(() => {
-                frontElement.textContent = originalText;
+                this.textContent = originalText;
                 this.classList.remove('copied');
               }, 2000);
             } catch (fallbackErr) {
