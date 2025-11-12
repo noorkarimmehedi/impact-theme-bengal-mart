@@ -94,7 +94,6 @@
         },
         "liquid_RGVnHb": {
           "type": "liquid",
-          "disabled": true,
           "settings": {
             "liquid": "{% render 'offer-cards-carousel' %}"
           }
@@ -198,6 +197,7 @@
       "block_order": [
         "ai_gen_block_a2976ec_Yanmnd"
       ],
+      "disabled": true,
       "name": "Offer cards carousel",
       "settings": {}
     },
