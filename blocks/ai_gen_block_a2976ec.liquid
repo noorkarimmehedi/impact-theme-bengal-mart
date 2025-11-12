@@ -33,7 +33,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 20px 0;
+    padding: 8px 0 12px 0;
   }
 
   .ai-offer-cards__track-{{ ai_gen_id }}::-webkit-scrollbar {
@@ -143,6 +143,7 @@
 
   .ai-offer-card__description-{{ ai_gen_id }} {
     font-size: 9px;
+    font-weight: 600;
     color: {{ block.settings.description_color }};
     margin: 0;
     line-height: 1.25;
@@ -152,7 +153,7 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 8px;
   }
 
   .ai-offer-cards__indicator-{{ ai_gen_id }} {
