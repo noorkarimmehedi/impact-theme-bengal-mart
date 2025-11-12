@@ -172,11 +172,10 @@
     opacity: 1;
   }
 
-  @media screen and (max-width: 748px) {
-  .ai-offer-cards__carousel-{{ ai_gen_id }} {
-    overflow: hidden; /* Prevent any overflow visibility */
-    padding: 0;
-  }
+  @media screen and (min-width: 749px) {
+    .ai-offer-cards__carousel-{{ ai_gen_id }} {
+      padding: 0 40px;
+    }
 
     .ai-offer-cards__track-{{ ai_gen_id }} {
       justify-content: center;
