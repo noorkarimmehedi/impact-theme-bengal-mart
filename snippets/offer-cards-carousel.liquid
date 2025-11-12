@@ -16,58 +16,58 @@
 {% assign unique_id = section.id | default: 'default' | append: '-' | append: block.id | default: 'snippet' %}
 
 {% comment %} Default Settings {% endcomment %}
-{% assign title = title | default: "Available Offers" %}
+{% assign title = title | default: "Exclusive Coupons" %}
 {% assign title_size = title_size | default: 28 %}
 {% assign title_color = title_color | default: "#000000" %}
-{% assign title_spacing = title_spacing | default: 24 %}
+{% assign title_spacing = title_spacing | default: 4 %}
 
-{% assign card_background = card_background | default: "#ffffff" %}
-{% assign notch_background = notch_background | default: "#f5f5f5" %}
-{% assign border_color = border_color | default: "#ff8c00" %}
-{% assign card_border_radius = card_border_radius | default: 12 %}
+{% assign card_background = card_background | default: "#FFE603" %}
+{% assign notch_background = notch_background | default: "#F5F5F5" %}
+{% assign border_color = border_color | default: "#D88117" %}
+{% assign card_border_radius = card_border_radius | default: 4 %}
 {% assign heading_color = heading_color | default: "#000000" %}
 {% assign subheading_color = subheading_color | default: "#333333" %}
 {% assign link_color = link_color | default: "#0066cc" %}
 
-{% assign shadow_opacity = shadow_opacity | default: 10 %}
+{% assign shadow_opacity = shadow_opacity | default: 0 %}
 {% assign shadow_horizontal = shadow_horizontal | default: 0 %}
 {% assign shadow_vertical = shadow_vertical | default: 2 %}
 {% assign shadow_blur = shadow_blur | default: 8 %}
 
-{% assign code_background = code_background | default: "#fffbf5" %}
-{% assign code_border_color = code_border_color | default: "#ff8c00" %}
+{% assign code_background = code_background | default: "#FFFFFF" %}
+{% assign code_border_color = code_border_color | default: "#E0E0E0" %}
 {% assign code_color = code_color | default: "#000000" %}
 {% assign description_color = description_color | default: "#666666" %}
 
 {% assign copy_button_text = copy_button_text | default: "Copy" %}
 {% assign copied_text = copied_text | default: "Copied!" %}
-{% assign copy_button_bg = copy_button_bg | default: "#ff8c00" %}
-{% assign copy_button_color = copy_button_color | default: "#ffffff" %}
-{% assign copy_button_hover_bg = copy_button_hover_bg | default: "#e67e00" %}
-{% assign success_color = success_color | default: "#00a341" %}
+{% assign copy_button_bg = copy_button_bg | default: "#E67E00" %}
+{% assign copy_button_color = copy_button_color | default: "#FFFFFF" %}
+{% assign copy_button_hover_bg = copy_button_hover_bg | default: "#E67E00" %}
+{% assign success_color = success_color | default: "#00A341" %}
 
-{% assign indicator_color = indicator_color | default: "#ff8c00" %}
+{% assign indicator_color = indicator_color | default: "#FF8C00" %}
 
 {% comment %} Offer 1 {% endcomment %}
 {% assign card_1_enabled = card_1_enabled | default: true %}
 {% assign heading_1 = heading_1 | default: "Get Best Offer and Deals" %}
-{% assign subheading_1 = subheading_1 | default: "Download our app now to claim yours." %}
-{% assign code_1 = code_1 | default: "APP2024" %}
-{% assign description_1 = description_1 | default: "Valid for new app users only" %}
+{% assign subheading_1 = subheading_1 | default: "" %}
+{% assign code_1 = code_1 | default: "NEW25" %}
+{% assign description_1 = description_1 | default: "" %}
 
 {% comment %} Offer 2 {% endcomment %}
 {% assign card_2_enabled = card_2_enabled | default: true %}
 {% assign heading_2 = heading_2 | default: "20% OFF Your First Order" %}
-{% assign subheading_2 = subheading_2 | default: "Sign up today and save big on your purchase." %}
-{% assign code_2 = code_2 | default: "WELCOME20" %}
-{% assign description_2 = description_2 | default: "Minimum order ৳500 required" %}
+{% assign subheading_2 = subheading_2 | default: "" %}
+{% assign code_2 = code_2 | default: "INSTANT100" %}
+{% assign description_2 = description_2 | default: "" %}
 
 {% comment %} Offer 3 {% endcomment %}
 {% assign card_3_enabled = card_3_enabled | default: true %}
 {% assign heading_3 = heading_3 | default: "Free Shipping Available" %}
-{% assign subheading_3 = subheading_3 | default: "Shop now and get free delivery on all orders." %}
+{% assign subheading_3 = subheading_3 | default: "" %}
 {% assign code_3 = code_3 | default: "FREESHIP" %}
-{% assign description_3 = description_3 | default: "On orders above ৳1000" %}
+{% assign description_3 = description_3 | default: "" %}
 
 {% comment %} Offer 4 {% endcomment %}
 {% assign card_4_enabled = card_4_enabled | default: false %}
