@@ -200,24 +200,90 @@
   }
 
   .offer-card__copy-btn-{{ unique_id }} {
-    background: {{ copy_button_bg }};
-    color: {{ copy_button_color }};
+    position: relative;
     border: none;
-    padding: 4px 10px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 600;
+    background: transparent;
+    padding: 0;
     cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    text-transform: uppercase;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
   }
 
   .offer-card__copy-btn-{{ unique_id }}:hover {
-    background: {{ copy_button_hover_bg }};
+    filter: brightness(110%);
   }
 
-  .offer-card__copy-btn-{{ unique_id }}.copied {
+  .offer-card__copy-btn-{{ unique_id }}:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .offer-card__copy-shadow-{{ unique_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .offer-card__copy-edge-{{ unique_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(
+      to left,
+      hsl(28deg 100% 35%) 0%,
+      hsl(28deg 100% 45%) 8%,
+      hsl(28deg 100% 45%) 92%,
+      hsl(28deg 100% 35%) 100%
+    );
+  }
+
+  .offer-card__copy-front-{{ unique_id }} {
+    display: block;
+    position: relative;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: {{ copy_button_color }};
+    background: {{ copy_button_bg }};
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    text-transform: uppercase;
+  }
+
+  .offer-card__copy-btn-{{ unique_id }}:hover .offer-card__copy-front-{{ unique_id }} {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .offer-card__copy-btn-{{ unique_id }}:active .offer-card__copy-front-{{ unique_id }} {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .offer-card__copy-btn-{{ unique_id }}:hover .offer-card__copy-shadow-{{ unique_id }} {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .offer-card__copy-btn-{{ unique_id }}:active .offer-card__copy-shadow-{{ unique_id }} {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .offer-card__copy-btn-{{ unique_id }}.copied .offer-card__copy-front-{{ unique_id }} {
     background: {{ success_color }};
   }
 
@@ -340,7 +406,11 @@
                 data-code="{{ code }}"
                 aria-label="Copy coupon code {{ code }}"
               >
-                {{ copy_button_text }}
+                <span class="offer-card__copy-shadow-{{ unique_id }}"></span>
+                <span class="offer-card__copy-edge-{{ unique_id }}"></span>
+                <span class="offer-card__copy-front-{{ unique_id }}" data-front>
+                  {{ copy_button_text }}
+                </span>
               </button>
             </div>
 
@@ -449,16 +519,17 @@
         button.addEventListener('click', async function(e) {
           e.preventDefault();
           const code = this.getAttribute('data-code');
-          const originalText = this.textContent;
+          const frontElement = this.querySelector('[data-front]');
+          const originalText = frontElement.textContent;
 
           try {
             // Try modern clipboard API first
             await navigator.clipboard.writeText(code);
-            this.textContent = '{{ copied_text }}';
+            frontElement.textContent = '{{ copied_text }}';
             this.classList.add('copied');
 
             setTimeout(() => {
-              this.textContent = originalText;
+              frontElement.textContent = originalText;
               this.classList.remove('copied');
             }, 2000);
           } catch (err) {
@@ -482,11 +553,11 @@
             
             try {
               document.execCommand('copy');
-              this.textContent = '{{ copied_text }}';
+              frontElement.textContent = '{{ copied_text }}';
               this.classList.add('copied');
 
               setTimeout(() => {
-                this.textContent = originalText;
+                frontElement.textContent = originalText;
                 this.classList.remove('copied');
               }, 2000);
             } catch (fallbackErr) {
