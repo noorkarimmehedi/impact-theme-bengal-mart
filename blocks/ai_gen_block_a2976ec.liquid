@@ -20,9 +20,9 @@
 
   .ai-offer-cards__carousel-{{ ai_gen_id }} {
     position: relative;
+    overflow: hidden;
     width: 100%;
     padding: 0 16px;
-    overflow: hidden;
   }
 
   .ai-offer-cards__track-{{ ai_gen_id }} {
@@ -33,9 +33,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 8px 0 12px 0;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
   }
 
   .ai-offer-cards__track-{{ ai_gen_id }}::-webkit-scrollbar {
@@ -155,7 +153,7 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 16px;
   }
 
   .ai-offer-cards__indicator-{{ ai_gen_id }} {
@@ -172,30 +170,6 @@
 
   .ai-offer-cards__indicator-{{ ai_gen_id }}.active {
     opacity: 1;
-  }
-
-  /* Mobile specific - prevent background showing on swipe */
-  @media screen and (max-width: 748px) {
-    .ai-offer-cards__carousel-{{ ai_gen_id }} {
-      padding: 0 16px;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .ai-offer-cards__track-{{ ai_gen_id }} {
-      overscroll-behavior-x: contain;
-      width: 100%;
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    .ai-offer-card-{{ ai_gen_id }}:first-child {
-      margin-left: 0;
-    }
-    
-    .ai-offer-card-{{ ai_gen_id }}:last-child {
-      margin-right: 0;
-    }
   }
 
   @media screen and (min-width: 749px) {
