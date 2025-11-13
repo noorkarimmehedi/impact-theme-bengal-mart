@@ -77,10 +77,13 @@
   .ai-hero-heading-{{ ai_gen_id }} {
     margin: 0;
     font-size: {{ block.settings.heading_size_mobile }}px;
-    font-weight: 700;
+    font-weight: 900;
     color: {{ block.settings.heading_color }};
     line-height: 1.2;
     text-align: center;
+    text-shadow: 0 0 1px {{ block.settings.heading_color }}, 0 0 1px {{ block.settings.heading_color }};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .ai-hero-subheading-{{ ai_gen_id }} {
