@@ -7,6 +7,8 @@
 {% style %}
   .ai-product-info-table-wrapper-{{ ai_gen_id }} {
     background-color: {{ block.settings.outer_background_color }};
+    display: flex;
+    justify-content: center;
   }
 
   .ai-product-info-table-{{ ai_gen_id }} {
@@ -14,6 +16,8 @@
     border-radius: {{ block.settings.border_radius }}px;
     padding: {{ block.settings.section_padding }}px;
     background-color: {{ block.settings.background_color }};
+    width: 100%;
+    max-width: 1200px;
   }
 
   .ai-product-info-table__row-{{ ai_gen_id }} {
@@ -54,10 +58,15 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-product-info-table-wrapper-{{ ai_gen_id }} {
+      display: block;
+    }
+
     .ai-product-info-table-{{ ai_gen_id }} {
       padding: {{ block.settings.mobile_section_padding }}px;
       margin-left: {{ block.settings.mobile_horizontal_margin }}px;
       margin-right: {{ block.settings.mobile_horizontal_margin }}px;
+      max-width: none;
     }
 
     .ai-product-info-table__row-{{ ai_gen_id }} {
