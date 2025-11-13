@@ -9975,23 +9975,13 @@ split-lines {
   transform: translateY(2px);
 }
 
-/* Make product page containers WIDER on mobile */
+/* Make product page containers MAXIMUM WIDTH on mobile - ultra minimal padding */
 @media screen and (max-width: 749px) {
-  /* Reduce main container padding on mobile */
-  .product {
-    padding-left: var(--spacing-2);
-    padding-right: var(--spacing-2);
-  }
-  
-  /* Reduce product info container padding */
-  .product-info {
-    padding-left: var(--spacing-2);
-    padding-right: var(--spacing-2);
-  }
-  
-  /* Reduce product gallery padding */
-  .product-gallery {
-    padding-left: var(--spacing-2);
-    padding-right: var(--spacing-2);
+  .shopify-section--product-template {
+    --container-gutter: var(--spacing-0-5);   /* 2px padding - ultra tight */
+    /* OR */
+    --container-gutter: 1px;                  /* 1px padding - extremely tight */
+    /* OR */
+    --container-gutter: 0px;                  /* 0px padding - completely edge-to-edge */
   }
 }
