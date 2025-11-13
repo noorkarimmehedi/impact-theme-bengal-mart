@@ -9975,3 +9975,10 @@ split-lines {
   transform: translateY(2px);
 }
 
+/* Global mobile padding increase for product pages */
+@media screen and (max-width: 749px) {
+  .shopify-section--product-template .container,
+  .shopify-section--product-template .section {
+    --container-gutter: var(--spacing-8); /* Increased from default */
+  }
+}
