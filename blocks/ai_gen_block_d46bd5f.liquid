@@ -21,6 +21,7 @@
     grid-template-columns: {{ block.settings.left_column_width }}% 1fr;
     gap: {{ block.settings.column_gap }}px;
     padding: {{ block.settings.row_padding }}px 0;
+    align-items: center;
   }
 
   .ai-product-info-table__row-{{ ai_gen_id }}:first-child {
@@ -68,6 +69,7 @@
       grid-template-columns: {{ block.settings.mobile_left_column_width }}% 1fr;
       gap: {{ block.settings.mobile_column_gap }}px;
       padding: {{ block.settings.mobile_row_padding }}px 0;
+      align-items: start;
     }
 
     .ai-product-info-table__label-{{ ai_gen_id }} {
