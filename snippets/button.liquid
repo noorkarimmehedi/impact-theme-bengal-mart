@@ -1,10 +1,9 @@
 {%- comment -%}
 ----------------------------------------------------------------------------------------------------------------------
-BUTTON COMPONENT
+BUTTON COMPONENT - 3D STYLE
 ----------------------------------------------------------------------------------------------------------------------
 
-Generate a button (or link styled as a button). It supports wide range of attributes that can be used to customize
-the appearance and functionality of the button.
+Generate a button with 3D push effect style.
 
 ********************************************
 Supported variables
@@ -29,55 +28,126 @@ Supported variables
 * aria_controls: the ID of the element controlled
 {%- endcomment -%}
 
+<style>
+  .button-3d-wrapper {
+    position: relative;
+    display: inline-block;
+    width: {{ stretch | default: false }}{% if stretch %}100%{% else %}auto{% endif %};
+  }
+
+  .button-3d {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+  }
+
+  .button-3d[disabled],
+  .button-3d[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .button-3d__shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 48px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .button-3d__edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 48px;
+    background: linear-gradient(
+      to left,
+      {% if background != blank and background != 'rgba(0,0,0,0)' %}
+        {{ background | color_darken: 30 }} 0%,
+        {{ background | color_darken: 15 }} 8%,
+        {{ background | color_darken: 15 }} 92%,
+        {{ background | color_darken: 30 }} 100%
+      {% else %}
+        hsl(340deg 100% 16%) 0%,
+        hsl(340deg 100% 32%) 8%,
+        hsl(340deg 100% 32%) 92%,
+        hsl(340deg 100% 16%) 100%
+      {% endif %}
+    );
+  }
+
+  .button-3d__front {
+    display: block;
+    position: relative;
+    padding: {% if size == 'sm' %}10px 20px{% elsif size == 'lg' %}16px 32px{% elsif size == 'xl' %}18px 36px{% else %}12px 27px{% endif %};
+    border-radius: 48px;
+    font-size: {% if size == 'sm' %}0.9rem{% elsif size == 'lg' %}1.2rem{% elsif size == 'xl' %}1.3rem{% else %}1.1rem{% endif %};
+    font-weight: 600;
+    color: {% if text_color != blank and text_color != 'rgba(0,0,0,0)' %}{{ text_color }}{% else %}white{% endif %};
+    background: {% if background != blank and background != 'rgba(0,0,0,0)' %}{{ background }}{% else %}hsl(345deg 100% 47%){% endif %};
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    text-align: center;
+  }
+
+  .button-3d:hover:not([disabled]):not([aria-disabled="true"]) {
+    filter: brightness(110%);
+  }
+
+  .button-3d:hover:not([disabled]):not([aria-disabled="true"]) .button-3d__front {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .button-3d:active:not([disabled]):not([aria-disabled="true"]) .button-3d__front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .button-3d:hover:not([disabled]):not([aria-disabled="true"]) .button-3d__shadow {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .button-3d:active:not([disabled]):not([aria-disabled="true"]) .button-3d__shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .button-3d:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .button-3d__front .text-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+</style>
+
 {% liquid
   assign style = style | default: settings.button_style
-
-  capture class_attribute
-    echo 'button'
-
-    if size != blank and size != 'base'
-      echo ' button--' | append: size
-    endif
-
-    if style == 'outline'
-      echo ' button--outline'
-    endif
-
-    if secondary and disabled != true
-      echo ' button--secondary'
-    endif
-
-    if subdued and background == blank and text_color == blank
-      echo ' button--subdued'
-    endif
-
-    if stretch
-      echo ' w-full'
-    endif
-  endcapture
 %}
 
-{%- capture style_attribute -%}
-  {%- if background != blank and background != 'rgba(0,0,0,0)' -%}
-    --button-background: {{ background.rgb }} / var(--button-background-opacity, 1);
-
-    {%- if style != 'outline' -%}
-      --button-outline-color: {{ background.rgb }};
-    {%- endif -%}
-  {%- endif -%}
-
-  {%- if text_color != blank and text_color != 'rgba(0,0,0,0)' -%}
-    --button-text-color: {{ text_color.rgb }};
-
-    {%- if style == 'outline' -%}
-      --button-outline-color: {{ text_color.rgb }};
-    {%- endif -%}
-  {%- endif -%}
-{%- endcapture -%}
-
 {%- capture attributes -%}
-  {% if class_attribute != blank %}class="{{ class_attribute | strip_newlines | strip }}"{% endif %}
-  {% if style_attribute != blank %}style="{{ style_attribute | strip_newlines | strip }}"{% endif %}
   {% if aria_controls %}aria-controls="{{ aria_controls }}" aria-expanded="false"{% endif %}
   {% if disabled %}{% if href %}role="link" aria-disabled="true"{% else %}disabled{% endif %}{% endif %}
   {% if name %}name="{{ name }}"{% endif %}
@@ -88,22 +158,28 @@ Supported variables
 {%- endcapture -%}
 
 {%- capture button_content -%}
-  {% if icon != blank %}
-    <div class="text-with-icon justify-center">
-      {%- render 'icon' with icon, width: 18, height: 18 -%}
+  <span class="button-3d__shadow"></span>
+  <span class="button-3d__edge"></span>
+  <span class="button-3d__front">
+    {% if icon != blank %}
+      <span class="text-with-icon">
+        {%- render 'icon' with icon, width: 18, height: 18 -%}
+        {{- content -}}
+      </span>
+    {%- else -%}
       {{- content -}}
-    </div>
-  {%- else -%}
-    {{- content -}}
-  {%- endif -%}
+    {%- endif -%}
+  </span>
 {%- endcapture -%}
 
-{%- if href != blank -%}
-  <a {{ attributes }} {{ block.shopify_attributes }}>
-    {{- button_content -}}
-  </a>
-{%- else -%}
-  <button type="{{ type | default: 'button' }}" {{ attributes }} {{ block.shopify_attributes }}>
-    {{- button_content -}}
-  </button>
-{%- endif -%}
+<div class="button-3d-wrapper">
+  {%- if href != blank -%}
+    <a class="button-3d" {{ attributes }} {{ block.shopify_attributes }}>
+      {{- button_content -}}
+    </a>
+  {%- else -%}
+    <button type="{{ type | default: 'button' }}" class="button-3d" {{ attributes }} {{ block.shopify_attributes }}>
+      {{- button_content -}}
+    </button>
+  {%- endif -%}
+</div>
