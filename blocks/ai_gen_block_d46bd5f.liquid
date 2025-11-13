@@ -43,6 +43,8 @@
     letter-spacing: {{ block.settings.label_letter_spacing }}px;
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 
   .ai-product-info-table__content-{{ ai_gen_id }} {
@@ -51,6 +53,8 @@
     line-height: {{ block.settings.content_line_height }};
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 
   .ai-product-info-table__content-{{ ai_gen_id }} p {
@@ -79,11 +83,15 @@
     .ai-product-info-table__label-{{ ai_gen_id }} {
       font-size: {{ block.settings.mobile_label_font_size }}px;
       align-items: flex-start;
+      text-align: left;
+      justify-content: flex-start;
     }
 
     .ai-product-info-table__content-{{ ai_gen_id }} {
       font-size: {{ block.settings.mobile_content_font_size }}px;
       align-items: flex-start;
+      text-align: left;
+      justify-content: flex-start;
     }
   }
 {% endstyle %}
