@@ -145,17 +145,43 @@
         {%- endif -%}
       </div>
 
+      <style>
+        /* Mobile optimization for cart drawer buttons */
+        @media screen and (max-width: 699px) {
+          .cart-drawer .buy-buttons {
+            gap: 0.5rem !important;
+          }
+          
+          .cart-drawer .buy-buttons .button {
+            font-size: 0.9rem !important;
+            padding: 8px 16px !important;
+          }
+          
+          .cart-drawer .buy-buttons .button-3d__front {
+            padding: 8px 20px !important;
+            font-size: 0.9rem !important;
+          }
+          
+          .cart-drawer .buy-buttons .button-3d__shadow,
+          .cart-drawer .buy-buttons .button-3d__edge {
+            border-radius: 10px !important;
+          }
+          
+          .cart-drawer .buy-buttons .button-3d__front {
+            border-radius: 10px !important;
+          }
+        }
+      </style>
+
       <form action="{{ routes.cart_url }}" method="POST" class="buy-buttons {% if section.settings.show_checkout_button %}buy-buttons--compact{% endif %}">
         {%- assign checkout_label = 'cart.general.checkout' | t -%}
 
         {%- if section.settings.show_view_cart_button or section.settings.show_checkout_button == false -%}
-          <a href="{{ routes.cart_url }}" class="button button--xl {% if section.settings.show_checkout_button %}button--secondary{% endif %}" data-no-instant>
-            {{- 'cart.general.view_cart' | t -}}
-          </a>
+          {%- render 'button', href: routes.cart_url, content: 'cart.general.view_cart' | t, size: 'lg', secondary: true -%}
         {%- endif -%}
 
         {%- if section.settings.show_checkout_button -%}
-          {%- render 'button', type: 'submit', content: checkout_label, icon: 'picto-lock', name: 'checkout', size: 'xl' -%}
+          {%- render 'button', type: 'submit', content: checkout_label, icon: 'picto-lock', name: 'checkout', size: 'lg' -%}
         {%- endif -%}
       </form>
     </div>
