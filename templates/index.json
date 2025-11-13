@@ -90,7 +90,7 @@
           "type": "ai_gen_block_46a7ea5",
           "settings": {
             "image_mobile": "shopify://shop_images/2800_x_1000_px_1200_x_1600_px_2_.webp_2.webp",
-            "image_desktop": "shopify://shop_images/kam-idris-vqMQN9zImG4-unsplash.jpg",
+            "image_desktop": "shopify://shop_images/New_one_02.webp",
             "height_mobile": 600,
             "height_desktop": 600,
             "overlay_color": "#000000",
@@ -101,7 +101,7 @@
             "content_padding_desktop": 60,
             "content_spacing": 30,
             "heading": "<p>Welcome to <strong>Bengal Mart-বেঙ্গল মার্ট </strong></p>",
-            "heading_color": "#ffffff",
+            "heading_color": "#f5f5f5",
             "heading_size_mobile": 26,
             "heading_size_desktop": 30,
             "subheading": "",
