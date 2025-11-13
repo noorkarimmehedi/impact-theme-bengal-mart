@@ -9976,7 +9976,8 @@ split-lines {
 }
 
 @media screen and (max-width: 749px) {
-  .shopify-section--product {
-    --container-gutter: 8px;
+  .shopify-section--product .container {
+    padding-inline-start: 24px !important;
+    padding-inline-end: 24px !important;
   }
 }
