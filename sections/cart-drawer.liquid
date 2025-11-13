@@ -146,50 +146,87 @@
       </div>
 
       <style>
-        /* Cart drawer button fixes - applies to all screen sizes */
+        /* Cart drawer button fixes - HIGH SPECIFICITY */
+        #cart-drawer .buy-buttons,
+        cart-drawer .buy-buttons,
         .cart-drawer .buy-buttons {
           display: flex !important;
           flex-direction: row !important;
+          flex-wrap: nowrap !important;
           gap: 0.5rem !important;
           align-items: stretch !important;
-        }
-        
-        .cart-drawer .buy-buttons .button-3d-wrapper {
-          flex: 1 !important;
-          min-width: 0 !important;
-        }
-        
-        .cart-drawer .buy-buttons .button {
-          white-space: nowrap !important;
           width: 100% !important;
         }
         
+        #cart-drawer .buy-buttons > *,
+        cart-drawer .buy-buttons > *,
+        .cart-drawer .buy-buttons > * {
+          flex: 1 1 0% !important;
+          min-width: 0 !important;
+          max-width: 50% !important;
+        }
+        
+        #cart-drawer .buy-buttons .button-3d-wrapper,
+        cart-drawer .buy-buttons .button-3d-wrapper,
+        .cart-drawer .buy-buttons .button-3d-wrapper {
+          flex: 1 1 0% !important;
+          min-width: 0 !important;
+        }
+        
+        #cart-drawer .buy-buttons .button,
+        cart-drawer .buy-buttons .button,
+        .cart-drawer .buy-buttons .button {
+          white-space: nowrap !important;
+          width: 100% !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        
+        #cart-drawer .buy-buttons .button-3d,
+        cart-drawer .buy-buttons .button-3d,
         .cart-drawer .buy-buttons .button-3d {
           width: 100% !important;
           height: 100% !important;
         }
         
+        #cart-drawer .buy-buttons .button-3d__front,
+        cart-drawer .buy-buttons .button-3d__front,
         .cart-drawer .buy-buttons .button-3d__front {
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        
+        #cart-drawer .buy-buttons a,
+        #cart-drawer .buy-buttons button,
+        cart-drawer .buy-buttons a,
+        cart-drawer .buy-buttons button {
           white-space: nowrap !important;
         }
         
         /* Mobile optimization for cart drawer buttons */
         @media screen and (max-width: 699px) {
+          #cart-drawer .buy-buttons,
+          cart-drawer .buy-buttons,
           .cart-drawer .buy-buttons {
             gap: 0.5rem !important;
           }
           
+          #cart-drawer .buy-buttons .button,
+          cart-drawer .buy-buttons .button,
           .cart-drawer .buy-buttons .button {
             font-size: 0.85rem !important;
-            padding: 6px 12px !important;
+            padding: 6px 8px !important;
             text-align: center !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
           }
           
+          #cart-drawer .buy-buttons .button-3d__front,
+          cart-drawer .buy-buttons .button-3d__front,
           .cart-drawer .buy-buttons .button-3d__front {
-            padding: 6px 16px !important;
+            padding: 6px 12px !important;
             font-size: 0.85rem !important;
             text-align: center !important;
             display: flex !important;
@@ -197,14 +234,20 @@
             justify-content: center !important;
           }
           
+          #cart-drawer .buy-buttons .button-3d__front .text-with-icon,
+          cart-drawer .buy-buttons .button-3d__front .text-with-icon,
           .cart-drawer .buy-buttons .button-3d__front .text-with-icon {
             justify-content: center !important;
             gap: 4px !important;
+            flex-wrap: nowrap !important;
           }
           
-          .cart-drawer .buy-buttons .button-3d__shadow,
-          .cart-drawer .buy-buttons .button-3d__edge,
-          .cart-drawer .buy-buttons .button-3d__front {
+          #cart-drawer .buy-buttons .button-3d__shadow,
+          #cart-drawer .buy-buttons .button-3d__edge,
+          #cart-drawer .buy-buttons .button-3d__front,
+          cart-drawer .buy-buttons .button-3d__shadow,
+          cart-drawer .buy-buttons .button-3d__edge,
+          cart-drawer .buy-buttons .button-3d__front {
             border-radius: 10px !important;
           }
         }
