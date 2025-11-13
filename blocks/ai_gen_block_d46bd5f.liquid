@@ -14,6 +14,9 @@
     border-radius: {{ block.settings.border_radius }}px;
     padding: {{ block.settings.section_padding }}px;
     background-color: {{ block.settings.background_color }};
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .ai-product-info-table__row-{{ ai_gen_id }} {
@@ -63,6 +66,7 @@
       padding: {{ block.settings.mobile_section_padding }}px;
       margin-left: {{ block.settings.mobile_horizontal_margin }}px;
       margin-right: {{ block.settings.mobile_horizontal_margin }}px;
+      max-width: none;
     }
 
     .ai-product-info-table__row-{{ ai_gen_id }} {
