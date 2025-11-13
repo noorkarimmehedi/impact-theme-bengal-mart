@@ -9975,7 +9975,7 @@ split-lines {
   transform: translateY(2px);
 }
 
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 749px) {
   .product,
   .product-info,
   .product-gallery {
