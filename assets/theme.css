@@ -9975,10 +9975,35 @@ split-lines {
   transform: translateY(2px);
 }
 
-/* Global mobile padding increase for product pages */
+/* Increase mobile padding for product page containers */
 @media screen and (max-width: 749px) {
-  .shopify-section--product-template .container,
-  .shopify-section--product-template .section {
-    --container-gutter: var(--spacing-8); /* Increased from default */
+  /* Increase main container padding on mobile */
+  .product {
+    padding-left: var(--spacing-8);  /* Increased from default */
+    padding-right: var(--spacing-8);
+  }
+  
+  /* Increase product info container padding */
+  .product-info {
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+  }
+  
+  /* Increase product gallery padding */
+  .product-gallery {
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+  }
+  
+  /* Adjust variant picker padding */
+  .variant-picker {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+  
+  /* Adjust buy buttons container */
+  .buy-buttons {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
   }
 }
