@@ -9975,13 +9975,3 @@ split-lines {
   transform: translateY(2px);
 }
 
-/* Make product page containers MAXIMUM WIDTH on mobile - ultra minimal padding */
-@media screen and (max-width: 749px) {
-  .shopify-section--product-template {
-    --container-gutter: var(--spacing-0-5);   /* 2px padding - ultra tight */
-    /* OR */
-    --container-gutter: 1px;                  /* 1px padding - extremely tight */
-    /* OR */
-    --container-gutter: 0px;                  /* 0px padding - completely edge-to-edge */
-  }
-}
