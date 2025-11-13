@@ -86,7 +86,7 @@
 {% style %}
   .offer-cards-{{ unique_id }} {
     width: 100%;
-    padding: 0;
+    padding: 0 16px;
   }
 
   .offer-cards__title-{{ unique_id }} {
@@ -254,6 +254,10 @@
   }
 
   @media screen and (min-width: 749px) {
+    .offer-cards-{{ unique_id }} {
+      padding: 0;
+    }
+
     .offer-cards__carousel-{{ unique_id }} {
       padding: 0;
     }
