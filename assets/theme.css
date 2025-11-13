@@ -9979,8 +9979,8 @@ split-lines {
 @media screen and (max-width: 749px) {
   /* Increase main container padding on mobile */
   .product {
-    padding-left: var(--spacing-8);  /* Increased from default */
-    padding-right: var(--spacing-8);
+    padding-left: var(--spacing-20);  /* Increased from default */
+    padding-right: var(--spacing-20);
   }
   
   /* Increase product info container padding */
