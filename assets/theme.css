@@ -9975,35 +9975,23 @@ split-lines {
   transform: translateY(2px);
 }
 
-/* Increase mobile padding for product page containers */
+/* DECREASE mobile padding to make product page containers WIDER */
 @media screen and (max-width: 749px) {
-  /* Increase main container padding on mobile */
+  /* Reduce main container padding on mobile */
   .product {
-    padding-left: var(--spacing-8);  /* Increased from default */
-    padding-right: var(--spacing-8);
+    padding-left: var(--spacing-2);  /* Decreased for wider content */
+    padding-right: var(--spacing-2);
   }
   
-  /* Increase product info container padding */
+  /* Reduce product info container padding */
   .product-info {
-    padding-left: var(--spacing-6);
-    padding-right: var(--spacing-6);
+    padding-left: var(--spacing-2);
+    padding-right: var(--spacing-2);
   }
   
-  /* Increase product gallery padding */
+  /* Reduce product gallery padding */
   .product-gallery {
-    padding-left: var(--spacing-6);
-    padding-right: var(--spacing-6);
-  }
-  
-  /* Adjust variant picker padding */
-  .variant-picker {
-    padding-left: var(--spacing-4);
-    padding-right: var(--spacing-4);
-  }
-  
-  /* Adjust buy buttons container */
-  .buy-buttons {
-    padding-left: var(--spacing-4);
-    padding-right: var(--spacing-4);
+    padding-left: var(--spacing-2);
+    padding-right: var(--spacing-2);
   }
 }
