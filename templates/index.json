@@ -89,7 +89,7 @@
         "ai_gen_block_46a7ea5_bAGbUj": {
           "type": "ai_gen_block_46a7ea5",
           "settings": {
-            "image_mobile": "shopify://shop_images/Hero.png",
+            "image_mobile": "shopify://shop_images/2800_x_1000_px_1200_x_1600_px_2_.webp_2.webp",
             "image_desktop": "shopify://shop_images/kam-idris-vqMQN9zImG4-unsplash.jpg",
             "height_mobile": 600,
             "height_desktop": 600,
@@ -104,7 +104,7 @@
             "heading_color": "#ffffff",
             "heading_size_mobile": 26,
             "heading_size_desktop": 30,
-            "subheading": "<p>Bangladesh’s First Homegrown Home & Kitchen Brand.</p>",
+            "subheading": "",
             "subheading_color": "#ffffff",
             "subheading_size_mobile": 16,
             "subheading_size_desktop": 18,
