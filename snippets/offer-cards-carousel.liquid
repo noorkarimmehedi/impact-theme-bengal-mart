@@ -100,10 +100,9 @@
   .offer-cards__carousel-{{ unique_id }} {
     position: relative;
     overflow: hidden;
-    width: 100%;
+    width: calc(100% + 12px);
     padding: 0;
     margin-left: -6px;
-    margin-right: -6px;
   }
 
   .offer-cards__track-{{ unique_id }} {
@@ -259,7 +258,7 @@
     .offer-cards__carousel-{{ unique_id }} {
       padding: 0;
       margin-left: 0;
-      margin-right: 0;
+      width: 100%;
     }
 
     .offer-cards__track-{{ unique_id }} {
