@@ -179,21 +179,22 @@
       transform: translateY(-50%);
       width: 48px;
       height: 48px;
-      border-radius: 50%;
+      border-radius: 8px;
       background-color: {{ block.settings.arrow_background }};
       color: {{ block.settings.arrow_color }};
-      border: none;
+      border: 1px solid #E0E0E0;
       cursor: pointer;
       align-items: center;
       justify-content: center;
       z-index: 10;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     }
 
     .ai-category-arrow-{{ ai_gen_id }}:hover {
       background-color: {{ block.settings.arrow_hover_background }};
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border-color: #CCCCCC;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     }
 
     .ai-category-arrow-{{ ai_gen_id }}:disabled {
