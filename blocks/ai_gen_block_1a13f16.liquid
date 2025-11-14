@@ -31,6 +31,8 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  {{ block.settings.title_font | font_face: font_display: 'swap' }}
+
   .ai-category-section-{{ ai_gen_id }} {
     padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
   }
@@ -40,6 +42,9 @@
     margin-bottom: 30px;
     font-size: 32px;
     font-weight: 600;
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
   }
 
   .ai-category-grid-{{ ai_gen_id }} {
@@ -404,6 +409,12 @@
       "id": "section_title",
       "label": "Section title",
       "default": "Shop by Category"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "helvetica_n4"
     },
     {
       "type": "header",
