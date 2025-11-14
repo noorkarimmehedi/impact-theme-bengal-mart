@@ -1,9 +1,32 @@
 {% doc %}
-  Luxury home and kitchen category section with elegant design
-  - Mobile: 2 columns grid for better image visibility
-  - Desktop: 4-item slider with refined styling
-  - Elegant borders, subtle shadows, and sophisticated hover effects
-  - Optimized for premium home goods brands
+  @prompt
+    generate me a fashion brand category section where 3 categories in every row in mobile version and appealing in desktop version , should have the option for Category custom image adding , in desktop version it should be slider with arrow key . don't change anything on mobile version. for the Border and shadow i want this: Border
+    Border width
+    
+    1
+    Border color
+    
+    #E0E0E0
+    Hover border color
+    
+    #CCCCCC
+    Border radius
+    
+    8
+    Shadow
+    Horizontal offset
+    
+    0
+    Vertical offset
+    
+    4
+    Blur radius
+    
+    8
+    Shadow opacity
+    
+    0
+    , i don't want category Description and category title should be option for overlay text , option for collection should be added fro shopify, the default collection image isn't showing also title is not added please add titile option. i should have the option to hide unused collections, there is a black overlay background on overlay collection name text. remove that background, the collection default image isn't showing. in desktop version there should be arrow on left and right side to see collections , i barely see the Overlay text. fix this . also add top and bottom padding should be adjustable , gap between collections and size of the collection image should be adjustable 
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -12,7 +35,6 @@
 
   .ai-category-section-{{ ai_gen_id }} {
     padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
-    background-color: {{ block.settings.section_background }};
   }
 
   .ai-category-title-{{ ai_gen_id }} {
@@ -32,7 +54,7 @@
 
   .ai-category-title-wrapper-{{ ai_gen_id }} {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding-top: 20px;
     position: relative;
     display: inline-block;
@@ -131,7 +153,7 @@
 
   .ai-category-grid-{{ ai_gen_id }} {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: {{ block.settings.gap_mobile }}px;
     max-width: 100%;
   }
@@ -142,8 +164,7 @@
     border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
     border-radius: {{ block.settings.border_radius }}px;
     box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #ffffff;
+    transition: all 0.3s ease;
   }
 
   {% if block.settings.image_aspect_ratio == 'square' %}
@@ -162,8 +183,6 @@
 
   .ai-category-item-{{ ai_gen_id }}:hover {
     border-color: {{ block.settings.hover_border_color }};
-    transform: translateY(-4px);
-    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical | plus: 8 }}px {{ block.settings.shadow_blur | plus: 8 }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 | times: 1.5 }});
   }
 
   .ai-category-link-{{ ai_gen_id }} {
@@ -178,33 +197,27 @@
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: hidden;
   }
 
   .ai-category-image-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .ai-category-item-{{ ai_gen_id }}:hover .ai-category-image-{{ ai_gen_id }} {
-    transform: scale(1.05);
   }
 
   .ai-category-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .ai-category-placeholder-{{ ai_gen_id }} svg {
-    width: 50%;
-    height: 50%;
-    opacity: 0.2;
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
   }
 
   .ai-category-overlay-{{ ai_gen_id }} {
@@ -212,21 +225,14 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 16px 12px;
+    padding: 12px;
     background: linear-gradient(to top, rgba(0, 0, 0, {{ block.settings.overlay_background_opacity | divided_by: 100.0 }}), transparent);
     color: {{ block.settings.overlay_text_color }};
     text-align: center;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
     z-index: 2;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: padding 0.3s ease;
-  }
-
-  .ai-category-item-{{ ai_gen_id }}:hover .ai-category-overlay-{{ ai_gen_id }} {
-    padding-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   }
 
   .ai-category-desktop-slider-{{ ai_gen_id }} {
@@ -239,7 +245,7 @@
 
   @media screen and (min-width: 750px) {
     .ai-category-section-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top }}px 40px {{ block.settings.padding_bottom }}px;
+      padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
     }
 
     .ai-category-title-button-{{ ai_gen_id }} {
@@ -250,10 +256,6 @@
       max-width: 100%;
     }
 
-    .ai-category-title-wrapper-{{ ai_gen_id }} {
-      margin-bottom: 60px;
-    }
-
     .ai-category-grid-{{ ai_gen_id }} {
       display: none;
     }
@@ -261,9 +263,9 @@
     .ai-category-desktop-slider-{{ ai_gen_id }} {
       display: block;
       position: relative;
-      max-width: 1400px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 0 60px;
+      padding: 0 40px;
     }
 
     .ai-category-slider-wrapper-{{ ai_gen_id }} {
@@ -273,7 +275,7 @@
     .ai-category-slider-track-{{ ai_gen_id }} {
       display: flex;
       gap: {{ block.settings.gap_desktop }}px;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.4s ease;
     }
 
     .ai-category-slider-item-{{ ai_gen_id }} {
@@ -286,35 +288,29 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
       background-color: {{ block.settings.arrow_background }};
       color: {{ block.settings.arrow_color }};
-      border: 1px solid {{ block.settings.border_color }};
+      border: 1px solid #E0E0E0;
       cursor: pointer;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     }
 
     .ai-category-arrow-{{ ai_gen_id }}:hover {
       background-color: {{ block.settings.arrow_hover_background }};
-      border-color: {{ block.settings.hover_border_color }};
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-      transform: translateY(-50%) scale(1.05);
+      border-color: #CCCCCC;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     }
 
     .ai-category-arrow-{{ ai_gen_id }}:disabled {
       opacity: 0.3;
       cursor: not-allowed;
-      transform: translateY(-50%) scale(1);
-    }
-
-    .ai-category-arrow-{{ ai_gen_id }}:disabled:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .ai-category-arrow-prev-{{ ai_gen_id }} {
@@ -326,26 +322,13 @@
     }
 
     .ai-category-arrow-{{ ai_gen_id }} svg {
-      width: 22px;
-      height: 22px;
-      stroke-width: 2.5px;
+      width: 20px;
+      height: 20px;
     }
 
     .ai-category-overlay-{{ ai_gen_id }} {
-      font-size: 14px;
-      padding: 20px 16px;
-      letter-spacing: 0.8px;
-    }
-  }
-
-  @media screen and (min-width: 990px) {
-    .ai-category-section-{{ ai_gen_id }} {
-      padding: {{ block.settings.padding_top }}px 60px {{ block.settings.padding_bottom }}px;
-    }
-
-    .ai-category-overlay-{{ ai_gen_id }} {
-      font-size: 15px;
-      padding: 24px 20px;
+      font-size: 16px;
+      padding: 16px;
     }
   }
 {% endstyle %}
@@ -393,21 +376,21 @@
               <div class="ai-category-image-wrapper-{{ ai_gen_id }}">
                 {% if custom_image != blank %}
                   <img
-                    src="{{ custom_image | image_url: width: 600 }}"
+                    src="{{ custom_image | image_url: width: 500 }}"
                     alt="{{ collection.title | escape }}"
                     class="ai-category-image-{{ ai_gen_id }}"
                     loading="lazy"
-                    width="600"
-                    height="600"
+                    width="500"
+                    height="500"
                   >
                 {% elsif collection.featured_image != blank %}
                   <img
-                    src="{{ collection.featured_image | image_url: width: 600 }}"
+                    src="{{ collection.featured_image | image_url: width: 500 }}"
                     alt="{{ collection.title | escape }}"
                     class="ai-category-image-{{ ai_gen_id }}"
                     loading="lazy"
-                    width="600"
-                    height="600"
+                    width="500"
+                    height="500"
                   >
                 {% else %}
                   <div class="ai-category-placeholder-{{ ai_gen_id }}">
@@ -452,21 +435,21 @@
                   <div class="ai-category-image-wrapper-{{ ai_gen_id }}">
                     {% if custom_image != blank %}
                       <img
-                        src="{{ custom_image | image_url: width: 600 }}"
+                        src="{{ custom_image | image_url: width: 500 }}"
                         alt="{{ collection.title | escape }}"
                         class="ai-category-image-{{ ai_gen_id }}"
                         loading="lazy"
-                        width="600"
-                        height="600"
+                        width="500"
+                        height="500"
                       >
                     {% elsif collection.featured_image != blank %}
                       <img
-                        src="{{ collection.featured_image | image_url: width: 600 }}"
+                        src="{{ collection.featured_image | image_url: width: 500 }}"
                         alt="{{ collection.title | escape }}"
                         class="ai-category-image-{{ ai_gen_id }}"
                         loading="lazy"
-                        width="600"
-                        height="600"
+                        width="500"
+                        height="500"
                       >
                     {% else %}
                       <div class="ai-category-placeholder-{{ ai_gen_id }}">
@@ -545,14 +528,14 @@
 
 {% schema %}
 {
-  "name": "Luxury Categories",
+  "name": "Fashion category grid",
   "tag": null,
   "settings": [
     {
       "type": "text",
       "id": "section_title",
       "label": "Section title",
-      "default": "Explore Collections"
+      "default": "Shop by Category"
     },
     {
       "type": "font_picker",
@@ -568,23 +551,13 @@
       "type": "color",
       "id": "title_background_color",
       "label": "Title background color",
-      "default": "#2C3E50"
+      "default": "#FFD700"
     },
     {
       "type": "color",
       "id": "title_text_color",
       "label": "Title text color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "header",
-      "content": "Section styling"
-    },
-    {
-      "type": "color",
-      "id": "section_background",
-      "label": "Section background color",
-      "default": "#FAFAFA"
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -617,7 +590,7 @@
     {
       "type": "range",
       "id": "gap_mobile",
-      "min": 8,
+      "min": 4,
       "max": 40,
       "step": 2,
       "unit": "px",
@@ -627,12 +600,12 @@
     {
       "type": "range",
       "id": "gap_desktop",
-      "min": 16,
+      "min": 8,
       "max": 60,
       "step": 4,
       "unit": "px",
       "label": "Gap between items (desktop)",
-      "default": 28
+      "default": 24
     },
     {
       "type": "header",
@@ -642,21 +615,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 120,
+      "max": 100,
       "step": 5,
       "unit": "px",
       "label": "Top padding",
-      "default": 60
+      "default": 40
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 120,
+      "max": 100,
       "step": 5,
       "unit": "px",
       "label": "Bottom padding",
-      "default": 60
+      "default": 40
     },
     {
       "type": "header",
@@ -672,7 +645,7 @@
       "type": "color",
       "id": "overlay_text_color",
       "label": "Overlay text color",
-      "default": "#FFFFFF"
+      "default": "#ffffff"
     },
     {
       "type": "range",
@@ -682,7 +655,7 @@
       "step": 5,
       "unit": "%",
       "label": "Overlay background opacity",
-      "default": 60
+      "default": 70
     },
     {
       "type": "header",
@@ -708,7 +681,7 @@
       "type": "color",
       "id": "hover_border_color",
       "label": "Hover border color",
-      "default": "#B8B8B8"
+      "default": "#CCCCCC"
     },
     {
       "type": "range",
@@ -752,7 +725,7 @@
       "step": 2,
       "unit": "px",
       "label": "Blur radius",
-      "default": 12
+      "default": 8
     },
     {
       "type": "range",
@@ -762,7 +735,7 @@
       "step": 5,
       "unit": "%",
       "label": "Shadow opacity",
-      "default": 10
+      "default": 0
     },
     {
       "type": "header",
@@ -772,19 +745,19 @@
       "type": "color",
       "id": "arrow_background",
       "label": "Arrow background",
-      "default": "#FFFFFF"
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "arrow_hover_background",
       "label": "Arrow hover background",
-      "default": "#2C3E50"
+      "default": "#f4f4f4"
     },
     {
       "type": "color",
       "id": "arrow_color",
       "label": "Arrow color",
-      "default": "#2C3E50"
+      "default": "#000000"
     },
     {
       "type": "header",
@@ -1029,7 +1002,7 @@
   ],
   "presets": [
     {
-      "name": "Luxury Category Collection"
+      "name": "Fashion category grid"
     }
   ]
 }
