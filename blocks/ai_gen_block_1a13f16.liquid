@@ -61,85 +61,69 @@
     width: 100%;
   }
 
-  .ai-category-title-button-{{ ai_gen_id }} {
-    text-align: center;
-    transition: 0.3s ease-in-out;
-    cursor: default;
-    background-color: {{ block.settings.title_background_color }};
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
-    font-size: 32px;
-    font-weight: bold;
-    padding: 0.5em 1em;
-    border-width: 0px;
-    border-radius: 2rem;
-    box-shadow: #33333366 4px 4px 0 1px;
-    animation: ai-title-idle-{{ ai_gen_id }} 1s infinite ease-in-out;
+  .ai-category-title-inner-{{ ai_gen_id }} {
     position: relative;
-    color: {{ block.settings.title_text_color }};
+    display: inline-block;
+    transition: filter 250ms;
   }
 
-  @keyframes ai-title-idle-{{ ai_gen_id }} {
-    0% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(2.5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-
-  .ai-category-title-button-{{ ai_gen_id }}:hover {
-    font-weight: bold;
-    border-width: 0px;
-    border-radius: 2rem;
-    transform: rotate(-2.5deg);
-    animation: ai-title-hover-{{ ai_gen_id }} 2.5s infinite ease-in-out;
-  }
-
-  @keyframes ai-title-hover-{{ ai_gen_id }} {
-    0% {
-      transform: rotate(0deg) translateY(0);
-    }
-    25% {
-      transform: rotate(-1deg) translateY(-2px);
-    }
-    50% {
-      transform: rotate(0deg) translateY(2px);
-    }
-    75% {
-      transform: rotate(-1deg) translateY(-2px);
-    }
-    100% {
-      transform: rotate(0deg) translateY(0);
-    }
-  }
-
-  .ai-category-title-highlight-{{ ai_gen_id }} {
+  .ai-category-title-shadow-{{ ai_gen_id }} {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
   }
 
-  .ai-category-title-highlight-{{ ai_gen_id }} path {
-    fill: none;
-    stroke: rgba(255, 225, 0, 0.5);
-    stroke-width: 10;
-    stroke-linecap: round;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    transition: stroke-dashoffset 0.5s ease-in-out;
+  .ai-category-title-edge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+      to left,
+      hsl(340deg 100% 16%) 0%,
+      hsl(340deg 100% 32%) 8%,
+      hsl(340deg 100% 32%) 92%,
+      hsl(340deg 100% 16%) 100%
+    );
   }
 
-  .ai-category-title-button-{{ ai_gen_id }}:hover .ai-category-title-highlight-{{ ai_gen_id }} path {
-    stroke-dashoffset: 0;
+  .ai-category-title-front-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    padding: 4px 27px;
+    border-radius: 12px;
+    font-size: 32px;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
+  }
+
+  .ai-category-title-inner-{{ ai_gen_id }}:hover {
+    filter: brightness(110%);
+  }
+
+  .ai-category-title-inner-{{ ai_gen_id }}:hover .ai-category-title-front-{{ ai_gen_id }} {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .ai-category-title-inner-{{ ai_gen_id }}:hover .ai-category-title-shadow-{{ ai_gen_id }} {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
   }
 
   .ai-category-grid-{{ ai_gen_id }} {
@@ -239,9 +223,9 @@
       padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
     }
 
-    .ai-category-title-button-{{ ai_gen_id }} {
+    .ai-category-title-front-{{ ai_gen_id }} {
       font-size: 48px;
-      padding: 0.4em 1.2em;
+      padding: 6px 40px;
     }
 
     .ai-category-grid-{{ ai_gen_id }} {
@@ -324,11 +308,10 @@
 <div class="ai-category-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   {% if block.settings.section_title != blank %}
     <div class="ai-category-title-wrapper-{{ ai_gen_id }}">
-      <div class="ai-category-title-button-{{ ai_gen_id }}">
-        {{ block.settings.section_title }}
-        <svg class="ai-category-title-highlight-{{ ai_gen_id }}" viewBox="0 0 200 60" preserveAspectRatio="none">
-          <path d="M 5,30 Q 50,5 100,30 T 195,30" />
-        </svg>
+      <div class="ai-category-title-inner-{{ ai_gen_id }}">
+        <span class="ai-category-title-shadow-{{ ai_gen_id }}"></span>
+        <span class="ai-category-title-edge-{{ ai_gen_id }}"></span>
+        <span class="ai-category-title-front-{{ ai_gen_id }}">{{ block.settings.section_title }}</span>
       </div>
     </div>
   {% endif %}
@@ -516,22 +499,6 @@
       "id": "title_font",
       "label": "Title font",
       "default": "helvetica_n4"
-    },
-    {
-      "type": "header",
-      "content": "Title styling"
-    },
-    {
-      "type": "color",
-      "id": "title_background_color",
-      "label": "Title background color",
-      "default": "#FFD700"
-    },
-    {
-      "type": "color",
-      "id": "title_text_color",
-      "label": "Title text color",
-      "default": "#000000"
     },
     {
       "type": "header",
