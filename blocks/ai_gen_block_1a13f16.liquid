@@ -71,12 +71,12 @@
     align-items: center;
     user-select: none;
     font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
-    padding: 0.5em 1em;
+    padding: 0.4em 0.8em;
     border-width: 0px;
     border-radius: 4px;
-    box-shadow: #33333366 4px 4px 0 1px;
+    box-shadow: #33333366 3px 3px 0 1px;
     animation: ai-title-idle-{{ ai_gen_id }} 1s infinite ease-in-out;
     position: relative;
     color: {{ block.settings.title_text_color }};
@@ -249,7 +249,10 @@
     }
 
     .ai-category-title-button-{{ ai_gen_id }} {
-      font-size: 32px;
+      font-size: 36px;
+      padding: 0.5em 1.2em;
+      border-radius: 2rem;
+      box-shadow: #33333366 4px 4px 0 1px;
       max-width: 100%;
     }
 
