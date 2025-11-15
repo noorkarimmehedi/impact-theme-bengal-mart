@@ -47,29 +47,6 @@
     "favicon": "shopify://shop_images/favicon_bengal.png",
     "checkout_accent_color": "#f0c417",
     "checkout_button_color": "#1a1a1a",
-    "content_for_index": [],
-    "blocks": {
-      "6544682535036668446": {
-        "type": "shopify://apps/pumper-bundles/blocks/app-embed/0856870d-2aca-4b1e-a662-cf1797f61270",
-        "disabled": false,
-        "settings": {}
-      },
-      "17676059084223943535": {
-        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
-        "disabled": false,
-        "settings": {}
-      },
-      "13669795325273674392": {
-        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
-        "disabled": false,
-        "settings": {}
-      },
-      "7153973999063185398": {
-        "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-embed/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
-        "disabled": true,
-        "settings": {}
-      }
-    },
     "designForm": 1,
     "sh_price_p": "Product price",
     "msg_phone": "This field is required",
@@ -104,7 +81,59 @@
     "color_old_price_bundles": "gray",
     "color_coupon_button": "#000000",
     "coupon_code_placeholder": "Coupon Code",
-    "coupon_button": "Apply"
+    "coupon_button": "Apply",
+    "content_for_index": [],
+    "blocks": {
+      "6544682535036668446": {
+        "type": "shopify://apps/pumper-bundles/blocks/app-embed/0856870d-2aca-4b1e-a662-cf1797f61270",
+        "disabled": false,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
+      },
+      "7153973999063185398": {
+        "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-embed/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
+        "disabled": true,
+        "settings": {}
+      },
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
+        "disabled": true,
+        "settings": {}
+      },
+      "5169505657208949261": {
+        "type": "shopify://apps/cod-form-upsell-codmonster/blocks/star_rating/f2edb576-aa9c-431d-8c36-cd65a86a673c",
+        "disabled": false,
+        "settings": {
+          "headline_form": "",
+          "var_opt_out": "",
+          "form_color": "#000000",
+          "color_headline_form": "#000000",
+          "color_form_button": "#ffffff",
+          "color_border_form": "#000000",
+          "background_form_button": "#000000",
+          "labels": "Please fill this form to order this item!@|full name@|Phone number@|City@|Address",
+          "button_form_text": "Buy now",
+          "quick_form": "",
+          "sh_price_p": "",
+          "sh_price_sh": "",
+          "sh_total": "",
+          "var_direction": "2",
+          "show_flags": "",
+          "position_quick_form": "",
+          "ordercfmsg": "",
+          "cfdetails": "",
+          "offermsg": "Add any of those products and get [discount]% discount, just for our loyal customers",
+          "upselnothankclr": "#009688",
+          "inp_req": "",
+          "update": "1",
+          "updateTheme": "0"
+        }
+      }
+    }
   },
   "presets": {
     "Sound": {
