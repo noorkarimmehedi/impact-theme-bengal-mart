@@ -82,6 +82,13 @@
     "color_coupon_button": "#000000",
     "coupon_code_placeholder": "Coupon Code",
     "coupon_button": "Apply",
+    "button_text_checkout": "Payement With Cart",
+    "text_items": "عنصر",
+    "whatsapp_button_text": "Send message",
+    "whatsapp_message": "I want this product",
+    "whatsapp_phone": "0600000000",
+    "color_countdown": "#8908da",
+    "show_reviews": true,
     "content_for_index": [],
     "blocks": {
       "6544682535036668446": {
@@ -94,53 +101,12 @@
         "disabled": false,
         "settings": {}
       },
-      "7153973999063185398": {
-        "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-embed/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
-        "disabled": true,
-        "settings": {}
-      },
       "13669795325273674392": {
         "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
-        "disabled": true,
-        "settings": {}
-      },
-      "5169505657208949261": {
-        "type": "shopify://apps/cod-form-upsell-codmonster/blocks/star_rating/f2edb576-aa9c-431d-8c36-cd65a86a673c",
         "disabled": false,
-        "settings": {
-          "headline_form": "",
-          "var_opt_out": "1",
-          "form_color": "#000000",
-          "color_headline_form": "#191718",
-          "color_form_button": "#FFFFFF",
-          "color_border_form": "#8908da",
-          "background_form_button": "#8908da",
-          "labels": "[\"\",\"Full Name\",\"Phone\",\"Address\"]",
-          "button_form_text": "QUICK ORDER",
-          "quick_form": "[\"1\",\"2\",\"3\",\"4\"]",
-          "sh_price_p": "",
-          "sh_price_sh": "",
-          "sh_total": "",
-          "var_direction": "2",
-          "show_flags": "false",
-          "position_quick_form": "1",
-          "ordercfmsg": "",
-          "cfdetails": "",
-          "offermsg": "Add any of those products and get [discount]% discount, just for our loyal customers",
-          "upselnothankclr": "#009688",
-          "inp_req": "\"1,2\"",
-          "update": "1",
-          "updateTheme": "0"
-        }
+        "settings": {}
       }
-    },
-    "button_text_checkout": "Payement With Cart",
-    "text_items": "عنصر",
-    "whatsapp_button_text": "Send message",
-    "whatsapp_message": "I want this product",
-    "whatsapp_phone": "0600000000",
-    "color_countdown": "#8908da",
-    "show_reviews": true
+    }
   },
   "presets": {
     "Sound": {
