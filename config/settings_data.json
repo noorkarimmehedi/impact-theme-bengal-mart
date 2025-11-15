@@ -59,13 +59,13 @@
         "disabled": false,
         "settings": {}
       },
-      "7153973999063185398": {
-        "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-embed/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
         "disabled": false,
         "settings": {}
       },
-      "13669795325273674392": {
-        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
+      "7153973999063185398": {
+        "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-embed/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
         "disabled": true,
         "settings": {}
       }
