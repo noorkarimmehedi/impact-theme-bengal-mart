@@ -70,7 +70,41 @@
         "settings": {}
       }
     },
-    "designForm": 1
+    "designForm": 1,
+    "sh_price_p": "Product price",
+    "msg_phone": "This field is required",
+    "upselnothankbck": "#ffffff33",
+    "upselnothank": "No thank you",
+    "upseladdorder": "Add to order",
+    "upselnothankclr": "#009688",
+    "upseladdorderbck": "#00b43c",
+    "cfdetails": "We will contact you in the next 12-24 hrs",
+    "offermsg": "We will contact you in the next 12-24 hrs",
+    "ordercfmsg": "Your order has been placed successfully",
+    "up_clr_active": "#00b43c",
+    "show_qty": "false",
+    "text_countdown": "Buy now before it end",
+    "show_section_c_stock": false,
+    "color_stock_count": "#44931f",
+    "stock_count": "Remaining product in stock",
+    "slide_stock_count_0": "#289a2c",
+    "slide_stock_count_1": "#59d507",
+    "time_remaining_countdown": "15",
+    "msg_req": "This field is required",
+    "show_whatsapp_button": false,
+    "show_button_checkout": "false",
+    "shaking_btn": "",
+    "show_countdown": false,
+    "show_coupon_code": false,
+    "color_background_bundles": "rgb(0 106 238 / 7%)",
+    "color_border_bundles": "#006AEE",
+    "color_badge_bundles": "#006AEE",
+    "active_bundles": false,
+    "color_price_bundles": "#006AEE",
+    "color_old_price_bundles": "gray",
+    "color_coupon_button": "#000000",
+    "coupon_code_placeholder": "Coupon Code",
+    "coupon_button": "Apply"
   },
   "presets": {
     "Sound": {
@@ -169,5 +203,6 @@
       "product_color_display": "swatch",
       "product_info_alignment": "center"
     }
-  }
+  },
+  "designForm": "1"
 }
