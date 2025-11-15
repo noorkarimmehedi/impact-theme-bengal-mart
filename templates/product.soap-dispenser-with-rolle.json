@@ -67,8 +67,15 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "cod_form_builder_kashpay_app_block_bPC8Yc": {
+          "type": "shopify://apps/cod-form-builder-kashpay/blocks/app-block/9d8f0442-8b85-43a5-ae76-0d242c979bc0",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
+          "disabled": true,
           "settings": {
             "show_payment_button": true,
             "show_gift_card_recipient": true,
@@ -108,6 +115,7 @@
         "description",
         "variant_picker",
         "quantity_selector",
+        "cod_form_builder_kashpay_app_block_bPC8Yc",
         "buy_buttons",
         "liquid_kYApyA",
         "liquid_HTqcEP",
