@@ -69,7 +69,8 @@
         "disabled": true,
         "settings": {}
       }
-    }
+    },
+    "designForm": 1
   },
   "presets": {
     "Sound": {
