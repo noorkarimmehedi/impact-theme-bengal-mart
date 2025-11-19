@@ -26,80 +26,154 @@
 {% assign viewer_update_interval = viewer_update_interval | default: 3000 %}
 {% assign stock_update_interval = stock_update_interval | default: 8000 %}
 
-{% assign background_color = background_color | default: "#FFF3CD" %}
-{% assign border_color = border_color | default: "#FFD700" %}
-{% assign text_color = text_color | default: "#856404" %}
-{% assign icon_color = icon_color | default: "#FF6B6B" %}
-{% assign stock_color = stock_color | default: "#DC3545" %}
-{% assign pulse_color = pulse_color | default: "#FF6B6B" %}
+{% assign background_color = background_color | default: "#FFFFFF" %}
+{% assign border_color = border_color | default: "#E5E7EB" %}
+{% assign text_color = text_color | default: "#374151" %}
+{% assign accent_color = accent_color | default: "#10B981" %}
+{% assign stock_bg = stock_bg | default: "#FEF3C7" %}
+{% assign stock_text = stock_text | default: "#92400E" %}
+{% assign bar_bg = bar_bg | default: "#F3F4F6" %}
+{% assign bar_fill_high = bar_fill_high | default: "#10B981" %}
+{% assign bar_fill_medium = bar_fill_medium | default: "#F59E0B" %}
+{% assign bar_fill_low = bar_fill_low | default: "#EF4444" %}
 
 {% style %}
   .fomo-counter-{{ unique_id }} {
     background: {{ background_color }};
-    border: 2px solid {{ border_color }};
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin: 16px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid {{ border_color }};
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
 
-  .fomo-counter-{{ unique_id }}::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer-{{ unique_id }} 3s infinite;
-  }
-
-  @keyframes shimmer-{{ unique_id }} {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-
-  .fomo-counter__row-{{ unique_id }} {
+  .fomo-counter__viewers-{{ unique_id }} {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid {{ border_color }};
+  }
+
+  .fomo-counter__eye-icon-{{ unique_id }} {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
     position: relative;
-    z-index: 1;
   }
 
-  .fomo-counter__stock-row-{{ unique_id }} {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
+  .fomo-counter__eye-icon-{{ unique_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ accent_color }};
   }
 
-  .fomo-counter__stock-wrapper-{{ unique_id }} {
+  .fomo-counter__pulse-dot-{{ unique_id }} {
+    width: 8px;
+    height: 8px;
+    background: {{ accent_color }};
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .fomo-counter__pulse-dot-{{ unique_id }}::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: {{ accent_color }};
+    border-radius: 50%;
+    animation: pulse-ring-{{ unique_id }} 2s ease-out infinite;
+  }
+
+  @keyframes pulse-ring-{{ unique_id }} {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }
+
+  .fomo-counter__viewers-text-{{ unique_id }} {
+    color: {{ text_color }};
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .fomo-counter__viewers-number-{{ unique_id }} {
+    font-weight: 700;
+    color: {{ accent_color }};
+    display: inline-block;
+    min-width: 25px;
+  }
+
+  .fomo-counter__stock-section-{{ unique_id }} {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .fomo-counter__stock-header-{{ unique_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fomo-counter__stock-label-{{ unique_id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: {{ stock_text }};
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .fomo-counter__stock-count-{{ unique_id }} {
+    background: {{ stock_bg }};
+    color: {{ stock_text }};
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-    flex: 1;
+  }
+
+  .fomo-counter__stock-number-{{ unique_id }} {
+    font-size: 16px;
+  }
+
+  .fomo-counter__progress-container-{{ unique_id }} {
+    position: relative;
   }
 
   .fomo-counter__progress-bar-{{ unique_id }} {
-    height: 8px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    height: 12px;
+    background: {{ bar_bg }};
+    border-radius: 20px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .fomo-counter__progress-fill-{{ unique_id }} {
     height: 100%;
-    background: linear-gradient(90deg, #FF6B6B 0%, #DC3545 100%);
-    border-radius: 10px;
-    transition: width 0.8s ease-out;
+    background: {{ bar_fill_high }};
+    border-radius: 20px;
+    transition: all 0.8s ease-out;
     position: relative;
-    box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+    overflow: hidden;
   }
 
   .fomo-counter__progress-fill-{{ unique_id }}::after {
@@ -109,143 +183,82 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: progress-shimmer-{{ unique_id }} 2s infinite;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    animation: shimmer-{{ unique_id }} 2s infinite;
   }
 
-  @keyframes progress-shimmer-{{ unique_id }} {
+  @keyframes shimmer-{{ unique_id }} {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
 
-  @keyframes progress-pulse-{{ unique_id }} {
-    0%, 100% { box-shadow: 0 0 10px rgba(220, 53, 69, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(220, 53, 69, 0.8); }
-  }
-
-  .fomo-counter__icon-{{ unique_id }} {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    position: relative;
-  }
-
-  .fomo-counter__icon-{{ unique_id }} svg {
-    width: 100%;
-    height: 100%;
-    fill: {{ icon_color }};
-  }
-
-  .fomo-counter__pulse-{{ unique_id }} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: {{ pulse_color }};
-    opacity: 0.6;
-    animation: pulse-{{ unique_id }} 2s ease-out infinite;
-  }
-
-  @keyframes pulse-{{ unique_id }} {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.6;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(2);
-      opacity: 0;
-    }
-  }
-
-  .fomo-counter__text-{{ unique_id }} {
-    color: {{ text_color }};
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .fomo-counter__number-{{ unique_id }} {
-    font-weight: 700;
-    font-size: 16px;
-    display: inline-block;
-    min-width: 30px;
-    text-align: center;
-  }
-
-  .fomo-counter__stock-{{ unique_id }} {
-    color: {{ stock_color }};
-    font-weight: 700;
-  }
-
   .fomo-counter__updating-{{ unique_id }} {
-    animation: update-flash-{{ unique_id }} 0.5s ease;
+    animation: update-bounce-{{ unique_id }} 0.4s ease;
   }
 
-  @keyframes update-flash-{{ unique_id }} {
+  @keyframes update-bounce-{{ unique_id }} {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.08); }
   }
 
-  @media screen and (min-width: 749px) {
+  /* Responsive Design */
+  @media screen and (min-width: 640px) {
     .fomo-counter-{{ unique_id }} {
-      flex-direction: row;
+      padding: 24px;
+    }
+
+    .fomo-counter__viewers-{{ unique_id }} {
       justify-content: center;
-      gap: 24px;
-      padding: 14px 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
     }
 
-    .fomo-counter__stock-row-{{ unique_id }} {
-      flex-direction: row;
-      align-items: center;
-      flex: 1;
-      max-width: 400px;
-    }
-
-    .fomo-counter__stock-wrapper-{{ unique_id }} {
-      flex: 1;
-    }
-
-    .fomo-counter__text-{{ unique_id }} {
+    .fomo-counter__viewers-text-{{ unique_id }} {
       font-size: 15px;
     }
 
-    .fomo-counter__number-{{ unique_id }} {
-      font-size: 17px;
+    .fomo-counter__stock-label-{{ unique_id }} {
+      font-size: 14px;
+    }
+
+    .fomo-counter__stock-count-{{ unique_id }} {
+      font-size: 14px;
+      padding: 5px 14px;
     }
 
     .fomo-counter__progress-bar-{{ unique_id }} {
-      height: 10px;
+      height: 14px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .fomo-counter-{{ unique_id }} {
+      max-width: 600px;
+      margin: 20px auto;
     }
   }
 {% endstyle %}
 
 <div class="fomo-counter-{{ unique_id }}" id="fomo-counter-{{ unique_id }}">
-  <div class="fomo-counter__row-{{ unique_id }}">
-    <div class="fomo-counter__icon-{{ unique_id }}">
-      <div class="fomo-counter__pulse-{{ unique_id }}"></div>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-      </svg>
-    </div>
-    <p class="fomo-counter__text-{{ unique_id }}">
-      <span class="fomo-counter__number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> people are viewing this right now
+  <!-- Viewers Section -->
+  <div class="fomo-counter__viewers-{{ unique_id }}">
+    <div class="fomo-counter__pulse-dot-{{ unique_id }}"></div>
+    <p class="fomo-counter__viewers-text-{{ unique_id }}">
+      <span class="fomo-counter__viewers-number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> people are viewing this right now
     </p>
   </div>
 
-  <div class="fomo-counter__row-{{ unique_id }} fomo-counter__stock-row-{{ unique_id }}">
-    <div class="fomo-counter__icon-{{ unique_id }}">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-      </svg>
+  <!-- Stock Section -->
+  <div class="fomo-counter__stock-section-{{ unique_id }}">
+    <div class="fomo-counter__stock-header-{{ unique_id }}">
+      <p class="fomo-counter__stock-label-{{ unique_id }}">Availability</p>
+      <div class="fomo-counter__stock-count-{{ unique_id }}">
+        <span class="fomo-counter__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
+        <span>units left</span>
+      </div>
     </div>
-    <div class="fomo-counter__stock-wrapper-{{ unique_id }}">
-      <p class="fomo-counter__text-{{ unique_id }}">
-        Only <span class="fomo-counter__number-{{ unique_id }} fomo-counter__stock-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span> left in stock!
-      </p>
+    
+    <div class="fomo-counter__progress-container-{{ unique_id }}">
       <div class="fomo-counter__progress-bar-{{ unique_id }}">
         <div class="fomo-counter__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
       </div>
@@ -276,31 +289,28 @@
       stockUpdateInterval: {{ stock_update_interval }}
     };
 
-    // Generate random number between min and max
     function randomBetween(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // Update progress bar
     function updateProgressBar() {
       const percentage = (currentStock / initialStock) * 100;
       progressBar.style.width = percentage + '%';
       
       // Change color based on stock level
-      if (percentage <= 20) {
-        progressBar.style.background = 'linear-gradient(90deg, #DC3545 0%, #C82333 100%)';
-        progressBar.style.animation = 'progress-pulse-{{ unique_id }} 1s ease-in-out infinite';
-      } else if (percentage <= 40) {
-        progressBar.style.background = 'linear-gradient(90deg, #FF6B6B 0%, #DC3545 100%)';
+      if (percentage <= 25) {
+        progressBar.style.background = '{{ bar_fill_low }}';
+      } else if (percentage <= 50) {
+        progressBar.style.background = '{{ bar_fill_medium }}';
+      } else {
+        progressBar.style.background = '{{ bar_fill_high }}';
       }
     }
 
-    // Update viewers with smooth animation
     function updateViewers() {
-      const change = randomBetween(-2, 5); // More likely to increase
+      const change = randomBetween(-2, 5);
       let newViewers = currentViewers + change;
 
-      // Keep within bounds
       if (newViewers > config.maxViewers) newViewers = config.maxViewers;
       if (newViewers < config.minViewers) newViewers = config.minViewers;
 
@@ -311,11 +321,10 @@
 
         setTimeout(() => {
           viewersElement.classList.remove('fomo-counter__updating-{{ unique_id }}');
-        }, 500);
+        }, 400);
       }
     }
 
-    // Update stock (always decreasing)
     function updateStock() {
       if (currentStock > config.minStock) {
         const decrease = randomBetween(1, 2);
@@ -328,38 +337,29 @@
 
         setTimeout(() => {
           stockElement.classList.remove('fomo-counter__updating-{{ unique_id }}');
-        }, 500);
-
-        // Create extra urgency when stock is low
-        if (currentStock <= 10) {
-          container.style.animation = 'none';
-          setTimeout(() => {
-            container.style.animation = '';
-          }, 10);
-        }
+        }, 400);
       }
     }
 
-    // Initialize progress bar
+    // Initialize
     updateProgressBar();
 
     // Start intervals
     const viewerInterval = setInterval(updateViewers, config.viewerUpdateInterval);
     const stockInterval = setInterval(updateStock, config.stockUpdateInterval);
 
-    // Add slight variation to intervals to make it feel more natural
+    // Add variation after 1 minute
     setTimeout(() => {
       clearInterval(viewerInterval);
       setInterval(updateViewers, config.viewerUpdateInterval + randomBetween(-500, 500));
-    }, 60000); // After 1 minute, add variation
+    }, 60000);
 
-    // Cleanup on page unload
+    // Cleanup
     window.addEventListener('beforeunload', () => {
       clearInterval(viewerInterval);
       clearInterval(stockInterval);
     });
 
-    // Pause updates when page is not visible
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         clearInterval(viewerInterval);
