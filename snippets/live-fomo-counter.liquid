@@ -30,7 +30,7 @@
 {% assign border_width = border_width | default: 1 %}
 {% assign border_color = border_color | default: "#E0E0E0" %}
 {% assign hover_border_color = hover_border_color | default: "#CCCCCC" %}
-{% assign border_radius = border_radius | default: 8 %}
+{% assign border_radius = border_radius | default: 0 %}
 {% assign shadow_horizontal = shadow_horizontal | default: 0 %}
 {% assign shadow_vertical = shadow_vertical | default: 4 %}
 {% assign shadow_blur = shadow_blur | default: 8 %}
@@ -39,9 +39,9 @@
 {% assign accent_color = accent_color | default: "#10B981" %}
 {% assign stock_bg = stock_bg | default: "#FEF3C7" %}
 {% assign stock_text = stock_text | default: "#92400E" %}
-{% assign bar_bg = bar_bg | default: "#F3F4F6" %}
-{% assign bar_fill_high = bar_fill_high | default: "#10B981" %}
-{% assign bar_fill_medium = bar_fill_medium | default: "#F59E0B" %}
+{% assign bar_bg = bar_bg | default: "#E5E7EB" %}
+{% assign bar_fill_high = bar_fill_high | default: "#3B82F6" %}
+{% assign bar_fill_medium = bar_fill_medium | default: "#F97316" %}
 {% assign bar_fill_low = bar_fill_low | default: "#EF4444" %}
 
 {% style %}
@@ -171,9 +171,9 @@
   }
 
   .fomo-counter__progress-bar-{{ unique_id }} {
-    height: 12px;
+    height: 8px;
     background: {{ bar_bg }};
-    border-radius: 20px;
+    border-radius: 4px;
     overflow: hidden;
     position: relative;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -182,7 +182,7 @@
   .fomo-counter__progress-fill-{{ unique_id }} {
     height: 100%;
     background: {{ bar_fill_high }};
-    border-radius: 20px;
+    border-radius: 4px;
     transition: all 0.8s ease-out;
     position: relative;
     overflow: hidden;
@@ -239,7 +239,7 @@
     }
 
     .fomo-counter__progress-bar-{{ unique_id }} {
-      height: 14px;
+      height: 10px;
     }
   }
 
