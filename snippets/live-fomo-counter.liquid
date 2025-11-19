@@ -71,6 +71,58 @@
     z-index: 1;
   }
 
+  .fomo-counter__stock-row-{{ unique_id }} {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .fomo-counter__stock-wrapper-{{ unique_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .fomo-counter__progress-bar-{{ unique_id }} {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .fomo-counter__progress-fill-{{ unique_id }} {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B6B 0%, #DC3545 100%);
+    border-radius: 10px;
+    transition: width 0.8s ease-out;
+    position: relative;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+  }
+
+  .fomo-counter__progress-fill-{{ unique_id }}::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progress-shimmer-{{ unique_id }} 2s infinite;
+  }
+
+  @keyframes progress-shimmer-{{ unique_id }} {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes progress-pulse-{{ unique_id }} {
+    0%, 100% { box-shadow: 0 0 10px rgba(220, 53, 69, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(220, 53, 69, 0.8); }
+  }
+
   .fomo-counter__icon-{{ unique_id }} {
     width: 20px;
     height: 20px;
@@ -146,12 +198,27 @@
       padding: 14px 20px;
     }
 
+    .fomo-counter__stock-row-{{ unique_id }} {
+      flex-direction: row;
+      align-items: center;
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .fomo-counter__stock-wrapper-{{ unique_id }} {
+      flex: 1;
+    }
+
     .fomo-counter__text-{{ unique_id }} {
       font-size: 15px;
     }
 
     .fomo-counter__number-{{ unique_id }} {
       font-size: 17px;
+    }
+
+    .fomo-counter__progress-bar-{{ unique_id }} {
+      height: 10px;
     }
   }
 {% endstyle %}
@@ -169,15 +236,20 @@
     </p>
   </div>
 
-  <div class="fomo-counter__row-{{ unique_id }}">
+  <div class="fomo-counter__row-{{ unique_id }} fomo-counter__stock-row-{{ unique_id }}">
     <div class="fomo-counter__icon-{{ unique_id }}">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
       </svg>
     </div>
-    <p class="fomo-counter__text-{{ unique_id }}">
-      Only <span class="fomo-counter__number-{{ unique_id }} fomo-counter__stock-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span> left in stock!
-    </p>
+    <div class="fomo-counter__stock-wrapper-{{ unique_id }}">
+      <p class="fomo-counter__text-{{ unique_id }}">
+        Only <span class="fomo-counter__number-{{ unique_id }} fomo-counter__stock-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span> left in stock!
+      </p>
+      <div class="fomo-counter__progress-bar-{{ unique_id }}">
+        <div class="fomo-counter__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -190,9 +262,11 @@
 
     const viewersElement = container.querySelector('[data-viewers]');
     const stockElement = container.querySelector('[data-stock]');
+    const progressBar = container.querySelector('[data-progress]');
 
     let currentViewers = {{ initial_viewers }};
     let currentStock = {{ initial_stock }};
+    const initialStock = {{ initial_stock }};
 
     const config = {
       minViewers: {{ min_viewers }},
@@ -205,6 +279,20 @@
     // Generate random number between min and max
     function randomBetween(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Update progress bar
+    function updateProgressBar() {
+      const percentage = (currentStock / initialStock) * 100;
+      progressBar.style.width = percentage + '%';
+      
+      // Change color based on stock level
+      if (percentage <= 20) {
+        progressBar.style.background = 'linear-gradient(90deg, #DC3545 0%, #C82333 100%)';
+        progressBar.style.animation = 'progress-pulse-{{ unique_id }} 1s ease-in-out infinite';
+      } else if (percentage <= 40) {
+        progressBar.style.background = 'linear-gradient(90deg, #FF6B6B 0%, #DC3545 100%)';
+      }
     }
 
     // Update viewers with smooth animation
@@ -235,6 +323,8 @@
 
         stockElement.classList.add('fomo-counter__updating-{{ unique_id }}');
         stockElement.textContent = currentStock;
+        
+        updateProgressBar();
 
         setTimeout(() => {
           stockElement.classList.remove('fomo-counter__updating-{{ unique_id }}');
@@ -249,6 +339,9 @@
         }
       }
     }
+
+    // Initialize progress bar
+    updateProgressBar();
 
     // Start intervals
     const viewerInterval = setInterval(updateViewers, config.viewerUpdateInterval);
