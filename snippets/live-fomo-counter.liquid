@@ -64,7 +64,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 16px;
-    padding-bottom: 16px;
+    padding: 0 0 16px 0;
     border-bottom: {{ border_width }}px solid {{ border_color }};
   }
 
@@ -222,7 +222,7 @@
     .fomo-counter__viewers-{{ unique_id }} {
       justify-content: center;
       margin-bottom: 20px;
-      padding-bottom: 20px;
+      padding: 0 0 20px 0;
     }
 
     .fomo-counter__viewers-text-{{ unique_id }} {
@@ -245,8 +245,8 @@
 
   @media screen and (min-width: 990px) {
     .fomo-counter-{{ unique_id }} {
-      max-width: 600px;
-      margin: 20px auto;
+      max-width: 100%;
+      margin: 20px 0;
     }
   }
 {% endstyle %}
