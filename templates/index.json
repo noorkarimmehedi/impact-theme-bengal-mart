@@ -89,12 +89,12 @@
         "ai_gen_block_46a7ea5_bAGbUj": {
           "type": "ai_gen_block_46a7ea5",
           "settings": {
-            "image_mobile": "shopify://shop_images/2800_x_1000_px_1200_x_1600_px_3.webp",
+            "image_mobile": "shopify://shop_images/Heroimg_11zon.webp",
             "image_desktop": "shopify://shop_images/Facebook_Cover.webp",
             "height_mobile": 600,
             "height_desktop": 600,
             "overlay_color": "#000000",
-            "overlay_opacity": 0.1,
+            "overlay_opacity": 0,
             "content_alignment": "left",
             "content_padding_mobile": 30,
             "button_side_gap_mobile": 15,
