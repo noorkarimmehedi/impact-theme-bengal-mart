@@ -349,6 +349,71 @@
       "disabled": true,
       "settings": {}
     },
+    "1766665881713a894a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_e6443b1_8BpA7A": {
+          "type": "ai_gen_block_e6443b1",
+          "settings": {
+            "product_list": [
+              "all-in-one-fruit-veggie-washer-storage-basket",
+              "kitchen-sink-and-bathroom-organzier",
+              "glass-oil-dispenser-jar",
+              "premium-dish-washing-brush-with-soap-dispenser"
+            ],
+            "products_to_show": 8,
+            "desktop_columns": 4,
+            "desktop_gap": 16,
+            "desktop_horizontal_padding": 28,
+            "mobile_gap": 12,
+            "mobile_horizontal_padding": 16,
+            "mobile_vertical_padding": 20,
+            "desktop_vertical_padding": 32,
+            "card_background": "#ffffff",
+            "border_color": "#000000",
+            "border_width": 1,
+            "card_padding_mobile": 10,
+            "card_padding_desktop": 16,
+            "image_width": 90,
+            "image_height": 90,
+            "show_ribbon": true,
+            "ribbon_card_count": 4,
+            "ribbon_text": "HOLIDAY SPECIAL",
+            "ribbon_background": "#ff0000",
+            "ribbon_text_color": "#ffffff",
+            "ribbon_font_size": 10,
+            "ribbon_padding_vertical": 4,
+            "ribbon_padding_horizontal": 8,
+            "ribbon_top_position": 12,
+            "show_countdown": true,
+            "countdown_end_time": "2025-12-31 23:59:59",
+            "countdown_font_size": 10,
+            "title_font": "sans_serif_n4",
+            "title_font_size_mobile": 13,
+            "title_font_size_desktop": 14,
+            "title_color": "#000000",
+            "show_subtitle": true,
+            "subtitle_font_size": 11,
+            "subtitle_color": "#666666",
+            "price_font": "sans_serif_n4",
+            "price_font_size_mobile": 13,
+            "price_font_size_desktop": 14,
+            "price_color": "#000000",
+            "add_button_size": 28,
+            "add_button_background": "#ffffff",
+            "add_button_hover_background": "#000000",
+            "add_button_border": "#000000",
+            "add_button_icon_color": "#000000",
+            "add_button_hover_icon_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_e6443b1_8BpA7A"
+      ],
+      "settings": {}
+    },
     "1762331971972f85e7": {
       "type": "_blocks",
       "blocks": {
@@ -409,6 +474,7 @@
       "block_order": [
         "ai_gen_block_1a13f16_wC6QQM"
       ],
+      "disabled": true,
       "settings": {}
     },
     "scrolling-text": {
@@ -1362,6 +1428,7 @@
     "slideshow",
     "image-link-blocks",
     "1761717881f75057a2",
+    "1766665881713a894a",
     "1762331971972f85e7",
     "scrolling-text",
     "1762584449c48a09b9",
