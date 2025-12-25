@@ -13,6 +13,7 @@
   "sections": {
     "announce_6pf39r": {
       "type": "announce",
+      "disabled": true,
       "name": "Announcement Bar - V2",
       "settings": {
         "announcement": true,
