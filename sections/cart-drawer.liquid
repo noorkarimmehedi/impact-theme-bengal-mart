@@ -227,9 +227,10 @@
 
       <form action="{{ routes.cart_url }}" method="POST" class="buy-buttons {% if section.settings.show_checkout_button %}buy-buttons--compact{% endif %}">
         {%- assign checkout_label = 'cart.general.checkout' | t -%}
+        {%- assign view_cart_label = 'cart.general.view_cart' | t -%}
 
         {%- if section.settings.show_view_cart_button or section.settings.show_checkout_button == false -%}
-          {%- render 'button', href: routes.cart_url, content: 'cart.general.view_cart' | t, size: 'sm', secondary: true -%}
+          {%- render 'button', href: routes.cart_url, content: view_cart_label, size: 'sm', secondary: true -%}
         {%- endif -%}
 
         {%- if section.settings.show_checkout_button -%}
