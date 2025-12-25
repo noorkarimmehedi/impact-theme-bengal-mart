@@ -412,6 +412,7 @@
       "block_order": [
         "ai_gen_block_e6443b1_8BpA7A"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1762331971972f85e7": {
@@ -474,7 +475,6 @@
       "block_order": [
         "ai_gen_block_1a13f16_wC6QQM"
       ],
-      "disabled": true,
       "settings": {}
     },
     "scrolling-text": {
