@@ -82,6 +82,7 @@
         },
         "liquid_iMBpAw": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% render 'live-fomo-counter' %}"
           }
