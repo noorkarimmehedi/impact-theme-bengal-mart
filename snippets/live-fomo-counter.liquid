@@ -1,278 +1,281 @@
 {% comment %}
-  Live FOMO Counter - Shopify Snippet
+  Home & Kitchen Live Counter - Shopify Snippet (Performance Optimized)
   
-  Usage: {% render 'live-fomo-counter' %}
+  Usage: {% render 'home-kitchen-live-counter' %}
   
   Customization:
-  {% render 'live-fomo-counter',
-    initial_viewers: 53,
-    initial_stock: 30,
-    min_viewers: 35,
-    max_viewers: 89,
-    min_stock: 5,
-    viewer_update_interval: 3000,
-    stock_update_interval: 8000
+  {% render 'home-kitchen-live-counter',
+    initial_viewers: 127,
+    initial_stock: 39,
+    min_viewers: 85,
+    max_viewers: 180,
+    min_stock: 0
   %}
+  
+  NOTE: Each product will automatically get different stock numbers!
+  The snippet uses product ID to randomize initial stock between 35-45 units.
 {% endcomment %}
 
 {% assign unique_id = section.id | default: 'default' | append: '-' | append: block.id | default: 'snippet' %}
 
-{% comment %} Default Settings {% endcomment %}
-{% assign initial_viewers = initial_viewers | default: 53 %}
-{% assign initial_stock = initial_stock | default: 30 %}
-{% assign min_viewers = min_viewers | default: 35 %}
-{% assign max_viewers = max_viewers | default: 89 %}
-{% assign min_stock = min_stock | default: 5 %}
-{% assign viewer_update_interval = viewer_update_interval | default: 3000 %}
-{% assign stock_update_interval = stock_update_interval | default: 8000 %}
+{% comment %} Generate random stock based on product ID {% endcomment %}
+{% if initial_stock == blank or initial_stock == null %}
+  {% assign product_id_num = product.id | default: 0 %}
+  {% assign seed = product_id_num | modulo: 11 %}
+  {% assign initial_stock = seed | plus: 35 %}
+{% endif %}
 
-{% assign background_color = background_color | default: "#FFFFFF" %}
-{% assign border_width = border_width | default: 1 %}
-{% assign border_color = border_color | default: "#E0E0E0" %}
-{% assign hover_border_color = hover_border_color | default: "#CCCCCC" %}
-{% assign border_radius = border_radius | default: 0 %}
-{% assign shadow_horizontal = shadow_horizontal | default: 0 %}
-{% assign shadow_vertical = shadow_vertical | default: 4 %}
-{% assign shadow_blur = shadow_blur | default: 8 %}
-{% assign shadow_opacity = shadow_opacity | default: 0 %}
-{% assign text_color = text_color | default: "#374151" %}
-{% assign accent_color = accent_color | default: "#10B981" %}
-{% assign stock_bg = stock_bg | default: "#FEF3C7" %}
-{% assign stock_text = stock_text | default: "#92400E" %}
-{% assign bar_bg = bar_bg | default: "#E5E7EB" %}
-{% assign bar_fill_high = bar_fill_high | default: "#3B82F6" %}
-{% assign bar_fill_medium = bar_fill_medium | default: "#F97316" %}
-{% assign bar_fill_low = bar_fill_low | default: "#EF4444" %}
+{% comment %} Default Settings {% endcomment %}
+{% assign initial_viewers = initial_viewers | default: 127 %}
+{% assign initial_stock = initial_stock | default: 39 %}
+{% assign min_viewers = min_viewers | default: 85 %}
+{% assign max_viewers = max_viewers | default: 180 %}
+{% assign min_stock = min_stock | default: 0 %}
 
 {% style %}
-  .fomo-counter-{{ unique_id }} {
-    background: {{ background_color }};
-    border: {{ border_width }}px solid {{ border_color }};
-    border-radius: {{ border_radius }}px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: {{ shadow_horizontal }}px {{ shadow_vertical }}px {{ shadow_blur }}px rgba(0, 0, 0, {{ shadow_opacity | divided_by: 100.0 }});
-    transition: border-color 0.3s ease;
+  .kitchen-counter-{{ unique_id }} {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+    border: 1.5px solid #FF1744;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 8px 0;
+    box-shadow: 0 0 20px rgba(213, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    will-change: auto;
   }
 
-  .fomo-counter-{{ unique_id }}:hover {
-    border-color: {{ hover_border_color }};
+  .kitchen-counter__live-badge-{{ unique_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #D50000;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
   }
 
-  .fomo-counter__viewers-{{ unique_id }} {
+  .kitchen-counter__live-dot-{{ unique_id }} {
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    animation: live-pulse-{{ unique_id }} 2s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse-{{ unique_id }} {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .kitchen-counter__viewers-{{ unique_id }} {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding: 0 0 16px 0;
-    border-bottom: {{ border_width }}px solid {{ border_color }};
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
+    padding: 5px 8px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #FFE0E0;
   }
 
-  .fomo-counter__eye-icon-{{ unique_id }} {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    position: relative;
+  .kitchen-counter__viewer-icons-{{ unique_id }} {
+    display: flex;
+    gap: 2px;
   }
 
-  .fomo-counter__eye-icon-{{ unique_id }} svg {
+  .kitchen-counter__eye-icon-{{ unique_id }} {
+    width: 16px;
+    height: 16px;
+  }
+
+  .kitchen-counter__eye-icon-{{ unique_id }} svg {
     width: 100%;
     height: 100%;
-    fill: {{ accent_color }};
+    fill: #D50000;
   }
 
-  .fomo-counter__pulse-dot-{{ unique_id }} {
-    width: 8px;
-    height: 8px;
-    background: {{ accent_color }};
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .fomo-counter__pulse-dot-{{ unique_id }}::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: {{ accent_color }};
-    border-radius: 50%;
-    animation: pulse-ring-{{ unique_id }} 2s ease-out infinite;
-  }
-
-  @keyframes pulse-ring-{{ unique_id }} {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(3);
-      opacity: 0;
-    }
-  }
-
-  .fomo-counter__viewers-text-{{ unique_id }} {
-    color: {{ text_color }};
-    font-size: 14px;
-    font-weight: 500;
+  .kitchen-counter__viewers-text-{{ unique_id }} {
+    color: #1F2937;
+    font-size: 12px;
+    font-weight: 600;
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.2;
   }
 
-  .fomo-counter__viewers-number-{{ unique_id }} {
-    font-weight: 700;
-    color: {{ accent_color }};
+  .kitchen-counter__viewers-number-{{ unique_id }} {
+    font-weight: 800;
+    color: #D50000;
+    font-size: 14px;
     display: inline-block;
-    min-width: 25px;
+    min-width: 26px;
+    text-align: center;
   }
 
-  .fomo-counter__stock-section-{{ unique_id }} {
+  .kitchen-counter__stock-section-{{ unique_id }} {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+    background: white;
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: 1.5px solid #FFE0E0;
   }
 
-  .fomo-counter__stock-header-{{ unique_id }} {
+  .kitchen-counter__stock-header-{{ unique_id }} {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .fomo-counter__stock-label-{{ unique_id }} {
-    font-size: 13px;
-    font-weight: 600;
-    color: {{ stock_text }};
+  .kitchen-counter__stock-label-{{ unique_id }} {
+    font-size: 11px;
+    font-weight: 700;
+    color: #D50000;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .fomo-counter__stock-count-{{ unique_id }} {
-    background: {{ stock_bg }};
-    color: {{ stock_text }};
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
+  .kitchen-counter__stock-icon-{{ unique_id }} {
+    width: 14px;
+    height: 14px;
+  }
+
+  .kitchen-counter__stock-count-{{ unique_id }} {
+    background: linear-gradient(135deg, #D50000 0%, #FF1744 100%);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    font-size: 11px;
+    font-weight: 800;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
   }
 
-  .fomo-counter__stock-number-{{ unique_id }} {
-    font-size: 16px;
+  .kitchen-counter__stock-number-{{ unique_id }} {
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
   }
 
-  .fomo-counter__progress-container-{{ unique_id }} {
-    position: relative;
-  }
-
-  .fomo-counter__progress-bar-{{ unique_id }} {
-    height: 8px;
-    background: {{ bar_bg }};
+  .kitchen-counter__progress-bar-{{ unique_id }} {
+    height: 6px;
+    background: linear-gradient(90deg, #FFE0E0 0%, #FFF5F5 100%);
     border-radius: 4px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid #FFD0D0;
   }
 
-  .fomo-counter__progress-fill-{{ unique_id }} {
+  .kitchen-counter__progress-fill-{{ unique_id }} {
     height: 100%;
-    background: {{ bar_fill_high }};
+    background: linear-gradient(90deg, #D50000 0%, #FF1744 100%);
     border-radius: 4px;
-    transition: all 0.8s ease-out;
-    position: relative;
-    overflow: hidden;
+    transition: width 0.5s ease-out;
   }
 
-  .fomo-counter__progress-fill-{{ unique_id }}::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
-    animation: shimmer-{{ unique_id }} 2s infinite;
+  .kitchen-counter__updating-{{ unique_id }} {
+    animation: update-pop-{{ unique_id }} 0.3s ease;
   }
 
-  @keyframes shimmer-{{ unique_id }} {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-
-  .fomo-counter__updating-{{ unique_id }} {
-    animation: update-bounce-{{ unique_id }} 0.4s ease;
-  }
-
-  @keyframes update-bounce-{{ unique_id }} {
+  @keyframes update-pop-{{ unique_id }} {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50% { transform: scale(1.1); }
+  }
+
+  .kitchen-counter__urgency-text-{{ unique_id }} {
+    text-align: center;
+    font-size: 10px;
+    color: #DC2626;
+    font-weight: 600;
+    margin-top: 4px;
   }
 
   /* Responsive Design */
   @media screen and (min-width: 640px) {
-    .fomo-counter-{{ unique_id }} {
-      padding: 24px 0;
+    .kitchen-counter-{{ unique_id }} {
+      padding: 10px 12px;
     }
 
-    .fomo-counter__viewers-{{ unique_id }} {
-      justify-content: center;
-      margin-bottom: 20px;
-      padding: 0 0 20px 0;
+    .kitchen-counter__viewers-text-{{ unique_id }} {
+      font-size: 13px;
     }
 
-    .fomo-counter__viewers-text-{{ unique_id }} {
+    .kitchen-counter__viewers-number-{{ unique_id }} {
       font-size: 15px;
     }
 
-    .fomo-counter__stock-label-{{ unique_id }} {
-      font-size: 14px;
+    .kitchen-counter__stock-label-{{ unique_id }} {
+      font-size: 12px;
     }
 
-    .fomo-counter__stock-count-{{ unique_id }} {
-      font-size: 14px;
-      padding: 5px 14px;
-    }
-
-    .fomo-counter__progress-bar-{{ unique_id }} {
-      height: 10px;
+    .kitchen-counter__progress-bar-{{ unique_id }} {
+      height: 7px;
     }
   }
 
-  @media screen and (min-width: 990px) {
-    .fomo-counter-{{ unique_id }} {
-      max-width: 100%;
-      margin: 20px 0;
+  /* Reduce animations on mobile devices */
+  @media (prefers-reduced-motion: reduce) {
+    .kitchen-counter-{{ unique_id }}::before,
+    .kitchen-counter__live-dot-{{ unique_id }},
+    .kitchen-counter__updating-{{ unique_id }} {
+      animation: none;
     }
   }
 {% endstyle %}
 
-<div class="fomo-counter-{{ unique_id }}" id="fomo-counter-{{ unique_id }}">
+<div class="kitchen-counter-{{ unique_id }}" id="kitchen-counter-{{ unique_id }}">
+  <!-- Live Badge -->
+  <div class="kitchen-counter__live-badge-{{ unique_id }}">
+    <div class="kitchen-counter__live-dot-{{ unique_id }}"></div>
+    <span>Live Now</span>
+  </div>
+
   <!-- Viewers Section -->
-  <div class="fomo-counter__viewers-{{ unique_id }}">
-    <div class="fomo-counter__pulse-dot-{{ unique_id }}"></div>
-    <p class="fomo-counter__viewers-text-{{ unique_id }}">
-      <span class="fomo-counter__viewers-number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> people are viewing this right now
+  <div class="kitchen-counter__viewers-{{ unique_id }}">
+    <div class="kitchen-counter__viewer-icons-{{ unique_id }}">
+      <div class="kitchen-counter__eye-icon-{{ unique_id }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+        </svg>
+      </div>
+    </div>
+    <p class="kitchen-counter__viewers-text-{{ unique_id }}">
+      <span class="kitchen-counter__viewers-number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> people viewing now
     </p>
   </div>
 
   <!-- Stock Section -->
-  <div class="fomo-counter__stock-section-{{ unique_id }}">
-    <div class="fomo-counter__stock-header-{{ unique_id }}">
-      <p class="fomo-counter__stock-label-{{ unique_id }}">Availability</p>
-      <div class="fomo-counter__stock-count-{{ unique_id }}">
-        <span class="fomo-counter__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
-        <span>units left</span>
+  <div class="kitchen-counter__stock-section-{{ unique_id }}">
+    <div class="kitchen-counter__stock-header-{{ unique_id }}">
+      <p class="kitchen-counter__stock-label-{{ unique_id }}">
+        <svg class="kitchen-counter__stock-icon-{{ unique_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D50000">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        In Stock
+      </p>
+      <div class="kitchen-counter__stock-count-{{ unique_id }}">
+        <span class="kitchen-counter__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
+        <span>units</span>
       </div>
     </div>
     
-    <div class="fomo-counter__progress-container-{{ unique_id }}">
-      <div class="fomo-counter__progress-bar-{{ unique_id }}">
-        <div class="fomo-counter__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
+    <div class="kitchen-counter__progress-container-{{ unique_id }}">
+      <div class="kitchen-counter__progress-bar-{{ unique_id }}">
+        <div class="kitchen-counter__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -281,7 +284,7 @@
 <script>
   (function() {
     const uniqueId = '{{ unique_id }}';
-    const container = document.getElementById('fomo-counter-' + uniqueId);
+    const container = document.getElementById('kitchen-counter-' + uniqueId);
     
     if (!container) return;
 
@@ -297,9 +300,13 @@
       minViewers: {{ min_viewers }},
       maxViewers: {{ max_viewers }},
       minStock: {{ min_stock }},
-      viewerUpdateInterval: {{ viewer_update_interval }},
-      stockUpdateInterval: {{ stock_update_interval }}
+      viewerUpdateInterval: 8000,  // Reduced frequency: every 8 seconds
+      stockUpdateInterval: 6000    // Every 6 seconds as requested
     };
+
+    let viewerInterval = null;
+    let stockInterval = null;
+    let isTabActive = true;
 
     function randomBetween(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -308,75 +315,102 @@
     function updateProgressBar() {
       const percentage = (currentStock / initialStock) * 100;
       progressBar.style.width = percentage + '%';
-      
-      // Change color based on stock level
-      if (percentage <= 25) {
-        progressBar.style.background = '{{ bar_fill_low }}';
-      } else if (percentage <= 50) {
-        progressBar.style.background = '{{ bar_fill_medium }}';
-      } else {
-        progressBar.style.background = '{{ bar_fill_high }}';
-      }
     }
 
     function updateViewers() {
-      const change = randomBetween(-2, 5);
+      if (!isTabActive) return; // Don't update if tab is not visible
+      
+      const change = randomBetween(-3, 5);
       let newViewers = currentViewers + change;
 
-      if (newViewers > config.maxViewers) newViewers = config.maxViewers;
-      if (newViewers < config.minViewers) newViewers = config.minViewers;
+      newViewers = Math.max(config.minViewers, Math.min(config.maxViewers, newViewers));
 
       if (newViewers !== currentViewers) {
         currentViewers = newViewers;
-        viewersElement.classList.add('fomo-counter__updating-{{ unique_id }}');
+        viewersElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
         viewersElement.textContent = currentViewers;
 
         setTimeout(() => {
-          viewersElement.classList.remove('fomo-counter__updating-{{ unique_id }}');
-        }, 400);
+          viewersElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+        }, 300);
       }
     }
 
     function updateStock() {
+      if (!isTabActive) return; // Don't update if tab is not visible
+      
       if (currentStock > config.minStock) {
-        const decrease = randomBetween(1, 2);
-        currentStock = Math.max(config.minStock, currentStock - decrease);
+        currentStock = Math.max(config.minStock, currentStock - 1);
 
-        stockElement.classList.add('fomo-counter__updating-{{ unique_id }}');
+        stockElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
         stockElement.textContent = currentStock;
         
         updateProgressBar();
 
         setTimeout(() => {
-          stockElement.classList.remove('fomo-counter__updating-{{ unique_id }}');
-        }, 400);
+          stockElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+        }, 300);
       }
+    }
+
+    function startIntervals() {
+      if (viewerInterval) clearInterval(viewerInterval);
+      if (stockInterval) clearInterval(stockInterval);
+      
+      viewerInterval = setInterval(updateViewers, config.viewerUpdateInterval);
+      stockInterval = setInterval(updateStock, config.stockUpdateInterval);
+    }
+
+    function stopIntervals() {
+      if (viewerInterval) clearInterval(viewerInterval);
+      if (stockInterval) clearInterval(stockInterval);
+      viewerInterval = null;
+      stockInterval = null;
     }
 
     // Initialize
     updateProgressBar();
+    
+    // Drop from 39 to 35 in first 6 seconds (4 units)
+    const initialDropInterval = 1500; // 6 seconds / 4 drops = 1.5 seconds each
+    let dropCount = 0;
+    const maxInitialDrops = 4; // Drop 4 units (39 -> 35)
+    
+    const initialDropTimer = setInterval(() => {
+      if (dropCount < maxInitialDrops && currentStock > config.minStock) {
+        currentStock--;
+        dropCount++;
+        
+        stockElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
+        stockElement.textContent = currentStock;
+        updateProgressBar();
+        
+        setTimeout(() => {
+          stockElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+        }, 300);
+        
+        if (dropCount >= maxInitialDrops) {
+          clearInterval(initialDropTimer);
+          // Start normal intervals after initial drop
+          startIntervals();
+        }
+      }
+    }, initialDropInterval);
 
-    // Start intervals
-    const viewerInterval = setInterval(updateViewers, config.viewerUpdateInterval);
-    const stockInterval = setInterval(updateStock, config.stockUpdateInterval);
-
-    // Add variation after 1 minute
-    setTimeout(() => {
-      clearInterval(viewerInterval);
-      setInterval(updateViewers, config.viewerUpdateInterval + randomBetween(-500, 500));
-    }, 60000);
-
-    // Cleanup
-    window.addEventListener('beforeunload', () => {
-      clearInterval(viewerInterval);
-      clearInterval(stockInterval);
+    // Pause when tab is not visible to save battery
+    document.addEventListener('visibilitychange', () => {
+      isTabActive = !document.hidden;
+      
+      if (isTabActive) {
+        startIntervals();
+      } else {
+        stopIntervals();
+      }
     });
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        clearInterval(viewerInterval);
-        clearInterval(stockInterval);
-      }
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      stopIntervals();
     });
   })();
 </script>
