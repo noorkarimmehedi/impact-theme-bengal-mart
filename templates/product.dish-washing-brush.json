@@ -102,6 +102,7 @@
         },
         "liquid_RGVnHb": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% render 'offer-cards-carousel' %}"
           }
