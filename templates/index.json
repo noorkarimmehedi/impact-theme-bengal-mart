@@ -116,7 +116,7 @@
             "button_primary_hover_bg": "#7900fd",
             "button_primary_hover_color": "#ffffff",
             "button_secondary_label": "EXPLORE NEW PRODUCT",
-            "button_secondary_link": "shopify://products/premium-dish-washing-brush-with-soap-dispenser",
+            "button_secondary_link": "shopify://products/premium-soap-dispensing-palm-brush",
             "button_secondary_bg": "#fffdf7",
             "button_secondary_color": "#000000",
             "button_secondary_border": "#ffffff",
@@ -359,7 +359,7 @@
               "all-in-one-fruit-veggie-washer-storage-basket",
               "kitchen-sink-and-bathroom-organzier",
               "glass-oil-dispenser-jar",
-              "premium-dish-washing-brush-with-soap-dispenser"
+              "premium-soap-dispensing-palm-brush"
             ],
             "products_to_show": 8,
             "desktop_columns": 4,
