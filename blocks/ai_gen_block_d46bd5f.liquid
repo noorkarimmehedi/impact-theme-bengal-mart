@@ -68,14 +68,10 @@
   }
 
   @media screen and (max-width: 749px) {
-    .ai-product-info-table-wrapper-{{ ai_gen_id }} {
-      padding: 0 {{ block.settings.mobile_horizontal_margin }}px;
-    }
-
     .ai-product-info-table-{{ ai_gen_id }} {
       padding: {{ block.settings.mobile_section_padding }}px;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: {{ block.settings.mobile_horizontal_margin }}px;
+      margin-right: {{ block.settings.mobile_horizontal_margin }}px;
       max-width: none;
     }
 
