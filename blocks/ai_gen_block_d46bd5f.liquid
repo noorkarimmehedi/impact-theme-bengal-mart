@@ -68,10 +68,15 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-product-info-table-wrapper-{{ ai_gen_id }} {
+      padding-left: {{ block.settings.mobile_horizontal_margin }}px;
+      padding-right: {{ block.settings.mobile_horizontal_margin }}px;
+    }
+
     .ai-product-info-table-{{ ai_gen_id }} {
       padding: {{ block.settings.mobile_section_padding }}px;
-      margin-left: {{ block.settings.mobile_horizontal_margin }}px;
-      margin-right: {{ block.settings.mobile_horizontal_margin }}px;
+      margin-left: 0;
+      margin-right: 0;
       max-width: none;
     }
 
@@ -473,7 +478,7 @@
       "step": 1,
       "unit": "px",
       "label": "Horizontal margin",
-      "default": 18
+      "default": 16
     },
     {
       "type": "range",
