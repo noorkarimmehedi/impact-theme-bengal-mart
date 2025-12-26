@@ -256,7 +256,7 @@
             "row_6_content": "",
             "border_color": "#000000",
             "border_width": 1,
-            "border_radius": 4,
+            "border_radius": 0,
             "outer_background_color": "#f5f5f5",
             "background_color": "#f5f5f5",
             "label_color": "#000000",
