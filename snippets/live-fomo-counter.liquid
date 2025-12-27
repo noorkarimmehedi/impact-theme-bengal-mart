@@ -46,7 +46,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .kitchen-counter-compact__row-{{ unique_id }}:first-child {
+    flex-wrap: nowrap;
   }
 
   .kitchen-counter-compact__live-badge-{{ unique_id }} {
@@ -80,9 +85,10 @@
   .kitchen-counter-compact__viewers-{{ unique_id }} {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     flex: 1;
     min-width: 0;
+    justify-content: flex-end;
   }
 
   .kitchen-counter-compact__eye-icon-{{ unique_id }} {
@@ -115,8 +121,8 @@
   .kitchen-counter-compact__stock-wrapper-{{ unique_id }} {
     display: flex;
     align-items: center;
-    gap: 6px;
-    flex: 1;
+    gap: 8px;
+    flex-shrink: 0;
   }
 
   .kitchen-counter-compact__stock-label-{{ unique_id }} {
@@ -158,7 +164,8 @@
 
   .kitchen-counter-compact__progress-container-{{ unique_id }} {
     flex: 1;
-    min-width: 60px;
+    min-width: 80px;
+    max-width: 200px;
   }
 
   .kitchen-counter-compact__progress-bar-{{ unique_id }} {
@@ -192,6 +199,10 @@
       padding: 7px 12px;
     }
 
+    .kitchen-counter-compact__row-{{ unique_id }} {
+      gap: 12px;
+    }
+
     .kitchen-counter-compact__viewers-text-{{ unique_id }} {
       font-size: 12px;
     }
@@ -202,6 +213,10 @@
 
     .kitchen-counter-compact__progress-bar-{{ unique_id }} {
       height: 6px;
+    }
+
+    .kitchen-counter-compact__progress-container-{{ unique_id }} {
+      max-width: 250px;
     }
   }
 
