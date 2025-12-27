@@ -87,6 +87,7 @@
         },
         "liquid_cp3bd4": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% render 'offer-cards-carousel' %}"
           }
@@ -548,7 +549,7 @@
             "section_padding": 30,
             "row_padding": 20,
             "column_gap": 30,
-            "mobile_horizontal_margin": 15,
+            "mobile_horizontal_margin": 18,
             "mobile_left_column_width": 35,
             "mobile_section_padding": 20,
             "mobile_row_padding": 15,
