@@ -1,19 +1,16 @@
 {% comment %}
-  Home & Kitchen Live Counter - Shopify Snippet (Performance Optimized)
+  Compact Home & Kitchen Live Counter - Shopify Snippet (2-Line Design)
   
-  Usage: {% render 'home-kitchen-live-counter' %}
+  Usage: {% render 'home-kitchen-live-counter-compact' %}
   
   Customization:
-  {% render 'home-kitchen-live-counter',
+  {% render 'home-kitchen-live-counter-compact',
     initial_viewers: 127,
     initial_stock: 39,
     min_viewers: 85,
     max_viewers: 180,
     min_stock: 0
   %}
-  
-  NOTE: Each product will automatically get different stock numbers!
-  The snippet uses product ID to randomize initial stock between 35-45 units.
 {% endcomment %}
 
 {% assign unique_id = section.id | default: 'default' | append: '-' | append: block.id | default: 'snippet' %}
@@ -33,249 +30,228 @@
 {% assign min_stock = min_stock | default: 0 %}
 
 {% style %}
-  .kitchen-counter-{{ unique_id }} {
+  .kitchen-counter-compact-{{ unique_id }} {
     background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
     border: 1.5px solid #000000;
     border-radius: 4px;
-    padding: 8px;
-    margin: 8px 0;
-    box-shadow: 0 0 20px rgba(213, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    will-change: auto;
+    padding: 6px 10px;
+    margin: 6px 0;
+    box-shadow: 0 0 15px rgba(213, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
-  .kitchen-counter__live-badge-{{ unique_id }} {
+  .kitchen-counter-compact__row-{{ unique_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .kitchen-counter-compact__live-badge-{{ unique_id }} {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     background: #7900FD;
     color: white;
     padding: 2px 6px;
-    border-radius: 6px;
-    border: 1px solid #E0E0E0;
-    font-size: 10px;
+    border-radius: 4px;
+    font-size: 9px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.4px;
-    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
   }
 
-  .kitchen-counter__live-dot-{{ unique_id }} {
-    width: 5px;
-    height: 5px;
+  .kitchen-counter-compact__live-dot-{{ unique_id }} {
+    width: 4px;
+    height: 4px;
     background: white;
     border-radius: 50%;
-    animation: live-pulse-{{ unique_id }} 2s ease-in-out infinite;
+    animation: live-pulse-compact-{{ unique_id }} 2s ease-in-out infinite;
   }
 
-  @keyframes live-pulse-{{ unique_id }} {
+  @keyframes live-pulse-compact-{{ unique_id }} {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.6; }
   }
 
-  .kitchen-counter__viewers-{{ unique_id }} {
+  .kitchen-counter-compact__viewers-{{ unique_id }} {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 5px;
-    padding: 5px 8px;
-    background: white;
-    border-radius: 5px;
-    border: 1px solid #FFE0E0;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
   }
 
-  .kitchen-counter__viewer-icons-{{ unique_id }} {
-    display: flex;
-    gap: 2px;
+  .kitchen-counter-compact__eye-icon-{{ unique_id }} {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
   }
 
-  .kitchen-counter__eye-icon-{{ unique_id }} {
-    width: 16px;
-    height: 16px;
-  }
-
-  .kitchen-counter__eye-icon-{{ unique_id }} svg {
+  .kitchen-counter-compact__eye-icon-{{ unique_id }} svg {
     width: 100%;
     height: 100%;
     fill: #7900FD;
   }
 
-  .kitchen-counter__viewers-text-{{ unique_id }} {
+  .kitchen-counter-compact__viewers-text-{{ unique_id }} {
     color: #1F2937;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1;
+    white-space: nowrap;
   }
 
-  .kitchen-counter__viewers-number-{{ unique_id }} {
+  .kitchen-counter-compact__viewers-number-{{ unique_id }} {
     font-weight: 800;
     color: #7900FD;
-    font-size: 14px;
-    display: inline-block;
-    min-width: 26px;
-    text-align: center;
+    font-size: 12px;
   }
 
-  .kitchen-counter__stock-section-{{ unique_id }} {
+  .kitchen-counter-compact__stock-wrapper-{{ unique_id }} {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: white;
-    padding: 6px 8px;
-    border-radius: 5px;
-    border: 1.5px solid #FFE0E0;
-  }
-
-  .kitchen-counter__stock-header-{{ unique_id }} {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 6px;
+    flex: 1;
   }
 
-  .kitchen-counter__stock-label-{{ unique_id }} {
-    font-size: 11px;
+  .kitchen-counter-compact__stock-label-{{ unique_id }} {
+    font-size: 10px;
     font-weight: 700;
     color: #7900FD;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.4px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    white-space: nowrap;
   }
 
-  .kitchen-counter__stock-icon-{{ unique_id }} {
-    width: 14px;
-    height: 14px;
+  .kitchen-counter-compact__stock-icon-{{ unique_id }} {
+    width: 12px;
+    height: 12px;
   }
 
-  .kitchen-counter__stock-count-{{ unique_id }} {
+  .kitchen-counter-compact__stock-count-{{ unique_id }} {
     background: linear-gradient(135deg, #7900FD 0%, #7900FD 100%);
     color: white;
-    padding: 3px 8px;
-    border-radius: 6px;
-    border: 1px solid #E0E0E0;
-    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
     font-weight: 800;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    white-space: nowrap;
   }
 
-  .kitchen-counter__stock-number-{{ unique_id }} {
-    font-size: 14px;
-    min-width: 20px;
+  .kitchen-counter-compact__stock-number-{{ unique_id }} {
+    font-size: 12px;
+    min-width: 16px;
     text-align: center;
   }
 
-  .kitchen-counter__progress-bar-{{ unique_id }} {
-    height: 6px;
+  .kitchen-counter-compact__progress-container-{{ unique_id }} {
+    flex: 1;
+    min-width: 60px;
+  }
+
+  .kitchen-counter-compact__progress-bar-{{ unique_id }} {
+    height: 5px;
     background: linear-gradient(90deg, #FFE0E0 0%, #FFF5F5 100%);
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
     position: relative;
     border: 1px solid #FFD0D0;
   }
 
-  .kitchen-counter__progress-fill-{{ unique_id }} {
+  .kitchen-counter-compact__progress-fill-{{ unique_id }} {
     height: 100%;
     background: linear-gradient(90deg, #7900FD 0%, #7900FD 100%);
-    border-radius: 4px;
+    border-radius: 3px;
     transition: width 0.5s ease-out;
   }
 
-  .kitchen-counter__updating-{{ unique_id }} {
-    animation: update-pop-{{ unique_id }} 0.3s ease;
+  .kitchen-counter-compact__updating-{{ unique_id }} {
+    animation: update-pop-compact-{{ unique_id }} 0.3s ease;
   }
 
-  @keyframes update-pop-{{ unique_id }} {
+  @keyframes update-pop-compact-{{ unique_id }} {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  .kitchen-counter__urgency-text-{{ unique_id }} {
-    text-align: center;
-    font-size: 10px;
-    color: #DC2626;
-    font-weight: 600;
-    margin-top: 4px;
+    50% { transform: scale(1.08); }
   }
 
   /* Responsive Design */
   @media screen and (min-width: 640px) {
-    .kitchen-counter-{{ unique_id }} {
-      padding: 10px 12px;
+    .kitchen-counter-compact-{{ unique_id }} {
+      padding: 7px 12px;
     }
 
-    .kitchen-counter__viewers-text-{{ unique_id }} {
-      font-size: 13px;
-    }
-
-    .kitchen-counter__viewers-number-{{ unique_id }} {
-      font-size: 15px;
-    }
-
-    .kitchen-counter__stock-label-{{ unique_id }} {
+    .kitchen-counter-compact__viewers-text-{{ unique_id }} {
       font-size: 12px;
     }
 
-    .kitchen-counter__progress-bar-{{ unique_id }} {
-      height: 7px;
+    .kitchen-counter-compact__stock-label-{{ unique_id }} {
+      font-size: 11px;
+    }
+
+    .kitchen-counter-compact__progress-bar-{{ unique_id }} {
+      height: 6px;
     }
   }
 
   /* Reduce animations on mobile devices */
   @media (prefers-reduced-motion: reduce) {
-    .kitchen-counter-{{ unique_id }}::before,
-    .kitchen-counter__live-dot-{{ unique_id }},
-    .kitchen-counter__updating-{{ unique_id }} {
+    .kitchen-counter-compact__live-dot-{{ unique_id }},
+    .kitchen-counter-compact__updating-{{ unique_id }} {
       animation: none;
     }
   }
 {% endstyle %}
 
-<div class="kitchen-counter-{{ unique_id }}" id="kitchen-counter-{{ unique_id }}">
-  <!-- Live Badge -->
-  <div class="kitchen-counter__live-badge-{{ unique_id }}">
-    <div class="kitchen-counter__live-dot-{{ unique_id }}"></div>
-    <span>Live Now</span>
-  </div>
-
-  <!-- Viewers Section -->
-  <div class="kitchen-counter__viewers-{{ unique_id }}">
-    <div class="kitchen-counter__viewer-icons-{{ unique_id }}">
-      <div class="kitchen-counter__eye-icon-{{ unique_id }}">
+<div class="kitchen-counter-compact-{{ unique_id }}" id="kitchen-counter-compact-{{ unique_id }}">
+  <!-- First Row: Live Badge + Viewers -->
+  <div class="kitchen-counter-compact__row-{{ unique_id }}">
+    <div class="kitchen-counter-compact__live-badge-{{ unique_id }}">
+      <div class="kitchen-counter-compact__live-dot-{{ unique_id }}"></div>
+      <span>Live</span>
+    </div>
+    
+    <div class="kitchen-counter-compact__viewers-{{ unique_id }}">
+      <div class="kitchen-counter-compact__eye-icon-{{ unique_id }}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
         </svg>
       </div>
+      <p class="kitchen-counter-compact__viewers-text-{{ unique_id }}">
+        <span class="kitchen-counter-compact__viewers-number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> viewing
+      </p>
     </div>
-    <p class="kitchen-counter__viewers-text-{{ unique_id }}">
-      <span class="kitchen-counter__viewers-number-{{ unique_id }}" data-viewers="{{ initial_viewers }}">{{ initial_viewers }}</span> people viewing now
-    </p>
   </div>
 
-  <!-- Stock Section -->
-  <div class="kitchen-counter__stock-section-{{ unique_id }}">
-    <div class="kitchen-counter__stock-header-{{ unique_id }}">
-      <p class="kitchen-counter__stock-label-{{ unique_id }}">
-        <svg class="kitchen-counter__stock-icon-{{ unique_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7900FD">
+  <!-- Second Row: Stock Info + Progress Bar -->
+  <div class="kitchen-counter-compact__row-{{ unique_id }}">
+    <div class="kitchen-counter-compact__stock-wrapper-{{ unique_id }}">
+      <p class="kitchen-counter-compact__stock-label-{{ unique_id }}">
+        <svg class="kitchen-counter-compact__stock-icon-{{ unique_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7900FD">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
         </svg>
-        In Stock
+        Stock
       </p>
-      <div class="kitchen-counter__stock-count-{{ unique_id }}">
-        <span class="kitchen-counter__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
+      <div class="kitchen-counter-compact__stock-count-{{ unique_id }}">
+        <span class="kitchen-counter-compact__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
         <span>units</span>
       </div>
     </div>
-    
-    <div class="kitchen-counter__progress-container-{{ unique_id }}">
-      <div class="kitchen-counter__progress-bar-{{ unique_id }}">
-        <div class="kitchen-counter__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
+
+    <div class="kitchen-counter-compact__progress-container-{{ unique_id }}">
+      <div class="kitchen-counter-compact__progress-bar-{{ unique_id }}">
+        <div class="kitchen-counter-compact__progress-fill-{{ unique_id }}" data-progress style="width: 100%;"></div>
       </div>
     </div>
   </div>
@@ -284,7 +260,7 @@
 <script>
   (function() {
     const uniqueId = '{{ unique_id }}';
-    const container = document.getElementById('kitchen-counter-' + uniqueId);
+    const container = document.getElementById('kitchen-counter-compact-' + uniqueId);
     
     if (!container) return;
 
@@ -300,8 +276,8 @@
       minViewers: {{ min_viewers }},
       maxViewers: {{ max_viewers }},
       minStock: {{ min_stock }},
-      viewerUpdateInterval: 8000,  // Reduced frequency: every 8 seconds
-      stockUpdateInterval: 6000    // Every 6 seconds as requested
+      viewerUpdateInterval: 8000,
+      stockUpdateInterval: 6000
     };
 
     let viewerInterval = null;
@@ -318,7 +294,7 @@
     }
 
     function updateViewers() {
-      if (!isTabActive) return; // Don't update if tab is not visible
+      if (!isTabActive) return;
       
       const change = randomBetween(-3, 5);
       let newViewers = currentViewers + change;
@@ -327,28 +303,28 @@
 
       if (newViewers !== currentViewers) {
         currentViewers = newViewers;
-        viewersElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
+        viewersElement.classList.add('kitchen-counter-compact__updating-{{ unique_id }}');
         viewersElement.textContent = currentViewers;
 
         setTimeout(() => {
-          viewersElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+          viewersElement.classList.remove('kitchen-counter-compact__updating-{{ unique_id }}');
         }, 300);
       }
     }
 
     function updateStock() {
-      if (!isTabActive) return; // Don't update if tab is not visible
+      if (!isTabActive) return;
       
       if (currentStock > config.minStock) {
         currentStock = Math.max(config.minStock, currentStock - 1);
 
-        stockElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
+        stockElement.classList.add('kitchen-counter-compact__updating-{{ unique_id }}');
         stockElement.textContent = currentStock;
         
         updateProgressBar();
 
         setTimeout(() => {
-          stockElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+          stockElement.classList.remove('kitchen-counter-compact__updating-{{ unique_id }}');
         }, 300);
       }
     }
@@ -372,32 +348,31 @@
     updateProgressBar();
     
     // Drop from 39 to 35 in first 6 seconds (4 units)
-    const initialDropInterval = 1500; // 6 seconds / 4 drops = 1.5 seconds each
+    const initialDropInterval = 1500;
     let dropCount = 0;
-    const maxInitialDrops = 4; // Drop 4 units (39 -> 35)
+    const maxInitialDrops = 4;
     
     const initialDropTimer = setInterval(() => {
       if (dropCount < maxInitialDrops && currentStock > config.minStock) {
         currentStock--;
         dropCount++;
         
-        stockElement.classList.add('kitchen-counter__updating-{{ unique_id }}');
+        stockElement.classList.add('kitchen-counter-compact__updating-{{ unique_id }}');
         stockElement.textContent = currentStock;
         updateProgressBar();
         
         setTimeout(() => {
-          stockElement.classList.remove('kitchen-counter__updating-{{ unique_id }}');
+          stockElement.classList.remove('kitchen-counter-compact__updating-{{ unique_id }}');
         }, 300);
         
         if (dropCount >= maxInitialDrops) {
           clearInterval(initialDropTimer);
-          // Start normal intervals after initial drop
           startIntervals();
         }
       }
     }, initialDropInterval);
 
-    // Pause when tab is not visible to save battery
+    // Pause when tab is not visible
     document.addEventListener('visibilitychange', () => {
       isTabActive = !document.hidden;
       
