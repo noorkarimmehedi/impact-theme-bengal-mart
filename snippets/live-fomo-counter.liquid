@@ -126,15 +126,13 @@
   }
 
   .kitchen-counter-compact__stock-label-{{ unique_id }} {
-    font-size: 10px;
-    font-weight: 700;
-    color: #7900FD;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1F2937;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     white-space: nowrap;
   }
 
@@ -157,9 +155,9 @@
   }
 
   .kitchen-counter-compact__stock-number-{{ unique_id }} {
-    font-size: 12px;
-    min-width: 16px;
-    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #7900FD;
   }
 
   .kitchen-counter-compact__progress-container-{{ unique_id }} {
@@ -256,12 +254,8 @@
         <svg class="kitchen-counter-compact__stock-icon-{{ unique_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7900FD">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
         </svg>
-        Units
+        <span class="kitchen-counter-compact__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span> units left
       </p>
-      <div class="kitchen-counter-compact__stock-count-{{ unique_id }}">
-        <span class="kitchen-counter-compact__stock-number-{{ unique_id }}" data-stock="{{ initial_stock }}">{{ initial_stock }}</span>
-        <span>left</span>
-      </div>
     </div>
 
     <div class="kitchen-counter-compact__progress-container-{{ unique_id }}">
