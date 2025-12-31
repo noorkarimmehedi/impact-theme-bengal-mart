@@ -40,6 +40,16 @@
     margin: 0 20px;
   }
 
+  @media screen and (max-width: 749px) {
+    .ai-search-heading-{{ ai_gen_id }} {
+      padding: 0 8px;
+    }
+
+    .ai-search-input-wrapper-{{ ai_gen_id }} {
+      margin: 0 8px;
+    }
+  }
+
   .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within {
     border-color: {{ block.settings.input_focus_border_color }};
   }
@@ -195,6 +205,16 @@
   @media screen and (max-width: 749px) {
     .ai-search-heading-{{ ai_gen_id }} {
       font-size: calc({{ block.settings.heading_size }}px * 0.8);
+      padding: 0 8px;
+    }
+
+    .ai-search-input-wrapper-{{ ai_gen_id }} {
+      margin: 0 8px;
+    }
+
+    .ai-search-suggestions-{{ ai_gen_id }} {
+      left: 8px;
+      right: 8px;
     }
 
     /* CRITICAL: Keep input font-size at 16px minimum on mobile to prevent zoom */
