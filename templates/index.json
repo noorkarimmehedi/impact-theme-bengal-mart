@@ -83,6 +83,54 @@
       "disabled": true,
       "settings": {}
     },
+    "17671747989568dcec": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c08d2b1_WRxhqF": {
+          "type": "ai_gen_block_c08d2b1",
+          "settings": {
+            "heading": "",
+            "heading_size": 32,
+            "heading_alignment": "center",
+            "heading_spacing": 20,
+            "placeholder": "Search for products...",
+            "min_characters": 2,
+            "max_results": 5,
+            "max_width": 800,
+            "padding_top": 10,
+            "padding_bottom": 10,
+            "background_color": "#f5f5f5",
+            "heading_color": "#000000",
+            "text_color": "#000000",
+            "price_color": "#1a1a1a",
+            "input_background": "#ffffff",
+            "input_text_color": "#000000",
+            "placeholder_color": "#999999",
+            "input_border_color": "#e0e0e0",
+            "input_focus_border_color": "#1a1a1a",
+            "input_border_width": 1,
+            "input_border_radius": 2,
+            "input_padding": 16,
+            "input_font_size": 16,
+            "icon_color": "#666666",
+            "icon_size": 20,
+            "suggestions_background": "#ffffff",
+            "suggestions_border_color": "#e0e0e0",
+            "suggestions_border_radius": 2,
+            "suggestion_hover_background": "#f5f5f5",
+            "view_all_background": "#f9f9f9",
+            "view_all_color": "#1a1a1a",
+            "view_all_hover_background": "#eeeeee",
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c08d2b1_WRxhqF"
+      ],
+      "settings": {}
+    },
     "1762548976c4d25b0a": {
       "type": "_blocks",
       "blocks": {
@@ -1431,6 +1479,7 @@
   },
   "order": [
     "1762431366d8997677",
+    "17671747989568dcec",
     "1762548976c4d25b0a",
     "slideshow",
     "image-link-blocks",
