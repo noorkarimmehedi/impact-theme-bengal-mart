@@ -20,7 +20,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: {{ block.settings.image_fit_mobile }};
   }
 
   .ai-hero-image-desktop-{{ ai_gen_id }} {
@@ -60,7 +60,7 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: {{ block.settings.content_padding_mobile }}px {{ block.settings.button_side_gap_mobile }}px;
+    padding: {{ block.settings.content_padding_mobile }}px 8px;
     display: flex;
     flex-direction: column;
     gap: {{ block.settings.content_spacing }}px;
@@ -107,10 +107,10 @@
     align-items: center;
     padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal_mobile }}px;
     text-decoration: none;
-    border-radius: {{ block.settings.button_border_radius }}px;
+    border-radius: 0;
     font-size: {{ block.settings.button_font_size }}px;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 2px solid #000000;
     text-align: center;
     width: 100%;
   }
@@ -118,25 +118,25 @@
   .ai-hero-button-primary-{{ ai_gen_id }} {
     background-color: {{ block.settings.button_primary_bg }};
     color: {{ block.settings.button_primary_color }};
-    border-color: {{ block.settings.button_primary_bg }};
+    border-color: #000000;
   }
 
   .ai-hero-button-primary-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_primary_hover_bg }};
     color: {{ block.settings.button_primary_hover_color }};
-    border-color: {{ block.settings.button_primary_hover_bg }};
+    border-color: #000000;
   }
 
   .ai-hero-button-secondary-{{ ai_gen_id }} {
     background-color: {{ block.settings.button_secondary_bg }};
     color: {{ block.settings.button_secondary_color }};
-    border-color: {{ block.settings.button_secondary_border }};
+    border-color: #000000;
   }
 
   .ai-hero-button-secondary-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_secondary_hover_bg }};
     color: {{ block.settings.button_secondary_hover_color }};
-    border-color: {{ block.settings.button_secondary_hover_border }};
+    border-color: #000000;
   }
 
   .ai-hero-empty-state-{{ ai_gen_id }} {
@@ -162,6 +162,7 @@
 
     .ai-hero-image-desktop-{{ ai_gen_id }} {
       display: block;
+      object-fit: {{ block.settings.image_fit_desktop }};
     }
 
     .ai-hero-content-{{ ai_gen_id }} {
@@ -315,6 +316,46 @@
       "default": 700
     },
     {
+      "type": "select",
+      "id": "image_fit_mobile",
+      "label": "Image fit on mobile",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "image_fit_desktop",
+      "label": "Image fit on desktop",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
       "type": "header",
       "content": "Overlay"
     },
@@ -366,16 +407,6 @@
       "unit": "px",
       "label": "Padding on mobile",
       "default": 30
-    },
-    {
-      "type": "range",
-      "id": "button_side_gap_mobile",
-      "min": 0,
-      "max": 40,
-      "step": 5,
-      "unit": "px",
-      "label": "Button side gap on mobile",
-      "default": 15
     },
     {
       "type": "range",
@@ -547,12 +578,6 @@
     },
     {
       "type": "color",
-      "id": "button_secondary_border",
-      "label": "Border",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
       "id": "button_secondary_hover_bg",
       "label": "Hover background",
       "default": "#ffffff"
@@ -562,12 +587,6 @@
       "id": "button_secondary_hover_color",
       "label": "Hover text",
       "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_secondary_hover_border",
-      "label": "Hover border",
-      "default": "#ffffff"
     },
     {
       "type": "header",
@@ -612,16 +631,6 @@
       "unit": "px",
       "label": "Horizontal padding on desktop",
       "default": 40
-    },
-    {
-      "type": "range",
-      "id": "button_border_radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Border radius",
-      "default": 4
     },
     {
       "type": "range",
