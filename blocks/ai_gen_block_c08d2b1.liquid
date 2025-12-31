@@ -112,6 +112,32 @@
     height: 20px;
   }
 
+  .ai-search-submit-{{ ai_gen_id }} {
+    padding: 0 20px 0 12px;
+    background: linear-gradient(135deg, #7900FD 0%, #9D4EDD 100%);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    gap: 6px;
+    transition: all 0.3s ease;
+    height: 100%;
+    letter-spacing: -0.01em;
+  }
+
+  .ai-search-submit-{{ ai_gen_id }}:hover {
+    background: linear-gradient(135deg, #6800E0 0%, #8C3DCB 100%);
+    transform: translateX(-2px);
+  }
+
+  .ai-search-submit-{{ ai_gen_id }} svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .ai-search-suggestions-{{ ai_gen_id }} {
     position: absolute;
     top: calc(100% + 12px);
@@ -361,6 +387,17 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
+        <button
+          type="button"
+          class="ai-search-submit-{{ ai_gen_id }}"
+          aria-label="Search"
+        >
+          Search
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
       </div>
 
       <div
@@ -379,6 +416,7 @@
         super();
         this.input = this.querySelector('.ai-search-input-{{ ai_gen_id }}');
         this.clearBtn = this.querySelector('.ai-search-clear-{{ ai_gen_id }}');
+        this.submitBtn = this.querySelector('.ai-search-submit-{{ ai_gen_id }}');
         this.suggestions = this.querySelector('.ai-search-suggestions-{{ ai_gen_id }}');
         this.minChars = parseInt(this.dataset.minChars) || 2;
         this.maxResults = parseInt(this.dataset.maxResults) || 5;
@@ -388,7 +426,9 @@
 
       connectedCallback() {
         this.input.addEventListener('input', this.handleInput.bind(this));
+        this.input.addEventListener('keypress', this.handleKeyPress.bind(this));
         this.clearBtn.addEventListener('click', this.clearSearch.bind(this));
+        this.submitBtn.addEventListener('click', this.handleSubmit.bind(this));
         document.addEventListener('click', this.handleClickOutside.bind(this));
       }
 
@@ -550,6 +590,20 @@
       handleClickOutside(event) {
         if (!this.contains(event.target)) {
           this.hideSuggestions();
+        }
+      }
+
+      handleKeyPress(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.handleSubmit();
+        }
+      }
+
+      handleSubmit() {
+        const query = this.input.value.trim();
+        if (query.length >= this.minChars) {
+          window.location.href = `/search?q=${encodeURIComponent(query)}`;
         }
       }
     }
