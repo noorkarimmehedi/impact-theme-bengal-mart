@@ -422,6 +422,9 @@
         this.maxResults = parseInt(this.dataset.maxResults) || 5;
         this.searchTimeout = null;
         this.currentRequest = null;
+        
+        // Get Shopify's money format from theme settings
+        this.moneyFormat = window.theme?.moneyFormat || '{{amount}}';
       }
 
       connectedCallback() {
@@ -565,8 +568,38 @@
       }
 
       formatMoney(cents) {
-        const amount = (cents / 100).toFixed(2);
-        return `{{ cart.currency.symbol }}${amount}`;
+        // Shopify API returns prices in cents
+        const dollars = (cents / 100).toFixed(2);
+        
+        // Use Shopify's money format if available
+        if (window.Shopify && window.Shopify.formatMoney) {
+          return window.Shopify.formatMoney(cents, this.moneyFormat);
+        }
+        
+        // Fallback to manual formatting
+        // Try to get currency from Shopify.currency or default to shop currency
+        const currency = window.Shopify?.currency?.active || '{{ shop.currency }}';
+        
+        // Common currency symbols
+        const currencySymbols = {
+          'USD': '$',
+          'EUR': '€',
+          'GBP': '£',
+          'CAD': 'CA$',
+          'AUD': 'A$',
+          'JPY': '¥',
+          'INR': '₹',
+          'BDT': '৳'
+        };
+        
+        const symbol = currencySymbols[currency] || currency + ' ';
+        
+        // Format based on currency (some currencies don't use decimals)
+        if (currency === 'JPY' || currency === 'KRW') {
+          return `${symbol}${Math.round(cents / 100)}`;
+        }
+        
+        return `${symbol}${dollars}`;
       }
 
       escapeHtml(text) {
