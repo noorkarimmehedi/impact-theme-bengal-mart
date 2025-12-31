@@ -138,7 +138,7 @@
           "settings": {
             "image_mobile": "shopify://shop_images/Heroimg_11zon.webp",
             "image_desktop": "shopify://shop_images/Facebook_Cover.webp",
-            "height_mobile": 450,
+            "height_mobile": 400,
             "height_desktop": 600,
             "image_fit_mobile": "cover",
             "image_fit_desktop": "cover",
