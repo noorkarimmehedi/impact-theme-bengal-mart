@@ -422,9 +422,6 @@
         this.maxResults = parseInt(this.dataset.maxResults) || 5;
         this.searchTimeout = null;
         this.currentRequest = null;
-        
-        // Get Shopify's money format from theme settings
-        this.moneyFormat = window.theme?.moneyFormat || '{{amount}}';
       }
 
       connectedCallback() {
@@ -466,7 +463,6 @@
         }
 
         this.showLoading();
-
         this.currentRequest = new AbortController();
 
         try {
@@ -530,7 +526,7 @@
 
         products.forEach(product => {
           const imageUrl = product.image ? this.getImageUrl(product.image) : '';
-          const price = this.formatMoney(product.price);
+          const price = this.formatPrice(product.price);
 
           html += `
             <a href="${product.url}" class="ai-search-suggestion-item-{{ ai_gen_id }}" role="option">
@@ -567,39 +563,22 @@
         return imageUrl + '?width=140';
       }
 
-      formatMoney(cents) {
-        // Shopify API returns prices in cents
-        const dollars = (cents / 100).toFixed(2);
-        
-        // Use Shopify's money format if available
-        if (window.Shopify && window.Shopify.formatMoney) {
-          return window.Shopify.formatMoney(cents, this.moneyFormat);
+      formatPrice(priceInCents) {
+        // If it's already a string, return it
+        if (typeof priceInCents === 'string') {
+          return priceInCents;
         }
-        
-        // Fallback to manual formatting
-        // Try to get currency from Shopify.currency or default to shop currency
-        const currency = window.Shopify?.currency?.active || '{{ shop.currency }}';
-        
-        // Common currency symbols
-        const currencySymbols = {
-          'USD': '$',
-          'EUR': '€',
-          'GBP': '£',
-          'CAD': 'CA$',
-          'AUD': 'A$',
-          'JPY': '¥',
-          'INR': '₹',
-          'BDT': '৳'
-        };
-        
-        const symbol = currencySymbols[currency] || currency + ' ';
-        
-        // Format based on currency (some currencies don't use decimals)
-        if (currency === 'JPY' || currency === 'KRW') {
-          return `${symbol}${Math.round(cents / 100)}`;
+
+        // Convert cents to dollars
+        const priceInDollars = priceInCents / 100;
+
+        // Use Shopify.formatMoney if available
+        if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+          return Shopify.formatMoney(priceInCents, '{{ shop.money_format }}');
         }
-        
-        return `${symbol}${dollars}`;
+
+        // Fallback formatting
+        return '{{ shop.currency }}' + ' ' + priceInDollars.toFixed(2);
       }
 
       escapeHtml(text) {
