@@ -87,9 +87,8 @@
         },
         "liquid_HTqcEP": {
           "type": "liquid",
-          "disabled": true,
           "settings": {
-            "liquid": "{% render 'offer-cards-carousel' %}"
+            "liquid": "{% render 'video-Magnetic-Selfie-Light' %}"
           }
         }
       },
