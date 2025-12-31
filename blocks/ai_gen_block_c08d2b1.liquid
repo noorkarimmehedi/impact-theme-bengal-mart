@@ -1,7 +1,3 @@
-{% doc %}
-  @prompt
-    generate a search functionality section where user can search products and while user typing it should automatically shows suggestions, suggestion product image isn't rendering also i want top and bottom padding control options, there is a gap on left and right side outside of the Input box. i don't want that gap on both mobile and desktop 
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -29,7 +25,7 @@
   .ai-search-form-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
   }
 
   .ai-search-input-wrapper-{{ ai_gen_id }} {
@@ -41,6 +37,7 @@
     border-radius: {{ block.settings.input_border_radius }}px;
     overflow: hidden;
     transition: border-color 0.3s ease;
+    margin: 0 20px;
   }
 
   .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within {
@@ -149,12 +146,16 @@
     border-radius: 4px;
     overflow: hidden;
     background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ai-search-suggestion-image-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   .ai-search-suggestion-info-{{ ai_gen_id }} {
@@ -196,8 +197,9 @@
       font-size: calc({{ block.settings.heading_size }}px * 0.8);
     }
 
+    /* CRITICAL: Keep input font-size at 16px minimum on mobile to prevent zoom */
     .ai-search-input-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.input_font_size }}px * 0.9);
+      font-size: 16px !important;
     }
   }
 {% endstyle %}
@@ -640,7 +642,8 @@
       "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 16,
+      "info": "Note: On mobile, font size is locked to 16px minimum to prevent zoom"
     },
     {
       "type": "color",
@@ -707,16 +710,6 @@
       "id": "view_all_hover_background",
       "label": "View all hover",
       "default": "#eeeeee"
-    },
-    {
-      "type": "range",
-      "id": "desktop_width_percent",
-      "label": "Desktop width",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 100
     }
   ],
   "presets": [
