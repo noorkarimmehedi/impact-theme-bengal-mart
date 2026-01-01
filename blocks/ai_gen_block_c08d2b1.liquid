@@ -113,24 +113,28 @@
   }
 
   .ai-search-submit-{{ ai_gen_id }} {
-    padding: 0 20px 0 12px;
-    background: linear-gradient(135deg, #7900FD 0%, #9D4EDD 100%);
-    border: none;
+    padding: 12px 24px;
+    background-color: #0171E3;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 24px;
+    border: 1px solid #0171E3;
+    box-shadow: inset 0 1px 1px rgba(0, 255, 255, 0.8);
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 14px;
     gap: 6px;
     transition: all 0.3s ease;
-    height: 100%;
     letter-spacing: -0.01em;
+    corner-shape: squircle;
   }
 
   .ai-search-submit-{{ ai_gen_id }}:hover {
-    background: linear-gradient(135deg, #6800E0 0%, #8C3DCB 100%);
-    transform: translateX(-2px);
+    background-color: #0159B3;
+    border-color: #0159B3;
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 1px rgba(0, 255, 255, 0.8), 0 4px 12px rgba(1, 113, 227, 0.3);
   }
 
   .ai-search-submit-{{ ai_gen_id }} svg {
