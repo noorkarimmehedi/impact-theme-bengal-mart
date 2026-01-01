@@ -742,6 +742,36 @@
       ],
       "settings": {}
     },
+    "1767189860b376afe5": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_aiV39B": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_aiV39B"
+      ],
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "enable_review_integration": true,
+        "review_header_gradient": "linear-gradient(135deg, rgba(255, 194, 102, 1), rgba(255, 163, 26, 1) 100%)",
+        "review_header_text_color": "#000000",
+        "review_button_background": "#000000",
+        "review_button_text_color": "#ffffff"
+      }
+    },
     "custom_recommendations_CLpcEi": {
       "type": "custom-recommendations",
       "name": "You may also like",
@@ -834,36 +864,6 @@
       "name": "Horizontal divider",
       "settings": {}
     },
-    "1767189860b376afe5": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_aiV39B": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_aiV39B"
-      ],
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "enable_review_integration": true,
-        "review_header_gradient": "linear-gradient(135deg, rgba(255, 194, 102, 1), rgba(255, 163, 26, 1) 100%)",
-        "review_header_text_color": "#000000",
-        "review_button_background": "#000000",
-        "review_button_text_color": "#ffffff"
-      }
-    },
     "featured_collection_gEQgRW": {
       "type": "featured-collection",
       "disabled": true,
@@ -907,9 +907,9 @@
     "related-products",
     "blocks_wzFWbh",
     "1759497772a737a649",
+    "1767189860b376afe5",
     "custom_recommendations_CLpcEi",
     "blocks_dMtyVD",
-    "1767189860b376afe5",
     "featured_collection_gEQgRW"
   ]
 }
