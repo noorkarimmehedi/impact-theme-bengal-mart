@@ -39,16 +39,20 @@
     display: flex;
     align-items: center;
     background: {{ block.settings.input_background }};
-    border: 2px solid transparent;
+    border: {{ block.settings.input_border_width }}px solid {{ block.settings.input_border_color }};
     border-radius: {{ block.settings.input_border_radius }}px;
     overflow: hidden;
     margin: 0 20px;
-    box-shadow: 0 4px 20px rgba(121, 0, 253, 0.08);
+    box-shadow: {{ block.settings.shadow_h_offset }}px {{ block.settings.shadow_v_offset }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .ai-search-input-wrapper-{{ ai_gen_id }}:hover {
+    border-color: {{ block.settings.input_hover_border_color }};
+  }
+
   .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within {
-    border-color: #7900FD;
+    border-color: {{ block.settings.input_focus_border_color }};
     box-shadow: 0 8px 30px rgba(121, 0, 253, 0.2);
     transform: translateY(-2px);
   }
@@ -463,6 +467,7 @@
         }
 
         this.showLoading();
+
         this.currentRequest = new AbortController();
 
         try {
@@ -526,7 +531,7 @@
 
         products.forEach(product => {
           const imageUrl = product.image ? this.getImageUrl(product.image) : '';
-          const price = this.formatPrice(product.price);
+          const price = this.formatPrice(product);
 
           html += `
             <a href="${product.url}" class="ai-search-suggestion-item-{{ ai_gen_id }}" role="option">
@@ -563,22 +568,25 @@
         return imageUrl + '?width=140';
       }
 
-      formatPrice(priceInCents) {
-        // If it's already a string, return it
-        if (typeof priceInCents === 'string') {
-          return priceInCents;
+      formatPrice(product) {
+        // Shopify API returns price in cents or as a number
+        let priceValue = product.price;
+        
+        // Check if price_min and price_max exist (for products with variants)
+        if (product.price_min !== undefined && product.price_max !== undefined) {
+          if (product.price_min === product.price_max) {
+            priceValue = product.price_min;
+          } else {
+            // Show price range
+            const minPrice = (product.price_min / 100).toFixed(2);
+            const maxPrice = (product.price_max / 100).toFixed(2);
+            return `{{ cart.currency.symbol }}${minPrice} - {{ cart.currency.symbol }}${maxPrice}`;
+          }
         }
-
-        // Convert cents to dollars
-        const priceInDollars = priceInCents / 100;
-
-        // Use Shopify.formatMoney if available
-        if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
-          return Shopify.formatMoney(priceInCents, '{{ shop.money_format }}');
-        }
-
-        // Fallback formatting
-        return '{{ shop.currency }}' + ' ' + priceInDollars.toFixed(2);
+        
+        // Convert cents to currency format
+        const amount = (priceValue / 100).toFixed(2);
+        return `{{ cart.currency.symbol }}${amount}`;
       }
 
       escapeHtml(text) {
@@ -631,6 +639,62 @@
   "settings": [
     {
       "type": "header",
+      "content": "Suggestions style"
+    },
+    {
+      "type": "color",
+      "id": "suggestions_background",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "suggestions_border_color",
+      "label": "Border",
+      "default": "#F3F4F6"
+    },
+    {
+      "type": "range",
+      "id": "suggestions_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "suggestion_hover_background",
+      "label": "Hover background",
+      "default": "#F9FAFB"
+    },
+    {
+      "type": "color",
+      "id": "view_all_background",
+      "label": "View all background",
+      "default": "#7900FD"
+    },
+    {
+      "type": "color",
+      "id": "view_all_color",
+      "label": "View all text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "view_all_hover_background",
+      "label": "View all hover",
+      "default": "#6800E0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product search"
+    }
+  ]
+}
+{% endschema %}
       "content": "Content"
     },
     {
@@ -795,7 +859,13 @@
       "type": "color",
       "id": "input_border_color",
       "label": "Border",
-      "default": "#E5E7EB"
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "input_hover_border_color",
+      "label": "Hover border",
+      "default": "#CCCCCC"
     },
     {
       "type": "color",
@@ -807,11 +877,11 @@
       "type": "range",
       "id": "input_border_width",
       "label": "Border width",
-      "min": 1,
+      "min": 0,
       "max": 4,
       "step": 1,
       "unit": "px",
-      "default": 2
+      "default": 1
     },
     {
       "type": "range",
@@ -821,7 +891,7 @@
       "max": 50,
       "step": 2,
       "unit": "px",
-      "default": 16
+      "default": 8
     },
     {
       "type": "range",
@@ -862,59 +932,3 @@
     },
     {
       "type": "header",
-      "content": "Suggestions style"
-    },
-    {
-      "type": "color",
-      "id": "suggestions_background",
-      "label": "Background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "suggestions_border_color",
-      "label": "Border",
-      "default": "#F3F4F6"
-    },
-    {
-      "type": "range",
-      "id": "suggestions_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 20,
-      "step": 2,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "suggestion_hover_background",
-      "label": "Hover background",
-      "default": "#F9FAFB"
-    },
-    {
-      "type": "color",
-      "id": "view_all_background",
-      "label": "View all background",
-      "default": "#7900FD"
-    },
-    {
-      "type": "color",
-      "id": "view_all_color",
-      "label": "View all text",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "view_all_hover_background",
-      "label": "View all hover",
-      "default": "#6800E0"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product search"
-    }
-  ]
-}
-{% endschema %}
