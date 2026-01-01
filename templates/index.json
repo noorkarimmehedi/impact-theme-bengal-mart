@@ -110,6 +110,10 @@
             "input_focus_border_color": "#1a1a1a",
             "input_border_width": 1,
             "input_border_radius": 2,
+            "shadow_horizontal": 0,
+            "shadow_vertical": 4,
+            "shadow_blur": 20,
+            "shadow_opacity": 10,
             "input_padding": 16,
             "input_font_size": 16,
             "icon_color": "#666666",
@@ -128,6 +132,7 @@
       "block_order": [
         "ai_gen_block_c08d2b1_WRxhqF"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1762548976c4d25b0a": {
