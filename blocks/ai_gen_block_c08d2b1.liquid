@@ -1,636 +1,623 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-search-container-{{ ai_gen_id }} {
-    display: block;
-    width: 100%;
-    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  .search-container-{{ ai_gen_id }} {
+    display: flex;
+    min-height: 50vh;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
     background: {{ block.settings.background_color }};
+    position: relative;
+    overflow: hidden;
   }
 
-  .ai-search-wrapper-{{ ai_gen_id }} {
-    max-width: {{ block.settings.max_width }}px;
-    margin: 0 auto;
-    padding: 0;
+  .search-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    z-index: 10;
   }
 
-  .ai-search-heading-{{ ai_gen_id }} {
-    text-align: {{ block.settings.heading_alignment }};
+  .search-heading-{{ ai_gen_id }} {
+    text-align: center;
     color: {{ block.settings.heading_color }};
     font-size: {{ block.settings.heading_size }}px;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 0 0 {{ block.settings.heading_spacing }}px 0;
-    padding: 0 20px;
-    background: linear-gradient(135deg, #7900FD 0%, #9D4EDD 100%);
+    margin-bottom: {{ block.settings.heading_spacing }}px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .ai-search-form-{{ ai_gen_id }} {
+  .search-form-{{ ai_gen_id }} {
     position: relative;
-    width: 100%;
-    padding: 0;
+    width: 240px;
+    margin: 0 auto;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .ai-search-input-wrapper-{{ ai_gen_id }} {
+  .search-form-{{ ai_gen_id }}.focused {
+    width: 340px;
+    transform: scale(1.05);
+  }
+
+  .search-input-wrapper-{{ ai_gen_id }} {
     position: relative;
     display: flex;
     align-items: center;
-    background: {{ block.settings.input_background }};
-    border: {{ block.settings.input_border_width }}px solid {{ block.settings.input_border_color }};
-    border-radius: {{ block.settings.input_border_radius }}px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    border-radius: 50px;
+    overflow: visible;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: all 0.3s ease;
+  }
+
+  .search-input-wrapper-{{ ai_gen_id }}.focused {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: transparent;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  }
+
+  .search-input-wrapper-{{ ai_gen_id }}.clicked {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(236, 72, 153, 0.7);
+    animation: pulseClick-{{ ai_gen_id }} 0.8s ease-out;
+  }
+
+  @keyframes pulseClick-{{ ai_gen_id }} {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  .search-gradient-bg-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+    transition: opacity 0.3s ease;
+    animation: gradientShift-{{ ai_gen_id }} 15s linear infinite;
+  }
+
+  .search-input-wrapper-{{ ai_gen_id }}.focused .search-gradient-bg-{{ ai_gen_id }} {
+    opacity: 0.15;
+  }
+
+  @keyframes gradientShift-{{ ai_gen_id }} {
+    0% { background: linear-gradient(90deg, #f6d365 0%, #fda085 100%); }
+    33% { background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%); }
+    66% { background: linear-gradient(90deg, #d4fc79 0%, #96e6a1 100%); }
+    100% { background: linear-gradient(90deg, #f6d365 0%, #fda085 100%); }
+  }
+
+  .search-particles-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
     overflow: hidden;
-    margin: 0 20px;
-    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(121, 0, 253, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
   }
 
-  .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within {
-    border-color: {{ block.settings.input_focus_border_color }};
-    box-shadow: 0 8px 30px rgba(121, 0, 253, 0.2);
-    transform: translateY(-2px);
+  .particle-{{ ai_gen_id }} {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #a78bfa, #ec4899);
+    filter: blur(2px);
+    opacity: 0;
+    animation: float-{{ ai_gen_id }} 3s ease-in-out infinite;
   }
 
-  .ai-search-icon-{{ ai_gen_id }} {
-    padding: 0 18px;
+  @keyframes float-{{ ai_gen_id }} {
+    0%, 100% { opacity: 0; transform: translate(0, 0) scale(0); }
+    50% { opacity: 0.8; transform: translate(var(--tx), var(--ty)) scale(1); }
+  }
+
+  .search-icon-{{ ai_gen_id }} {
+    padding: 0 16px;
     display: flex;
     align-items: center;
-    color: #7900FD;
-    transition: transform 0.3s ease;
+    color: #6b7280;
+    transition: all 0.3s ease;
+    z-index: 2;
   }
 
-  .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within .ai-search-icon-{{ ai_gen_id }} {
-    transform: scale(1.1);
+  .search-input-wrapper-{{ ai_gen_id }}.focused .search-icon-{{ ai_gen_id }} {
+    color: #8B5CF6;
   }
 
-  .ai-search-icon-{{ ai_gen_id }} svg {
-    width: {{ block.settings.icon_size }}px;
-    height: {{ block.settings.icon_size }}px;
-    stroke-width: 2.5;
+  .search-input-wrapper-{{ ai_gen_id }}.searching .search-icon-{{ ai_gen_id }} svg {
+    animation: wiggle-{{ ai_gen_id }} 0.6s ease-in-out;
   }
 
-  .ai-search-input-{{ ai_gen_id }} {
+  @keyframes wiggle-{{ ai_gen_id }} {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    15% { transform: rotate(-15deg) scale(1.3); }
+    30% { transform: rotate(15deg) scale(1.3); }
+    45% { transform: rotate(-10deg) scale(1.3); }
+    60% { transform: rotate(10deg) scale(1.3); }
+    75% { transform: rotate(0deg) scale(1); }
+  }
+
+  .search-input-{{ ai_gen_id }} {
     flex: 1;
-    padding: {{ block.settings.input_padding }}px 18px;
-    border: none;
+    padding: 14px 16px;
     background: transparent;
-    font-size: {{ block.settings.input_font_size }}px;
-    font-weight: 500;
-    color: {{ block.settings.input_text_color }};
-    outline: none;
-  }
-
-  .ai-search-input-{{ ai_gen_id }}::placeholder {
-    color: {{ block.settings.placeholder_color }};
-    font-weight: 400;
-  }
-
-  .ai-search-clear-{{ ai_gen_id }} {
-    padding: 0 18px;
-    background: none;
     border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151;
+    z-index: 2;
+  }
+
+  .search-input-{{ ai_gen_id }}::placeholder {
+    color: #9ca3af;
+  }
+
+  .search-input-wrapper-{{ ai_gen_id }}.focused .search-input-{{ ai_gen_id }} {
+    color: #1f2937;
+    letter-spacing: 0.02em;
+  }
+
+  .search-submit-{{ ai_gen_id }} {
+    padding: 10px 20px;
+    margin-right: 8px;
+    background: linear-gradient(to right, #8B5CF6, #EC4899);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
-    display: none;
-    align-items: center;
-    color: #9CA3AF;
+    opacity: 0;
+    transform: scale(0.8) translateX(-20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    z-index: 2;
+  }
+
+  .search-submit-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+
+  .search-submit-{{ ai_gen_id }}:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.5);
+  }
+
+  .search-submit-{{ ai_gen_id }}:active {
+    transform: scale(0.95);
+  }
+
+  .search-suggestions-{{ ai_gen_id }} {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
     transition: all 0.2s ease;
   }
 
-  .ai-search-clear-{{ ai_gen_id }}.active {
-    display: flex;
+  .search-suggestions-{{ ai_gen_id }}.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
   }
 
-  .ai-search-clear-{{ ai_gen_id }}:hover {
-    color: #7900FD;
-    transform: rotate(90deg);
-  }
-
-  .ai-search-clear-{{ ai_gen_id }} svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .ai-search-submit-{{ ai_gen_id }} {
-    padding: 12px 24px;
-    background-color: #0171E3;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 24px;
-    border: 1px solid #0171E3;
-    box-shadow: inset 0 1px 1px rgba(0, 255, 255, 0.8);
-    cursor: pointer;
+  .suggestion-item-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    gap: 6px;
-    transition: all 0.3s ease;
-    letter-spacing: -0.01em;
-    corner-shape: squircle;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: slideIn-{{ ai_gen_id }} 0.3s ease forwards;
   }
 
-  .ai-search-submit-{{ ai_gen_id }}:hover {
-    background-color: #0159B3;
-    border-color: #0159B3;
-    transform: translateY(-1px);
-    box-shadow: inset 0 1px 1px rgba(0, 255, 255, 0.8), 0 4px 12px rgba(1, 113, 227, 0.3);
-  }
-
-  .ai-search-submit-{{ ai_gen_id }} svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }} {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 20px;
-    right: 20px;
-    background: {{ block.settings.suggestions_background }};
-    border: 1px solid #F3F4F6;
-    border-radius: {{ block.settings.suggestions_border_radius }}px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-    max-height: 480px;
-    overflow-y: auto;
-    z-index: 100;
-    display: none;
-    backdrop-filter: blur(10px);
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }}.active {
-    display: block;
-    animation: slideDown{{ ai_gen_id }} 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  @keyframes slideDown{{ ai_gen_id }} {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
+  @keyframes slideIn-{{ ai_gen_id }} {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  .ai-search-loading-{{ ai_gen_id }} {
-    padding: 32px;
-    text-align: center;
-    color: #6B7280;
-    font-weight: 500;
-  }
-
-  .ai-search-no-results-{{ ai_gen_id }} {
-    padding: 40px 20px;
-    text-align: center;
-    color: #6B7280;
-    font-weight: 500;
-  }
-
-  .ai-search-suggestion-item-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    text-decoration: none;
-    color: {{ block.settings.text_color }};
-    border-bottom: 1px solid #F3F4F6;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-  }
-
-  .ai-search-suggestion-item-{{ ai_gen_id }}::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background: #7900FD;
-    transform: scaleY(0);
-    transition: transform 0.2s ease;
-  }
-
-  .ai-search-suggestion-item-{{ ai_gen_id }}:last-child {
+  .suggestion-item-{{ ai_gen_id }}:last-child {
     border-bottom: none;
   }
 
-  .ai-search-suggestion-item-{{ ai_gen_id }}:hover {
-    background: linear-gradient(90deg, rgba(121, 0, 253, 0.04) 0%, transparent 100%);
-    transform: translateX(4px);
+  .suggestion-item-{{ ai_gen_id }}:hover {
+    background: rgba(139, 92, 246, 0.05);
   }
 
-  .ai-search-suggestion-item-{{ ai_gen_id }}:hover::before {
-    transform: scaleY(1);
+  .suggestion-icon-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    color: #a78bfa;
+    transition: all 0.2s ease;
   }
 
-  .ai-search-suggestion-image-{{ ai_gen_id }} {
-    width: 70px;
-    height: 70px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s ease;
+  .suggestion-item-{{ ai_gen_id }}:hover .suggestion-icon-{{ ai_gen_id }} {
+    color: #8B5CF6;
+    transform: scale(1.1);
   }
 
-  .ai-search-suggestion-item-{{ ai_gen_id }}:hover .ai-search-suggestion-image-{{ ai_gen_id }} {
-    transform: scale(1.05);
+  .suggestion-image-{{ ai_gen_id }} {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f3f4f6;
   }
 
-  .ai-search-suggestion-image-{{ ai_gen_id }} img {
+  .suggestion-info-{{ ai_gen_id }} {
+    flex: 1;
+  }
+
+  .suggestion-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 2px;
+  }
+
+  .suggestion-price-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 700;
+    color: #8B5CF6;
+  }
+
+  .loading-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 24px;
+    color: #6b7280;
+  }
+
+  .loading-dots-{{ ai_gen_id }} {
+    display: inline-flex;
+    gap: 8px;
+  }
+
+  .loading-dot-{{ ai_gen_id }} {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8B5CF6;
+    animation: bounce-{{ ai_gen_id }} 1s ease-in-out infinite;
+  }
+
+  .loading-dot-{{ ai_gen_id }}:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .loading-dot-{{ ai_gen_id }}:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes bounce-{{ ai_gen_id }} {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-10px); opacity: 1; }
+  }
+
+  .shimmer-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer-{{ ai_gen_id }} 2s infinite;
+    pointer-events: none;
+    z-index: 3;
   }
 
-  .ai-search-suggestion-info-{{ ai_gen_id }} {
-    flex: 1;
-    min-width: 0;
+  @keyframes shimmer-{{ ai_gen_id }} {
+    0% { left: -100%; }
+    100% { left: 100%; }
   }
 
-  .ai-search-suggestion-title-{{ ai_gen_id }} {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 0 0 6px 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #111827;
-    letter-spacing: -0.01em;
-  }
+  @media (max-width: 768px) {
+    .search-form-{{ ai_gen_id }} {
+      width: 100%;
+      max-width: 280px;
+    }
 
-  .ai-search-suggestion-price-{{ ai_gen_id }} {
-    font-size: 15px;
-    font-weight: 700;
-    color: #7900FD;
-    letter-spacing: -0.01em;
-  }
+    .search-form-{{ ai_gen_id }}.focused {
+      width: 100%;
+      max-width: 320px;
+    }
 
-  .ai-search-view-all-{{ ai_gen_id }} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #7900FD 0%, #9D4EDD 100%);
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    border-top: 1px solid rgba(121, 0, 253, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .ai-search-view-all-{{ ai_gen_id }}:hover {
-    background: linear-gradient(135deg, #6800E0 0%, #8C3DCB 100%);
-    transform: translateY(-1px);
-  }
-
-  .ai-search-view-all-{{ ai_gen_id }} svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s ease;
-  }
-
-  .ai-search-view-all-{{ ai_gen_id }}:hover svg {
-    transform: translateX(4px);
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }}::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }}::-webkit-scrollbar-track {
-    background: #F9FAFB;
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
-    background: #D1D5DB;
-    border-radius: 3px;
-  }
-
-  .ai-search-suggestions-{{ ai_gen_id }}::-webkit-scrollbar-thumb:hover {
-    background: #7900FD;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-search-heading-{{ ai_gen_id }} {
+    .search-heading-{{ ai_gen_id }} {
       font-size: calc({{ block.settings.heading_size }}px * 0.8);
-      padding: 0 8px;
-    }
-
-    .ai-search-input-wrapper-{{ ai_gen_id }} {
-      margin: 0 8px;
-    }
-
-    .ai-search-suggestions-{{ ai_gen_id }} {
-      left: 8px;
-      right: 8px;
-    }
-
-    .ai-search-input-{{ ai_gen_id }} {
-      font-size: 16px !important;
-    }
-
-    .ai-search-suggestion-item-{{ ai_gen_id }} {
-      padding: 14px 16px;
-      gap: 12px;
-    }
-
-    .ai-search-suggestion-image-{{ ai_gen_id }} {
-      width: 60px;
-      height: 60px;
     }
   }
 {% endstyle %}
 
-<product-search-{{ ai_gen_id }}
-  class="ai-search-container-{{ ai_gen_id }}"
-  {{ block.shopify_attributes }}
-  data-min-chars="{{ block.settings.min_characters }}"
-  data-max-results="{{ block.settings.max_results }}"
->
-  <div class="ai-search-wrapper-{{ ai_gen_id }}">
+<div class="search-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="search-wrapper-{{ ai_gen_id }}">
     {% if block.settings.heading != blank %}
-      <h2 class="ai-search-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      <h2 class="search-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
     {% endif %}
 
-    <div class="ai-search-form-{{ ai_gen_id }}">
-      <div class="ai-search-input-wrapper-{{ ai_gen_id }}">
-        <span class="ai-search-icon-{{ ai_gen_id }}">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <form class="search-form-{{ ai_gen_id }}" id="searchForm{{ ai_gen_id }}">
+      <div class="search-input-wrapper-{{ ai_gen_id }}" id="searchWrapper{{ ai_gen_id }}">
+        <div class="search-gradient-bg-{{ ai_gen_id }}"></div>
+        <div class="search-particles-{{ ai_gen_id }}" id="particles{{ ai_gen_id }}"></div>
+        <div class="shimmer-{{ ai_gen_id }}" id="shimmer{{ ai_gen_id }}" style="display: none;"></div>
+        
+        <div class="search-icon-{{ ai_gen_id }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.35-4.35"></path>
           </svg>
-        </span>
+        </div>
+
         <input
           type="text"
-          class="ai-search-input-{{ ai_gen_id }}"
+          class="search-input-{{ ai_gen_id }}"
+          id="searchInput{{ ai_gen_id }}"
           placeholder="{{ block.settings.placeholder }}"
           autocomplete="off"
-          aria-label="Search products"
-          aria-autocomplete="list"
-          aria-controls="ai-search-suggestions-{{ ai_gen_id }}"
         >
-        <button
-          type="button"
-          class="ai-search-clear-{{ ai_gen_id }}"
-          aria-label="Clear search"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        <button
-          type="button"
-          class="ai-search-submit-{{ ai_gen_id }}"
-          aria-label="Search"
-        >
+
+        <button type="submit" class="search-submit-{{ ai_gen_id }}" id="searchSubmit{{ ai_gen_id }}">
           Search
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
         </button>
       </div>
 
-      <div
-        id="ai-search-suggestions-{{ ai_gen_id }}"
-        class="ai-search-suggestions-{{ ai_gen_id }}"
-        role="listbox"
-      ></div>
-    </div>
+      <div class="search-suggestions-{{ ai_gen_id }}" id="suggestions{{ ai_gen_id }}"></div>
+    </form>
   </div>
-</product-search-{{ ai_gen_id }}>
+</div>
 
 <script>
-  (function() {
-    class ProductSearch{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.input = this.querySelector('.ai-search-input-{{ ai_gen_id }}');
-        this.clearBtn = this.querySelector('.ai-search-clear-{{ ai_gen_id }}');
-        this.submitBtn = this.querySelector('.ai-search-submit-{{ ai_gen_id }}');
-        this.suggestions = this.querySelector('.ai-search-suggestions-{{ ai_gen_id }}');
-        this.minChars = parseInt(this.dataset.minChars) || 2;
-        this.maxResults = parseInt(this.dataset.maxResults) || 5;
-        this.searchTimeout = null;
-        this.currentRequest = null;
-      }
+(function() {
+  const wrapper = document.getElementById('searchWrapper{{ ai_gen_id }}');
+  const form = document.getElementById('searchForm{{ ai_gen_id }}');
+  const input = document.getElementById('searchInput{{ ai_gen_id }}');
+  const submit = document.getElementById('searchSubmit{{ ai_gen_id }}');
+  const suggestions = document.getElementById('suggestions{{ ai_gen_id }}');
+  const particles = document.getElementById('particles{{ ai_gen_id }}');
+  const shimmer = document.getElementById('shimmer{{ ai_gen_id }}');
+  
+  let searchTimeout = null;
+  let currentRequest = null;
+  let isFocused = false;
 
-      connectedCallback() {
-        this.input.addEventListener('input', this.handleInput.bind(this));
-        this.input.addEventListener('keypress', this.handleKeyPress.bind(this));
-        this.clearBtn.addEventListener('click', this.clearSearch.bind(this));
-        this.submitBtn.addEventListener('click', this.handleSubmit.bind(this));
-        document.addEventListener('click', this.handleClickOutside.bind(this));
-      }
+  // Create particles
+  function createParticles() {
+    particles.innerHTML = '';
+    if (!isFocused) return;
+    
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle-{{ ai_gen_id }}';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.setProperty('--tx', (Math.random() - 0.5) * 40 + 'px');
+      particle.style.setProperty('--ty', (Math.random() - 0.5) * 40 + 'px');
+      particle.style.animationDelay = Math.random() * 3 + 's';
+      particles.appendChild(particle);
+    }
+  }
 
-      disconnectedCallback() {
-        document.removeEventListener('click', this.handleClickOutside.bind(this));
-      }
+  // Create click particles
+  function createClickParticles(x, y) {
+    const rect = wrapper.getBoundingClientRect();
+    const relX = x - rect.left;
+    const relY = y - rect.top;
 
-      handleInput(event) {
-        const query = event.target.value.trim();
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement('div');
+      particle.style.position = 'absolute';
+      particle.style.width = '8px';
+      particle.style.height = '8px';
+      particle.style.borderRadius = '50%';
+      particle.style.left = relX + 'px';
+      particle.style.top = relY + 'px';
+      particle.style.background = `rgba(${Math.random() * 255}, ${Math.random() * 200 + 55}, ${Math.random() * 255}, 0.8)`;
+      particle.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.8)';
+      particle.style.pointerEvents = 'none';
+      particle.style.zIndex = '10';
+      
+      wrapper.appendChild(particle);
 
-        if (query.length > 0) {
-          this.clearBtn.classList.add('active');
-        } else {
-          this.clearBtn.classList.remove('active');
-        }
+      const tx = (Math.random() - 0.5) * 160;
+      const ty = (Math.random() - 0.5) * 160;
+      const duration = Math.random() * 800 + 500;
 
-        clearTimeout(this.searchTimeout);
+      particle.animate([
+        { transform: 'translate(0, 0) scale(0)', opacity: 1 },
+        { transform: `translate(${tx}px, ${ty}px) scale(${Math.random() * 0.8 + 0.2})`, opacity: 0 }
+      ], {
+        duration: duration,
+        easing: 'ease-out'
+      });
 
-        if (query.length < this.minChars) {
-          this.hideSuggestions();
-          return;
-        }
+      setTimeout(() => particle.remove(), duration);
+    }
+  }
 
-        this.searchTimeout = setTimeout(() => {
-          this.searchProducts(query);
-        }, 300);
-      }
+  // Focus handlers
+  input.addEventListener('focus', () => {
+    isFocused = true;
+    wrapper.classList.add('focused');
+    form.classList.add('focused');
+    createParticles();
+    shimmer.style.display = 'block';
+  });
 
-      async searchProducts(query) {
-        if (this.currentRequest) {
-          this.currentRequest.abort();
-        }
+  input.addEventListener('blur', () => {
+    setTimeout(() => {
+      isFocused = false;
+      wrapper.classList.remove('focused');
+      form.classList.remove('focused');
+      suggestions.classList.remove('visible');
+      particles.innerHTML = '';
+      shimmer.style.display = 'none';
+    }, 200);
+  });
 
-        this.showLoading();
-        this.currentRequest = new AbortController();
+  // Click handler
+  wrapper.addEventListener('click', (e) => {
+    wrapper.classList.add('clicked');
+    createClickParticles(e.clientX, e.clientY);
+    setTimeout(() => wrapper.classList.remove('clicked'), 800);
+  });
 
-        try {
-          const response = await fetch(
-            `/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=${this.maxResults}`,
-            { signal: this.currentRequest.signal }
-          );
-
-          if (!response.ok) throw new Error('Search failed');
-
-          const data = await response.json();
-          this.displayResults(data.resources.results.products || [], query);
-        } catch (error) {
-          if (error.name !== 'AbortError') {
-            this.showError();
-          }
-        } finally {
-          this.currentRequest = null;
-        }
-      }
-
-      showLoading() {
-        this.suggestions.innerHTML = `
-          <div class="ai-search-loading-{{ ai_gen_id }}">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#7900FD">
-              <circle cx="4" cy="12" r="3">
-                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"/>
-              </circle>
-              <circle cx="12" cy="12" r="3">
-                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"/>
-              </circle>
-              <circle cx="20" cy="12" r="3">
-                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"/>
-              </circle>
-            </svg>
-          </div>
-        `;
-        this.suggestions.classList.add('active');
-      }
-
-      showError() {
-        this.suggestions.innerHTML = `
-          <div class="ai-search-no-results-{{ ai_gen_id }}">
-            Something went wrong. Please try again.
-          </div>
-        `;
-      }
-
-      displayResults(products, query) {
-        if (products.length === 0) {
-          this.suggestions.innerHTML = `
-            <div class="ai-search-no-results-{{ ai_gen_id }}">
-              No products found for "${this.escapeHtml(query)}"
-            </div>
-          `;
-          this.suggestions.classList.add('active');
-          return;
-        }
-
-        let html = '';
-
-        products.forEach(product => {
-          const imageUrl = product.image ? this.getImageUrl(product.image) : '';
-          const price = this.formatPrice(product.price);
-
-          html += `
-            <a href="${product.url}" class="ai-search-suggestion-item-{{ ai_gen_id }}" role="option">
-              <div class="ai-search-suggestion-image-{{ ai_gen_id }}">
-                ${imageUrl ? `<img src="${imageUrl}" alt="${this.escapeHtml(product.title)}" loading="lazy">` : ''}
-              </div>
-              <div class="ai-search-suggestion-info-{{ ai_gen_id }}">
-                <h3 class="ai-search-suggestion-title-{{ ai_gen_id }}">${this.escapeHtml(product.title)}</h3>
-                <div class="ai-search-suggestion-price-{{ ai_gen_id }}">${price}</div>
-              </div>
-            </a>
-          `;
-        });
-
-        html += `
-          <a href="/search?q=${encodeURIComponent(query)}" class="ai-search-view-all-{{ ai_gen_id }}">
-            View all results
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-        `;
-
-        this.suggestions.innerHTML = html;
-        this.suggestions.classList.add('active');
-      }
-
-      getImageUrl(imageUrl) {
-        if (!imageUrl) return '';
-        if (imageUrl.includes('?')) {
-          return imageUrl.split('?')[0] + '?width=140';
-        }
-        return imageUrl + '?width=140';
-      }
-
-      formatPrice(priceInCents) {
-        // If it's already a string, return it
-        if (typeof priceInCents === 'string') {
-          return priceInCents;
-        }
-
-        // Convert cents to dollars
-        const priceInDollars = priceInCents / 100;
-
-        // Use Shopify.formatMoney if available
-        if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
-          return Shopify.formatMoney(priceInCents, '{{ shop.money_format }}');
-        }
-
-        // Fallback formatting
-        return '{{ shop.currency }}' + ' ' + priceInDollars.toFixed(2);
-      }
-
-      escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      clearSearch() {
-        this.input.value = '';
-        this.clearBtn.classList.remove('active');
-        this.hideSuggestions();
-        this.input.focus();
-      }
-
-      hideSuggestions() {
-        this.suggestions.classList.remove('active');
-        this.suggestions.innerHTML = '';
-      }
-
-      handleClickOutside(event) {
-        if (!this.contains(event.target)) {
-          this.hideSuggestions();
-        }
-      }
-
-      handleKeyPress(event) {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          this.handleSubmit();
-        }
-      }
-
-      handleSubmit() {
-        const query = this.input.value.trim();
-        if (query.length >= this.minChars) {
-          window.location.href = `/search?q=${encodeURIComponent(query)}`;
-        }
-      }
+  // Input handler
+  input.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    
+    if (query.length > 0) {
+      submit.classList.add('visible');
+    } else {
+      submit.classList.remove('visible');
+      suggestions.classList.remove('visible');
+      return;
     }
 
-    customElements.define('product-search-{{ ai_gen_id }}', ProductSearch{{ ai_gen_id }});
-  })();
+    clearTimeout(searchTimeout);
+
+    if (query.length < {{ block.settings.min_characters }}) {
+      suggestions.classList.remove('visible');
+      return;
+    }
+
+    searchTimeout = setTimeout(() => searchProducts(query), 300);
+  });
+
+  // Search function
+  async function searchProducts(query) {
+    if (currentRequest) currentRequest.abort();
+    
+    showLoading();
+    currentRequest = new AbortController();
+
+    try {
+      const response = await fetch(
+        `/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]={{ block.settings.max_results }}`,
+        { signal: currentRequest.signal }
+      );
+
+      if (!response.ok) throw new Error('Search failed');
+
+      const data = await response.json();
+      displayResults(data.resources.results.products || []);
+    } catch (error) {
+      if (error.name !== 'AbortError') {
+        suggestions.innerHTML = '<div class="loading-{{ ai_gen_id }}">Search failed. Please try again.</div>';
+        suggestions.classList.add('visible');
+      }
+    } finally {
+      currentRequest = null;
+    }
+  }
+
+  // Show loading
+  function showLoading() {
+    suggestions.innerHTML = `
+      <div class="loading-{{ ai_gen_id }}">
+        <div class="loading-dots-{{ ai_gen_id }}">
+          <span class="loading-dot-{{ ai_gen_id }}"></span>
+          <span class="loading-dot-{{ ai_gen_id }}"></span>
+          <span class="loading-dot-{{ ai_gen_id }}"></span>
+        </div>
+      </div>
+    `;
+    suggestions.classList.add('visible');
+  }
+
+  // Display results
+  function displayResults(products) {
+    if (products.length === 0) {
+      suggestions.innerHTML = '<div class="loading-{{ ai_gen_id }}">No products found</div>';
+      suggestions.classList.add('visible');
+      return;
+    }
+
+    let html = '';
+    products.forEach((product, index) => {
+      const imageUrl = product.image ? getImageUrl(product.image) : '';
+      const price = formatPrice(product.price);
+      
+      html += `
+        <a href="${product.url}" class="suggestion-item-{{ ai_gen_id }}" style="animation-delay: ${index * 0.05}s">
+          <svg class="suggestion-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          ${imageUrl ? `<img src="${imageUrl}" alt="${escapeHtml(product.title)}" class="suggestion-image-{{ ai_gen_id }}">` : ''}
+          <div class="suggestion-info-{{ ai_gen_id }}">
+            <div class="suggestion-title-{{ ai_gen_id }}">${escapeHtml(product.title)}</div>
+            <div class="suggestion-price-{{ ai_gen_id }}">${price}</div>
+          </div>
+        </a>
+      `;
+    });
+
+    suggestions.innerHTML = html;
+    suggestions.classList.add('visible');
+  }
+
+  // Helper functions
+  function getImageUrl(url) {
+    if (!url) return '';
+    return url.includes('?') ? url.split('?')[0] + '?width=100' : url + '?width=100';
+  }
+
+  function formatPrice(cents) {
+    if (typeof cents === 'string') return cents;
+    if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+      return Shopify.formatMoney(cents, '{{ shop.money_format }}');
+    }
+    return '{{ shop.currency }}' + ' ' + (cents / 100).toFixed(2);
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Form submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const query = input.value.trim();
+    if (query.length >= {{ block.settings.min_characters }}) {
+      wrapper.classList.add('searching');
+      setTimeout(() => {
+        window.location.href = `/search?q=${encodeURIComponent(query)}`;
+      }, 600);
+    }
+  });
+})();
 </script>
 
 {% schema %}
 {
-  "name": "Product search",
+  "name": "Advanced Product Search",
   "tag": null,
   "settings": [
     {
@@ -654,26 +641,6 @@
       "default": 36
     },
     {
-      "type": "select",
-      "id": "heading_alignment",
-      "label": "Heading alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
-    },
-    {
       "type": "range",
       "id": "heading_spacing",
       "label": "Heading spacing",
@@ -681,13 +648,13 @@
       "max": 50,
       "step": 5,
       "unit": "px",
-      "default": 25
+      "default": 30
     },
     {
       "type": "text",
       "id": "placeholder",
       "label": "Placeholder text",
-      "default": "What are you looking for?"
+      "default": "Search..."
     },
     {
       "type": "header",
@@ -710,16 +677,6 @@
       "max": 10,
       "step": 1,
       "default": 6
-    },
-    {
-      "type": "range",
-      "id": "max_width",
-      "label": "Maximum width",
-      "min": 400,
-      "max": 1200,
-      "step": 50,
-      "unit": "px",
-      "default": 700
     },
     {
       "type": "header",
@@ -760,208 +717,11 @@
       "id": "heading_color",
       "label": "Heading",
       "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "price_color",
-      "label": "Price",
-      "default": "#7900FD"
-    },
-    {
-      "type": "header",
-      "content": "Input style"
-    },
-    {
-      "type": "color",
-      "id": "input_background",
-      "label": "Background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "input_text_color",
-      "label": "Text",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "placeholder_color",
-      "label": "Placeholder",
-      "default": "#9CA3AF"
-    },
-    {
-      "type": "color",
-      "id": "input_border_color",
-      "label": "Border",
-      "default": "#E5E7EB"
-    },
-    {
-      "type": "color",
-      "id": "input_focus_border_color",
-      "label": "Focus border",
-      "default": "#7900FD"
-    },
-    {
-      "type": "range",
-      "id": "input_border_width",
-      "label": "Border width",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "unit": "px",
-      "default": 2
-    },
-    {
-      "type": "range",
-      "id": "input_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "header",
-      "content": "Input shadow"
-    },
-    {
-      "type": "range",
-      "id": "shadow_horizontal",
-      "label": "Horizontal offset",
-      "min": -20,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "shadow_vertical",
-      "label": "Vertical offset",
-      "min": -20,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "shadow_blur",
-      "label": "Blur radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "shadow_opacity",
-      "label": "Shadow opacity",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "input_padding",
-      "label": "Padding",
-      "min": 10,
-      "max": 30,
-      "step": 2,
-      "unit": "px",
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "input_font_size",
-      "label": "Font size",
-      "min": 14,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 16,
-      "info": "Note: On mobile, font size is locked to 16px minimum to prevent zoom"
-    },
-    {
-      "type": "color",
-      "id": "icon_color",
-      "label": "Icon color",
-      "default": "#7900FD"
-    },
-    {
-      "type": "range",
-      "id": "icon_size",
-      "label": "Icon size",
-      "min": 16,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 22
-    },
-    {
-      "type": "header",
-      "content": "Suggestions style"
-    },
-    {
-      "type": "color",
-      "id": "suggestions_background",
-      "label": "Background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "suggestions_border_color",
-      "label": "Border",
-      "default": "#F3F4F6"
-    },
-    {
-      "type": "range",
-      "id": "suggestions_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 20,
-      "step": 2,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "suggestion_hover_background",
-      "label": "Hover background",
-      "default": "#F9FAFB"
-    },
-    {
-      "type": "color",
-      "id": "view_all_background",
-      "label": "View all background",
-      "default": "#7900FD"
-    },
-    {
-      "type": "color",
-      "id": "view_all_color",
-      "label": "View all text",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "view_all_hover_background",
-      "label": "View all hover",
-      "default": "#6800E0"
     }
   ],
   "presets": [
     {
-      "name": "Product search"
+      "name": "Advanced Product Search"
     }
   ]
 }
