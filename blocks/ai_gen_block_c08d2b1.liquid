@@ -39,16 +39,16 @@
     display: flex;
     align-items: center;
     background: {{ block.settings.input_background }};
-    border: 2px solid transparent;
+    border: {{ block.settings.input_border_width }}px solid {{ block.settings.input_border_color }};
     border-radius: {{ block.settings.input_border_radius }}px;
     overflow: hidden;
     margin: 0 20px;
-    box-shadow: 0 4px 20px rgba(121, 0, 253, 0.08);
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(121, 0, 253, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .ai-search-input-wrapper-{{ ai_gen_id }}:focus-within {
-    border-color: #7900FD;
+    border-color: {{ block.settings.input_focus_border_color }};
     box-shadow: 0 8px 30px rgba(121, 0, 253, 0.2);
     transform: translateY(-2px);
   }
@@ -822,6 +822,50 @@
       "step": 2,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Input shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "label": "Horizontal offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "label": "Vertical offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Blur radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 10
     },
     {
       "type": "range",
