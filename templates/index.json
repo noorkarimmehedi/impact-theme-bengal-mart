@@ -66,37 +66,8 @@
     },
     "176719919952536179": {
       "type": "apps",
-      "blocks": {
-        "moast_carousel_bcU3An": {
-          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
-          "settings": {
-            "dynamic": false,
-            "feed": "",
-            "feed_usage": "back_up",
-            "header": "",
-            "slide_type": "cards",
-            "product_cards": "below",
-            "autoplay_mode": "none",
-            "autoscroll_duration": 0,
-            "slide_size": "250",
-            "border": 1,
-            "border_color": "linear-gradient(90deg, rgba(131, 58, 180, 1), rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%)",
-            "slide_rounding": "6",
-            "slide_spacing": 16,
-            "padding_top": 40,
-            "pagination": "below",
-            "alignment": "center",
-            "click_action": "fullscreen",
-            "float_location": "bottom_right",
-            "float_size": "medium",
-            "show_captions": false,
-            "custom_css": ""
-          }
-        }
-      },
-      "block_order": [
-        "moast_carousel_bcU3An"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "full_width": true,
         "remove_vertical_spacing": true,
